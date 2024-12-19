@@ -29,6 +29,9 @@
     },
     "clean": {
       "cache": false
+    },
+    "publish:packages": {
+      "dependsOn": ["build"]
     }
   }
 }
