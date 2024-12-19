@@ -28,7 +28,7 @@ jobs:
           node-version: 20
           registry-url: https://registry.npmjs.org/
       - run: npm ci
+      - run: npx turbo build --filter=@abetest/ui
       - run: npx turbo run publish:packages --filter=@abetest/ui
-      - run: npm publish
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
