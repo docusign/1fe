@@ -1,0 +1,5 @@
+{
+  "extends": [
+    "ts-react-important-stuff",
+  ]
+}
