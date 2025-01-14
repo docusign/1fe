@@ -22,7 +22,7 @@ export default defineConfig({
     outDir: 'dist/public',
     rollupOptions: {
       input: {
-        main: 'src/app/main.tsx',
+        main: 'src/shell/main.tsx',
       },
       output: {
         format: 'system', // Output as SystemJS modules
