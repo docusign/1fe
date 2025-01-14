@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <base href="<%- baseHref %>" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="Docusign" />
+    <meta name="keywords" content="docusign, sign, e-signature" />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <title id="oneds-title"><%- pageTitle %></title>
+    <link rel="icon" type="image/x-icon" href="<%- favicon %>" />
+
+    <!-- Hardcoded ds-ui styles since page is .ejs and unable to use ds-ui components-->
+    <style nonce="<%= cspNonceGuid %>">
+      @font-face {
+        font-display: swap;
+        font-family: 'DSIndigo';
+        font-style: normal;
+        font-weight: 400;
+        src: url('https://docucdn-a.akamaihd.net/olive/fonts/2.11.0/DSIndigo-Regular.woff2')
+          format('woff2');
+      }
+      body {
+        font-family: 'DSIndigo';
+        margin: 0;
+      }
+      p {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-top: 8px;
+      }
+      h1 {
+        margin: 0;
+      }
+      #root {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      #ds-logo {
+        padding: 1.5em 0 0 1.5em;
+        width: 150px;
+      }
+      #animation {
+        width: 100%;
+        height: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #lottie {
+        max-width: 480px;
+        flex-shrink: 0;
+      }
+      #container {
+        font-family: 'DSIndigo';
+        margin: 3.5vh auto;
+        width: 400px;
+        max-width: 80vw;
+        height: auto;
+        display: flex;
+        justify-content: center;
+      }
+      .st0 {
+        fill: none;
+        stroke: #6f56ff;
+        stroke-width: 10;
+        stroke-miterlimit: 10;
+      }
+      #btn {
+        font-size: 16px;
+        font-weight: lighter;
+        line-height: 1.5;
+        align-items: center;
+        padding: 7.5px 15px;
+        border-radius: 2px;
+        border-style: solid;
+        border-width: 1px;
+        cursor: pointer;
+        background-color: transparent;
+      }
+    </style>
+  </head>
+  <header>
+    <div id="ds-logo">
+      <a href="/">
+        <img
+          data-qa="header-docusign-logo"
+          alt="Docusign logo"
+          src="https://docucdn-a.akamaihd.net/olive/images/2.65.0/global-assets/ds-logo-default.svg"
+          class="css-1sz9cjp"
+        />
+      </a>
+    </div>
+  </header>
+
+  <body>
+    <div id="animation">
+      <svg
+        width="100%"
+        height="200"
+        viewBox="0 0 1500 200"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <g>
+          <line class="st0" x1="0" y1="100" x2="1500" y2="100" />
+        </g>
+      </svg>
+      <svg
+        viewBox="0 0 480 200"
+        height="200px"
+        width="100%"
+        preserveAspectRatio="xMidYMid meet"
+        id="lottie"
+        aria-hidden="true"
+      >
+        <defs>
+          <clipPath id="__lottie_element_2">
+            <rect width="480" height="200" x="0" y="0"></rect>
+          </clipPath>
+        </defs>
+        <g clip-path="url(#__lottie_element_2)">
+          <g
+            transform="matrix(1,0,0,1,-480,62.5)"
+            opacity="1"
+            style="display: block"
+          >
+            <g
+              opacity="1"
+              transform="matrix(1,0,0,1,1215.833984375,42.63100051879883)"
+            >
+              <path
+                stroke-linecap="butt"
+                stroke-linejoin="round"
+                fill-opacity="0"
+                stroke="rgb(111,86,255)"
+                stroke-opacity="1"
+                stroke-width="10"
+                d=" M-449.94500732421875,14.869000434875488 C-404.8340148925781,-8.630999565124512 -426.8349914550781,-21.631000518798828 -404.968994140625,-31.979000091552734 C-377.0150146484375,-45.20800018310547 -361.8349914550781,8.369000434875488 -348.50299072265625,6.8420000076293945 C-334.07501220703125,5.189000129699707 -353.8340148925781,-24.631000518798828 -348.6300048828125,-39.066001892089844 C-341.5469970703125,-58.71200180053711 -300.843994140625,-73.01899719238281 -318.822998046875,-4.568999767303467 C-332.3340148925781,46.86899948120117 -276.9859924316406,31.05500030517578 -288.0369873046875,6.640999794006348 C-300.8340148925781,-21.631000518798828 -273.2099914550781,-5.151000022888184 -269.76800537109375,-5.13100004196167 C-264.3659973144531,-5.099999904632568 -248.86599731445312,-5.105999946594238 -248.86599731445312,-5.105999946594238 M-543.9450073242188,-25.131000518798828 C-550.583984375,-22.381000518798828 -576.5880126953125,-9.859999656677246 -588.1740112304688,3.2170000076293945 C-605.5850219726562,22.868999481201172 -607.7059936523438,-13.5 -625.6380004882812,-16.854000091552734 C-645.833984375,-20.631000518798828 -621.833984375,26.368999481201172 -645.010986328125,22.054000854492188 C-683.030029296875,14.97599983215332 -654.8350219726562,-66.63099670410156 -698.4530029296875,-49.255001068115234 C-733.72802734375,-35.202999114990234 -655.8350219726562,11.119000434875488 -680.6019897460938,24.30699920654297 C-699.6680297851562,34.45899963378906 -701.2100219726562,-5.50600004196167 -724.3330078125,-5.13100004196167 C-728.10400390625,-5.070000171661377 -741.4190063476562,-5.099999904632568 -741.4190063476562,-5.099999904632568"
+              ></path>
+            </g>
+          </g>
+        </g>
+      </svg>
+      <svg
+        width="100%"
+        height="200"
+        viewBox="0 0 1500 200"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <g>
+          <line class="st0" x1="0" y1="100" x2="1500" y2="100" />
+        </g>
+      </svg>
+    </div>
+    <div id="root">
+      <div id="container" data-qa="<%= type %>.browser.page">
+        <div>
+          <% if(type === 'unsupported' ){ %>
+          <h1>Unsupported Browser</h1>
+          <p>
+            You’re using a version that isn’t supported by DocuSign, update to
+            the latest version to continue.
+          </p>
+          <a
+            href="https://www.docusign.com/blog/docusign-esignature-system-requirements"
+            target="_blank"
+          >
+            <button data-qa="learn-more-btn" id="btn">Learn More</button>
+          </a>
+          <% } else if (type === 'auth-login-loop') { %>
+          <h1>There was an issue logging you in</h1>
+          <p>Please try again at a later time.</p>
+          <button data-qa="server-try-again-btn" id="try-again-btn">
+            Try Again
+          </button>
+          <% } else { %>
+          <h1>An error has occurred</h1>
+          <p>Make sure your connection is stable and try again</p>
+          <button data-qa="server-try-again-btn" id="try-again-btn">
+            Try Again
+          </button>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+    <script nonce="<%= cspNonceGuid %>">
+      const button = document.getElementById('try-again-btn');
+      const type = '<%= type %>';
+      const redirectOnRetry = '<%= redirectOnRetry %>';
+
+      function handleClick() {
+        switch (type) {
+          case 'auth-login-loop':
+            // Refresh the window
+            window.location.href = redirectOnRetry;
+            break;
+          case 'error':
+          default:
+            // Go the the page that triggered the error
+            window.history.go(-1);
+            break;
+        }
+      }
+
+      button.addEventListener('click', handleClick);
+    </script>
+  </body>
+</html>
