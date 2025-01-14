@@ -1,10 +1,11 @@
 import express from 'express';
 import path from 'path';
 import router from './lib/router';
+import magicBoxServer from './magic-box/src';
 
 const { PORT = 3001 } = process.env;
 
-const app = express();
+const app = magicBoxServer();
 
 // Middleware that parses json and looks at requests where the Content-Type header matches the type option.
 app.use(express.json());
