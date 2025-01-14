@@ -1,7 +1,8 @@
 import express from 'express';
 import path from 'path';
+import magicBoxServer from '@devhub/magicbox-server';
+
 import router from './lib/router';
-import magicBoxServer from './magic-box/src';
 
 const { PORT = 3001 } = process.env;
 

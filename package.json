@@ -1,4 +1,5 @@
 {
+  "name": "@devhub/magicbox",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -17,11 +18,10 @@
   "engines": {
     "node": ">=18"
   },
-  "name": "kitchen-sink",
   "packageManager": "npm@9.8.1",
   "workspaces": [
     "packages/*",
     "widgets/*",
-    "starter-app"
+    "apps/*"
   ]
 }
