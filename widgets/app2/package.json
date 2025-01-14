@@ -2,11 +2,8 @@
   "name": "app2",
   "type": "module",
   "scripts": {
-    "dev": "vite --port 8002",
+    "dev": "vite preview --port 8002",
     "build": "tsc && vite build",
-    "serve": "run-p watch preview",
-    "watch": "tsc && vite build --watch",
-    "preview": "vite preview --port 8002",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write .",
     "check-format": "prettier --check ."
