@@ -18,7 +18,7 @@ export const ROUTES = {
     LOAD_TEST: '/test/load',
     CLM_TEST: '/test/clm',
     AUTH_FORWARDER: '/auth-forwarder/:widgetId',
-    INDEX: '*', // [HTML] MUST BE * to catch all routes
+    INDEX: '/*', // [HTML] MUST BE * to catch all routes
 };
 
 export const STATIC_ASSETS = {

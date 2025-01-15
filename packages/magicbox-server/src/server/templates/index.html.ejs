@@ -1,167 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <base href="<%- baseHref %>" />
-    <% if ( typeof metaTags !=='undefined' && metaTags && metaTags.length ) { 
-        metaTags.forEach(function(metaTagEntries) { %>
-          <meta <%- metaTagEntries %> >
-      <% });
-    } %>
-
-    <title id="oneds-title"><%- pageTitle %></title>
-    <link rel="preload" as="script" href="<%= shellCdnUrl %>" crossorigin="anonymous"></link>
-    <link rel="icon" type="image/x-icon" href=<%- favicon %>>
-    <link rel="apple-touch-icon" href="<%= iosIcon %>">
-
-
-    <style type="text/css">
-      #root,body,html{height:100%}body{min-height:100vh}
-    </style>
-
     <script type="systemjs-importmap" crossorigin="anonymous">
       <%- JSON.stringify(systemJsImportMapConfig) %>
     </script>
-    <script type="application/json" data-1ds-config-id="env-config">
-      <%- JSON.stringify(envConfig) %>
-    </script>
-
-    <script type="application/json" data-1ds-config-id="plugin-config">
-      <%- JSON.stringify(pluginConfigs) %>
-    </script>
-
-    <script type="application/json" data-1ds-config-id="widget-config">
-      <%- JSON.stringify(widgetConfigs) %>
-    </script>
-
-    <script type="application/json" data-1ds-config-id="lazy-loaded-libs-config">
-      <%- JSON.stringify(lazyLoadedLibsConfig) %>
-    </script>
-
-    <% if (
-      typeof preloadableStaticAssetURLs !== 'undefined'
-      && preloadableStaticAssetURLs
-      && preloadableStaticAssetURLs.length
-    ) {
-      preloadableStaticAssetURLs.forEach(function(preloadURL) { %>
-        <link rel="preload" as="script" href="<%= preloadURL %>" crossorigin="anonymous"></link>
-      <% });
-    } %>
-
-    <% if (
-      typeof preloadableFetchAPIURLs !== 'undefined'
-      && preloadableFetchAPIURLs
-      && preloadableFetchAPIURLs.length
-    ) {
-      preloadableFetchAPIURLs.forEach(function(preloadURL) { %>
-        <link rel="preload" as="fetch" href="<%= preloadURL %>" crossorigin="anonymous"></link>
-      <% });
-    } %>
-
-    %>
   </head>
   <body>
     <div id="root"></div>
-
-    <script nonce="<%= cspNonceGuid %>">
-
-      function importWithRetries(importPath, retries = 2) {
-        if ('<%= enableCriticalLibRetry %>' === 'true') {
-          return System.import(importPath).catch(function(err) {
-            if (retries > 0) {
-              //If the import fails, we need to delete the module from the cache in order to try again
-              System.delete(importPath);
-
-              return importWithRetries(importPath, retries - 1)
-            }
-            // When we have retried 3 times, then try to go to the CDN Proxy in prod
-          if ('<%= envConfig.IS_PROD %>' === 'true') {
-            const resourcePath = new URL(importPath).pathname;
-            const proxyUrl =  new URL(`/cdn${pathName}`, window.location.origin).href;
-
-            return System.import(proxyUrl)
-          }
-
-          return Promise.reject(err);
-        });
-        } else{
-          return System.import(importPath)
-        }
-      }
-
-      function onError(err) {
-        console.error('Something went wrong initializing 1ds-app', err);
-        if ('<%= enableCriticalLibRetry %>' === 'true') {
-          // Non user initiated calls do not add to history to be able to go back 
-          history.pushState({}, "", window.location.href);
-          window.location.href = `<%= serverErrorRoute%>?<%= cause%>=initialization&<%= widgetPath%>=${window.location.pathname}`
-        } else{
-          // don't bail out outside of production
-          if ('<%= envConfig.IS_PROD %>' === 'false') return;
-
-          if (window.location.href.indexOf("apps-d.docusign") > -1) {
-            window.location.href="https://appdemo.docusign.com/redirect-to-baseline?source=1ds-error";
-          } else {
-            window.location.href = "https://app.docusign.com/redirect-to-baseline?source=1ds-error"
-          }
-        }
-      }
-
+    <script>
       function onSystemReady() {
-        importWithRetries("<%= criticalLibraryConfigUrls.SystemAMD %>")
-          .then(function() {
-            importWithRetries("<%= shellCdnUrl %>")
-              .then(function(shell) {
-                return shell.default()
-              })
-              .catch(onError)
-          })
-          .catch(onError)
+        System.import('http://localhost:3001/main.js');
       }
-
-      const systemScript = document.createElement('script');
-      systemScript.onload = onSystemReady;
-      systemScript.onerror = onError;
-      systemScript.fetchPriority = "high";
-      systemScript.src = "<%= criticalLibraryConfigUrls.System %>";
-      systemScript.defer = true;
-      systemScript.crossOrigin = 'anonymous';
-
-      document.head.appendChild(systemScript);
     </script>
-    
-    <%# import map overrides settings %>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.14.0/dist/system.js" onload=onSystemReady()></script>
     <meta name="importmap-type" content="systemjs-importmap" />
-    <% if (!envConfig.IS_PROD && !hideImportMapOverrideElement) { %>
-      <import-map-overrides-full></import-map-overrides-full>
-    <% } %>
-
-    <%# Load import-map-overrides UI before systemjs %>
-    <script fetchpriority="high" src="<%= criticalLibraryConfigUrls.ImportMapOverride %>" async crossorigin="anonymous"></script>
-
-    <%# cspNonce to window is not okay, this is only for Send's elastic-sign/clickwraps experience %>
-    <script nonce="<%= cspNonceGuid %>">
-      window.cspNonceGuid = '<%= cspNonceGuid %>';
-    </script>
-
-    <% if (auth && widgetId) { %>
-      <script nonce="<%= cspNonceGuid %>">
-        window.sessionStorage.setItem('<%- authInfoSessionStorageKey %>', '<%- auth %>');
-      </script>
-    <% } %>
-
-    <%# "app-load-start" is to support @ds/Send plugin load time tracking %>
-    <script nonce="<%= cspNonceGuid %>">
-      var telemetry = {
-        mark: (name, context) => {
-          if (performance && typeof performance.mark === 'function') {
-            performance.mark(name, context)
-          }
-        }
-      }
-
-      telemetry.mark("<%= envConfig.APP_NAME %>-start");
-
-      telemetry.mark('app-load-start', { detail: { phase: "app-load-full" , time: Date.now(), markerPostion: "start", actionType: "parse"}});
-    </script>
   </body>
 </html>
