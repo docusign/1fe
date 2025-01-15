@@ -192,3 +192,5 @@ export const isUrlValid = (url: string, environment: string) => {
     return false;
   }
 };
+
+export { getWidgetConfigValues } from './widget-configs';
