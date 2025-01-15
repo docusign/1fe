@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "@devhub/magicbox-server": "*",
+    "badge-maker": "^3.3.1",
     "browserslist-useragent": "^4.0.0",
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.0.3",
