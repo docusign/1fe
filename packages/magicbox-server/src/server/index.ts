@@ -1,4 +1,5 @@
 import express, { Router } from 'express';
+import path from 'path';
 import cookieParser from 'cookie-parser';
 import combinedMiddleware from './middlewares';
 import HealthRoute from './routes/health.route';
@@ -37,7 +38,8 @@ export const magicBoxServer = () => {
     app.use(cookieParser());
     app.use(combinedMiddleware);
 
-    // initializeRoutes(app);
+    app.use(express.static(path.join(process.cwd(), 'dist', 'public')));
+    initializeRoutes(app);
 
     return app;
 }
