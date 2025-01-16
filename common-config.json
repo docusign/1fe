@@ -21,12 +21,7 @@
                         "enabled": true,
                         "route": "/app1"
                     },
-                    "version": {
-                        "current": "1.0.0",
-                        "next": "1.0.0",
-                        "nextReleaseStart": 1734633059355,
-                        "nextReleaseEnd": 1734633062955
-                    }
+                    "version": "1.0.0"
                 }
             ]
         }
