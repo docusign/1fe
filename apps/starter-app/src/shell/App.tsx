@@ -6,17 +6,13 @@ import Welcome from './components/Welcome/Welcome';
 
 function App(): JSX.Element {
   const [count, setCount] = useState<number>(0);
-  const LazyApp1 = React.lazy(() =>
-    (window as any).System.import('app1')
-  );
-  const LazyApp2 = React.lazy(() =>
-    (window as any).System.import('app2')
-  );
+  const LazyApp1 = React.lazy(() => (window as any).System.import('app1'));
+  const LazyApp2 = React.lazy(() => (window as any).System.import('app2'));
   return (
     <Router>
       <div className={styles.App}>
         <header className={styles['App-header']}>
-          <img src={logo} className={styles['App-logo']} alt="logo" />
+          <img src={logo} className={styles['App-logo']} alt='logo' />
           <Welcome />
           <Suspense fallback={<div>Loading...</div>}>
             <LazyApp1 />
@@ -33,27 +29,27 @@ function App(): JSX.Element {
           <p>
             <a
               className={styles['App-link']}
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
+              href='https://reactjs.org'
+              target='_blank'
+              rel='noopener noreferrer'
             >
               Learn React
             </a>
             {' | '}
             <a
               className={styles['App-link']}
-              href="https://vitejs.dev/guide/features.html"
-              target="_blank"
-              rel="noopener noreferrer"
+              href='https://vitejs.dev/guide/features.html'
+              target='_blank'
+              rel='noopener noreferrer'
             >
               Vite Docs
             </a>
           </p>
           <Switch>
-            <Route path="/about">
+            <Route path='/about'>
               <main>About</main>
             </Route>
-            <Route path="/">
+            <Route path='/'>
               <main>Home</main>
             </Route>
           </Switch>

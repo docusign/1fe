@@ -1,25 +1,19 @@
 import { NextFunction, Request, Response } from 'express';
 import { query } from 'express-validator';
 
-import {
-  RUNTIME_CONFIG_OVERRIDES,
-  WIDGET_URL_OVERRIDES,
-} from '../constants';
+import { RUNTIME_CONFIG_OVERRIDES, WIDGET_URL_OVERRIDES } from '../constants';
 
 // TODO - Make these configurable via options: IS_PROD, IS_LOCAL_OR_INTEGRATION, ALLOWED_USER_AGENTS_FOR_WIDGET_OVERRIDE
 const IS_LOCAL_OR_INTEGRATION = false;
 const IS_PROD = true;
 
-export const ALLOWED_USER_AGENTS_FOR_WIDGET_OVERRIDE = [
-  'test.userAgent'
-];
+export const ALLOWED_USER_AGENTS_FOR_WIDGET_OVERRIDE = ['test.userAgent'];
 
 const forbiddenQueryParams = [
   'imo', // Used by import-map-overrides library to allow users to request import map overrides
 ];
 
 const redirectIfForbiddenQueryParams = (req: Request, res: Response) => {
-
   const userAgent = req.headers['user-agent'] || '';
 
   // Check if widget_url_override query string exists

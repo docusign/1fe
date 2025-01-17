@@ -9,9 +9,8 @@ const setup = () => {
     <React.StrictMode>
       <App />
     </React.StrictMode>,
-    document.querySelector('#root')
+    document.querySelector('#root'),
   );
-  
-}
+};
 
 setup();

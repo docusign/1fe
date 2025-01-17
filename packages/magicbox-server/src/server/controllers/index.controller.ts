@@ -68,32 +68,30 @@ class IndexController {
     res: Response,
     next: NextFunction,
   ): Promise<void> => {
-      try {
+    try {
+      const pluginFound = (req as any).plugin;
 
-        const pluginFound = (req as any).plugin;
-
-        if (pluginFound && ifSystemPluginRequestedOnProd(pluginFound)) {
-          res.sendStatus(404);
-        } else if (
-          pluginFound &&
-          allowUnsafeEvalForSystemPluginsOnPreprod(pluginFound)
-        ) {
-          res.set({
-            'Content-Security-Policy':
-              "connect-src * data: blob: 'unsafe-inline'",
-          });
-        }
-
-        const dataForRenderingTemplatePayload = await dataForRenderingTemplate(
-          req,
-        );
-
-        const template = getTemplate('index.html.ejs');
-        const html = ejs.render(template, dataForRenderingTemplatePayload);
-        res.send(html);
-      } catch (error) {
-        next(error);
+      if (pluginFound && ifSystemPluginRequestedOnProd(pluginFound)) {
+        res.sendStatus(404);
+      } else if (
+        pluginFound &&
+        allowUnsafeEvalForSystemPluginsOnPreprod(pluginFound)
+      ) {
+        res.set({
+          'Content-Security-Policy':
+            "connect-src * data: blob: 'unsafe-inline'",
+        });
       }
+
+      const dataForRenderingTemplatePayload =
+        await dataForRenderingTemplate(req);
+
+      const template = getTemplate('index.html.ejs');
+      const html = ejs.render(template, dataForRenderingTemplatePayload);
+      res.send(html);
+    } catch (error) {
+      next(error);
+    }
   };
 }
 

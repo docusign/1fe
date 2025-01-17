@@ -27,23 +27,23 @@ TODO:
 const getPluginBaselineUrl = (plugin: PluginConfig) => 'https://test.com';
 // @ts-ignore
 const getPlugin = (path: string) => ({
-  "enabled": true,
-  "route": "/starter-kit",
-  "widgetId": "@1ds/widget-starter-kit"
-  });
+  enabled: true,
+  route: '/starter-kit',
+  widgetId: '@1ds/widget-starter-kit',
+});
 // @ts-ignore
 const getPluginById = (widgetId: string) => ({
-  "enabled": true,
-  "route": "/starter-kit",
-  "widgetId": "@1ds/widget-starter-kit"
-  })
+  enabled: true,
+  route: '/starter-kit',
+  widgetId: '@1ds/widget-starter-kit',
+});
 
 type PluginConfig = {
   enabled: boolean;
   route: string;
   widgetId: string;
   baselineUrl?: string;
-  [key: string]: any; 
+  [key: string]: any;
 };
 
 const IGNORED_PATHS = [
@@ -81,8 +81,9 @@ const pluginMiddleware = async (
     // for /auth/logout, /test/load, etc.
     const topTwoLevelsPath = `/${path.split('/').slice(1, 3).join('/')}`;
 
-    const shouldIgnorePath = IGNORED_PATHS_SET.has(topLevelPath) ||
-        IGNORED_PATHS_SET.has(topTwoLevelsPath)
+    const shouldIgnorePath =
+      IGNORED_PATHS_SET.has(topLevelPath) ||
+      IGNORED_PATHS_SET.has(topTwoLevelsPath);
 
     if (shouldIgnorePath) {
       return next();

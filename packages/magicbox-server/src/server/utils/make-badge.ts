@@ -1,6 +1,5 @@
 import { makeBadge } from 'badge-maker';
 
-
 /*
 TODO:
 - update label and color. Currently stubbed
@@ -20,7 +19,6 @@ type badgeStyles =
   | 'for-the-badge'
   | 'social'
   | undefined;
-
 
 export const badgeMaker = (widgetId: string, widgetVersion: string) => {
   const format = {

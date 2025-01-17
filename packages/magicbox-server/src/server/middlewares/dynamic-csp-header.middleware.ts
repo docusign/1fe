@@ -4,7 +4,6 @@ import { mergeWith, mapKeys, isArray, uniq } from 'lodash';
 import helmet from 'helmet';
 import { ROUTES } from '../constants';
 
-
 /*
   TODO:
   - strongly type request
@@ -17,7 +16,7 @@ const defaultCSPDirectives: any = {
       "'unsafe-eval'", // needed for bathtub support
       "'unsafe-inline'",
       "'wasm-unsafe-eval'", // needed for experimental wasm support
-      '*'
+      '*',
     ],
     scriptSrcAttr: [
       "'unsafe-eval'", // needed for bathtub support
@@ -29,8 +28,8 @@ const defaultCSPDirectives: any = {
     scriptSrc: [
       "'unsafe-eval'", // needed for bathtub support
       "'wasm-unsafe-eval'", // needed for experimental wasm support
-      '*'
-    ]
+      '*',
+    ],
   },
   stage: {},
   demo: {},
@@ -77,17 +76,15 @@ const kebabToCamel = (kebabCaseString: string): string => {
 };
 
 // @ts-ignore
-const getRuntimeCSPConfigs = ({ pluginId, reportOnly, req}: any) => {
+const getRuntimeCSPConfigs = ({ pluginId, reportOnly, req }: any) => {
   return {
-    "imgSrc": [
-      "https://lhWidget-csp-test.docusign.com",
-      "https://lhWidget-csp-test-runtime.docusign.com"
+    imgSrc: [
+      'https://lhWidget-csp-test.docusign.com',
+      'https://lhWidget-csp-test-runtime.docusign.com',
     ],
-    "frameAncestors": [
-      "*"
-    ]
-    }
-}
+    frameAncestors: ['*'],
+  };
+};
 
 export const mergeWithUsingUniqueArray = (
   objValue: string[],
@@ -147,9 +144,7 @@ export const getMergedDirectives = (cspOptions: MergeCSPOptions = {}) => {
   }
 };
 
-const generateCSPPolicy = (
-  generateOptions: any = {},
-) => {
+const generateCSPPolicy = (generateOptions: any = {}) => {
   const {
     environment = 'development',
     reportOnly = false,
@@ -180,41 +175,41 @@ const dynamicCspHeaderMiddleware = async (
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
-      try {
-        const pluginId = (req as any).plugin?.widgetId;
+  try {
+    const pluginId = (req as any).plugin?.widgetId;
 
-        // Generate plugin csp with helmet
-        const helmetCspMiddleware = helmet.contentSecurityPolicy(
-          generateCSPPolicy({
-            environment: 'development',
-            pluginId,
-            req,
-          }),
-        );
+    // Generate plugin csp with helmet
+    const helmetCspMiddleware = helmet.contentSecurityPolicy(
+      generateCSPPolicy({
+        environment: 'development',
+        pluginId,
+        req,
+      }),
+    );
 
-        if (
-          pluginId &&
-          !!getRuntimeCSPConfigs({ pluginId, reportOnly: true, req })
-        ) {
-          // Generate plugin report only csp with helmet
-          const helmetReportOnlyCspMiddleware = helmet.contentSecurityPolicy(
-            generateCSPPolicy({
-              environment: 'development',
-              pluginId,
-              reportOnly: true,
-              req,
-            }),
-          );
+    if (
+      pluginId &&
+      !!getRuntimeCSPConfigs({ pluginId, reportOnly: true, req })
+    ) {
+      // Generate plugin report only csp with helmet
+      const helmetReportOnlyCspMiddleware = helmet.contentSecurityPolicy(
+        generateCSPPolicy({
+          environment: 'development',
+          pluginId,
+          reportOnly: true,
+          req,
+        }),
+      );
 
-          helmetCspMiddleware(req, res, () =>
-            helmetReportOnlyCspMiddleware(req, res, next),
-          );
-        } else {
-          helmetCspMiddleware(req, res, next);
-        }
-      } catch (err) {
-        next(err);
-      }
+      helmetCspMiddleware(req, res, () =>
+        helmetReportOnlyCspMiddleware(req, res, next),
+      );
+    } else {
+      helmetCspMiddleware(req, res, next);
+    }
+  } catch (err) {
+    next(err);
+  }
 };
 
 export default dynamicCspHeaderMiddleware;

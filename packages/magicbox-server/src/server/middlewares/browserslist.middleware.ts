@@ -22,58 +22,55 @@ const ignoredRoutes = [
 
 const browsersListConfig = BROWSERS_LIST;
 
-
-
 const browsersListMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction,
 ): void => {
-    try {
-      const { path } = req || {};
-      const activeAutomatedTestFramework =
-        req.query.automated_test_framework || null;
-      const userAgent = req?.headers?.['user-agent'];
+  try {
+    const { path } = req || {};
+    const activeAutomatedTestFramework =
+      req.query.automated_test_framework || null;
+    const userAgent = req?.headers?.['user-agent'];
 
-      if (
-        // not an automation test (SAW or Playwright) by query param
-        !activeAutomatedTestFramework &&
-        // is Useragent header present
-        userAgent &&
-        // UserAgent does not have SAW or Playwright signature
-        !userAgent.includes('ClientTransactionId') && // exclude SAW and/or Playwright automated tests
-        !userAgent.includes('sawmill.docusignhq') && // exclude SAW and/or Playwright automated tests
-        !ignoredRoutes.includes(path) &&
-        // Ignore redirecting for static assets (Only applicable to local dev mode - Usually served by CDN)
-        !path.startsWith(STATIC_ASSETS.IMAGES) &&
-        !path.startsWith(STATIC_ASSETS.FAVICON)
-      ) {
-        const matchesUnsupportedBrowser = matchesUA(userAgent, {
-          browsers: browsersListConfig,
-        });
+    if (
+      // not an automation test (SAW or Playwright) by query param
+      !activeAutomatedTestFramework &&
+      // is Useragent header present
+      userAgent &&
+      // UserAgent does not have SAW or Playwright signature
+      !userAgent.includes('ClientTransactionId') && // exclude SAW and/or Playwright automated tests
+      !userAgent.includes('sawmill.docusignhq') && // exclude SAW and/or Playwright automated tests
+      !ignoredRoutes.includes(path) &&
+      // Ignore redirecting for static assets (Only applicable to local dev mode - Usually served by CDN)
+      !path.startsWith(STATIC_ASSETS.IMAGES) &&
+      !path.startsWith(STATIC_ASSETS.FAVICON)
+    ) {
+      const matchesUnsupportedBrowser = matchesUA(userAgent, {
+        browsers: browsersListConfig,
+      });
 
+      if (matchesUnsupportedBrowser) {
+        const { cspNonceGuid } = req as any; // TODO: Strongly type
 
-        if (matchesUnsupportedBrowser) {
-          const { cspNonceGuid } = req as any; // TODO: Strongly type
+        const dataForRenderingTemplatePayload = {
+          baseHref: `${getRequestHost(req)}/`,
+          cspNonceGuid,
+          type: ERROR_MIDDLEWARE_TYPES.UNSUPPORTED,
+          favicon: STATIC_ASSETS.FAVICON,
+          pageTitle: `Unsupported Browser - ${UNSUPPORTED_TITLE}`,
+          redirectOnRetry: null,
+        };
 
-          const dataForRenderingTemplatePayload = {
-            baseHref: `${getRequestHost(req)}/`,
-            cspNonceGuid,
-            type: ERROR_MIDDLEWARE_TYPES.UNSUPPORTED,
-            favicon: STATIC_ASSETS.FAVICON,
-            pageTitle: `Unsupported Browser - ${UNSUPPORTED_TITLE}`,
-            redirectOnRetry: null,
-          };
-
-          const template = getTemplate('error.html.ejs');
-          const html = ejs.render(template, dataForRenderingTemplatePayload);
-          res.send(html);
-        }
+        const template = getTemplate('error.html.ejs');
+        const html = ejs.render(template, dataForRenderingTemplatePayload);
+        res.send(html);
       }
-    } catch (err) {
-      next(err);
     }
-    return next();
+  } catch (err) {
+    next(err);
+  }
+  return next();
 };
 
 export default browsersListMiddleware;

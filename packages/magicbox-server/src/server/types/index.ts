@@ -92,7 +92,6 @@ export type WidgetConfigs<
   T extends PluginConfig | WidgetConfig = WidgetConfig,
 > = ReadonlyMap<string, T>;
 
-
 export type SystemWidgetConfig = {
   widgetId: string;
   version: string;
@@ -106,4 +105,3 @@ export type WidgetConfigRaw = {
   version: string;
   plugin?: PluginConfigRaw;
 };
-  
