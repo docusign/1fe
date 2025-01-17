@@ -22,7 +22,6 @@ const SERVER_GIT_BRANCH = 'branch';
 const SERVER_BUILD_NUMBER = '123';
 const IS_PROD = true;
 
-
 type TemplatizeCDNUrlArgs = {
   widgetId: string;
   widgetVersion: string;
@@ -38,7 +37,9 @@ export const templatizeCDNUrl = ({
   IS_PROD = true,
   templateFilePath = 'js/1ds-bundle.js',
 }: TemplatizeCDNUrlArgs): URL => {
-  return new URL(`https://docutest-a.akamaihd.net/${ENVIRONMENT}/1ds/widgets/${widgetId}/${widgetVersion}/${templateFilePath}`);
+  return new URL(
+    `https://docutest-a.akamaihd.net/${ENVIRONMENT}/1ds/widgets/${widgetId}/${widgetVersion}/${templateFilePath}`,
+  );
 };
 
 class VersionController {
@@ -48,9 +49,8 @@ class VersionController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const dataForRenderingTemplatePayload = await dataForRenderingTemplate(
-        req,
-      );
+      const dataForRenderingTemplatePayload =
+        await dataForRenderingTemplate(req);
 
       if (!dataForRenderingTemplatePayload) {
         res.sendStatus(500);
@@ -66,11 +66,13 @@ class VersionController {
         environment: getHostedOrSimulatedEnvironment(),
         version: SERVER_VERSION,
         nodeVersion: process.version,
-        ...(!IS_PROD ? {
-          buildNumber: SERVER_BUILD_NUMBER,
-          branch: SERVER_GIT_BRANCH,
-          gitSha: SERVER_GIT_SHA,
-        } : {}),
+        ...(!IS_PROD
+          ? {
+              buildNumber: SERVER_BUILD_NUMBER,
+              branch: SERVER_GIT_BRANCH,
+              gitSha: SERVER_GIT_SHA,
+            }
+          : {}),
         packages,
         configs: {
           // have to return singular widgetConfig and pluginConfig for backward compatibility

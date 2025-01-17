@@ -10,27 +10,27 @@ dotenv.config();
 const { PORT = 3001 } = process.env;
 
 const options = {
-  // points to common flat file 
-  mode: "production",
+  // points to common flat file
+  mode: 'production',
   configManagement: {
-    url: "https://raw.githubusercontent.com/docusign/dev-hub/refs/heads/main/common-config.json",
+    url: 'https://raw.githubusercontent.com/docusign/dev-hub/refs/heads/main/common-config.json',
     refreshMs: 30 * 1000,
     phasedRelease: true,
   },
-  shellBundleUrl: "localhost:3000/bundle.js",
+  shellBundleUrl: 'localhost:3000/bundle.js',
   server: {
     // for Integration-env only
-    development: { 
+    development: {
       bathtub: true, // automatically on when mode: development
-      importMapOverrides: { // automatically on when mode: development
+      importMapOverrides: {
+        // automatically on when mode: development
         enableUI: true,
-        cdnURL: "",
+        cdnURL: '',
       },
-      devtools: true // automatically on when mode: development
+      devtools: true, // automatically on when mode: development
     },
   },
 };
-  
 
 const app = magicBoxServer(options);
 
@@ -45,7 +45,6 @@ app.set('view engine', 'ejs');
 
 // Set the directory for views (optional)
 app.set('views', path.join(__dirname, 'views'));
-
 
 // Handle client routing, return all requests to the app
 // @ts-ignore
