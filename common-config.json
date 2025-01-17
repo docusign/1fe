@@ -22,6 +22,14 @@
                         "route": "/app1"
                     },
                     "version": "1.0.0"
+                },
+                {
+                    "widgetId": "@1ds/starter-kit2",
+                    "plugin": {
+                        "enabled": true,
+                        "route": "/app2"
+                    },
+                    "version": "1.0.5"
                 }
             ]
         }
