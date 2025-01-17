@@ -4,7 +4,7 @@ import ejs from 'ejs';
 import { getTemplate } from '../templates';
 import { WidgetConfigs, SystemWidgetConfig, PluginConfig } from '../types';
 import { getWidgetConfigValues } from '../utils';
-import { getCachedWidgetConfigs } from '../utils/widget-configs';
+import { getCachedWidgetConfigs } from '../utils';
 import { dataForRenderingTemplate } from './data';
 
 /*

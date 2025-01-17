@@ -32,5 +32,6 @@ export const WIDGET_URL_OVERRIDES = 'widget_url_overrides';
 export const RUNTIME_CONFIG_OVERRIDES = 'runtime_config_overrides';
 export const PLUGIN_ID = 'plugin_id';
 export const PLUGIN_DISABLED = 'plugin_disabled';
-
-    
+export const WIDGET_ID_UNAVAILABLE =
+  'widgetId unavailable at this point in the runtime';
+export const widgetRuntimeConfigUrlFilename = 'widget-runtime-config.json';

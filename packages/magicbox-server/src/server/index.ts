@@ -1,15 +1,18 @@
-import express, { Router } from 'express';
+import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
+
 import combinedMiddleware from './middlewares';
 import HealthRoute from './routes/health.route';
 import VersionRoute from './routes/version.route';
 import IndexRoute from './routes/index.route';
 import { RoutesInterface } from './types';
+import { pollDynamicConfig } from './utils/config-poller';
 
 /*
     TODO:
     - Strong type request
+    - Strongly type options
 */
 
 const initializeRoutes = (app: express.Application) => {
@@ -33,13 +36,15 @@ const initializeRoutes = (app: express.Application) => {
     app.use('/', new IndexRoute().router);
 }
 
-export const magicBoxServer = () => {
+export const magicBoxServer = (options: any) => {
     const app = express();
     app.use(cookieParser());
     app.use(combinedMiddleware);
 
     app.use(express.static(path.join(process.cwd(), 'dist', 'public')));
     initializeRoutes(app);
+
+    pollDynamicConfig(options.configManagement.url, options.configManagement.refreshMs);
 
     return app;
 }

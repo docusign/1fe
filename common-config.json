@@ -14,19 +14,16 @@
         },
         "widgets": {
             "basePrefix": "docucdn-a.akamaihd.net/production/1ds/widgets/",
-            "releaseConfig": {
-                "widgetId": "@1ds/starter-kit",
-                "plugin": {
-                    "enabled": true,
-                    "route": "/app1"
-                },
-                "version": {
-                    "current": "1.0.0",
-                    "next": "1.0.0",
-                    "nextReleaseStart": 1734633059355,
-                    "nextReleaseEnd": 1734633062955
+            "releaseConfig": [
+                {
+                    "widgetId": "@1ds/starter-kit",
+                    "plugin": {
+                        "enabled": true,
+                        "route": "/app1"
+                    },
+                    "version": "1.0.0"
                 }
-            }
+            ]
         }
     },
     "csp": {

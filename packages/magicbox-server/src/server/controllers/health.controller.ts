@@ -5,7 +5,8 @@ import {
   WidgetConfig
 } from '../types';
 import { getWidgetConfigValues } from '../utils';
-import { getCachedWidgetConfigs } from '../utils/widget-configs';
+import { getCachedWidgetConfigs } from '../utils';
+
 /*
   TODO:
   - Implement getCachedWidgetConfigs + getWidgetConfigValues 
