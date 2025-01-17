@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 type PinnedWidget = { widgetId: string; version: string };
 type PreloadKey = 'apiGet' | 'html' | 'widget';
-type PreloadType = { [k in PreloadKey]?: string };
+export type PreloadType = { [k in PreloadKey]?: string };
 type AuthenticationType = 'required' | 'lazy';
 type MetaTags = Record<string, string>[];
 
@@ -63,7 +63,8 @@ type RuntimePluginConfig = {
   metaTags?: MetaTags;
   baselineUrl?: string;
 };
-type RuntimeConfig = {
+
+export type RuntimeConfig = {
   dependsOn?: { pinnedWidgets: PinnedWidget[] };
   preload?: PreloadType[];
   plugin?: RuntimePluginConfig;
@@ -82,10 +83,8 @@ type PluginConfigRaw = {
 export type WidgetConfig = {
   widgetId: string;
   version: string;
-  activePhasedDeployment: boolean;
   runtime: RuntimeConfig;
   type?: WidgetType;
-  _url?: string;
   plugin?: PluginConfigRaw;
 };
 
@@ -95,9 +94,16 @@ export type WidgetConfigs<
 
 
 export type SystemWidgetConfig = {
-    widgetId: string;
-    version: string;
-    _url?: string;
-    type: 'system';
-  };
+  widgetId: string;
+  version: string;
+  _url?: string;
+  type: 'system';
+};
+
+export type WidgetConfigRaw = {
+  widgetId: string;
+  type?: WidgetType;
+  version: string;
+  plugin?: PluginConfigRaw;
+};
   

@@ -1,4 +1,5 @@
 import { Request } from 'express';
+import { getCachedWidgetConfigs } from '../../utils';
 
 // TODO:
 // import packageJson from '../../../package.json';
@@ -201,7 +202,7 @@ import { Request } from 'express';
 // export * from './widget-config';
 
 export const dataForRenderingTemplate = async (_: Request) => ({
-  widgetConfigs: {},
+  widgetConfigs: getCachedWidgetConfigs(),
   pluginConfigs: {},
   packages: {},
   systemJsImportMapConfig: {

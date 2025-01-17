@@ -1,3 +1,4 @@
+import dotenv from 'dotenv';
 import express from 'express';
 import path from 'path';
 // @ts-ignore
@@ -5,9 +6,33 @@ import magicBoxServer from '@devhub/magicbox-server';
 
 import router from './lib/router';
 
+dotenv.config();
 const { PORT = 3001 } = process.env;
 
-const app = magicBoxServer();
+const options = {
+  // points to common flat file 
+  mode: "production",
+  configManagement: {
+    url: "https://raw.githubusercontent.com/docusign/dev-hub/refs/heads/main/common-config.json",
+    refreshMs: 30 * 1000,
+    phasedRelease: true,
+  },
+  shellBundleUrl: "localhost:3000/bundle.js",
+  server: {
+    // for Integration-env only
+    development: { 
+      bathtub: true, // automatically on when mode: development
+      importMapOverrides: { // automatically on when mode: development
+        enableUI: true,
+        cdnURL: "",
+      },
+      devtools: true // automatically on when mode: development
+    },
+  },
+};
+  
+
+const app = magicBoxServer(options);
 
 // Middleware that parses json and looks at requests where the Content-Type header matches the type option.
 app.use(express.json());

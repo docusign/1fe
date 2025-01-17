@@ -1,9 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import hash from 'object-hash';
 
-import { getCachedWidgetConfigs } from '../utils/widget-configs';
+import { getCachedWidgetConfigs } from '../utils';
 import { badgeMaker } from '../utils/make-badge';
 import { dataForRenderingTemplate } from './data';
+import { getWidgetConfigValues } from '../utils';
 
 /*
 TODO:
@@ -59,6 +60,8 @@ class VersionController {
       const { widgetConfigs, pluginConfigs, packages } =
         dataForRenderingTemplatePayload;
 
+      console.log({ dataForRenderingTemplatePayload });
+
       res.send({
         environment: getHostedOrSimulatedEnvironment(),
         version: SERVER_VERSION,
@@ -71,7 +74,7 @@ class VersionController {
         packages,
         configs: {
           // have to return singular widgetConfig and pluginConfig for backward compatibility
-          widgetConfig: widgetConfigs,
+          widgetConfig: getWidgetConfigValues(widgetConfigs),
           pluginConfig: pluginConfigs,
         },
         hashOfWidgetConfigs: hash.MD5({ ...widgetConfigs }),
