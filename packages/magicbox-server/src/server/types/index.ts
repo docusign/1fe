@@ -105,3 +105,22 @@ export type WidgetConfigRaw = {
   version: string;
   plugin?: PluginConfigRaw;
 };
+
+// corresponds to the installed library JSONs in 1ds-configs
+// https://github.docusignhq.com/Core/1ds-configs/blob/main/integration/libraries/%401ds-cli.json
+export type InstalledLibConfig = {
+  id: string;
+  version: string;
+  type: 'installed';
+};
+
+// corresponds to the external library JSONs in 1ds-configs
+// e.g. https://github.docusignhq.com/Core/1ds-configs/blob/main/integration/libraries/react.json
+export type ExternalLibConfig = {
+  id: string;
+  name: string;
+  version: string;
+  path: string;
+  isPreloaded: boolean;
+  type: 'external';
+};

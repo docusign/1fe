@@ -1,5 +1,10 @@
-import { isEmpty, isObjectLike } from 'lodash';
-import { WidgetConfig, WidgetConfigs } from '../types';
+import { cloneDeep, isEmpty, isObjectLike } from 'lodash';
+import {
+  ExternalLibConfig,
+  InstalledLibConfig,
+  WidgetConfig,
+  WidgetConfigs,
+} from '../types';
 import { WIDGET_ID_UNAVAILABLE } from '../constants';
 import { getHostedOrSimulatedEnvironment } from '../configs';
 import {
@@ -13,6 +18,7 @@ import {
   fetchAllWidgetRuntimeConfigs,
   getFallbackRuntimeConfigs,
 } from './runtime-configs';
+import { getLibraryConfigs, setLibraryConfigs } from './libs';
 
 /*
 TODO:
@@ -148,6 +154,151 @@ const verifyWidgetCDNUrls = async (widgetConfigsToVerify: WidgetConfigs) => {
     });
 };
 
+export const pollDynamicLibraryConfig = async (): Promise<void> => {
+  try {
+    // TODO: Wire up to flatfile options
+    const result: { config: (ExternalLibConfig | InstalledLibConfig)[] } = {
+      config: [
+        { id: '@1ds/cli', version: '1.13.4', type: 'installed' },
+        {
+          id: '@1ds/webpack-localization-plugin',
+          version: '1.3.1',
+          type: 'installed',
+        },
+        { id: '@playwright/test', version: '1.44.1', type: 'installed' },
+        { id: 'ts-node', version: '10.9.2', type: 'installed' },
+        {
+          id: '@ds/ui',
+          name: 'dsUi',
+          version: '7.41.0',
+          isPreloaded: true,
+          path: 'dist/js/1ds-bundle.js',
+          type: 'external',
+        },
+        {
+          id: '@optimizely/optimizely-sdk',
+          name: 'optimizelySdk',
+          version: '4.9.2',
+          isPreloaded: true,
+          path: 'dist/optimizely.browser.umd.js',
+          type: 'external',
+        },
+        {
+          id: 'lottie-web',
+          name: 'lottie',
+          version: '5.11.0',
+          isPreloaded: true,
+          path: 'build/player/lottie.js',
+          type: 'external',
+        },
+        {
+          id: '@emotion/react',
+          name: 'emotionReact',
+          version: '11.10.6',
+          isPreloaded: true,
+          path: 'dist/emotion-react.umd.min.js',
+          type: 'external',
+        },
+        {
+          id: '@reduxjs/toolkit',
+          name: 'RTK',
+          version: '1.9.1',
+          isPreloaded: true,
+          path: 'dist/redux-toolkit.umd.js',
+          type: 'external',
+        },
+        {
+          id: '@emotion/styled',
+          name: 'emotionStyled',
+          version: '11.10.6',
+          isPreloaded: true,
+          path: 'dist/emotion-styled.umd.min.js',
+          type: 'external',
+        },
+        {
+          id: 'react-dom',
+          name: 'ReactDOM',
+          version: '17.0.2',
+          isPreloaded: true,
+          path: 'umd/react-dom.development.js',
+          type: 'external',
+        },
+        {
+          id: 'moment',
+          name: 'moment',
+          version: '2.29.4',
+          isPreloaded: true,
+          path: 'min/moment-with-locales.js',
+          type: 'external',
+        },
+        {
+          id: 'moment-timezone',
+          name: 'MomentTimezone',
+          version: '0.5.43',
+          isPreloaded: true,
+          path: 'builds/moment-timezone-with-data.js',
+          type: 'external',
+        },
+        {
+          id: 'jquery',
+          name: 'jQuery',
+          version: '3.5.1',
+          isPreloaded: true,
+          path: 'dist/jquery.js',
+          type: 'external',
+        },
+        {
+          id: 'zod',
+          name: 'zod',
+          version: '3.23.8',
+          isPreloaded: true,
+          path: 'lib/index.umd.js',
+          type: 'external',
+        },
+        {
+          id: 'react',
+          name: 'React',
+          version: '17.0.2',
+          isPreloaded: true,
+          path: 'umd/react.development.js',
+          type: 'external',
+        },
+        {
+          id: 'lodash',
+          name: 'lodash',
+          version: '4.17.21',
+          isPreloaded: true,
+          path: 'lodash.js',
+          type: 'external',
+        },
+      ],
+    };
+
+    const libraryConfigsPayload = result?.config || [];
+
+    //   const previousConfigs = getLibraryConfigs();
+
+    // Check if new config is different than current config, if so, log
+    //   if (!_isEqual(previousConfigs, libraryConfigsPayload)) {
+    //   }
+
+    if (!isEmpty(libraryConfigsPayload)) {
+      setLibraryConfigs(cloneDeep(libraryConfigsPayload));
+    } else {
+      if (isEmpty(getLibraryConfigs())) {
+        throw new Error(
+          '[DYNAMIC_CONFIG][LIBRARY][CRITICAL] Library config empty and initial libraryConfig is empty as well!',
+        );
+      }
+
+      return;
+    }
+  } catch (error) {
+    // re-throw error, (doing this to keep error handling parity now that a new try/catch block is added with the span)
+    throw error;
+  }
+};
+
 const pollDynamicWidgetConfig = async (url: string): Promise<void> => {
   try {
     const result = await fetchConfig(url);
@@ -212,7 +363,11 @@ export const pollDynamicConfig = async (url: string, intervalMs: number) => {
   const intervalInMilliseconds = intervalMs;
 
   await pollDynamicWidgetConfig(url);
+  await pollDynamicLibraryConfig();
 
   // Start the polling loop
-  setInterval(() => pollDynamicWidgetConfig(url), intervalInMilliseconds);
+  setInterval(() => {
+    pollDynamicWidgetConfig(url);
+    pollDynamicLibraryConfig();
+  }, intervalInMilliseconds);
 };

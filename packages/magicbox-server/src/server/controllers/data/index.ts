@@ -1,5 +1,20 @@
 import { Request } from 'express';
-import { getCachedWidgetConfigs } from '../../utils';
+import {
+  convertServerWidgetConfigToShellWidgetConfig,
+  getCachedWidgetConfigs,
+  getPluginConfigs,
+} from '../../utils';
+import {
+  getPluginPreloadApiUrls,
+  getPluginPreloadAssetUrls,
+} from '../../utils/preload';
+import {
+  getCriticalLibs,
+  getLazyLoadedLibs,
+  getPreloadedLibs,
+} from '../../utils/libs';
+import { getMetaTagStringsFromWidgetRuntimeConfig } from '../../utils/meta-tags';
+import { PluginConfig } from '../../types';
 
 // TODO:
 // import packageJson from '../../../package.json';
@@ -201,44 +216,84 @@ import { getCachedWidgetConfigs } from '../../utils';
 // export * from './plugin-config';
 // export * from './widget-config';
 
-export const dataForRenderingTemplate = async (_: Request) => ({
-  widgetConfigs: getCachedWidgetConfigs(),
-  pluginConfigs: {},
-  packages: {},
-  systemJsImportMapConfig: {
-    imports: {
-      zod: 'https://docucdn-a.akamaihd.net/production/1ds/libs/zod/3.23.8/lib/index.umd.js',
-      lottie:
-        'https://docucdn-a.akamaihd.net/production/1ds/libs/lottie-web/5.11.0/build/player/lottie.js',
-      emotionStyled:
-        'https://docucdn-a.akamaihd.net/production/1ds/libs/@emotion/styled/11.10.6/dist/emotion-styled.umd.min.js',
-      lodash:
-        'https://docucdn-a.akamaihd.net/production/1ds/libs/lodash/4.17.21/lodash.js',
-      moment:
-        'https://docucdn-a.akamaihd.net/production/1ds/libs/moment/2.29.4/min/moment-with-locales.js',
-      emotionReact:
-        'https://docucdn-a.akamaihd.net/production/1ds/libs/@emotion/react/11.10.6/dist/emotion-react.umd.min.js',
-      jQuery:
-        'https://docucdn-a.akamaihd.net/production/1ds/libs/jquery/3.5.1/dist/jquery.js',
-      RTK: 'https://docucdn-a.akamaihd.net/production/1ds/libs/@reduxjs/toolkit/1.9.1/dist/redux-toolkit.umd.js',
-      React:
-        'https://docucdn-a.akamaihd.net/production/1ds/libs/react/17.0.2/umd/react.development.js',
-      dsUi: 'https://docucdn-a.akamaihd.net/production/1ds/libs/@ds/ui/7.40.0/dist/js/1ds-bundle.js',
-      optimizelySdk:
-        'https://docucdn-a.akamaihd.net/production/1ds/libs/@optimizely/optimizely-sdk/4.9.2/dist/optimizely.browser.umd.js',
-      MomentTimezone:
-        'https://docucdn-a.akamaihd.net/production/1ds/libs/moment-timezone/0.5.43/builds/moment-timezone-with-data.js',
-      ReactDOM:
-        'https://docucdn-a.akamaihd.net/production/1ds/libs/react-dom/17.0.2/umd/react-dom.development.js',
-      react: 'React',
-      '@emotion/react': 'emotionReact',
-      ReduxjsToolkit: 'RTK',
-      _: 'lodash',
-      Moment: 'moment',
-      _react: 'React',
-      _reactDom: 'ReactDOM',
-      app1: 'http://localhost:8001/assets/app1.js',
-      app2: 'http://localhost:8002/assets/app2.js',
+// TODO: Strongly type request
+export const dataForRenderingTemplate = async (req: Request) => {
+  // TODO: Will enableRuntimeConfigOverrides flag be promoted to production? May need to update this
+  const widgetConfigs = getCachedWidgetConfigs();
+  const activePluginConfig = (req as any).plugin;
+
+  const preloadableFetchAPIURLs = getPluginPreloadApiUrls({
+    widgetConfigs,
+    pluginId: activePluginConfig?.widgetId,
+  });
+
+  // These are needed bare specifiers that are missing from externalConfigLibraryMapper
+  // Without shellLibSpecifierMap, we get this error: https://github.com/systemjs/systemjs/blob/main/docs/errors.md#8
+  const missingBareSpecifiersMap = {
+    // emotion/react compatibility
+    react: 'React',
+
+    // emotion/styled compatibility
+    '@emotion/react': 'emotionReact',
+
+    // ReduxjsToolkit got renamed to RTK
+    ReduxjsToolkit: 'RTK',
+    _: 'lodash',
+
+    Moment: 'moment',
+
+    // @TODO: This part below is unacceptable - 1ds should not
+    // know about a particular widget or plugin
+    // @ds/prepare hardcoded requirements
+    _react: 'React',
+    _reactDom: 'ReactDOM',
+
+    // TODO: (@mason-chinkin) uncomment below when externalizing react router
+    // required for externalizing react-router-dom
+    // 'react-router': 'ReactRouter',
+    // '@remix-run/router': 'RemixRouter',
+  } as const;
+
+  const preloadedLibs = getPreloadedLibs();
+  const lazyLoadedLibs = getLazyLoadedLibs();
+  const criticalLibs = getCriticalLibs();
+
+  const pluginPreloadAssetUrls =
+    getPluginPreloadAssetUrls({
+      widgetConfigs,
+      pluginId: activePluginConfig?.widgetId,
+    }) ?? [];
+
+  const preloadableStaticAssetURLs = [
+    ...pluginPreloadAssetUrls,
+    ...Object.values(preloadedLibs),
+    ...Object.values(criticalLibs),
+  ];
+
+  const slimWidgetConfigsForShell =
+    convertServerWidgetConfigToShellWidgetConfig(getCachedWidgetConfigs());
+
+  return {
+    widgetConfigs: slimWidgetConfigsForShell,
+    pluginConfigs: getPluginConfigs(),
+    criticalLibraryConfigUrls: criticalLibs,
+    lazyLoadedLibsConfig: lazyLoadedLibs,
+    packages: {},
+    preloadableFetchAPIURLs,
+    preloadableStaticAssetURLs,
+    metaTags: getMetaTagStringsFromWidgetRuntimeConfig(
+      widgetConfigs,
+      activePluginConfig as PluginConfig,
+    ),
+    systemJsImportMapConfig: {
+      imports: {
+        ...preloadedLibs,
+        ...missingBareSpecifiersMap,
+
+        // TODO: Remove these. Need to dynamically add import map in shell on startup
+        app1: 'http://localhost:8001/assets/app1.js',
+        app2: 'http://localhost:8002/assets/app2.js',
+      },
     },
-  },
-});
+  };
+};

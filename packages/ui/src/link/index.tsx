@@ -6,7 +6,7 @@ interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
 }
 
-console.log('test')
+console.log("test");
 
 export function Link({
   children,
