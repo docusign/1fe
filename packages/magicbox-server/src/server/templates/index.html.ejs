@@ -1,18 +1,56 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <% if ( typeof metaTags !=='undefined' && metaTags && metaTags.length ) { 
+      metaTags.forEach(function(metaTagEntries) { %>
+        <meta <%- metaTagEntries %> >
+    <% });
+  } %>
     <script type="systemjs-importmap" crossorigin="anonymous">
       <%- JSON.stringify(systemJsImportMapConfig) %>
     </script>
+    <script type="application/json" data-1ds-config-id="plugin-config">
+      <%- JSON.stringify(pluginConfigs) %>
+    </script>
+    <script type="application/json" data-1ds-config-id="widget-config">
+      <%- JSON.stringify(widgetConfigs) %>
+    </script>
+    <script type="application/json" data-1ds-config-id="lazy-loaded-libs-config">
+      <%- JSON.stringify(lazyLoadedLibsConfig) %>
+    </script>
+
+    <% if (
+      typeof preloadableStaticAssetURLs !== 'undefined'
+      && preloadableStaticAssetURLs
+      && preloadableStaticAssetURLs.length
+    ) {
+      preloadableStaticAssetURLs.forEach(function(preloadURL) { %>
+        <link rel="preload" as="script" href="<%= preloadURL %>" crossorigin="anonymous"></link>
+      <% });
+    } %>
+
+    <% if (
+      typeof preloadableFetchAPIURLs !== 'undefined'
+      && preloadableFetchAPIURLs
+      && preloadableFetchAPIURLs.length
+    ) {
+      preloadableFetchAPIURLs.forEach(function(preloadURL) { %>
+        <link rel="preload" as="fetch" href="<%= preloadURL %>" crossorigin="anonymous"></link>
+      <% });
+    } %>
   </head>
   <body>
     <div id="root"></div>
     <script>
       function onSystemReady() {
-        System.import('http://localhost:3001/main.js');
+        System.import("<%= criticalLibraryConfigUrls.SystemAMD %>").then(() => {
+          System.import('http://localhost:3001/main.js');
+        });
       }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.14.0/dist/system.js" onload=onSystemReady()></script>
+    <script src="<%= criticalLibraryConfigUrls.System %>" onload=onSystemReady()></script>
+    <script fetchpriority="high" src="<%= criticalLibraryConfigUrls.ImportMapOverride %>" async crossorigin="anonymous"></script>
+
     <meta name="importmap-type" content="systemjs-importmap" />
   </body>
 </html>

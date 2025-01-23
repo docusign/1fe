@@ -35,3 +35,16 @@ export const PLUGIN_DISABLED = 'plugin_disabled';
 export const WIDGET_ID_UNAVAILABLE =
   'widgetId unavailable at this point in the runtime';
 export const widgetRuntimeConfigUrlFilename = 'widget-runtime-config.json';
+
+export const PINNED_WIDGET_TYPE = 'pinned' as const;
+export const SYSTEM_WIDGET_TYPE = 'system' as const;
+
+export const SYSTEM_LOADER = {
+  id: 'systemjs',
+  version: '6.14.0',
+};
+
+export const IMPORT_MAP_OVERRIDE_LIB_NEXT = {
+  id: '@1ds/import-map-overrides',
+  version: '3.1.2',
+};
