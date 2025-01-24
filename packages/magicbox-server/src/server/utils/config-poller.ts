@@ -27,6 +27,7 @@ TODO:
 - Replace IS_PROD with "mode" configuration
 - templatizeCDNUrl should consume baseurl from options
 - revisit retries
+- strongly type dynamicConfig
 */
 
 const IS_PROD = true;
@@ -45,6 +46,8 @@ type TemplatizeCDNUrlArgs = {
   IS_PROD?: boolean;
   templateFilePath?: string;
 };
+
+let dynamicConfig: any = {};
 
 const templatizeCDNUrl = ({
   widgetId,
@@ -80,22 +83,26 @@ const performWidgetBundleRequest = async (
   }
 };
 
-const fetchConfig = (url: string) => {
-  return fetch(url, {
-    method: 'GET', // You can change this to POST or any other HTTP method if needed
-    headers: {
-      Authorization: `Bearer ${process.env.GH_REPO_READ_TOKEN}`,
-    },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json(); // Parse the JSON response
-    })
-    .catch((error) => {
-      console.error('Error fetching config:', error);
+const fetchConfig = async (url: string) => {
+  try {
+    const response = await fetch(url, {
+      method: 'GET', // You can change this to POST or any other HTTP method if needed
+      headers: {
+        Authorization: `Bearer ${process.env.GH_REPO_READ_TOKEN}`,
+      },
     });
+  
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+  
+    const configJson = await response.json();
+    dynamicConfig = configJson;
+
+    return dynamicConfig;
+  } catch (error) {
+    console.error('Error fetching config:', error);
+  }
 };
 
 const didWidgetVersionsUpdate = (
@@ -156,7 +163,6 @@ const verifyWidgetCDNUrls = async (widgetConfigsToVerify: WidgetConfigs) => {
 
 export const processDynamicLibraryConfig = (config: any): void => {
   try {
-    // TODO: Wire up to flatfile options
     const libraryConfigsPayload: (ExternalLibConfig | InstalledLibConfig)[]  = config?.cdn?.libraries?.managed || [];
 
     //   const previousConfigs = getLibraryConfigs();
@@ -253,4 +259,8 @@ export const pollDynamicConfig = async (url: string, intervalMs: number) => {
     processDynamicWidgetConfig(initialConfig);
     processDynamicLibraryConfig(initialConfig);
   }, intervalInMilliseconds);
+};
+
+export const readDynamicConfig = () => {
+  return dynamicConfig
 };

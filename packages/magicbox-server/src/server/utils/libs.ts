@@ -1,6 +1,7 @@
 import { isEqual as _isEqual, cloneDeep, isEmpty } from 'lodash';
 import { IMPORT_MAP_OVERRIDE_LIB_NEXT, SYSTEM_LOADER } from '../constants';
 import { ExternalLibConfig, InstalledLibConfig } from '../types';
+import { readDynamicConfig } from './config-poller';
 
 // TODO: replace this w/ config file
 const IS_PROD = true;
@@ -27,9 +28,10 @@ const getDynamicExternalLibraryConfigs = (): ExternalLibConfig[] => {
   return getLibraryConfigs().filter(libIsExternal);
 };
 
-// TODO: replace this w/ flat file. Also need public 1ds-config setup
-const getCDNLibraryUrl = (id: string, version: string, path: string): string =>
-  `https://docucdn-a.akamaihd.net/production/1ds/libs/${id}/${version}/${path}`;
+const getCDNLibraryUrl = (id: string, version: string, path: string): string => {
+  const libBaseUrl = readDynamicConfig().cdn.libraries.basePrefix;
+  return `${libBaseUrl}${id}/${version}/${path}`;
+}
 
 const getExternalLibsWithUrl = ({
   getPreloaded,
