@@ -9,11 +9,13 @@ import router from './lib/router';
 dotenv.config();
 const { PORT = 3001 } = process.env;
 
+const ENVIRONMENT = process.env.NODE_ENV || 'production';
+
 const options = {
   // points to common flat file
-  mode: 'production',
+  mode: ENVIRONMENT,
   configManagement: {
-    url: 'https://raw.githubusercontent.com/docusign/dev-hub/refs/heads/main/common-config.json',
+    url: `https://raw.githubusercontent.com/docusign/dev-hub/refs/heads/main/common-configs/${ENVIRONMENT}.json`,
     refreshMs: 30 * 1000,
     phasedRelease: true,
   },

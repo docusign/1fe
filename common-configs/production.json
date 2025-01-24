@@ -1,7 +1,7 @@
 {
     "cdn": {
         "libraries": {
-            "basePrefix": "https://docutest-a.akamaihd.net/stage/1ds/libraries/",
+            "basePrefix": "https://docucdn-a.akamaihd.net/production/1ds/libraries/",
             "managed": [
                 { "id": "@1ds/cli", "version": "1.13.4", "type": "installed" },
                 {
@@ -142,54 +142,30 @@
     "csp": {
       "defaultCSP": {
         "enforced": {
-            "development": {
-                "scriptSrc": [
-                    "'unsafe-eval'",
-                    "'unsafe-inline'",
-                    "'wasm-unsafe-eval'",
-                    "*"
-                ],
-                "scriptSrcAttr": [
-                    "'unsafe-eval'",
-                    "'unsafe-inline'",
-                    "'wasm-unsafe-eval'"
-                ]
-            },
-            "integration": {
-                "scriptSrc": [
-                    "'unsafe-eval'",
-                    "'wasm-unsafe-eval'",
-                    "*"
-                ]
-            },
-            "stage": {},
-            "demo": {},
-            "production": {}
+          "scriptSrc": [
+                "'unsafe-eval'",
+                "'unsafe-inline'",
+                "'wasm-unsafe-eval'",
+                "*"
+            ],
+            "scriptSrcAttr": [
+                "'unsafe-eval'",
+                "'unsafe-inline'",
+                "'wasm-unsafe-eval'"
+            ]
         },
         "reportOnly": {
-            "development": {
-                "scriptSrc": [
-                    "'unsafe-eval'",
-                    "'unsafe-inline'",
-                    "'wasm-unsafe-eval'",
-                    "*"
-                ],
-                "scriptSrcAttr": [
-                    "'unsafe-eval'",
-                    "'unsafe-inline'",
-                    "'wasm-unsafe-eval'"
-                ]
-            },
-            "integration": {
-                "scriptSrc": [
-                    "'unsafe-eval'",
-                    "'wasm-unsafe-eval'",
-                    "*"
-                ]
-            },
-            "stage": {},
-            "demo": {},
-            "production": {}
+          "scriptSrc": [
+                "'unsafe-eval'",
+                "'unsafe-inline'",
+                "'wasm-unsafe-eval'",
+                "*"
+            ],
+            "scriptSrcAttr": [
+                "'unsafe-eval'",
+                "'unsafe-inline'",
+                "'wasm-unsafe-eval'"
+            ]
         }
       },
       "allowWildcard": false,
