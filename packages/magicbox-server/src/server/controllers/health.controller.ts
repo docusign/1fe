@@ -5,11 +5,6 @@ import { WidgetConfig } from '../types';
 import { getWidgetConfigValues } from '../utils';
 import { getCachedWidgetConfigs } from '../utils';
 
-/*
-  TODO:
-  - Implement getCachedWidgetConfigs + getWidgetConfigValues 
-*/
-
 const validateWidgetConfig = (widgetConfig: WidgetConfig): boolean => {
   switch (true as boolean) {
     case typeof widgetConfig !== 'object':

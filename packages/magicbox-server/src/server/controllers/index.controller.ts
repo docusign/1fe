@@ -9,11 +9,9 @@ import { dataForRenderingTemplate } from './data';
 
 /*
 TODO:
-- Set feature flag hash elsewhere
+- [1DS consumption] Set feature flag hash elsewhere
 - Strongly type request
-- Set ACTIVE_AUTOMATED_TEST_FRAMEWORK cookie elsewhere
-- Implement getCachedWidgetConfigs
-- Implement dataForRenderingTemplate
+- [1DS consumption] Set ACTIVE_AUTOMATED_TEST_FRAMEWORK cookie elsewhere
 */
 
 // TODO - Make these configurable via options: IS_PROD
