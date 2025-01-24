@@ -1,7 +1,7 @@
 {
     "cdn": {
         "libraries": {
-            "basePrefix": "https://docutest-a.akamaihd.net/integration/1ds/libraries/",
+            "basePrefix": "https://docutest-a.akamaihd.net/integration/1ds/libs/",
             "managed": [
                 { "id": "@1ds/cli", "version": "1.13.4", "type": "installed" },
                 {
