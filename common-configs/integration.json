@@ -14,7 +14,7 @@
                 {
                   "id": "@ds/ui",
                   "name": "dsUi",
-                  "version": "7.41.0",
+                  "version": "7.42.0",
                   "isPreloaded": true,
                   "path": "dist/js/1ds-bundle.js",
                   "type": "external"
