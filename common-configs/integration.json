@@ -1,7 +1,7 @@
 {
     "cdn": {
         "libraries": {
-            "basePrefix": "https://docutest-a.akamaihd.net/integration/1ds/libs/",
+            "basePrefix": "https://raw.githubusercontent.com/docusign/mock-cdn-assets/refs/heads/main/libs/",
             "managed": [
                 { "id": "@1ds/cli", "version": "1.13.4", "type": "installed" },
                 {
@@ -118,7 +118,7 @@
               ]
         },
         "widgets": {
-            "basePrefix": "https://docutest-a.akamaihd.net/integration/1ds/widgets/",
+            "basePrefix": "https://raw.githubusercontent.com/docusign/mock-cdn-assets/refs/heads/main/widgets/",
             "releaseConfig": [
                 {
                     "widgetId": "@1ds/starter-kit",
