@@ -118,7 +118,7 @@
               ]
         },
         "widgets": {
-            "basePrefix": "docutest-a.akamaihd.net/integration/1ds/widgets/",
+            "basePrefix": "https://docutest-a.akamaihd.net/integration/1ds/widgets/",
             "releaseConfig": [
                 {
                     "widgetId": "@1ds/starter-kit",

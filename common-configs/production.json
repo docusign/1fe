@@ -118,7 +118,7 @@
               ]
         },
         "widgets": {
-            "basePrefix": "docucdn-a.akamaihd.net/production/1ds/widgets/",
+            "basePrefix": "https://docucdn-a.akamaihd.net/production/1ds/widgets/",
             "releaseConfig": [
                 {
                     "widgetId": "@1ds/starter-kit",
