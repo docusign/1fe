@@ -41,10 +41,7 @@ export const magicBoxServer = (options: any) => {
   app.use(express.static(path.join(process.cwd(), 'dist', 'public')));
   initializeRoutes(app);
 
-  pollDynamicConfig(
-    options.configManagement.url,
-    options.configManagement.refreshMs,
-  );
+  pollDynamicConfig(options);
 
   return app;
 };

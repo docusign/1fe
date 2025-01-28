@@ -5,40 +5,33 @@ import { getCachedWidgetConfigs } from '../utils';
 import { badgeMaker } from '../utils/make-badge';
 import { dataForRenderingTemplate } from './data';
 import { getWidgetConfigValues } from '../utils';
+import { readMagicBoxConfigs } from '../utils/config-poller';
+import { version } from '../../../package.json';
 
 /*
 TODO:
-- BadgeMaker
-- TemplatizeCDNUrl needs to read from configs
-- getHostedOrSimulatedEnvironment needs to read from configs
-- Read from configs for below constants
+- [1DS consumption] BadgeMaker
 */
 
-const getHostedOrSimulatedEnvironment = () => 'production';
+const SERVER_VERSION = version;
+const SERVER_BUILD_NUMBER = process.env.SERVER_BUILD_NUMBER || '';
+const SERVER_GIT_SHA = process.env.SERVER_GIT_SHA || '';
+const SERVER_GIT_BRANCH = process.env.SERVER_GIT_BRANCH || '';
 
-const SERVER_VERSION = '1.0.0';
-const SERVER_GIT_SHA = 'asdf';
-const SERVER_GIT_BRANCH = 'branch';
-const SERVER_BUILD_NUMBER = '123';
-const IS_PROD = true;
 
 type TemplatizeCDNUrlArgs = {
   widgetId: string;
   widgetVersion: string;
-  ENVIRONMENT: string;
-  IS_PROD?: boolean;
   templateFilePath?: string;
 };
 
 export const templatizeCDNUrl = ({
   widgetId,
   widgetVersion,
-  ENVIRONMENT,
-  IS_PROD = true,
   templateFilePath = 'js/1ds-bundle.js',
 }: TemplatizeCDNUrlArgs): URL => {
   return new URL(
-    `https://docutest-a.akamaihd.net/${ENVIRONMENT}/1ds/widgets/${widgetId}/${widgetVersion}/${templateFilePath}`,
+    `${readMagicBoxConfigs().dynamicConfigs.cdn.widgets.basePrefix}${widgetId}/${widgetVersion}/${templateFilePath}`,
   );
 };
 
@@ -60,13 +53,11 @@ class VersionController {
       const { widgetConfigs, pluginConfigs, packages } =
         dataForRenderingTemplatePayload;
 
-      console.log({ dataForRenderingTemplatePayload });
-
       res.send({
-        environment: getHostedOrSimulatedEnvironment(),
+        environment: readMagicBoxConfigs().environment,
         version: SERVER_VERSION,
         nodeVersion: process.version,
-        ...(!IS_PROD
+        ...(!(readMagicBoxConfigs().environment === 'production')
           ? {
               buildNumber: SERVER_BUILD_NUMBER,
               branch: SERVER_GIT_BRANCH,
@@ -222,8 +213,6 @@ export async function validateWidgetInputs(
   const widgetCdnUrl = `${templatizeCDNUrl({
     widgetId: resolvedWidgetId,
     widgetVersion: resolvedVersion,
-    ENVIRONMENT: getHostedOrSimulatedEnvironment(),
-    IS_PROD,
     templateFilePath: '',
   })}`;
   const widgetBundleUrl = `${widgetCdnUrl}js/1ds-bundle.js`;

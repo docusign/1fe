@@ -13,10 +13,8 @@ import {
   getCachedWidgetConfigs,
   getWidgetConfigValues,
 } from './widget-config';
-import { getHostedOrSimulatedEnvironment } from '../configs';
 
 // TODO: Drill IS_PROD and ENVIRONMENT
-const IS_PROD = true;
 const ENVIRONMENT = 'production';
 
 type ParseRuntimeConfigArgs = {
@@ -29,15 +27,11 @@ type FetchSingleWidgetRuntimeConfigArgs = {
 };
 
 const generateRuntimeConfigCDNUrl = (
-  hostedEnvironment: string,
-  isProduction: boolean,
   widget: WidgetConfig,
 ): URL => {
   return templatizeCDNUrl({
     widgetId: widget.widgetId,
     widgetVersion: widget.version,
-    ENVIRONMENT: hostedEnvironment,
-    IS_PROD: isProduction,
     templateFilePath: widgetRuntimeConfigUrlFilename,
   });
 };
@@ -88,11 +82,7 @@ const parseRuntimeConfig = ({
 const _fetchSingleWidgetRuntimeConfig = async ({
   widgetConfig,
 }: FetchSingleWidgetRuntimeConfigArgs): Promise<WidgetConfig> => {
-  const widgetRuntimeConfigUrl = generateRuntimeConfigCDNUrl(
-    getHostedOrSimulatedEnvironment(ENVIRONMENT),
-    IS_PROD,
-    widgetConfig,
-  );
+  const widgetRuntimeConfigUrl = generateRuntimeConfigCDNUrl(widgetConfig);
 
   const response = await fetch(widgetRuntimeConfigUrl);
 

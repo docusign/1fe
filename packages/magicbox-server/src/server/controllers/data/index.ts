@@ -218,7 +218,7 @@ import { PluginConfig } from '../../types';
 
 // TODO: Strongly type request
 export const dataForRenderingTemplate = async (req: Request) => {
-  // TODO: Will enableRuntimeConfigOverrides flag be promoted to production? May need to update this
+  // TODO:[1DS consumption] Will enableRuntimeConfigOverrides flag be promoted to production? May need to update this
   const widgetConfigs = getCachedWidgetConfigs();
   const activePluginConfig = (req as any).plugin;
 

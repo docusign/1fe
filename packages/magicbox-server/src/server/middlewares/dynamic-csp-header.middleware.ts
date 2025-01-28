@@ -3,62 +3,14 @@ import { mergeWith, mapKeys, isArray, uniq } from 'lodash';
 
 import helmet from 'helmet';
 import { ROUTES } from '../constants';
+import { getRuntimeCSPConfigs } from '../utils';
+import { readMagicBoxConfigs } from '../utils/config-poller';
 
 /*
   TODO:
   - strongly type request
-  - Implement getRuntimeCSPConfigs
+  - strongly type csp
 */
-
-const defaultCSPDirectives: any = {
-  development: {
-    scriptSrc: [
-      "'unsafe-eval'", // needed for bathtub support
-      "'unsafe-inline'",
-      "'wasm-unsafe-eval'", // needed for experimental wasm support
-      '*',
-    ],
-    scriptSrcAttr: [
-      "'unsafe-eval'", // needed for bathtub support
-      "'unsafe-inline'",
-      "'wasm-unsafe-eval'", // needed for experimental wasm support
-    ],
-  },
-  integration: {
-    scriptSrc: [
-      "'unsafe-eval'", // needed for bathtub support
-      "'wasm-unsafe-eval'", // needed for experimental wasm support
-      '*',
-    ],
-  },
-  stage: {},
-  demo: {},
-  production: {},
-};
-
-export const defaultCSPDirectivesReportOnly: any = {
-  ...defaultCSPDirectives,
-  development: {
-    ...defaultCSPDirectives.development,
-    upgradeInsecureRequests: null,
-  },
-  integration: {
-    ...defaultCSPDirectives.integration,
-    upgradeInsecureRequests: null,
-  },
-  stage: {
-    ...defaultCSPDirectives.stage,
-    upgradeInsecureRequests: null,
-  },
-  demo: {
-    ...defaultCSPDirectives.demo,
-    upgradeInsecureRequests: null,
-  },
-  production: {
-    ...defaultCSPDirectives.production,
-    upgradeInsecureRequests: null,
-  },
-};
 
 type MergeCSPOptions =
   | {
@@ -73,17 +25,6 @@ const kebabToCamel = (kebabCaseString: string): string => {
   return kebabCaseString.replace(/-([a-z])/g, (_, letter) => {
     return letter.toUpperCase();
   });
-};
-
-// @ts-ignore
-const getRuntimeCSPConfigs = ({ pluginId, reportOnly, req }: any) => {
-  return {
-    imgSrc: [
-      'https://lhWidget-csp-test.docusign.com',
-      'https://lhWidget-csp-test-runtime.docusign.com',
-    ],
-    frameAncestors: ['*'],
-  };
 };
 
 export const mergeWithUsingUniqueArray = (
@@ -109,8 +50,8 @@ export const getMergedDirectives = (cspOptions: MergeCSPOptions = {}) => {
     : ROUTES.CSP_REPORT_VIOLATION;
 
   const mappedDefaultCSPDirectives = reportOnly
-    ? defaultCSPDirectivesReportOnly[environment]
-    : defaultCSPDirectives[environment];
+    ? readMagicBoxConfigs().csp.defaultCSP.reportOnly
+    : readMagicBoxConfigs().csp.defaultCSP.enforced
 
   const defaultDirectives = mapKeys(
     helmet.contentSecurityPolicy.getDefaultDirectives(),
@@ -119,6 +60,7 @@ export const getMergedDirectives = (cspOptions: MergeCSPOptions = {}) => {
   const combinedDefaultDirectives = {
     ...defaultDirectives,
     ...mappedDefaultCSPDirectives,
+    upgradeInsecureRequests: readMagicBoxConfigs().csp.upgradeInsecureRequests
   };
 
   // If pluginId is defined, grab only plugin's csp

@@ -1,3 +1,10 @@
+import { Request } from 'express';
+import { RUNTIME_CONFIG_OVERRIDES } from "../constants";
+import { RuntimeConfig } from "../types";
+import { readMagicBoxConfigs } from "./config-poller";
+import { getParamFromQueryOrRedirectUri } from "./url";
+import { getCachedWidgetConfigs } from "./widget-config";
+
 const getFrameAncestorAllowlist = (enableEmbedded: string | undefined) => {
   // param downscopes functionality for send
   return enableEmbedded === '1'
@@ -189,4 +196,45 @@ export const isUrlValid = (url: string, environment: string) => {
   } catch (ex) {
     return false;
   }
+};
+
+/**
+ * Get runtime csp configurations. (defined in .1ds.config.ts)
+ *
+ * @param pluginId plugin's widgetId
+ * @param reportOnly is the csp report-only or enforced
+ * @param req request object to pull runtime_config_overrides query string
+ * @returns Plugin's runtime csp configurations
+ */
+export const getRuntimeCSPConfigs = ({
+  pluginId,
+  reportOnly,
+  req,
+}: {
+  pluginId: string;
+  reportOnly: boolean;
+  req: Request;
+}) => {
+  // Only want to override in local or integration. Not in higher environments.
+  if (readMagicBoxConfigs().mode === 'preproduction') {
+    // get stringified runtime configs
+    const runtimeConfigOverridesParam = getParamFromQueryOrRedirectUri(
+      req,
+      RUNTIME_CONFIG_OVERRIDES,
+    );
+
+    // parse runtime config override if exist
+    if (runtimeConfigOverridesParam) {
+      const parsedRuntimeConfigs = JSON.parse(
+        runtimeConfigOverridesParam,
+      ) as Record<string, RuntimeConfig>;
+      return reportOnly
+        ? parsedRuntimeConfigs[pluginId]?.headers?.csp?.reportOnly
+        : parsedRuntimeConfigs[pluginId]?.headers?.csp?.enforced;
+    }
+  }
+  const pluginConfig = getCachedWidgetConfigs().get(pluginId);
+  return reportOnly
+    ? pluginConfig?.runtime?.headers?.csp?.reportOnly
+    : pluginConfig?.runtime?.headers?.csp?.enforced;
 };
