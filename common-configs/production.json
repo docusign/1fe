@@ -155,7 +155,7 @@
             ],
             "styleSrc": [
               "'unsafe-inline'"
-            ]
+            ],
         },
         "reportOnly": {
           "scriptSrc": [
@@ -171,11 +171,11 @@
             ],
             "styleSrc": [
               "'unsafe-inline'"
-            ]
+            ],
+            "upgradeInsecureRequests": null
         }
       },
       "allowWildcard": false,
-      "useNonce": true,
-      "upgradeInsecureRequests": true
+      "useNonce": true
     }
 }
