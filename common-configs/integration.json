@@ -1,7 +1,7 @@
 {
     "cdn": {
         "libraries": {
-            "basePrefix": "https://raw.githubusercontent.com/docusign/mock-cdn-assets/refs/heads/main/libs/",
+            "basePrefix": "https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/libs/",
             "managed": [
                 { "id": "@1ds/cli", "version": "1.13.4", "type": "installed" },
                 {
@@ -118,7 +118,7 @@
               ]
         },
         "widgets": {
-            "basePrefix": "https://raw.githubusercontent.com/docusign/mock-cdn-assets/refs/heads/main/widgets/",
+            "basePrefix": "https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/widgets/",
             "releaseConfig": [
                 {
                     "widgetId": "@1ds/starter-kit",
