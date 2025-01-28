@@ -155,7 +155,7 @@
             ],
             "styleSrc": [
               "'unsafe-inline'"
-            ],
+            ]
         },
         "reportOnly": {
           "scriptSrc": [
