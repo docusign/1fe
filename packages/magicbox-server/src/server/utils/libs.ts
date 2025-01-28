@@ -1,7 +1,7 @@
 import { isEqual as _isEqual, cloneDeep, isEmpty } from 'lodash';
 import { IMPORT_MAP_OVERRIDE_LIB_NEXT, SYSTEM_LOADER } from '../constants';
 import { ExternalLibConfig, InstalledLibConfig } from '../types';
-import { readDynamicConfig } from './config-poller';
+import { readMagicBoxConfigs } from './config-poller';
 
 // TODO: replace this w/ config file
 const IS_PROD = true;
@@ -29,7 +29,7 @@ const getDynamicExternalLibraryConfigs = (): ExternalLibConfig[] => {
 };
 
 const getCDNLibraryUrl = (id: string, version: string, path: string): string => {
-  const libBaseUrl = readDynamicConfig().cdn.libraries.basePrefix;
+  const libBaseUrl = readMagicBoxConfigs().dynamicConfigs.cdn.libraries.basePrefix;
   return `${libBaseUrl}${id}/${version}/${path}`;
 }
 

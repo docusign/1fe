@@ -1,3 +1,4 @@
+// TODO: break this up into different files
 export enum ERROR_MIDDLEWARE_TYPES {
   UNSUPPORTED = 'unsupported',
   AUTH_LOGIN_LOOP = 'auth-login-loop',
@@ -48,3 +49,7 @@ export const IMPORT_MAP_OVERRIDE_LIB_NEXT = {
   id: '@1ds/import-map-overrides',
   version: '3.1.2',
 };
+
+export const STATE = 'state';
+export const REDIRECT_URI = 'redirectUri';
+export const DUMMY_URL = 'https://dummy.url.com';

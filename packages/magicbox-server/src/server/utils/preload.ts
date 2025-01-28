@@ -16,8 +16,6 @@ const generateCDNUrl = (widget: WidgetConfig): URL => {
   return templatizeCDNUrl({
     widgetId: widget.widgetId,
     widgetVersion: widget.version,
-    // TODO: read from flatfile config
-    ENVIRONMENT: 'production',
   });
 };
 

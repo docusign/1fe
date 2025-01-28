@@ -5,6 +5,7 @@ import {
   removeWildcardsFromCSPFrameAncestors,
   replaceFrameAncestorWildcards,
 } from '../utils';
+import { readMagicBoxConfigs } from '../utils/config-poller';
 
 export const DEFAULT_REFERER = '';
 
@@ -13,10 +14,7 @@ export const DEFAULT_REFERER = '';
   - strongly type request
   - Consume removeWildcard config
   - Implement getRuntimeCSPConfigs
-  - Read environment from configs
 */
-
-const environment = 'production;';
 
 // @ts-ignore
 const getRuntimeCSPConfigs = ({ pluginId, reportOnly, req }: any) => {
@@ -51,7 +49,7 @@ const dynamicFrameAncestorMiddleware = async (
     ) as string;
 
     // Plugin needs to be enabled
-    if (plugin?.enabled && isUrlValid(refererHeader, environment)) {
+    if (plugin?.enabled && isUrlValid(refererHeader, readMagicBoxConfigs().mode)) {
       if (!cspHeader) {
         const message = 'missing CSP in dynamicFrameAncestorMiddleware';
         const error = new Error(message);

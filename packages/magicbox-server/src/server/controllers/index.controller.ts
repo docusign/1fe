@@ -6,16 +6,14 @@ import { WidgetConfigs, SystemWidgetConfig, PluginConfig } from '../types';
 import { getWidgetConfigValues } from '../utils';
 import { getCachedWidgetConfigs } from '../utils';
 import { dataForRenderingTemplate } from './data';
+import { readMagicBoxConfigs } from '../utils/config-poller';
 
 /*
 TODO:
 - [1DS consumption] Set feature flag hash elsewhere
-- Strongly type request
 - [1DS consumption] Set ACTIVE_AUTOMATED_TEST_FRAMEWORK cookie elsewhere
+- Strongly type request
 */
-
-// TODO - Make these configurable via options: IS_PROD
-const IS_PROD = true;
 
 const getSystemWidgetConfigs = (
   widgetConfigs: WidgetConfigs,
@@ -33,7 +31,7 @@ const getSystemWidgetConfigs = (
 export const allowUnsafeEvalForSystemPluginsOnPreprod = (
   plugin: PluginConfig,
 ): boolean => {
-  if (IS_PROD) {
+  if (readMagicBoxConfigs().mode === 'production') {
     return false;
   }
 
@@ -53,7 +51,7 @@ export const ifSystemPluginRequestedOnProd = (
   const widgetConfigs = getCachedWidgetConfigs();
 
   return (
-    IS_PROD &&
+    readMagicBoxConfigs().mode === 'production' &&
     getSystemWidgetConfigs(widgetConfigs).some(
       (widget) => widget.widgetId === plugin?.widgetId,
     )

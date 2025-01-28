@@ -1,4 +1,4 @@
-import { cloneDeep, isEmpty, isObjectLike } from 'lodash';
+import { cloneDeep, isEmpty } from 'lodash';
 import {
   ExternalLibConfig,
   InstalledLibConfig,
@@ -6,7 +6,6 @@ import {
   WidgetConfigs,
 } from '../types';
 import { WIDGET_ID_UNAVAILABLE } from '../constants';
-import { getHostedOrSimulatedEnvironment } from '../configs';
 import {
   generateWidgetConfigMap,
   getCachedWidgetConfigs,
@@ -19,6 +18,7 @@ import {
   getFallbackRuntimeConfigs,
 } from './runtime-configs';
 import { getLibraryConfigs, setLibraryConfigs } from './libs';
+import { templatizeCDNUrl } from '../controllers/version.controller';
 
 /*
 TODO:
@@ -28,6 +28,7 @@ TODO:
 - templatizeCDNUrl should consume baseurl from options
 - revisit retries
 - strongly type dynamicConfig
+- strongly type configs
 */
 
 const IS_PROD = true;
@@ -47,29 +48,7 @@ type TemplatizeCDNUrlArgs = {
   templateFilePath?: string;
 };
 
-let dynamicConfig: any = {};
-
-const templatizeCDNUrl = ({
-  widgetId,
-  widgetVersion,
-  ENVIRONMENT,
-  IS_PROD = true,
-  templateFilePath = 'js/1ds-bundle.js',
-}: TemplatizeCDNUrlArgs): URL => {
-  if (isObjectLike(widgetVersion)) {
-    const message = `malform widgetVersion ${JSON.stringify(
-      widgetVersion,
-    )} from widget: ${widgetId}`;
-
-    throw new Error(message);
-  }
-
-  return new URL(
-    IS_PROD
-      ? `https://docucdn-a.akamaihd.net/${ENVIRONMENT}/1ds/widgets/${widgetId}/${widgetVersion}/${templateFilePath}`
-      : `https://docutest-a.akamaihd.net/${ENVIRONMENT}/1ds/widgets/${widgetId}/${widgetVersion}/${templateFilePath}`,
-  );
-};
+let magicBoxConfigs: any = {};
 
 const performWidgetBundleRequest = async (
   widgetId: string,
@@ -83,7 +62,7 @@ const performWidgetBundleRequest = async (
   }
 };
 
-const fetchConfig = async (url: string) => {
+const fetchConfig = async (url: string, options: any) => {
   try {
     const response = await fetch(url, {
       method: 'GET', // You can change this to POST or any other HTTP method if needed
@@ -97,9 +76,12 @@ const fetchConfig = async (url: string) => {
     }
   
     const configJson = await response.json();
-    dynamicConfig = configJson;
+    magicBoxConfigs = {
+      ...options,
+      dynamicConfigs: configJson
+    };
 
-    return dynamicConfig;
+    return magicBoxConfigs;
   } catch (error) {
     console.error('Error fetching config:', error);
   }
@@ -131,8 +113,6 @@ const verifyWidgetCDNUrls = async (widgetConfigsToVerify: WidgetConfigs) => {
       const widgetUrl = templatizeCDNUrl({
         widgetId,
         widgetVersion: version,
-        ENVIRONMENT: getHostedOrSimulatedEnvironment(ENVIRONMENT),
-        IS_PROD,
       });
 
       // Construct array of fetch requests to cdn urls
@@ -244,23 +224,27 @@ const processDynamicWidgetConfig = async (config: any): Promise<void> => {
   }
 };
 
-export const pollDynamicConfig = async (url: string, intervalMs: number) => {
+export const pollDynamicConfig = async (options: any) => {
+  const url = options.configManagement.url;
+  const intervalMs = options.configManagement.refreshMs;
+
   // Convert seconds to milliseconds for setInterval
   const intervalInMilliseconds = intervalMs;
 
-  const initialConfig = await fetchConfig(url);
-  processDynamicWidgetConfig(initialConfig);
-  processDynamicLibraryConfig(initialConfig);
+  const initialConfig = await fetchConfig(url, options);
+
+  processDynamicWidgetConfig(initialConfig.dynamicConfigs);
+  processDynamicLibraryConfig(initialConfig.dynamicConfigs);
 
   // Start the polling loop
   setInterval(async () => {
-    const initialConfig = await fetchConfig(url);
+    const initialConfig = await fetchConfig(url, options);
 
-    processDynamicWidgetConfig(initialConfig);
-    processDynamicLibraryConfig(initialConfig);
+    processDynamicWidgetConfig(initialConfig.dynamicConfigs);
+    processDynamicLibraryConfig(initialConfig.dynamicConfigs);
   }, intervalInMilliseconds);
 };
 
-export const readDynamicConfig = () => {
-  return dynamicConfig
+export const readMagicBoxConfigs = () => {
+  return magicBoxConfigs;
 };

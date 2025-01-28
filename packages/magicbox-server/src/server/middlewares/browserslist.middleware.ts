@@ -18,7 +18,7 @@ const ignoredRoutes = [
 ];
 // STATIC ASSETS
 
-// TODO: When consuming back, need to add middleware for isAutomationRun flag to be set
+// TODO: [1DS consumption] When consuming back, need to add middleware for isAutomationRun flag to be set
 
 const browsersListConfig = BROWSERS_LIST;
 

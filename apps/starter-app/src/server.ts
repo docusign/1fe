@@ -11,9 +11,18 @@ const { PORT = 3001 } = process.env;
 
 const ENVIRONMENT = process.env.NODE_ENV || 'production';
 
+const envModeMap = {
+  development: 'development',
+  integration: 'preproduction',
+  stage: 'preproduction',
+  demo: 'production',
+  production: 'production'
+}
+
 const options = {
   // points to common flat file
-  mode: ENVIRONMENT,
+  mode: envModeMap[ENVIRONMENT],
+  environment: ENVIRONMENT,
   configManagement: {
     url: `https://raw.githubusercontent.com/docusign/dev-hub/refs/heads/main/common-configs/${ENVIRONMENT}.json`,
     refreshMs: 30 * 1000,
