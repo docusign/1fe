@@ -4,9 +4,9 @@ import ejs from 'ejs';
 import { getTemplate } from '../templates';
 import { WidgetConfigs, SystemWidgetConfig, PluginConfig } from '../types';
 import { getWidgetConfigValues } from '../utils';
-import { getCachedWidgetConfigs } from '../utils';
 import { dataForRenderingTemplate } from './data';
-import { readMagicBoxConfigs } from '../utils/config-poller';
+import { getCachedWidgetConfigs } from '../utils/widget-config';
+import { readMagicBoxConfigs } from '../utils/magicbox-configs';
 
 /*
 TODO:

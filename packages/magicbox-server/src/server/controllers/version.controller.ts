@@ -1,16 +1,15 @@
 import { NextFunction, Request, Response } from 'express';
 import hash from 'object-hash';
 
-import { getCachedWidgetConfigs } from '../utils';
 import { badgeMaker } from '../utils/make-badge';
 import { dataForRenderingTemplate } from './data';
 import { getWidgetConfigValues } from '../utils';
-import { readMagicBoxConfigs } from '../utils/config-poller';
 import { version } from '../../../package.json';
+import { getCachedWidgetConfigs } from '../utils/widget-config';
+import { readMagicBoxConfigs } from '../utils/magicbox-configs';
 
 /*
-TODO:
-- [1DS consumption] BadgeMaker
+TODO: [1DS consumption] BadgeMaker
 */
 
 const SERVER_VERSION = version;
@@ -57,7 +56,7 @@ class VersionController {
         environment: readMagicBoxConfigs().environment,
         version: SERVER_VERSION,
         nodeVersion: process.version,
-        ...(!(readMagicBoxConfigs().environment === 'production')
+        ...(!(readMagicBoxConfigs().mode === 'production')
           ? {
               buildNumber: SERVER_BUILD_NUMBER,
               branch: SERVER_GIT_BRANCH,
