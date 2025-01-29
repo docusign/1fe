@@ -38,6 +38,7 @@ export const KNOWN_PATHS = new Set([
   '/test',
   '/sw.js',
   '/js/bundle.js',
+  '/main.js',
   ...Object.values(ROUTES).filter(
     (route) => !IGNORED_PATHS_SET.has(route) && route !== ROUTES.INDEX,
   ),
