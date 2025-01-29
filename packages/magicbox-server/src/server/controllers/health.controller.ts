@@ -3,7 +3,7 @@ import { isEmpty } from 'lodash';
 
 import { WidgetConfig } from '../types';
 import { getWidgetConfigValues } from '../utils';
-import { getCachedWidgetConfigs } from '../utils';
+import { getCachedWidgetConfigs } from '../utils/widget-config';
 
 const validateWidgetConfig = (widgetConfig: WidgetConfig): boolean => {
   switch (true as boolean) {
