@@ -1,7 +1,6 @@
 import { Request } from 'express';
 import {
   convertServerWidgetConfigToShellWidgetConfig,
-  getCachedWidgetConfigs,
   getPluginConfigs,
 } from '../../utils';
 import {
@@ -15,6 +14,7 @@ import {
 } from '../../utils/libs';
 import { getMetaTagStringsFromWidgetRuntimeConfig } from '../../utils/meta-tags';
 import { PluginConfig } from '../../types';
+import { getCachedWidgetConfigs } from '../../utils/widget-config';
 
 // TODO:
 // import packageJson from '../../../package.json';

@@ -1,4 +1,5 @@
 import { template } from 'lodash';
+import ky from 'ky';
 
 import { widgetRuntimeConfigUrlFilename } from '../constants';
 import { templatizeCDNUrl } from '../controllers/version.controller';
@@ -10,12 +11,10 @@ import {
 } from '../types';
 import {
   generateWidgetConfigMap,
-  getCachedWidgetConfigs,
   getWidgetConfigValues,
-} from './widget-config';
-
-// TODO: Drill IS_PROD and ENVIRONMENT
-const ENVIRONMENT = 'production';
+} from './widget-config-helpers';
+import { getCachedWidgetConfigs } from './widget-config';
+import { readMagicBoxConfigs } from './magicbox-configs';
 
 type ParseRuntimeConfigArgs = {
   runtimeConfig: RuntimeConfig;
@@ -62,8 +61,7 @@ const parseRuntimeConfig = ({
 
               // If 1ds-app is running locally, the environment is development.
               // There is no cdn for development, so we use integration instead.
-              // TODO OSS: Replace this with config
-              ENVIRONMENT,
+              ENVIRONMENT: readMagicBoxConfigs().environment,
             }),
           };
         }
@@ -84,12 +82,10 @@ const _fetchSingleWidgetRuntimeConfig = async ({
 }: FetchSingleWidgetRuntimeConfigArgs): Promise<WidgetConfig> => {
   const widgetRuntimeConfigUrl = generateRuntimeConfigCDNUrl(widgetConfig);
 
-  const response = await fetch(widgetRuntimeConfigUrl);
-
-  // await ky.get(widgetRuntimeConfigUrl, {
-  //   retry: 3,
-  //   timeout: 10 * 1000
-  // });
+  const response = await ky.get(widgetRuntimeConfigUrl, {
+    retry: 3,
+    timeout: 10 * 1000
+  });
 
   const isColdStart = getIsColdStart();
 
@@ -106,13 +102,11 @@ const _fetchSingleWidgetRuntimeConfig = async ({
   } else if (response?.status >= 400 && response?.status < 500) {
     return getFallbackRuntimeConfigs(widgetConfig);
   } else if (response?.status >= 500 && !isColdStart) {
-    const retryResponse = await fetch(widgetRuntimeConfigUrl);
-
-    // await ky.get(widgetRuntimeConfigUrl, {
-    //   retry: 3,
-    //   timeout: 10 * 1000
-    // })
-
+    const retryResponse = await ky.get(widgetRuntimeConfigUrl, {
+      retry: 3,
+      timeout: 10 * 1000
+    });
+  
     if (retryResponse?.status === 200) {
       const retryRuntimeConfig: RuntimeConfig = await retryResponse.json();
 

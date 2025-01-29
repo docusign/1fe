@@ -7,44 +7,18 @@ import {
   ROUTES,
   STATIC_ASSETS,
 } from '../constants';
+import { getPlugin, getPluginBaselineUrl, getPluginById } from '../utils/plugin-helpers';
+import { PluginConfig } from '../types';
 
 /*
 TODO:
 - Strongly type request
-- New middleware for updateOtelContextWithWidgetId
-- New middleware for getPluginFromAuthCallback
-- Make IGNORED_PATHS configurable
-- Make KNOWN_PATHS configurable (removed AUTH_ROUTES)
-- Where to put PluginConfig type?
-- Implenetations for:
-  - getPluginBaselineUrl
-  - getPlugin
-  - getPluginById
+- [1DS consumption] New middleware for updateOtelContextWithWidgetId
+- [1DS consumption] New middleware for getPluginFromAuthCallback
+- Refactor IGNORED_PATHS and KNOWN_PATHS
+  - Make IGNORED_PATHS configurable
+  - Make KNOWN_PATHS configurable (removed AUTH_ROUTES)
 */
-
-// TEMP
-// @ts-ignore
-const getPluginBaselineUrl = (plugin: PluginConfig) => 'https://test.com';
-// @ts-ignore
-const getPlugin = (path: string) => ({
-  enabled: true,
-  route: '/starter-kit',
-  widgetId: '@1ds/widget-starter-kit',
-});
-// @ts-ignore
-const getPluginById = (widgetId: string) => ({
-  enabled: true,
-  route: '/starter-kit',
-  widgetId: '@1ds/widget-starter-kit',
-});
-
-type PluginConfig = {
-  enabled: boolean;
-  route: string;
-  widgetId: string;
-  baselineUrl?: string;
-  [key: string]: any;
-};
 
 const IGNORED_PATHS = [
   ROUTES.WATCHDOG,
@@ -64,6 +38,7 @@ export const KNOWN_PATHS = new Set([
   '/test',
   '/sw.js',
   '/js/bundle.js',
+  '/main.js',
   ...Object.values(ROUTES).filter(
     (route) => !IGNORED_PATHS_SET.has(route) && route !== ROUTES.INDEX,
   ),

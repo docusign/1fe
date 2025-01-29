@@ -4,9 +4,8 @@ import { NextFunction, Request, Response } from 'express';
 
 /*
 TODO: 
- - When consuming back, need new middleware to force native auth via session id
- - When consuming back, need new middleware for updateOtelContextWithSessionId
- - Configuration for sessionId
+ - [1DS consumption] When consuming back, need new middleware to force native auth via session id
+ - [1DS consumption] When consuming back, need new middleware for updateOtelContextWithSessionId
  - Strongly type request
 */
 
