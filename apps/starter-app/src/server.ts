@@ -19,6 +19,32 @@ const envModeMap: Record<string, string> = {
   production: 'production'
 }
 
+const ROUTES = {
+  WATCHDOG: '/watchdog',
+  CSP_REPORT_ONLY: '/csp-report-only',
+  CSP_REPORT_VIOLATION: '/csp-report-violation',
+  HEALTH: '/health',
+  AUTH: '/auth', // 302 to /authenticate
+  LOGOUT: '/logout', // 302 to /logoutUrl
+  // AUTHENTICATE: '/authenticate', // [HTML]
+  VERSION: '/version',
+  WIDGET_VERSION: '/version/*',
+  API: '/api',
+  // LOAD_TEST: '/test/load',
+  // CLM_TEST: '/test/clm',
+  AUTH_FORWARDER: '/auth-forwarder/:widgetId',
+  IMAGES: '/images',
+  // Query Parameter needed for updating favicon cache
+  FAVICON: '/favicon.ico?v=2',
+  OLD_FAVICON: '/favicon.ico',
+  ROOT: '/',
+  // TEST: '/test',
+  SW: '/sw.js',
+  ONE_DS_BUNDLE: '/js/bundle.js',
+  EXAMPLE_BUNDLE: '/main.js',
+  // TODO: Maybe need to add /* back here.
+};
+
 const options = {
   // points to common flat file
   mode: envModeMap[ENVIRONMENT],
@@ -40,7 +66,9 @@ const options = {
     devtools: true, // automatically on when mode: development
     headers: {
       poweredBy: 'MagicBox',
-    }
+    },
+    // known routes are routes that magic box will NOT 404 on if the current route does not match a plugin
+    knownRoutes: Object.values(ROUTES)
   },
 };
 
