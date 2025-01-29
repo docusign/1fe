@@ -19,6 +19,7 @@ const envModeMap: Record<string, string> = {
   production: 'production'
 }
 
+// TODO: Clean this up
 const ROUTES = {
   WATCHDOG: '/watchdog',
   CSP_REPORT_ONLY: '/csp-report-only',
