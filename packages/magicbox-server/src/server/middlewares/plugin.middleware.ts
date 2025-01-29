@@ -14,9 +14,6 @@ TODO:
 - Strongly type request
 - [1DS consumption] New middleware for updateOtelContextWithWidgetId
 - [1DS consumption] New middleware for getPluginFromAuthCallback
-- Refactor IGNORED_PATHS and KNOWN_PATHS
-  - Make IGNORED_PATHS configurable
-  - Make KNOWN_PATHS configurable (removed AUTH_ROUTES)
 */
 
 const pluginMiddleware = async (
@@ -29,8 +26,15 @@ const pluginMiddleware = async (
     const topLevelPath = `/${path.split('/')[1]}`;
 
     // for /auth/logout, /test/load, etc.
+    // For OSS, combined KNOWN_PATHS and IGNORED_PATHS
     // TODO: [1DS Consumption]. Going to comment this out for now. Could cause unwanted side effects
     // const topTwoLevelsPath = `/${path.split('/').slice(1, 3).join('/')}`;
+    const knownPaths = new Set(readMagicBoxConfigs().server.knownRoutes);
+    const shouldIgnorePath = knownPaths.has(topLevelPath);
+
+    if (shouldIgnorePath) {
+      return next();
+    }
 
     let plugin: PluginConfig | undefined;
     let should404 = false;
@@ -71,10 +75,6 @@ const pluginMiddleware = async (
 
         should404 = true;
       }
-    } else {
-      const knownPaths = new Set(readMagicBoxConfigs().server.knownRoutes);
-      // no plugin found, is this another recognized route?
-      should404 = !( knownPaths.has(topLevelPath));
     }
 
     if (should404) {
