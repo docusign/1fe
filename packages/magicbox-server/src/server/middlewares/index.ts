@@ -1,6 +1,5 @@
 import browsersListMiddleware from './browserslist.middleware';
 import dynamicCspMiddleware from './dynamic-csp-header.middleware';
-import dynamicFrameAncestor from './dynamic-frame-ancestor.middleware';
 import nonceMiddleware from './nonce.middleware';
 import pluginMiddleware from './plugin.middleware';
 import sanitizeQueryParamMiddleware from './sanitize-query-params.middleware';
@@ -13,7 +12,6 @@ const combinedMiddleware = [
   browsersListMiddleware,
   pluginMiddleware,
   dynamicCspMiddleware,
-  dynamicFrameAncestor,
   nonceMiddleware,
   securityMiddleware,
 ];

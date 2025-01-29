@@ -4,7 +4,7 @@ import { mergeWith, mapKeys, isArray, uniq } from 'lodash';
 import helmet from 'helmet';
 import { ROUTES } from '../constants';
 import { getRuntimeCSPConfigs } from '../utils';
-import { readMagicBoxConfigs } from '../utils/config-poller';
+import { readMagicBoxConfigs } from '../utils/magicbox-configs';
 
 /*
   TODO:
@@ -39,7 +39,6 @@ export const mergeWithUsingUniqueArray = (
 
 export const getMergedDirectives = (cspOptions: MergeCSPOptions = {}) => {
   const {
-    environment = 'development',
     reportOnly = false,
     pluginId,
     req,
@@ -50,8 +49,8 @@ export const getMergedDirectives = (cspOptions: MergeCSPOptions = {}) => {
     : ROUTES.CSP_REPORT_VIOLATION;
 
   const mappedDefaultCSPDirectives = reportOnly
-    ? readMagicBoxConfigs().csp.defaultCSP.reportOnly
-    : readMagicBoxConfigs().csp.defaultCSP.enforced
+    ? readMagicBoxConfigs().dynamicConfigs.csp.defaultCSP.reportOnly
+    : readMagicBoxConfigs().dynamicConfigs.csp.defaultCSP.enforced
 
   const defaultDirectives = mapKeys(
     helmet.contentSecurityPolicy.getDefaultDirectives(),
@@ -60,7 +59,6 @@ export const getMergedDirectives = (cspOptions: MergeCSPOptions = {}) => {
   const combinedDefaultDirectives = {
     ...defaultDirectives,
     ...mappedDefaultCSPDirectives,
-    upgradeInsecureRequests: readMagicBoxConfigs().csp.upgradeInsecureRequests
   };
 
   // If pluginId is defined, grab only plugin's csp

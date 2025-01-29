@@ -1,6 +1,6 @@
 import { templatizeCDNUrl } from '../controllers/version.controller';
 import { WidgetConfig, WidgetConfigs } from '../types';
-import { getRequestedWidgetConfigWithoutRuntimeConfig } from './widget-config';
+import { getRequestedWidgetConfigWithoutRuntimeConfig } from './widget-config-helpers';
 
 type GetPluginPreloadApiUrlsArg = {
   widgetConfigs: WidgetConfigs;

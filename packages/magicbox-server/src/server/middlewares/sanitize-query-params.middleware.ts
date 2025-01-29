@@ -2,10 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { query } from 'express-validator';
 
 import { RUNTIME_CONFIG_OVERRIDES, WIDGET_URL_OVERRIDES } from '../constants';
-
-// TODO - Make these configurable via options: IS_PROD, IS_LOCAL_OR_INTEGRATION, ALLOWED_USER_AGENTS_FOR_WIDGET_OVERRIDE
-const IS_LOCAL_OR_INTEGRATION = false;
-const IS_PROD = true;
+import { readMagicBoxConfigs } from '../utils/magicbox-configs';
 
 export const ALLOWED_USER_AGENTS_FOR_WIDGET_OVERRIDE = ['test.userAgent'];
 
@@ -26,7 +23,7 @@ const redirectIfForbiddenQueryParams = (req: Request, res: Response) => {
 
   // Check to see if redirect is needed for removing widget_url_overrides
   const widgetOverrideSanitizeRequired =
-    hasWidgetOverride && !validUAForOverride && IS_PROD;
+    hasWidgetOverride && !validUAForOverride && readMagicBoxConfigs().mode === 'production';
 
   const needsRedirect =
     forbiddenQueryParams.find((param) => param in req.query) ||
@@ -60,7 +57,7 @@ const validateRuntimeConfigOverrides = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
-  if (!IS_LOCAL_OR_INTEGRATION) {
+  if (readMagicBoxConfigs().mode === 'production') {
     delete req.query.runtime_config_overrides;
     return;
   }

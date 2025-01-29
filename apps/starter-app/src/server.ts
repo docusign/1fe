@@ -9,9 +9,9 @@ import router from './lib/router';
 dotenv.config();
 const { PORT = 3001 } = process.env;
 
-const ENVIRONMENT = process.env.NODE_ENV || 'production';
+const ENVIRONMENT: string = process.env.NODE_ENV || 'production';
 
-const envModeMap = {
+const envModeMap: Record<string, string> = {
   development: 'development',
   integration: 'preproduction',
   stage: 'preproduction',
@@ -24,22 +24,23 @@ const options = {
   mode: envModeMap[ENVIRONMENT],
   environment: ENVIRONMENT,
   configManagement: {
-    url: `https://raw.githubusercontent.com/docusign/dev-hub/refs/heads/main/common-configs/${ENVIRONMENT}.json`,
+    url: `https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/common-configs/${ENVIRONMENT}.json`,
     refreshMs: 30 * 1000,
     phasedRelease: true,
   },
   shellBundleUrl: 'localhost:3000/bundle.js',
   server: {
     // for Integration-env only
-    development: {
-      bathtub: true, // automatically on when mode: development
-      importMapOverrides: {
-        // automatically on when mode: development
-        enableUI: true,
-        cdnURL: '',
-      },
-      devtools: true, // automatically on when mode: development
+    bathtub: true, // automatically on when mode: development
+    importMapOverrides: {
+      // automatically on when mode: development
+      enableUI: true,
+      cdnURL: '',
     },
+    devtools: true, // automatically on when mode: development
+    headers: {
+      poweredBy: 'MagicBox',
+    }
   },
 };
 

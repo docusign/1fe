@@ -1,7 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-
-// TODO: Powered by configurable
-const POWERED_BY = 'Docusign';
+import { readMagicBoxConfigs } from '../utils/magicbox-configs';
 
 const securityMiddleware = (
   // @ts-ignore
@@ -10,7 +8,7 @@ const securityMiddleware = (
   next: NextFunction,
 ) => {
   try {
-    res.setHeader('x-powered-by', POWERED_BY);
+    res.setHeader('x-powered-by', readMagicBoxConfigs().server.headers.poweredBy);
     res.setHeader('cache-control', 'no-store');
     res.setHeader(
       'strict-transport-security',

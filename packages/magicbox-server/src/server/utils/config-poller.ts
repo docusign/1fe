@@ -1,4 +1,6 @@
 import { cloneDeep, isEmpty } from 'lodash';
+import ky from 'ky';
+
 import {
   ExternalLibConfig,
   InstalledLibConfig,
@@ -8,31 +10,25 @@ import {
 import { WIDGET_ID_UNAVAILABLE } from '../constants';
 import {
   generateWidgetConfigMap,
-  getCachedWidgetConfigs,
   getWidgetConfigValues,
   mapAndGenerateWidgetConfigMap,
-  setCachedWidgetConfigs,
-} from './widget-config';
+} from './widget-config-helpers';
 import {
   fetchAllWidgetRuntimeConfigs,
   getFallbackRuntimeConfigs,
 } from './runtime-configs';
 import { getLibraryConfigs, setLibraryConfigs } from './libs';
 import { templatizeCDNUrl } from '../controllers/version.controller';
+import { getCachedWidgetConfigs, setCachedWidgetConfigs } from './widget-config';
+import { setMagicBoxConfigs } from './magicbox-configs';
 
 /*
 TODO:
-- playwright environment override
 - Strong type result
-- Replace IS_PROD with "mode" configuration
-- templatizeCDNUrl should consume baseurl from options
-- revisit retries
 - strongly type dynamicConfig
 - strongly type configs
+- What happens if initial config fetch fails on startup?
 */
-
-const IS_PROD = true;
-const ENVIRONMENT = 'production';
 
 interface WidgetBundleRequestResponse {
   widgetId: string;
@@ -40,22 +36,17 @@ interface WidgetBundleRequestResponse {
   error?: unknown;
 }
 
-type TemplatizeCDNUrlArgs = {
-  widgetId: string;
-  widgetVersion: string;
-  ENVIRONMENT: string;
-  IS_PROD?: boolean;
-  templateFilePath?: string;
-};
-
-let magicBoxConfigs: any = {};
 
 const performWidgetBundleRequest = async (
   widgetId: string,
   url: string,
 ): Promise<WidgetBundleRequestResponse> => {
   try {
-    const response = await fetch(url);
+    const response = await ky.get(url, {
+      retry: 3,
+      timeout: 10 * 1000,
+    });
+
     return { widgetId, response };
   } catch (error) {
     return { widgetId, error };
@@ -64,26 +55,27 @@ const performWidgetBundleRequest = async (
 
 const fetchConfig = async (url: string, options: any) => {
   try {
-    const response = await fetch(url, {
-      method: 'GET', // You can change this to POST or any other HTTP method if needed
-      headers: {
-        Authorization: `Bearer ${process.env.GH_REPO_READ_TOKEN}`,
-      },
+    const response = await ky.get(url, {
+      retry: 3,
+      timeout: 10 * 1000
     });
-  
+
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
   
     const configJson = await response.json();
-    magicBoxConfigs = {
+
+    const magicBoxConfigs = {
       ...options,
       dynamicConfigs: configJson
     };
+    setMagicBoxConfigs(magicBoxConfigs)
 
     return magicBoxConfigs;
   } catch (error) {
     console.error('Error fetching config:', error);
+    return null;
   }
 };
 
@@ -194,14 +186,8 @@ const processDynamicWidgetConfig = async (config: any): Promise<void> => {
       const widgetCdnUrlsNotVerified =
         await verifyWidgetCDNUrls(newWidgetConfigs);
 
-      // TODO: Rewire this up later. Skipping to unblock development
-      const SKIP_WIDGET_CDN_VERIFICATION = true;
-
       // Consume if widget urls are verified
-      if (
-        widgetCdnUrlsNotVerified.length === 0 ||
-        SKIP_WIDGET_CDN_VERIFICATION
-      ) {
+      if (widgetCdnUrlsNotVerified.length === 0) {
         setCachedWidgetConfigs(newWidgetConfigs);
       } else {
         // Log critical error if failed to verify widget bundles from cdn
@@ -233,18 +219,20 @@ export const pollDynamicConfig = async (options: any) => {
 
   const initialConfig = await fetchConfig(url, options);
 
-  processDynamicWidgetConfig(initialConfig.dynamicConfigs);
-  processDynamicLibraryConfig(initialConfig.dynamicConfigs);
+  if (initialConfig) {
+    processDynamicWidgetConfig(initialConfig.dynamicConfigs);
+    processDynamicLibraryConfig(initialConfig.dynamicConfigs);
+  }
 
   // Start the polling loop
   setInterval(async () => {
     const initialConfig = await fetchConfig(url, options);
 
-    processDynamicWidgetConfig(initialConfig.dynamicConfigs);
-    processDynamicLibraryConfig(initialConfig.dynamicConfigs);
+    if (initialConfig) {
+      processDynamicWidgetConfig(initialConfig.dynamicConfigs);
+      processDynamicLibraryConfig(initialConfig.dynamicConfigs);
+    }
   }, intervalInMilliseconds);
 };
 
-export const readMagicBoxConfigs = () => {
-  return magicBoxConfigs;
-};
+
