@@ -3,12 +3,11 @@ import { isEmpty } from 'lodash';
 
 import {
   PLUGIN_DISABLED,
-  PLUGIN_ID,
-  ROUTES,
-  STATIC_ASSETS,
+  PLUGIN_ID
 } from '../constants';
 import { getPlugin, getPluginBaselineUrl, getPluginById } from '../utils/plugin-helpers';
 import { PluginConfig } from '../types';
+import { readMagicBoxConfigs } from '../utils/magicbox-configs';
 
 /*
 TODO:
@@ -20,30 +19,6 @@ TODO:
   - Make KNOWN_PATHS configurable (removed AUTH_ROUTES)
 */
 
-const IGNORED_PATHS = [
-  ROUTES.WATCHDOG,
-  ROUTES.HEALTH,
-  ROUTES.VERSION,
-  ROUTES.WIDGET_VERSION,
-  ROUTES.LOAD_TEST,
-  // DO NOT IGNORE ROUTES.INDEX
-  ROUTES.API, // istio takes this on hosted environments, but needs to be here for local dev
-  ...Object.values(STATIC_ASSETS),
-];
-export const IGNORED_PATHS_SET = new Set(IGNORED_PATHS);
-
-//Base route, everything in ROUTES not in IGNORED_PATHS, and routes used in the auth flow
-export const KNOWN_PATHS = new Set([
-  '/',
-  '/test',
-  '/sw.js',
-  '/js/bundle.js',
-  '/main.js',
-  ...Object.values(ROUTES).filter(
-    (route) => !IGNORED_PATHS_SET.has(route) && route !== ROUTES.INDEX,
-  ),
-]);
-
 const pluginMiddleware = async (
   req: Request,
   res: Response,
@@ -54,15 +29,8 @@ const pluginMiddleware = async (
     const topLevelPath = `/${path.split('/')[1]}`;
 
     // for /auth/logout, /test/load, etc.
-    const topTwoLevelsPath = `/${path.split('/').slice(1, 3).join('/')}`;
-
-    const shouldIgnorePath =
-      IGNORED_PATHS_SET.has(topLevelPath) ||
-      IGNORED_PATHS_SET.has(topTwoLevelsPath);
-
-    if (shouldIgnorePath) {
-      return next();
-    }
+    // TODO: [1DS Consumption]. Going to comment this out for now. Could cause unwanted side effects
+    // const topTwoLevelsPath = `/${path.split('/').slice(1, 3).join('/')}`;
 
     let plugin: PluginConfig | undefined;
     let should404 = false;
@@ -104,10 +72,9 @@ const pluginMiddleware = async (
         should404 = true;
       }
     } else {
+      const knownPaths = new Set(readMagicBoxConfigs().server.knownRoutes);
       // no plugin found, is this another recognized route?
-      should404 = !(
-        KNOWN_PATHS.has(topLevelPath) || KNOWN_PATHS.has(topTwoLevelsPath)
-      );
+      should404 = !( knownPaths.has(topLevelPath));
     }
 
     if (should404) {
