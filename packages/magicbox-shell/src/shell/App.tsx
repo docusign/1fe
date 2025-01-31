@@ -6,8 +6,8 @@ import Welcome from './components/Welcome/Welcome';
 
 function App(): JSX.Element {
   const [count, setCount] = useState<number>(0);
-  const LazyApp1 = React.lazy(() => (window as any).System.import('app1'));
-  const LazyApp2 = React.lazy(() => (window as any).System.import('app2'));
+  const LazyApp1 = React.lazy(() => (window as any).System.import('@1ds/starter-kit'));
+  const LazyApp2 = React.lazy(() => (window as any).System.import('@1ds/starter-kit2'));
   return (
     <Router>
       <div className={styles.App}>

@@ -1,5 +1,6 @@
 import { Request } from 'express';
 import {
+  convertServerDynamicConfigToShellDynamicConfig,
   convertServerWidgetConfigToShellWidgetConfig,
   getPluginConfigs,
 } from '../../utils';
@@ -15,6 +16,7 @@ import {
 import { getMetaTagStringsFromWidgetRuntimeConfig } from '../../utils/meta-tags';
 import { PluginConfig } from '../../types';
 import { getCachedWidgetConfigs } from '../../utils/widget-config';
+import { readMagicBoxConfigs } from '../../utils/magicbox-configs';
 
 // TODO:
 // import packageJson from '../../../package.json';
@@ -276,6 +278,7 @@ export const dataForRenderingTemplate = async (req: Request) => {
   return {
     widgetConfigs: slimWidgetConfigsForShell,
     pluginConfigs: getPluginConfigs(),
+    dynamicConfigs: convertServerDynamicConfigToShellDynamicConfig(readMagicBoxConfigs().dynamicConfigs),
     criticalLibraryConfigUrls: criticalLibs,
     lazyLoadedLibsConfig: lazyLoadedLibs,
     packages: {},
@@ -289,10 +292,6 @@ export const dataForRenderingTemplate = async (req: Request) => {
       imports: {
         ...preloadedLibs,
         ...missingBareSpecifiersMap,
-
-        // TODO: Remove these. Need to dynamically add import map in shell on startup
-        app1: 'http://localhost:8001/assets/app1.js',
-        app2: 'http://localhost:8002/assets/app2.js',
       },
     },
   };

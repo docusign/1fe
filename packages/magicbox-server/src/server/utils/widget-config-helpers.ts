@@ -84,6 +84,21 @@ export const convertServerWidgetConfigToShellWidgetConfig = (
 };
 
 /**
+ * Strip out certain keys and values from the widget config before sending to the Shell client
+ * This helps keep the HTML payload size down for the client and reduces the amount of data sent
+ * Keys added here are ones that are not required for the Shell to handle widget functionality
+ *
+ * @param widgetConfigs
+ * @returns widget config map
+ */
+// TODO: Strongly type input output
+export const convertServerDynamicConfigToShellDynamicConfig = (
+  dynamicConfigs: any,
+): any => {
+  return omit(dynamicConfigs, ['cdn.libraries.managed', 'cdn.widgets.releaseConfig', 'csp'])
+};
+
+/**
  * exported for unit testing
  */
 export const getPinnedWidgets = (

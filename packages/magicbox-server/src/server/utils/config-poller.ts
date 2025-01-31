@@ -217,6 +217,7 @@ export const pollDynamicConfig = async (options: any) => {
   // Convert seconds to milliseconds for setInterval
   const intervalInMilliseconds = intervalMs;
 
+  // TODO: What if initial polling fails?
   const initialConfig = await fetchConfig(url, options);
 
   if (initialConfig) {
