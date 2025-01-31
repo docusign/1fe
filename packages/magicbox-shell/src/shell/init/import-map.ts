@@ -1,14 +1,17 @@
+// TODO: Character encoding issues with import map override ui
 import { isEmpty, isObject, pickBy } from 'lodash';
 
 import { ImportMap, SystemImportMap } from '../types/init';
 import { WidgetConfig } from '../types/widget-config';
-import { generateCDNUrl } from './url';
+import { generateCDNUrl } from '../utils/url';
 import {
   getWidgetConfigValues,
   LAZY_LOADED_LIB_CONFIGS,
   WIDGET_CONFIGS,
 } from '../configs/config-helpers';
 import { STATE, WIDGET_URL_OVERRIDES } from '../constants/search-params';
+import { readMagicBoxShellConfigs } from '../configs/shell-configs';
+import { initializeImportMapOverridesReskin } from './import-map-ui';
 
 export const getQueryURLParams = (): URLSearchParams => {
   const urlParams = new URLSearchParams(window?.location?.search);
@@ -110,6 +113,7 @@ export const createDynamicImportMap = (): {
     '127.0.0.1',
     'docucdn-a.akamaihd.net',
     'docutest-a.akamaihd.net',
+    'cdn.jsdelivr.net',
   ];
 
   const widgetConfigs = getWidgetConfigValues(WIDGET_CONFIGS);
@@ -191,20 +195,20 @@ export const insertPersistentWidgetOverrides = (
 
   // const { IS_PROD, FEATURE_FLAGS, ENVIRONMENT } = getEnvironmentConfigs();
 
-  // if (!IS_PROD) {
-  // TODO (POST_MVP): Uncomment and do reskin later
-  // initializeImportMapOverridesReskin();
+  const IS_PROD = readMagicBoxShellConfigs().mode === 'production';
+  if (!IS_PROD) {
+    initializeImportMapOverridesReskin();
 
-  // TODO (POST_MVP): Uncomment and add dev tools later
-  // try {
-  //   if (
-  //     FEATURE_FLAGS.enable1dsDevtool &&
-  //     isIntegrationEnvironment(ENVIRONMENT)
-  //   ) {
-  //     hideImportMapOverrideButton();
-  //   }
-  // } catch (e) {}
-  // }
+    // TODO (POST_MVP): Uncomment and add dev tools later
+    // try {
+    //   if (
+    //     FEATURE_FLAGS.enable1dsDevtool &&
+    //     isIntegrationEnvironment(ENVIRONMENT)
+    //   ) {
+    //     hideImportMapOverrideButton();
+    //   }
+    // } catch (e) {}
+  }
 
   if (overrides && Object.keys(overrides).length > 0) {
     if (!window?.importMapOverrides) {

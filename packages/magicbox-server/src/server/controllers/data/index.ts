@@ -17,6 +17,7 @@ import { getMetaTagStringsFromWidgetRuntimeConfig } from '../../utils/meta-tags'
 import { PluginConfig } from '../../types';
 import { getCachedWidgetConfigs } from '../../utils/widget-config';
 import { readMagicBoxConfigs } from '../../utils/magicbox-configs';
+import { ACTIVE_AUTOMATED_TEST_FRAMEWORK } from '../../constants/cookie-names';
 
 // TODO:
 // import packageJson from '../../../package.json';
@@ -275,7 +276,15 @@ export const dataForRenderingTemplate = async (req: Request) => {
   const slimWidgetConfigsForShell =
     convertServerWidgetConfigToShellWidgetConfig(getCachedWidgetConfigs());
 
+  const activeAutomatedTestFramework =
+    req.query.automated_test_framework || null;
+
+  // TODO: Support meta tags
   return {
+    isProduction: readMagicBoxConfigs().mode === 'production',
+    hideImportMapOverrideElement:
+      activeAutomatedTestFramework ||
+      req.cookies[ACTIVE_AUTOMATED_TEST_FRAMEWORK],
     widgetConfigs: slimWidgetConfigsForShell,
     pluginConfigs: getPluginConfigs(),
     dynamicConfigs: convertServerDynamicConfigToShellDynamicConfig(

@@ -3,8 +3,20 @@ import renderMagicBoxShell from '@devhub/magicbox-shell';
 import '@devhub/magicbox-shell/dist/style.css';
 
 const setup = () => {
-  console.log('setup hit');
-  renderMagicBoxShell({});
+  const ENVIRONMENT: string = process.env.NODE_ENV || 'integration';
+
+  const envModeMap: Record<string, string> = {
+    development: 'development',
+    integration: 'preproduction',
+    stage: 'preproduction',
+    demo: 'production',
+    production: 'production',
+  };
+
+  renderMagicBoxShell({
+    mode: envModeMap[ENVIRONMENT],
+    environment: ENVIRONMENT,
+  });
 };
 
 setup();

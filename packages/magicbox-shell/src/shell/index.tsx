@@ -7,7 +7,8 @@ import {
   createDynamicImportMap,
   insertNonPersistentWidgetOverrides,
   insertPersistentWidgetOverrides,
-} from './utils/import-map';
+} from './init/import-map';
+import { setMagicBoxShellConfigs } from './configs/shell-configs';
 
 export const init = (): Promise<void> => {
   // Initialize import map Promise resolver
@@ -68,8 +69,7 @@ export const init = (): Promise<void> => {
 };
 
 const renderMagicBoxShell = (options: any) => {
-  console.log('renderMagicBoxShell hit');
-  // setMagicBoxConfigs(options);
+  setMagicBoxShellConfigs(options);
 
   // TODO: Init utils if needed?
 
