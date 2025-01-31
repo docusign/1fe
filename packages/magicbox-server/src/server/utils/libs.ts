@@ -25,10 +25,15 @@ const getDynamicExternalLibraryConfigs = (): ExternalLibConfig[] => {
   return getLibraryConfigs().filter(libIsExternal);
 };
 
-const getCDNLibraryUrl = (id: string, version: string, path: string): string => {
-  const libBaseUrl = readMagicBoxConfigs().dynamicConfigs.cdn.libraries.basePrefix;
+const getCDNLibraryUrl = (
+  id: string,
+  version: string,
+  path: string,
+): string => {
+  const libBaseUrl =
+    readMagicBoxConfigs().dynamicConfigs.cdn.libraries.basePrefix;
   return `${libBaseUrl}${id}/${version}/${path}`;
-}
+};
 
 const getExternalLibsWithUrl = ({
   getPreloaded,
@@ -65,12 +70,16 @@ export const getCriticalLibs = () => ({
   System: getCDNLibraryUrl(
     SYSTEM_LOADER.id,
     SYSTEM_LOADER.version,
-    readMagicBoxConfigs().mode === 'production' ? 'dist/system.min.js' : 'dist/system.js',
+    readMagicBoxConfigs().mode === 'production'
+      ? 'dist/system.min.js'
+      : 'dist/system.js',
   ),
   SystemAMD: getCDNLibraryUrl(
     SYSTEM_LOADER.id,
     SYSTEM_LOADER.version,
-    readMagicBoxConfigs().mode === 'production' ? 'dist/extras/amd.min.js' : 'dist/extras/amd.js',
+    readMagicBoxConfigs().mode === 'production'
+      ? 'dist/extras/amd.min.js'
+      : 'dist/extras/amd.js',
   ),
   ImportMapOverride: getCDNLibraryUrl(
     IMPORT_MAP_OVERRIDE_LIB_NEXT.id,

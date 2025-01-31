@@ -16,8 +16,8 @@ const envModeMap: Record<string, string> = {
   integration: 'preproduction',
   stage: 'preproduction',
   demo: 'production',
-  production: 'production'
-}
+  production: 'production',
+};
 
 // TODO: Clean this up
 const ROUTES = {
@@ -69,7 +69,7 @@ const options = {
       poweredBy: 'MagicBox',
     },
     // known routes are routes that magic box will NOT 404 on if the current route does not match a plugin
-    knownRoutes: Object.values(ROUTES)
+    knownRoutes: Object.values(ROUTES),
   },
 };
 

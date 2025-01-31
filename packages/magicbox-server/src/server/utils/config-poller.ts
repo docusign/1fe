@@ -19,7 +19,10 @@ import {
 } from './runtime-configs';
 import { getLibraryConfigs, setLibraryConfigs } from './libs';
 import { templatizeCDNUrl } from '../controllers/version.controller';
-import { getCachedWidgetConfigs, setCachedWidgetConfigs } from './widget-config';
+import {
+  getCachedWidgetConfigs,
+  setCachedWidgetConfigs,
+} from './widget-config';
 import { setMagicBoxConfigs } from './magicbox-configs';
 
 /*
@@ -35,7 +38,6 @@ interface WidgetBundleRequestResponse {
   response?: Response;
   error?: unknown;
 }
-
 
 const performWidgetBundleRequest = async (
   widgetId: string,
@@ -57,20 +59,20 @@ const fetchConfig = async (url: string, options: any) => {
   try {
     const response = await ky.get(url, {
       retry: 3,
-      timeout: 10 * 1000
+      timeout: 10 * 1000,
     });
 
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-  
+
     const configJson = await response.json();
 
     const magicBoxConfigs = {
       ...options,
-      dynamicConfigs: configJson
+      dynamicConfigs: configJson,
     };
-    setMagicBoxConfigs(magicBoxConfigs)
+    setMagicBoxConfigs(magicBoxConfigs);
 
     return magicBoxConfigs;
   } catch (error) {
@@ -135,7 +137,8 @@ const verifyWidgetCDNUrls = async (widgetConfigsToVerify: WidgetConfigs) => {
 
 export const processDynamicLibraryConfig = (config: any): void => {
   try {
-    const libraryConfigsPayload: (ExternalLibConfig | InstalledLibConfig)[]  = config?.cdn?.libraries?.managed || [];
+    const libraryConfigsPayload: (ExternalLibConfig | InstalledLibConfig)[] =
+      config?.cdn?.libraries?.managed || [];
 
     //   const previousConfigs = getLibraryConfigs();
 
@@ -235,5 +238,3 @@ export const pollDynamicConfig = async (options: any) => {
     }
   }, intervalInMilliseconds);
 };
-
-

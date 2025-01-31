@@ -25,9 +25,7 @@ type FetchSingleWidgetRuntimeConfigArgs = {
   widgetConfig: WidgetConfig;
 };
 
-const generateRuntimeConfigCDNUrl = (
-  widget: WidgetConfig,
-): URL => {
+const generateRuntimeConfigCDNUrl = (widget: WidgetConfig): URL => {
   return templatizeCDNUrl({
     widgetId: widget.widgetId,
     widgetVersion: widget.version,
@@ -84,7 +82,7 @@ const _fetchSingleWidgetRuntimeConfig = async ({
 
   const response = await ky.get(widgetRuntimeConfigUrl, {
     retry: 3,
-    timeout: 10 * 1000
+    timeout: 10 * 1000,
   });
 
   const isColdStart = getIsColdStart();
@@ -104,9 +102,9 @@ const _fetchSingleWidgetRuntimeConfig = async ({
   } else if (response?.status >= 500 && !isColdStart) {
     const retryResponse = await ky.get(widgetRuntimeConfigUrl, {
       retry: 3,
-      timeout: 10 * 1000
+      timeout: 10 * 1000,
     });
-  
+
     if (retryResponse?.status === 200) {
       const retryRuntimeConfig: RuntimeConfig = await retryResponse.json();
 

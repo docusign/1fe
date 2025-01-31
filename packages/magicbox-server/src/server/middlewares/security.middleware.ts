@@ -8,7 +8,10 @@ const securityMiddleware = (
   next: NextFunction,
 ) => {
   try {
-    res.setHeader('x-powered-by', readMagicBoxConfigs().server.headers.poweredBy);
+    res.setHeader(
+      'x-powered-by',
+      readMagicBoxConfigs().server.headers.poweredBy,
+    );
     res.setHeader('cache-control', 'no-store');
     res.setHeader(
       'strict-transport-security',

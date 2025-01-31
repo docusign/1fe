@@ -1,7 +1,7 @@
 import { Request } from 'express';
-import { RUNTIME_CONFIG_OVERRIDES } from "../constants";
-import { RuntimeConfig } from "../types";
-import { getParamFromQueryOrRedirectUri } from "./url";
+import { RUNTIME_CONFIG_OVERRIDES } from '../constants';
+import { RuntimeConfig } from '../types';
+import { getParamFromQueryOrRedirectUri } from './url';
 import { getCachedWidgetConfigs } from './widget-config';
 import { readMagicBoxConfigs } from './magicbox-configs';
 

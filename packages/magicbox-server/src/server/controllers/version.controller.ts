@@ -17,7 +17,6 @@ const SERVER_BUILD_NUMBER = process.env.SERVER_BUILD_NUMBER || '';
 const SERVER_GIT_SHA = process.env.SERVER_GIT_SHA || '';
 const SERVER_GIT_BRANCH = process.env.SERVER_GIT_BRANCH || '';
 
-
 type TemplatizeCDNUrlArgs = {
   widgetId: string;
   widgetVersion: string;

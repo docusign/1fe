@@ -1,9 +1,9 @@
 let magicBoxConfigs: any = {};
 
 export const readMagicBoxConfigs = () => {
-    return magicBoxConfigs;
+  return magicBoxConfigs;
 };
 
 export const setMagicBoxConfigs = (newConfigs: any) => {
-    magicBoxConfigs = newConfigs;
+  magicBoxConfigs = newConfigs;
 };

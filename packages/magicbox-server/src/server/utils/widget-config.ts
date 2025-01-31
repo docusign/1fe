@@ -1,4 +1,4 @@
-import { WidgetConfigs } from "../types";
+import { WidgetConfigs } from '../types';
 
 let cachedWidgetConfigs: WidgetConfigs = new Map();
 
