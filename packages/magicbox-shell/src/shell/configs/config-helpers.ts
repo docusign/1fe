@@ -1,4 +1,8 @@
-import { PluginConfig, WidgetConfig, WidgetConfigs } from "../types/widget-config";
+import {
+  PluginConfig,
+  WidgetConfig,
+  WidgetConfigs,
+} from '../types/widget-config';
 
 const generateWidgetConfigMap = <
   T extends PluginConfig | WidgetConfig = WidgetConfig,
@@ -12,24 +16,22 @@ const generateWidgetConfigMap = <
     ]),
   );
 
-
 const getConfigArrFromGlobal = <Return>(
-    configName: 'plugin-config' | 'widget-config' | 'dynamic-config',
-  ): any => {
-    const defaultValue = configName === 'dynamic-config' ? {} : [];
+  configName: 'plugin-config' | 'widget-config' | 'dynamic-config',
+): any => {
+  const defaultValue = configName === 'dynamic-config' ? {} : [];
 
-    try {
-      
-      const oneDsConfig: Return[] =
-        JSON.parse(
-          document?.querySelector(`script[data-1ds-config-id="${configName}"]`)
-            ?.innerHTML || JSON.stringify(defaultValue),
-        ) ?? defaultValue
-  
-      return oneDsConfig;
-    } catch (e) {
-      return defaultValue;
-    }
+  try {
+    const oneDsConfig: Return[] =
+      JSON.parse(
+        document?.querySelector(`script[data-1ds-config-id="${configName}"]`)
+          ?.innerHTML || JSON.stringify(defaultValue),
+      ) ?? defaultValue;
+
+    return oneDsConfig;
+  } catch (e) {
+    return defaultValue;
+  }
 };
 
 const getConfigObjFromGlobal = <Return extends object>(
@@ -70,12 +72,11 @@ export const WIDGET_CONFIGS = generateWidgetConfigMap(
  * Map of all widget configs that we have loaded from the global config, keyed by widgetId
  */
 // TODO: strongly type
-export const DYNAMIC_CONFIGS = getConfigArrFromGlobal<any>('dynamic-config')
+export const DYNAMIC_CONFIGS = getConfigArrFromGlobal<any>('dynamic-config');
 
 export const LAZY_LOADED_LIB_CONFIGS = getConfigObjFromGlobal<
   Record<string, string>
 >('lazy-loaded-libs-config');
-
 
 // TODO: Duplicated code
 export const getWidgetConfigValues = <

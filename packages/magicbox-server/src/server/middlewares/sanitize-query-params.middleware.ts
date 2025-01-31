@@ -23,7 +23,9 @@ const redirectIfForbiddenQueryParams = (req: Request, res: Response) => {
 
   // Check to see if redirect is needed for removing widget_url_overrides
   const widgetOverrideSanitizeRequired =
-    hasWidgetOverride && !validUAForOverride && readMagicBoxConfigs().mode === 'production';
+    hasWidgetOverride &&
+    !validUAForOverride &&
+    readMagicBoxConfigs().mode === 'production';
 
   const needsRedirect =
     forbiddenQueryParams.find((param) => param in req.query) ||

@@ -95,7 +95,11 @@ export const convertServerWidgetConfigToShellWidgetConfig = (
 export const convertServerDynamicConfigToShellDynamicConfig = (
   dynamicConfigs: any,
 ): any => {
-  return omit(dynamicConfigs, ['cdn.libraries.managed', 'cdn.widgets.releaseConfig', 'csp'])
+  return omit(dynamicConfigs, [
+    'cdn.libraries.managed',
+    'cdn.widgets.releaseConfig',
+    'csp',
+  ]);
 };
 
 /**

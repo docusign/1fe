@@ -278,7 +278,9 @@ export const dataForRenderingTemplate = async (req: Request) => {
   return {
     widgetConfigs: slimWidgetConfigsForShell,
     pluginConfigs: getPluginConfigs(),
-    dynamicConfigs: convertServerDynamicConfigToShellDynamicConfig(readMagicBoxConfigs().dynamicConfigs),
+    dynamicConfigs: convertServerDynamicConfigToShellDynamicConfig(
+      readMagicBoxConfigs().dynamicConfigs,
+    ),
     criticalLibraryConfigUrls: criticalLibs,
     lazyLoadedLibsConfig: lazyLoadedLibs,
     packages: {},

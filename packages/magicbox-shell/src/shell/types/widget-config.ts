@@ -1,27 +1,27 @@
 // TODO: Consolidate types between shell and server
 
 export type CSPPerEnvironment = {
-    scriptSrc?: string[];
-    connectSrc?: string[];
-    imgSrc?: string[];
-    objectSrc?: string[];
-    frameSrc?: string[];
-    styleSrc?: string[];
-    frameAncestors?: string[];
-    mediaSrc?: string[];
-    workerSrc?: string[];
-    formAction?: string[];
-    fontSrc?: string[];
-  };
-  
-  export type CSPTypes = keyof CSPPerEnvironment;
-  
-  export type CSPDirectives = {
-    development: CSPPerEnvironment;
-    integration: CSPPerEnvironment;
-    stage: CSPPerEnvironment;
-    demo: CSPPerEnvironment;
-    production: CSPPerEnvironment;
+  scriptSrc?: string[];
+  connectSrc?: string[];
+  imgSrc?: string[];
+  objectSrc?: string[];
+  frameSrc?: string[];
+  styleSrc?: string[];
+  frameAncestors?: string[];
+  mediaSrc?: string[];
+  workerSrc?: string[];
+  formAction?: string[];
+  fontSrc?: string[];
+};
+
+export type CSPTypes = keyof CSPPerEnvironment;
+
+export type CSPDirectives = {
+  development: CSPPerEnvironment;
+  integration: CSPPerEnvironment;
+  stage: CSPPerEnvironment;
+  demo: CSPPerEnvironment;
+  production: CSPPerEnvironment;
 };
 
 export type AuthenticationType = 'required' | 'lazy';

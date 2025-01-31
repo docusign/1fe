@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
 import { isEmpty } from 'lodash';
 
+import { PLUGIN_DISABLED, PLUGIN_ID } from '../constants';
 import {
-  PLUGIN_DISABLED,
-  PLUGIN_ID
-} from '../constants';
-import { getPlugin, getPluginBaselineUrl, getPluginById } from '../utils/plugin-helpers';
+  getPlugin,
+  getPluginBaselineUrl,
+  getPluginById,
+} from '../utils/plugin-helpers';
 import { PluginConfig } from '../types';
 import { readMagicBoxConfigs } from '../utils/magicbox-configs';
 

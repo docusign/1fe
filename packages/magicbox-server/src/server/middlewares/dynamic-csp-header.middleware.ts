@@ -38,11 +38,7 @@ export const mergeWithUsingUniqueArray = (
 };
 
 export const getMergedDirectives = (cspOptions: MergeCSPOptions = {}) => {
-  const {
-    reportOnly = false,
-    pluginId,
-    req,
-  } = cspOptions;
+  const { reportOnly = false, pluginId, req } = cspOptions;
 
   const reportEndpoint = reportOnly
     ? ROUTES.CSP_REPORT_ONLY
@@ -50,7 +46,7 @@ export const getMergedDirectives = (cspOptions: MergeCSPOptions = {}) => {
 
   const mappedDefaultCSPDirectives = reportOnly
     ? readMagicBoxConfigs().dynamicConfigs.csp.defaultCSP.reportOnly
-    : readMagicBoxConfigs().dynamicConfigs.csp.defaultCSP.enforced
+    : readMagicBoxConfigs().dynamicConfigs.csp.defaultCSP.enforced;
 
   const defaultDirectives = mapKeys(
     helmet.contentSecurityPolicy.getDefaultDirectives(),
