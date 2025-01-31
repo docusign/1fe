@@ -1,3 +1,7 @@
 import { magicBoxServer } from './server';
+import { renderMagicBoxShell } from './shell';
 
-export default magicBoxServer;
+export {
+    magicBoxServer,
+    renderMagicBoxShell
+} 

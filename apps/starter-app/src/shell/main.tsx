@@ -1,5 +1,5 @@
 // @ts-ignore
-import renderMagicBoxShell from '@devhub/magicbox-shell';
+import { renderMagicBoxShell } from '@devhub/magicbox-server';
 import '@devhub/magicbox-shell/dist/style.css';
 
 const setup = () => {
