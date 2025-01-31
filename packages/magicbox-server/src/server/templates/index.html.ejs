@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <meta charset="utf-8" />
     <% if ( typeof metaTags !=='undefined' && metaTags && metaTags.length ) { 
       metaTags.forEach(function(metaTagEntries) { %>
         <meta <%- metaTagEntries %> >
@@ -55,5 +56,8 @@
     <script fetchpriority="high" src="<%= criticalLibraryConfigUrls.ImportMapOverride %>" async crossorigin="anonymous"></script>
 
     <meta name="importmap-type" content="systemjs-importmap" />
+    <% if (!isProduction && !hideImportMapOverrideElement) { %>
+      <import-map-overrides-full></import-map-overrides-full>
+    <% } %>
   </body>
 </html>

@@ -9,7 +9,7 @@ import router from './lib/router';
 dotenv.config();
 const { PORT = 3001 } = process.env;
 
-const ENVIRONMENT: string = process.env.NODE_ENV || 'production';
+const ENVIRONMENT: string = process.env.NODE_ENV || 'integration';
 
 const envModeMap: Record<string, string> = {
   development: 'development',
