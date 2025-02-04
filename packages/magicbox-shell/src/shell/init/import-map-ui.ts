@@ -16,6 +16,11 @@ const isOverrideActive = (element: HTMLElement) => {
   );
 };
 
+const selectImportMapOverrideButton = () =>
+    selectImportMapOverrideUi()?.querySelector(
+      'button.imo-trigger',
+    ) as HTMLButtonElement;
+
 export const selectImportMapOverrideUi = () =>
   document.querySelector('import-map-overrides-full')?.shadowRoot;
 
@@ -33,6 +38,18 @@ export const isOverrideElementActive = () => {
 
   return isOverrideActive(element);
 };
+
+/**
+ * When we hit the OneDsErrorBoundary, we want to show the import map override button
+ * in case the user has a broken override url ao they can reset/fix it.
+ */
+export const showImportMapOverrideButton = () => {
+    const button = selectImportMapOverrideButton();
+  
+    if (button) {
+      button.style.display = 'flex';
+    }
+  };
 
 // flash red when override is active
 const animateImportMapButtonIfOverrides = () => {

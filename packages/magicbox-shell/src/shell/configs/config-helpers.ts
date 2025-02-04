@@ -84,3 +84,17 @@ export const getWidgetConfigValues = <
 >(
   widgetConfigs: WidgetConfigs<T>,
 ): T[] => Array.from(widgetConfigs.values());
+
+/**
+ * Get the plugin baseline url from runtime config if it exists, otherwise fallback to 1ds-config
+ * @param plugin
+ * @returns baseline url
+ */
+export const getPluginBaselineUrl = (
+  plugin: PluginConfig,
+): string | undefined => {
+  return (
+    WIDGET_CONFIGS.get(plugin.widgetId)?.runtime?.plugin?.baselineUrl ||
+    plugin?.baselineUrl
+  );
+};

@@ -130,7 +130,6 @@ export type PluginConfig = {
 export type WidgetConfig = {
   widgetId: string;
   version: string;
-  activePhasedDeployment: boolean;
   runtime: RuntimeConfig;
   type?: WidgetType;
   _url?: string;

@@ -18,6 +18,7 @@ import { PluginConfig } from '../../types';
 import { getCachedWidgetConfigs } from '../../utils/widget-config';
 import { readMagicBoxConfigs } from '../../utils/magicbox-configs';
 import { ACTIVE_AUTOMATED_TEST_FRAMEWORK } from '../../constants/cookie-names';
+import { getRequestHost } from '../../utils/request-helpers';
 
 // TODO:
 // import packageJson from '../../../package.json';
@@ -299,6 +300,7 @@ export const dataForRenderingTemplate = async (req: Request) => {
       widgetConfigs,
       activePluginConfig as PluginConfig,
     ),
+    baseHref: `${getRequestHost(req)}/`,
     systemJsImportMapConfig: {
       imports: {
         ...preloadedLibs,
