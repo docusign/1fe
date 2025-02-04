@@ -1,8 +1,14 @@
-{
-  "extends": ["//"],
-  "tasks": {
-    "build": {
-      "outputs": ["dist/**"]
-    }
-  }
+{"@integ/navigator": {
+  "headers": {
+    "csp": {
+      "enforced": {
+        "imgSrc": [],
+          "frameAncestors": ["*"]
+},
+      "reportOnly": {
+        "imgSrc": [],
+          "frameAncestors": ["*"]
 }
+    }
+}
+}}

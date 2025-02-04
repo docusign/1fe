@@ -19,6 +19,7 @@ import { getCachedWidgetConfigs } from '../../utils/widget-config';
 import { readMagicBoxConfigs } from '../../utils/magicbox-configs';
 import { ACTIVE_AUTOMATED_TEST_FRAMEWORK } from '../../constants/cookie-names';
 import { getRequestHost } from '../../utils/request-helpers';
+import { getWidgetConfigsForIndexHtml } from './widget-config';
 
 // TODO:
 // import packageJson from '../../../package.json';
@@ -223,7 +224,7 @@ import { getRequestHost } from '../../utils/request-helpers';
 // TODO: Strongly type request
 export const dataForRenderingTemplate = async (req: Request) => {
   // TODO:[1DS consumption] Will enableRuntimeConfigOverrides flag be promoted to production? May need to update this
-  const widgetConfigs = getCachedWidgetConfigs();
+  const widgetConfigs = await getWidgetConfigsForIndexHtml(req);
   const activePluginConfig = (req as any).plugin;
 
   const preloadableFetchAPIURLs = getPluginPreloadApiUrls({
@@ -275,7 +276,7 @@ export const dataForRenderingTemplate = async (req: Request) => {
   ];
 
   const slimWidgetConfigsForShell =
-    convertServerWidgetConfigToShellWidgetConfig(getCachedWidgetConfigs());
+    convertServerWidgetConfigToShellWidgetConfig(widgetConfigs);
 
   const activeAutomatedTestFramework =
     req.query.automated_test_framework || null;

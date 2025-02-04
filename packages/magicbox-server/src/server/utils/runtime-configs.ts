@@ -40,7 +40,7 @@ const getIsColdStart = (): boolean => {
   );
 };
 
-const parseRuntimeConfig = ({
+export const parseRuntimeConfig = ({
   runtimeConfig,
   widgetConfig,
 }: ParseRuntimeConfigArgs): RuntimeConfig => {
