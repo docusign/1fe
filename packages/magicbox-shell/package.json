@@ -37,6 +37,8 @@
     "vite": "^2.6.10"
   },
   "dependencies": {
-    "systemjs": "^6.15.1"
+    "bowser": "^2.11.0",
+    "systemjs": "^6.15.1",
+    "react-router-dom": "6.9.0"
   }
 }

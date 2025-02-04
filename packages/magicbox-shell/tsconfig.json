@@ -5,7 +5,8 @@
     "sourceMap": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "types": ["jest", "node"]
+    "types": ["jest", "node"],
+    "jsx": "react-jsx"
   },
   "include": ["."],
   "exclude": ["dist", "build", "node_modules"]
