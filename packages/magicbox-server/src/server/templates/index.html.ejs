@@ -49,7 +49,7 @@
     <script>
       function onSystemReady() {
         System.import("<%= criticalLibraryConfigUrls.SystemAMD %>").then(() => {
-          System.import('http://localhost:3001/main.js');
+          System.import('http://localhost:3001/js/bundle.js');
         });
       }
     </script>

@@ -2,9 +2,15 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
+    "target": "ES2022",
     "module": "commonjs",
     "noEmit": false
   },
-  "include": ["src/*.ts"],
-  "exclude": ["src/app"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.d.ts",
+    "src/**/*.json"
+  ],
+  "exclude": ["src/shell", "src/sw.ts"]
 }
