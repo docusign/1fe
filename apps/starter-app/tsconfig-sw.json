@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "composite": true,
+    "module": "es2020",
+    "moduleResolution": "Node",
+    // Resulting files will be in dist/service-worker.js
+    "outDir": "dist",
+    // From https://joshuatz.com/posts/2021/strongly-typed-service-workers/
+    "lib": ["WebWorker", "ES2015"]
+  },
+  "include": ["src/sw.ts", "src/constants/routes.ts"]
+}
