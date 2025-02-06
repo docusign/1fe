@@ -18,5 +18,7 @@ export const getPlatformProps = (
     utils: getPlatformUtils(widget, options),
   };
 
-  return deepFreeze(platformProps);
+  return platformProps;
+  // TODO: FREEZE
+  // return deepFreeze(platformProps);
 };

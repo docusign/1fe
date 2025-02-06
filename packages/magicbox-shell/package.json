@@ -34,11 +34,12 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "5.5.4",
-    "vite": "^2.6.10"
+    "vite": "^5.2.0"
   },
   "dependencies": {
     "bowser": "^2.11.0",
     "systemjs": "^6.15.1",
-    "react-router-dom": "6.9.0"
+    "react-router-dom": "6.9.0",
+    "store2": "^2.14.4"
   }
 }
