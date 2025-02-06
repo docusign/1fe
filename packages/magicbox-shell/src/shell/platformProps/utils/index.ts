@@ -4,7 +4,7 @@ import { merge } from 'lodash';
 import deepFreeze from 'deep-freeze';
 
 // import { SESSION_ID_UNAVAILABLE } from '../../../constants';
-// import { router } from '../../components/Router';
+import { router } from '../../components/Router';
 // import { WidgetConfig } from '../../../isomorphic/types/widgetConfigs.types';
 // import { getSessionIdFromCookie } from '../../utils/cookie-helpers';
 // import { getBaseHrefUrl, getEnvironmentConfigs } from '../../utils/env-helpers';
@@ -14,18 +14,18 @@ import deepFreeze from 'deep-freeze';
 import { WidgetConfig } from '../../types/widget-config';
 import { PlatformUtils } from '../../types/platform-utils';
 import { initWidgetsHelper } from './widgets';
-// import { initNavigation } from './navigation';
+import { initNavigation } from './navigation';
 // import { initLogger } from './logger';
 // import { initNetwork } from './network';
 // import { getAppLoadTimeUtils } from './app-load-time';
 // import { initAuth } from './auth';
-// import { initEventBus } from './event-bus';
+import { initEventBus } from './event-bus';
 // import { WidgetAppLoadTimeUtils } from './app-load-time/types';
 import { initSessionStorage } from './sessionStorage';
 // import { initLocalStorage } from './localStorage';
 // import { initExperiments } from './experiments';
 // import { i18n as initi18n } from './i18n';
-// import { initExperience } from './experience';
+import { initExperience } from './experience';
 // import { initAnalytics } from './analytics';
 // import { DEFAULT_WIDGET_OPTIONS } from './widgets/internal/utils/constants';
 // import { initOTEL } from './otel';
@@ -62,13 +62,13 @@ export const getPlatformUtils = (
 
   const widgets = initWidgetsHelper(widget);
 
-//   const eventBus = initEventBus(widget.widgetId);
+  const eventBus = initEventBus(widget.widgetId);
 
-//   const navigation = initNavigation({
-//     widgetId,
-//     navigateShell: router.navigate,
-//     eventBus,
-//   });
+  const navigation = initNavigation({
+    widgetId,
+    navigateShell: router.navigate,
+    eventBus,
+  });
 
 //   const auth = initAuth(widget);
 
@@ -88,26 +88,26 @@ export const getPlatformUtils = (
 
 //   const i18n = initi18n(widgetId);
 
-//   const experience = initExperience(widgetId);
+  const experience = initExperience(widgetId);
 
 //   const analytics = initAnalytics(widgetId);
 
 //   const UNSAFE_otel = initOTEL(widget, options);
 
   const initializedPlatformUtils = merge({}, {}, {
-    // navigation,
+    navigation,
     // network,
     // logger,
     widgets,
     // appLoadTime,
     // auth,
     // user,
-    // eventBus,
+    eventBus,
     sessionStorage,
     // localStorage,
     // experiments,
     // i18n,
-    // experience,
+    experience,
     // analytics,
     // UNSAFE_otel,
   });

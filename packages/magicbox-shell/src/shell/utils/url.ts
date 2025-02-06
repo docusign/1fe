@@ -77,3 +77,51 @@ export const getWidgetBundleCdnUrl = ({
 
   return `${baseUrl}${widgetBundlePath}`;
 };
+
+/**
+ * Returns string with trailing slash removed.
+ * Example: http://localhost.com/ => http://localhost.com
+ * @returns Returns string with trailing slash removed.
+ */
+export const stripTrailingSlash = (str: string) => {
+  return str.endsWith('/') ? str.slice(0, -1) : str;
+};
+
+/**
+ * Given the plugin's route w/ params(optional), return full plugin url.
+ * Currently used to href redirect to plugin.
+ * @param pluginPathWithParams - plugin path w/ params. (e.g /send/home?forceReauth=1)
+ * @returns Returns full plugin url. (e.g https://apps.dev.docusign.net/send/home?forceReauth=1)
+ */
+export const getPluginUrlWithRoute = (pluginPathWithParams: string) => {
+  try {
+    return new URL(
+      pluginPathWithParams,
+      stripTrailingSlash(getBaseHrefUrl()),
+    ).toString();
+  } catch (e: any) {
+    throw new Error(`Something went wrong building plugin url: ${e.message}`);
+  }
+};
+
+/**
+ * Appends query params onto url path using URL class.
+ * @param path - path (e.g /path/name)
+ * @param queryParams - key value pairs of query params and values. (e.g { param1: paramValue })
+ * @returns pathname + queryParams (/path/name?param1=paramValue)
+ */
+export const addQueryParamsToPath = (
+  path: string,
+  queryParams: Record<string, string>,
+): string => {
+  // dummy url. Just need to use URL class for guard rails
+  const url = new URL(path, 'https://dummy.url.com');
+
+  // Loop through object and append query params
+  Object.entries(queryParams).forEach(([queryParam, paramValue]) => {
+    url.searchParams.append(queryParam, paramValue);
+  });
+
+  // Return just pathname + search params
+  return url.pathname + url.search;
+};
