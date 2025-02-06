@@ -18,5 +18,5 @@ export default defineConfig({
         chunkFileNames: '[name]-[hash].mjs', // Optional: add hashes for chunks
       },
     },
-  },
+  }
 });

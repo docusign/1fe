@@ -21,7 +21,7 @@ import { initWidgetsHelper } from './widgets';
 // import { initAuth } from './auth';
 // import { initEventBus } from './event-bus';
 // import { WidgetAppLoadTimeUtils } from './app-load-time/types';
-// import { initSessionStorage } from './sessionStorage';
+import { initSessionStorage } from './sessionStorage';
 // import { initLocalStorage } from './localStorage';
 // import { initExperiments } from './experiments';
 // import { i18n as initi18n } from './i18n';
@@ -40,7 +40,7 @@ export const getPlatformUtils = (
   // TODO: strongly type if needed
   options: any = {} // DEFAULT_WIDGET_OPTIONS,
 ): PlatformUtils => {
-  // const { widgetId, type, version } = widget;
+  const { widgetId, type, version } = widget;
   // const { ENVIRONMENT, FEATURE_FLAGS } = getEnvironmentConfigs();
   // const sessionId = getSessionIdFromCookie() ?? SESSION_ID_UNAVAILABLE;
 
@@ -80,7 +80,7 @@ export const getPlatformUtils = (
 
 //   const user = initUserUtils(widget);
 
-//   const sessionStorage = initSessionStorage(widgetId);
+  const sessionStorage = initSessionStorage(widgetId);
 
 //   const localStorage = initLocalStorage(widgetId);
 
@@ -103,7 +103,7 @@ export const getPlatformUtils = (
     // auth,
     // user,
     // eventBus,
-    // sessionStorage,
+    sessionStorage,
     // localStorage,
     // experiments,
     // i18n,
@@ -112,5 +112,7 @@ export const getPlatformUtils = (
     // UNSAFE_otel,
   });
 
-  return deepFreeze(initializedPlatformUtils);
+  // TODO: Freeze
+  return initializedPlatformUtils;
+  // return deepFreeze(initializedPlatformUtils);
 };
