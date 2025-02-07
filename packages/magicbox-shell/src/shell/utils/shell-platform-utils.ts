@@ -27,6 +27,5 @@ export const getShellPlatformUtils = () => {
    */
   shellUtils = getPlatformUtils(SHELL_WIDGET) as ShellPlatformProps;
 
-  console.log(shellUtils);
   return shellUtils;
 };
