@@ -1,3 +1,9 @@
+import 'systemjs/dist/extras/dynamic-import-maps.min.js';
+import 'systemjs/dist/extras/global.min.js';
+import 'systemjs/dist/extras/module-types.min.js';
+import 'systemjs/dist/extras/named-register.min.js';
+import 'systemjs/dist/extras/use-default.min.js';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
