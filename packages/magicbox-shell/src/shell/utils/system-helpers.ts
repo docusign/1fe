@@ -15,3 +15,5 @@ export const addScopedImportMapForPlatformProps = (
       platformProps,
     });
   };
+
+  export const platformProps = {} as PlatformPropsType;

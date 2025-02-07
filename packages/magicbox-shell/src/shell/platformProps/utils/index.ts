@@ -22,7 +22,7 @@ import { initNavigation } from './navigation';
 import { initEventBus } from './event-bus';
 // import { WidgetAppLoadTimeUtils } from './app-load-time/types';
 import { initSessionStorage } from './sessionStorage';
-// import { initLocalStorage } from './localStorage';
+import { initLocalStorage } from './localStorage';
 // import { initExperiments } from './experiments';
 // import { i18n as initi18n } from './i18n';
 import { initExperience } from './experience';
@@ -82,7 +82,7 @@ export const getPlatformUtils = (
 
   const sessionStorage = initSessionStorage(widgetId);
 
-//   const localStorage = initLocalStorage(widgetId);
+  const localStorage = initLocalStorage(widgetId);
 
 //   const experiments = initExperiments(ENVIRONMENT, widgetId, logger);
 
@@ -104,7 +104,7 @@ export const getPlatformUtils = (
     // user,
     eventBus,
     sessionStorage,
-    // localStorage,
+    localStorage,
     // experiments,
     // i18n,
     experience,

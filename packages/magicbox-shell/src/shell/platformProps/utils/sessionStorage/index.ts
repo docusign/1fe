@@ -15,8 +15,6 @@ export type SessionStoragePlatformUtils = {
   size: () => number | undefined;
 };
 
-console.log(store);
-
 export const initSessionStorage = (widgetId: string) => {
   // const logger = getShellLogger(widgetId);
 
@@ -28,12 +26,6 @@ export const initSessionStorage = (widgetId: string) => {
     // });
     throw new Error(errorMessage);
   }
-  console.log({
-    store,
-    session: store.session,
-    windowStore: (window as any).store,
-    windowStore2: (window as any).store2
-  });
 
   const namespace = store.namespace(widgetId);
 
@@ -133,7 +125,5 @@ export const initSessionStorage = (widgetId: string) => {
     size,
   } as const;
 
-  return 'temp';
-
-  // return sessionStorageFunctions;
+  return sessionStorageFunctions;
 };
