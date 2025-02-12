@@ -10,7 +10,7 @@ const securityMiddleware = (
   try {
     res.setHeader(
       'x-powered-by',
-      readMagicBoxConfigs().server.headers.poweredBy,
+      readMagicBoxConfigs().orgName,
     );
     res.setHeader('cache-control', 'no-store');
     res.setHeader(

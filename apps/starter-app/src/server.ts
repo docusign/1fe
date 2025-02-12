@@ -9,7 +9,7 @@ import router from './lib/router';
 dotenv.config();
 const { PORT = 3001 } = process.env;
 
-const ENVIRONMENT: string = process.env.NODE_ENV || 'integration';
+const ENVIRONMENT: string = process.env.NODE_ENV || 'development';
 
 const envModeMap: Record<string, string> = {
   development: 'development',
@@ -50,6 +50,7 @@ const options = {
   // points to common flat file
   mode: envModeMap[ENVIRONMENT],
   environment: ENVIRONMENT,
+  orgName: 'MagicBox',
   configManagement: {
     url: `https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/common-configs/${ENVIRONMENT}.json`,
     refreshMs: 30 * 1000,
@@ -65,9 +66,6 @@ const options = {
       cdnURL: '',
     },
     devtools: true, // automatically on when mode: development
-    headers: {
-      poweredBy: 'MagicBox',
-    },
     // known routes are routes that magic box will NOT 404 on if the current route does not match a plugin
     knownRoutes: Object.values(ROUTES),
   },

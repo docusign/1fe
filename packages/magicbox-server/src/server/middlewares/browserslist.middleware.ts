@@ -58,7 +58,7 @@ const browsersListMiddleware = (
           cspNonceGuid,
           type: ERROR_MIDDLEWARE_TYPES.UNSUPPORTED,
           favicon: STATIC_ASSETS.FAVICON,
-          pageTitle: `Unsupported Browser - ${UNSUPPORTED_TITLE}`,
+          pageTitle: `Unsupported Browser`,
           redirectOnRetry: null,
         };
 

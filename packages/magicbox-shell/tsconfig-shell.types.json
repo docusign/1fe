@@ -1,0 +1,12 @@
+{
+    "extends": "./tsconfig-client.json",
+    "compilerOptions": {
+      "module": "amd",
+      "declaration": true,
+      "declarationMap": true,
+      "emitDeclarationOnly": true,
+      "allowJs": false,
+      "outDir": "dist/types"
+    },
+    "include": ["src/shell-types.ts"]
+  }
