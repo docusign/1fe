@@ -4,7 +4,10 @@
     "jsx": "react-jsx",
     "declarationDir": "dist",
     "skipLibCheck": true,
-    "target": "esnext"
+    "target": "esnext",
+    "paths": {
+      "src/*": ["./src/*"]
+    }
   },
   "files": [
     "src/app1.tsx"

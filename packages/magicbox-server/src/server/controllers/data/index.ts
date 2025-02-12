@@ -301,6 +301,7 @@ export const dataForRenderingTemplate = async (req: Request) => {
       widgetConfigs,
       activePluginConfig as PluginConfig,
     ),
+    pageTitle: readMagicBoxConfigs().orgName,
     baseHref: `${getRequestHost(req)}/`,
     systemJsImportMapConfig: {
       imports: {

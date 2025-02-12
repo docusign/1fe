@@ -7,6 +7,7 @@ export default defineConfig({
   base: "/",
   build: {
     rollupOptions: {
+      external: ["react", "lodash"],
       input: "src/app1.tsx",
       preserveEntrySignatures: "strict",
       output: {
@@ -14,6 +15,10 @@ export default defineConfig({
         entryFileNames: `assets/[name].js`,
         chunkFileNames: `assets/[name].js`,
         assetFileNames: `assets/[name].[ext]`,
+        globals: {
+          lodash: "_",
+          react: "react"
+        },
       },
     },
   },
