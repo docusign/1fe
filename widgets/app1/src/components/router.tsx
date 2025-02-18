@@ -46,12 +46,6 @@ const Router: React.FC<any> = (props) => {
               // 'data-qa': 'wsk.header.button.home',
             },
             {
-              key: 'FOO',
-              label: 'Foo',
-              onClick: () => navigate1ds('/foo'),
-              // 'data-qa': 'wsk.header.button.foo',
-            },
-            {
               key: 'UTILS',
               label: 'Utils',
               onClick: () => navigate1ds('/utils'),
