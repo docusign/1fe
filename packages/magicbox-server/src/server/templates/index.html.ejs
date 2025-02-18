@@ -51,6 +51,7 @@
     <script>
       function onSystemReady() {
         System.import("<%= criticalLibraryConfigUrls.SystemAMD %>").then(() => {
+          // TODO: need to update this to use shellBundleUrl from configs
           System.import('http://localhost:3001/js/bundle.js');
         });
       }

@@ -13,6 +13,7 @@ const setup = () => {
     production: 'production',
   };
 
+  // TODO: Just read from server configs put on DOM
   renderMagicBoxShell({
     mode: envModeMap[ENVIRONMENT],
     environment: ENVIRONMENT,
