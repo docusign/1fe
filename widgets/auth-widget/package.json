@@ -1,0 +1,32 @@
+{
+  "name": "auth-widget",
+  "type": "module",
+  "scripts": {
+    "dev": "vite preview --port 8003",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "format": "prettier --write .",
+    "check-format": "prettier --check ."
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-ts-react-important-stuff": "^3.0.0",
+    "eslint-plugin-prettier": "^3.4.1",
+    "identity-obj-proxy": "^3.0.0",
+    "prettier": "^2.3.2",
+    "pretty-quick": "^3.1.1",
+    "ts-config-single-spa": "^3.0.0",
+    "typescript": "^4.3.5",
+    "vite-plugin-single-spa": "^0.1.0"
+  },
+  "dependencies": {
+    "@types/systemjs": "^6.1.1",
+    "antd": "^5.22.4",
+    "single-spa": "^5.9.3",
+    "single-spa-react": "^6.0.2"
+  },
+  "types": "dist/app2.d.ts"
+}
