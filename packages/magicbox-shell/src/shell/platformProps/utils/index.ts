@@ -26,6 +26,7 @@ import { initLocalStorage } from './localStorage';
 // import { initExperiments } from './experiments';
 // import { i18n as initi18n } from './i18n';
 import { initExperience } from './experience';
+import { readMagicBoxShellConfigs } from '../../configs/shell-configs';
 // import { initAnalytics } from './analytics';
 // import { DEFAULT_WIDGET_OPTIONS } from './widgets/internal/utils/constants';
 // import { initOTEL } from './otel';
@@ -94,7 +95,9 @@ export const getPlatformUtils = (
 
 //   const UNSAFE_otel = initOTEL(widget, options);
 
-  const initializedPlatformUtils = merge({}, {}, {
+  const shellUtilOverrides = readMagicBoxShellConfigs().utils;
+
+  const initializedPlatformUtils = merge({}, {
     navigation,
     // network,
     // logger,
@@ -110,7 +113,7 @@ export const getPlatformUtils = (
     experience,
     // analytics,
     // UNSAFE_otel,
-  });
+  }, shellUtilOverrides);
 
   // TODO: Freeze
   return initializedPlatformUtils;
