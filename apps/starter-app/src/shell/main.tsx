@@ -17,6 +17,15 @@ const setup = () => {
   renderMagicBoxShell({
     mode: envModeMap[ENVIRONMENT],
     environment: ENVIRONMENT,
+    auth: {
+      isAuthedCallback: (widgetId: string): boolean => {
+        console.log(widgetId, ' is authenticated.');
+        return true;
+      },
+      unauthedCallback: (widgetId: string) => {
+        console.log(widgetId, ' is not authenticated.');         
+      }
+    }
   });
 };
 

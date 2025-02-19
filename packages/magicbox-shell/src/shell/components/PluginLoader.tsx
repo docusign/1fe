@@ -4,8 +4,8 @@ import React, { useEffect } from 'react';
 import { Error } from './Error';
 import { PluginConfig } from '../types/widget-config';
 import { WIDGET_CONFIGS } from '../configs/config-helpers';
-import { getShellWidgetId } from '../constants/shell';
 import { getShellPlatformUtils } from '../utils/shell-platform-utils';
+import RequireAuth from './RequireAuth';
 
 interface PluginLoaderInterface {
   plugin: PluginConfig;
@@ -37,7 +37,9 @@ const PluginLoader = ({
   const Plugin = getShellPlatformUtils().widgets.get(parsedWidget?.widgetId);
 
   return (
-    <Plugin />
+    <RequireAuth pluginConfig={plugin}>
+      <Plugin />
+    </RequireAuth>
   );
 };
 
