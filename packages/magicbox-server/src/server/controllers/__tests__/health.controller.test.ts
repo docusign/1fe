@@ -1,6 +1,10 @@
 import { Request, Response } from 'express';
 import HealthController from '../health.controller';
 
+jest.mock('ky', () => ({
+  get: jest.fn().mockReturnValue({}),
+}));
+
 describe('HealthController', () => {
   it('should call next when error is throw', () => {
     const mockNext = jest.fn();

@@ -15,7 +15,11 @@ import { getCachedWidgetConfigs } from '../../utils/widget-config';
 import { generateWidgetConfigMap } from '../../utils';
 
 jest.mock('ky', () => ({
-  get: jest.fn().mockReturnValue({}),
+  get: jest.fn().mockResolvedValue({
+    json: () => Promise.resolve({}),
+      ok: true,
+      status: 200,
+  }),
 }));
 
 jest.mock('../../utils/magicbox-configs', () => ({
@@ -36,7 +40,7 @@ describe('Given Version Endpoint to test', () => {
 
   // before this describe block runs
   beforeAll(async () => {
-    jest.mocked(ky.get).mockReturnValueOnce({
+    jest.mocked(ky.get).mockResolvedValue({
       json: () => Promise.resolve({}),
       ok: true,
       status: 200,

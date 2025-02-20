@@ -85,7 +85,7 @@ describe('plugin.middleware tests', () => {
     expect(mockRequest.plugin).toBeUndefined();
   });
 
-  test.only('no plugin found in demo/prod, 404', async () => {
+  test('no plugin found in demo/prod, 404', async () => {
     mockRequest.path = '/fakePath';
 
     await PluginMiddleware(mockRequest, mockResponse, nextFunction);

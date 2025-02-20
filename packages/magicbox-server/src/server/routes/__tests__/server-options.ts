@@ -19,7 +19,7 @@ export const serverOptions = {
       },
       devtools: true, // automatically on when mode: development
       // known routes are routes that magic box will NOT 404 on if the current route does not match a plugin
-      knownRoutes: ['/test'],
+      knownRoutes: ['/test', '/version', '/'],
     },
     dynamicConfigs: {
       cdn: {
