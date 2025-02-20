@@ -45,8 +45,8 @@ export const getMergedDirectives = (cspOptions: MergeCSPOptions = {}) => {
     : ROUTES.CSP_REPORT_VIOLATION;
 
   const mappedDefaultCSPDirectives = reportOnly
-    ? readMagicBoxConfigs().dynamicConfigs.csp.defaultCSP.reportOnly
-    : readMagicBoxConfigs().dynamicConfigs.csp.defaultCSP.enforced;
+    ? readMagicBoxConfigs().dynamicConfigs?.csp?.defaultCSP?.reportOnly
+    : readMagicBoxConfigs().dynamicConfigs?.csp?.defaultCSP?.enforced;
 
   const defaultDirectives = mapKeys(
     helmet.contentSecurityPolicy.getDefaultDirectives(),
@@ -54,7 +54,7 @@ export const getMergedDirectives = (cspOptions: MergeCSPOptions = {}) => {
   );
   const combinedDefaultDirectives = {
     ...defaultDirectives,
-    ...mappedDefaultCSPDirectives,
+    ...(mappedDefaultCSPDirectives ?? {}),
   };
 
   // If pluginId is defined, grab only plugin's csp
@@ -80,7 +80,7 @@ export const getMergedDirectives = (cspOptions: MergeCSPOptions = {}) => {
   }
 };
 
-const generateCSPPolicy = (generateOptions: any = {}) => {
+export const generateCSPPolicy = (generateOptions: any = {}) => {
   const {
     environment = 'development',
     reportOnly = false,
@@ -117,7 +117,7 @@ const dynamicCspHeaderMiddleware = async (
     // Generate plugin csp with helmet
     const helmetCspMiddleware = helmet.contentSecurityPolicy(
       generateCSPPolicy({
-        environment: 'development',
+        environment: readMagicBoxConfigs().environment,
         pluginId,
         req,
       }),
@@ -130,7 +130,7 @@ const dynamicCspHeaderMiddleware = async (
       // Generate plugin report only csp with helmet
       const helmetReportOnlyCspMiddleware = helmet.contentSecurityPolicy(
         generateCSPPolicy({
-          environment: 'development',
+          environment: readMagicBoxConfigs().environment,
           pluginId,
           reportOnly: true,
           req,

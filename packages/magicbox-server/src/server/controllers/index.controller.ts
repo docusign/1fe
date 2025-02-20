@@ -15,7 +15,7 @@ TODO:
 - Strongly type request
 */
 
-const getSystemWidgetConfigs = (
+export const getSystemWidgetConfigs = (
   widgetConfigs: WidgetConfigs,
 ): SystemWidgetConfig[] => {
   const systemWidgetConfig = getWidgetConfigValues(widgetConfigs).filter(
