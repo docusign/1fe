@@ -25,7 +25,7 @@ type FetchSingleWidgetRuntimeConfigArgs = {
   widgetConfig: WidgetConfig;
 };
 
-const generateRuntimeConfigCDNUrl = (widget: WidgetConfig): URL => {
+export const generateRuntimeConfigCDNUrl = (widget: WidgetConfig): URL => {
   return templatizeCDNUrl({
     widgetId: widget.widgetId,
     widgetVersion: widget.version,
@@ -34,7 +34,7 @@ const generateRuntimeConfigCDNUrl = (widget: WidgetConfig): URL => {
 };
 
 // If some runtime configurations are defined, then that means it is not a cold start
-const getIsColdStart = (): boolean => {
+export const getIsColdStart = (): boolean => {
   return !Array.from(getCachedWidgetConfigs().values()).some(
     (widgetConfig) => widgetConfig.runtime !== undefined,
   );
@@ -75,7 +75,7 @@ export const parseRuntimeConfig = ({
   return parsedRuntimeConfig;
 };
 
-const _fetchSingleWidgetRuntimeConfig = async ({
+export const _fetchSingleWidgetRuntimeConfig = async ({
   widgetConfig,
 }: FetchSingleWidgetRuntimeConfigArgs): Promise<WidgetConfig> => {
   const widgetRuntimeConfigUrl = generateRuntimeConfigCDNUrl(widgetConfig);
