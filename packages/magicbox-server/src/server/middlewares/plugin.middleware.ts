@@ -25,13 +25,14 @@ const pluginMiddleware = async (
   try {
     const path = req.path ?? '';
     const topLevelPath = `/${path.split('/')[1]}`;
+    const topTwoLevelsPath = `/${path.split('/').slice(1, 3).join('/')}`;
 
     // for /auth/logout, /test/load, etc.
     // For OSS, combined KNOWN_PATHS and IGNORED_PATHS
     // TODO: [1DS Consumption]. Going to comment this out for now. Could cause unwanted side effects
     // const topTwoLevelsPath = `/${path.split('/').slice(1, 3).join('/')}`;
     const knownPaths = new Set(readMagicBoxConfigs().server.knownRoutes);
-    const shouldIgnorePath = knownPaths.has(topLevelPath);
+    const shouldIgnorePath = knownPaths.has(topLevelPath) || knownPaths.has(topTwoLevelsPath);
 
     if (shouldIgnorePath) {
       return next();
@@ -76,6 +77,8 @@ const pluginMiddleware = async (
 
         should404 = true;
       }
+    } else {
+      should404 = !knownPaths.has(topLevelPath)
     }
 
     if (should404) {
