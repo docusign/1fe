@@ -1,7 +1,7 @@
 import { Request } from 'express';
 
 import { isEmpty, omit } from 'lodash';
-import { RuntimeConfig, WidgetConfigs } from '../../types';
+import { RuntimeConfig, WidgetConfig, WidgetConfigs } from '../../types';
 import { mapAndGenerateWidgetConfigMap } from '../../utils';
 import { parseRuntimeConfig } from '../../utils/runtime-configs';
 import { getCachedWidgetConfigs } from '../../utils/widget-config';
@@ -109,3 +109,14 @@ export const getWidgetConfigsForIndexHtml = async (
   
     return cachedWidgetConfig;
   };
+
+export const validateWidgetConfig = (widgetConfig: WidgetConfig): boolean => {
+  switch (true as boolean) {
+    case typeof widgetConfig !== 'object':
+    case isEmpty(widgetConfig):
+    case typeof widgetConfig.runtime !== 'object':
+      return false;
+  }
+
+  return true;
+};
