@@ -45,8 +45,8 @@ export const getMergedDirectives = (cspOptions: MergeCSPOptions = {}) => {
     : ROUTES.CSP_REPORT_VIOLATION;
 
   const mappedDefaultCSPDirectives = reportOnly
-    ? readMagicBoxConfigs().dynamicConfigs.csp.defaultCSP.reportOnly
-    : readMagicBoxConfigs().dynamicConfigs.csp.defaultCSP.enforced;
+    ? readMagicBoxConfigs().dynamicConfigs?.csp?.defaultCSP?.reportOnly
+    : readMagicBoxConfigs().dynamicConfigs?.csp?.defaultCSP?.enforced;
 
   const defaultDirectives = mapKeys(
     helmet.contentSecurityPolicy.getDefaultDirectives(),
@@ -54,7 +54,7 @@ export const getMergedDirectives = (cspOptions: MergeCSPOptions = {}) => {
   );
   const combinedDefaultDirectives = {
     ...defaultDirectives,
-    ...mappedDefaultCSPDirectives,
+    ...(mappedDefaultCSPDirectives ?? {}),
   };
 
   // If pluginId is defined, grab only plugin's csp

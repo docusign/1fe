@@ -1,20 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
-import { isEmpty } from 'lodash';
 
-import { WidgetConfig } from '../types';
 import { getWidgetConfigValues } from '../utils';
 import { getCachedWidgetConfigs } from '../utils/widget-config';
-
-const validateWidgetConfig = (widgetConfig: WidgetConfig): boolean => {
-  switch (true as boolean) {
-    case typeof widgetConfig !== 'object':
-    case isEmpty(widgetConfig):
-    case typeof widgetConfig.runtime !== 'object':
-      return false;
-  }
-
-  return true;
-};
+import { validateWidgetConfig } from './data/widget-config';
 
 class HealthController {
   public static health =
