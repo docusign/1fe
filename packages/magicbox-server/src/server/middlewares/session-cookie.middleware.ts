@@ -9,7 +9,7 @@ TODO:
  - Strongly type request
 */
 
-const SESSION_ID = 'session_id';
+export const SESSION_ID = 'session_id';
 
 export const sessionCookieMiddleware =
   () =>

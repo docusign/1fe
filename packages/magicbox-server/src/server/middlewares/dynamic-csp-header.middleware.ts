@@ -80,7 +80,7 @@ export const getMergedDirectives = (cspOptions: MergeCSPOptions = {}) => {
   }
 };
 
-const generateCSPPolicy = (generateOptions: any = {}) => {
+export const generateCSPPolicy = (generateOptions: any = {}) => {
   const {
     environment = 'development',
     reportOnly = false,
@@ -117,7 +117,7 @@ const dynamicCspHeaderMiddleware = async (
     // Generate plugin csp with helmet
     const helmetCspMiddleware = helmet.contentSecurityPolicy(
       generateCSPPolicy({
-        environment: 'development',
+        environment: readMagicBoxConfigs().environment,
         pluginId,
         req,
       }),
@@ -130,7 +130,7 @@ const dynamicCspHeaderMiddleware = async (
       // Generate plugin report only csp with helmet
       const helmetReportOnlyCspMiddleware = helmet.contentSecurityPolicy(
         generateCSPPolicy({
-          environment: 'development',
+          environment: readMagicBoxConfigs().environment,
           pluginId,
           reportOnly: true,
           req,
