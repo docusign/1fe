@@ -7,6 +7,7 @@ import { getWidgetConfigValues } from '../utils';
 import { version } from '../../../package.json';
 import { getCachedWidgetConfigs } from '../utils/widget-config';
 import { readMagicBoxConfigs } from '../utils/magicbox-configs';
+import { WidgetConfigs } from '../types';
 
 /*
 TODO: [1DS consumption] BadgeMaker
@@ -65,7 +66,7 @@ class VersionController {
         packages,
         configs: {
           // have to return singular widgetConfig and pluginConfig for backward compatibility
-          widgetConfig: getWidgetConfigValues(widgetConfigs),
+          widgetConfig: widgetConfigs,
           pluginConfig: pluginConfigs,
         },
         hashOfWidgetConfigs: hash.MD5({ ...widgetConfigs }),

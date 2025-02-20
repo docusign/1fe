@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import Lottie from 'lottie-react';
+import { useEffect, useState } from 'react';
+// import Lottie from 'lottie-react';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 
 // import { getShellLogger } from '../utils/telemetry';
 
-import BrokenPage from './resources/brokenPage.json';
+// import BrokenPage from './resources/brokenPage.json';
 import { showImportMapOverrideButton } from '../init/import-map-ui';
 import { readMagicBoxShellConfigs } from '../configs/shell-configs';
 import { PluginConfig } from '../types/widget-config';
@@ -186,7 +186,7 @@ export const Error = ({
     <>
       <AnimationContainer>
         <SideLine />
-        <Lottie
+        {/* <Lottie
           animationData={BrokenPage}
           data-qa={`broken.line.animation${complete ? '.complete' : ''}`}
           loop={false}
@@ -203,7 +203,7 @@ export const Error = ({
             margin: '0 -1px 0',
             flexShrink: 0,
           }}
-        />
+        /> */}
         <SideLine />
       </AnimationContainer>
 
