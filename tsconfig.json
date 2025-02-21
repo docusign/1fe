@@ -1,0 +1,14 @@
+{
+  "include": [],
+  "references": [
+    {
+      "path": "packages/cli/tsconfig.json"
+    },
+    {
+      "path": "packages/magicbox-server/tsconfig.json"
+    },
+    {
+      "path": "packages/magicbox-shell/tsconfig.json"
+    }
+  ]
+}
