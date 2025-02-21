@@ -1,4 +1,4 @@
-import { Option } from 'commander';
+import { Option } from '@commander-js/extra-typings';
 
 import action from './action';
 
@@ -18,4 +18,3 @@ export default {
   action,
   optionsToAction,
 };
-

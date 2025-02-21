@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { Command, Option } from 'commander';
+import { Command, Option } from '@commander-js/extra-typings';
 import commands from './commands';
 
 import { preActionHook } from './commands/pre-action';
@@ -19,10 +19,9 @@ import { CliConfigOptions } from './types';
 process.env.BROWSERSLIST_IGNORE_OLD_DATA = 'true';
 
 const main = async (options?: CliConfigOptions) => {
-
   // const {commonConfigs, environment, isCi, mode, webpackConfigs, debug} = options;
 
-  console.log(`CLI started with ${JSON.stringify(options)} options`)
+  console.log(`CLI started with ${JSON.stringify(options)} options`);
 
   // Check node at the top to avoid fetch() in fetchLiveVersions throwing problems for people with older node versions
   await checkNodeVersion();
@@ -35,7 +34,7 @@ const main = async (options?: CliConfigOptions) => {
     .version(packageJson.version)
     .hook('preAction', preActionHook)
     .hook('postAction', async () => {
-        console.log('post action hook executed');
+      console.log('post action hook executed');
     })
     .addOption(
       new Option(
@@ -61,17 +60,11 @@ const main = async (options?: CliConfigOptions) => {
   program.parseAsync(process.argv);
 };
 
-export type {
-  CliConfigOptions,
-  PinnedWidget,
-  Preload,
-} from './types';
-
-
+export type { CliConfigOptions, PinnedWidget, Preload } from './types';
 
 export const CLI = (options: CliConfigOptions) => {
-  return main(options)
-}
+  return main(options);
+};
 
 // Kick off CLI execution, only when this file is executed
 if (require.main === module) {

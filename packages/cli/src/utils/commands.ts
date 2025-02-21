@@ -1,4 +1,4 @@
-import { Command, Option } from 'commander';
+import { Command, Option } from '@commander-js/extra-typings';
 
 type AddCommandsToProgramArgs = {
   program: Command;
