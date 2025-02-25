@@ -1,7 +1,24 @@
 {
     "extends": "@repo/typescript-config/react-library.json",
     "compilerOptions": {
-      "target": "ES2021" // supported by Node 18.16.0 https://node.green/#ES2021
+      "target": "ES2021", // supported by Node 18.16.0 https://node.green/#ES2021
+      "lib": [],
+      "module": "CommonJS",
+      "moduleResolution": "Node",
+      "allowSyntheticDefaultImports": true,
+      "composite": false,
+      "declaration": true,
+      "declarationMap": true,
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "inlineSources": false,
+      "isolatedModules": true,
+      "noUnusedLocals": false,
+      "noUnusedParameters": false,
+      "preserveWatchOutput": true,
+      "resolveJsonModule": true,
+      "skipLibCheck": true,
+      "strict": true
     },
     "include": ["src", "src/types/**/*.d.ts"],
     "exclude": ["dist", "build", "node_modules"]
