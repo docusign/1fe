@@ -9,7 +9,7 @@ import { jsonReplacer } from '../platformPropsImport/comparePlatformProps';
 import ResultElementBoundary from '../misc/resultElementBoundary';
 // TODO: how does useTranslate work
 // import { useTranslate } from 'src/locales';
-import { RootState } from '../../store';
+// import { RootState } from '../../store';
 
 const Container = styled.div({
   padding: '40px',
@@ -18,7 +18,7 @@ const Container = styled.div({
 // TODO: strongly type
 const Home: React.FC = (props: any) => {
   // const t = useTranslate();
-  const greeting = useSelector((state: RootState) => state.hello.greeting);
+  const greeting = useSelector((state: any) => state.hello.greeting);
 
   return (
     <Container>

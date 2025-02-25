@@ -17,5 +17,5 @@ export const createStore = () => {
 
 // Export types for the store, root state, and dispatch
 export type Store = ReturnType<typeof createStore>;
-export type RootState = ReturnType<Store['getState']>;
+// export type RootState = ReturnType<Store['getState']>;
 export type AppDispatch = Store['dispatch'];
