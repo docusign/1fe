@@ -1,7 +1,7 @@
 {
-  "extends": "@repo/typescript-config/react-library.json",
+  "extends": "@repo/config-typescript/react-library.json",
   "compilerOptions": {
-    "target": "ES2022", // supported by Node ^22.11.0 https://node.green/#ES2022
+    "target": "ES2022",, // supported by Node ^22.11.0 https://node.green/#ES2022
     "lib": [],
     "module": "CommonJS",
     "moduleResolution": "Node",
@@ -18,7 +18,8 @@
     "preserveWatchOutput": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "strict": true
+    "strict": true,
+    "lib": ["ES2022"]
   },
   "include": ["src"]
 }
