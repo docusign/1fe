@@ -11,6 +11,7 @@ const templatizeCDNUrl = ({
   );
 };
 
+// TODO: strongly type
 export const generateCDNUrl = (widget: any): URL => {
   return templatizeCDNUrl({
     widgetId: widget.widgetId,

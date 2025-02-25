@@ -1,5 +1,13 @@
 import { DeepReadonly } from 'deep-freeze';
 import { WidgetTreeNode } from './tree';
+import { EventBusPlatformUtils } from '../platformProps/utils/event-bus/types';
+import { initNavigation } from '../platformProps/utils/navigation';
+import { SessionStoragePlatformUtils } from '../platformProps/utils/sessionStorage';
+import { LocalStoragePlatformUtils } from '../platformProps/utils/localStorage';
+import { initExperience } from '../platformProps/utils/experience';
+
+export type NavigationUtils = ReturnType<typeof initNavigation>;
+export type ExperienceUtils = ReturnType<typeof initExperience>;
 
 export interface KnownWidgets {}
 export interface KnownVariants {}
@@ -49,81 +57,81 @@ export type PlatformUtils = {
      * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/apploadtime/
      */
     // appLoadTime: WidgetAppLoadTimeUtils;
-    // /**
-    //  * Utilities for handling authentication
-    //  * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/auth/
-    //  */
+    /**
+     * Utilities for handling authentication
+     * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/auth/
+     */
     // auth: Auth;
-    // /**
-    //  * Utilities for handling events and publishing/subscribing to the eventBus on the Shell
-    //  * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/eventbus/
-    //  */
-    // eventBus: EventBusPlatformUtils;
-    // /**
-    //  * Utilities for handling browser navigation including internal/external redirects
-    //  * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/navigation/
-    //  */
-    // navigation: NavigationUtils;
-    // /**
-    //  * Utilities for handling network requests and getting useful information about the network
-    //  * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/network/
-    //  */
+    /**
+     * Utilities for handling events and publishing/subscribing to the eventBus on the Shell
+     * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/eventbus/
+     */
+    eventBus: EventBusPlatformUtils;
+    /**
+     * Utilities for handling browser navigation including internal/external redirects
+     * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/navigation/
+     */
+    navigation: NavigationUtils;
+    /**
+     * Utilities for handling network requests and getting useful information about the network
+     * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/network/
+     */
     // network: NetworkPlatformUtils;
-    // /**
-    //  * Utilities for logging messages to KazMon
-    //  * No KazMon application or instrumentation key is required, a 1DS-wide application + key is used
-    //  *
-    //  * @dashboard https://dataexplorer.azure.com/dashboards/e34d5b0d-00b8-4a5a-87ea-1da4cee8a485?p-_startTime=1hours&p-_endTime=now&p-_environment=v-prod&p-Data+Source=Production&p-_widgetId=all
-    //  * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/logger/
-    //  */
+    /**
+     * Utilities for logging messages to KazMon
+     * No KazMon application or instrumentation key is required, a 1DS-wide application + key is used
+     *
+     * @dashboard https://dataexplorer.azure.com/dashboards/e34d5b0d-00b8-4a5a-87ea-1da4cee8a485?p-_startTime=1hours&p-_endTime=now&p-_environment=v-prod&p-Data+Source=Production&p-_widgetId=all
+     * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/logger/
+     */
     // logger: LoggerPlatformUtils;
-    // /**
-    //  * Utilities for handling session storage
-    //  * Provides an interface to the browser's session storage via set, get, getAll, remove, size, and clear
-    //  * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/sessionstorage/
-    //  */
-    // sessionStorage: SessionStoragePlatformUtils;
-    // /**
-    //  * Utilities for handling local storage
-    //  * Provides an interface to the browser's local storage via set, get, getAll, remove, size, keys, and clear
-    //  * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/localstorage/
-    //  */
-    // localStorage: LocalStoragePlatformUtils;
-    // /**
-    //  * Utilities for handling experiments
-    //  * Provides an interface to the @optimizely/optimizely-sdk npmjs package
-    //  *
-    //  * @version https://github.docusignhq.com/pages/Core/1ds-docs/ecosystem/libraries/common-libs/#externalized-libraries-1
-    //  * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/experiments/
-    //  */
+    /**
+     * Utilities for handling session storage
+     * Provides an interface to the browser's session storage via set, get, getAll, remove, size, and clear
+     * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/sessionstorage/
+     */
+    sessionStorage: SessionStoragePlatformUtils;
+    /**
+     * Utilities for handling local storage
+     * Provides an interface to the browser's local storage via set, get, getAll, remove, size, keys, and clear
+     * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/localstorage/
+     */
+    localStorage: LocalStoragePlatformUtils;
+    /**
+     * Utilities for handling experiments
+     * Provides an interface to the @optimizely/optimizely-sdk npmjs package
+     *
+     * @version https://github.docusignhq.com/pages/Core/1ds-docs/ecosystem/libraries/common-libs/#externalized-libraries-1
+     * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/experiments/
+     */
     // experiments: ExperimentsUtils;
-    // /**
-    //  * Utilities for handling i18n
-    //  *
-    //  * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/i18n/
-    //  */
+    /**
+     * Utilities for handling i18n
+     *
+     * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/i18n/
+     */
     // i18n: ReturnType<typeof i18n>;
-    // /**
-    //  * Utilities for handling the 1DS shell experience
-    //  *
-    //  * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/experience/
-    //  */
-    // experience: ExperienceUtils;
-    // /**
-    //  * Utilities for handling analytics via mixpanel
-    //  *
-    //  * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/analytics/
-    //  */
+    /**
+     * Utilities for handling the 1DS shell experience
+     *
+     * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/experience/
+     */
+    experience: ExperienceUtils;
+    /**
+     * Utilities for handling analytics via mixpanel
+     *
+     * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/analytics/
+     */
     // analytics: AnalyticsUtils;
-    // /**
-    //  * Utilities for logging traces and metrics using OTEL
-    //  */
+    /**
+     * Utilities for logging traces and metrics using OTEL
+     */
     // UNSAFE_otel: OTELPlatformUtils;
-    // /**
-    //  * Utilities for handling User/Account related data
-    //  *
-    //  * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/user/
-    //  */
+    /**
+     * Utilities for handling User/Account related data
+     *
+     * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/user/
+     */
     // user: UserUtils;
   };
 

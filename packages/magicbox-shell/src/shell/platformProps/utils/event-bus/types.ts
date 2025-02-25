@@ -1,7 +1,7 @@
 import { UnsubscribeFunction } from 'emittery';
 
 // import { PlatformUtilHistoryEvent } from '../../../components/system-widgets/Devtool/platformUtilHistoryCache';
-import { IFRAME_MESSAGE, PLATFORM_UTIL_HISTORY } from '../../../constants/event-bus';
+import { IFRAME_MESSAGE } from '../../../constants/event-bus';
 
 export type PublishToEventBusArgs<EventMap, K extends keyof EventMap> = {
   targetWidgetId: string;

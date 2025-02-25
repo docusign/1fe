@@ -158,7 +158,7 @@ export function WidgetNotFoundError(widgetId: string): Error {
 
 //   logger.error({ tag: '[WIDGETS][GET]', message: errorMsg });
 
-  throw new Error(`[WIDGETS][GET]${errorMsg}`);
+  throw new Error(`[WIDGETS][GET] ${errorMsg}`);
 }
 
 /**

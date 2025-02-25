@@ -6,13 +6,7 @@ import { PlatformPropsType, WidgetOptions } from '../../../../../types/platform-
 import { WidgetConfig } from '../../../../../types/widget-config';
 import { readMagicBoxShellConfigs } from '../../../../../configs/shell-configs';
 import { isOverrideElementActive } from '../../../../../init/import-map-ui';
-
-/**
- * Exported for unit testing
- */
-export function isUrl(widgetRequest: string | URL): widgetRequest is URL {
-  return widgetRequest instanceof URL;
-}
+import { isUrl } from './is-url';
 
 interface InjectedWidgetFrameProps<TWidgetProps> {
   /**
@@ -68,6 +62,7 @@ export async function downloadWidget<TWidgetProps>(
   // const widgetLoadTime = getShellPlatformUtils().appLoadTime;
 
   const logDownloadWidgetError = (message: string, error: unknown) =>
+    // TODO: convert this back to logger
     console.error({
       message,
       parsedWidget: widgetId,
@@ -88,6 +83,7 @@ export async function downloadWidget<TWidgetProps>(
 
     // TODO: add better documentation for this escape hatch, how can it be avoided?
     // Prepare is always fetched with send, but we don't want this fired twice
+    // TODO: Remove this
     if (widgetId === '@ds/send') {
       window.performance?.mark('app-bundle-start', {
         detail: {
