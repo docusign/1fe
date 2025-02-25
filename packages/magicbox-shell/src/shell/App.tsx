@@ -10,7 +10,6 @@ function App(): JSX.Element {
   // const LazyApp2 = React.lazy(() =>
   //   (window as any).System.import('@1ds/starter-kit2'),
   // );
-  console.log('HIOTT');
   return (
     <RouterProvider router={router} />
   );
