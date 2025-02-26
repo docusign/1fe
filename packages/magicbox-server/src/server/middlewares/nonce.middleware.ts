@@ -14,7 +14,7 @@ const nonceMiddleware = (
 ): void => {
   try {
     // calculate nonce
-    if (readMagicBoxConfigs().dynamicConfigs?.csp?.useNonce) {
+    if (readMagicBoxConfigs()?.csp?.useNonce) {
       const cspNonceGuid = `${randomUUID()}`;
 
       const cspHeader = res.getHeader('content-security-policy');
