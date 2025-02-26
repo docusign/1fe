@@ -1,6 +1,5 @@
 const commonCsp = {
     "scriptSrc": ["*", 'addCspNonceGuidHere'],
-    "scriptSrcAttr": ["'unsafe-inline'"],
     "styleSrc": ["'unsafe-inline'"]
 }
 
