@@ -56,7 +56,15 @@
         });
       }
     </script>
-    <script nonce="<%= cspNonceGuid %>" fetchpriority="high" src="<%= criticalLibraryConfigUrls.System %>" async crossorigin="anonymous" onload=onSystemReady()></script>
+    <script nonce="<%= cspNonceGuid %>">
+      const systemScript = document.createElement('script');
+      systemScript.src = '<%= criticalLibraryConfigUrls.System %>';
+      systemScript.async = true;
+      systemScript.crossOrigin = 'anonymous';
+      systemScript.fetchPriority  = 'high';
+      systemScript.onload = onSystemReady;
+      document.head.appendChild(systemScript);
+    </script>
     <script fetchpriority="high" src="<%= criticalLibraryConfigUrls.ImportMapOverride %>" async crossorigin="anonymous"></script>
 
     <meta name="importmap-type" content="systemjs-importmap" />
