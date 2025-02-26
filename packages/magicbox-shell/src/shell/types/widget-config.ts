@@ -16,6 +16,7 @@ export type CSPPerEnvironment = {
 
 export type CSPTypes = keyof CSPPerEnvironment;
 
+// TODO: change this type
 export type CSPDirectives = {
   development: CSPPerEnvironment;
   integration: CSPPerEnvironment;

@@ -303,6 +303,7 @@ export const dataForRenderingTemplate = async (req: Request) => {
     ),
     pageTitle: readMagicBoxConfigs().orgName,
     baseHref: `${getRequestHost(req)}/`,
+    cspNonceGuid: (req as any).cspNonceGuid,
     systemJsImportMapConfig: {
       imports: {
         ...preloadedLibs,

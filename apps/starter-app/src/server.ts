@@ -5,6 +5,7 @@ import path from 'path';
 import magicBoxServer from '@devhub/magicbox-server';
 
 import router from './lib/router';
+import { enforcedDefaultCsp, reportOnlyDefaultCsp } from './csp-configs';
 
 dotenv.config();
 const { PORT = 3001 } = process.env;
@@ -14,8 +15,6 @@ const ENVIRONMENT: string = process.env.NODE_ENV || 'development';
 const envModeMap: Record<string, string> = {
   development: 'development',
   integration: 'preproduction',
-  stage: 'preproduction',
-  demo: 'production',
   production: 'production',
 };
 
@@ -69,6 +68,13 @@ const options = {
     // known routes are routes that magic box will NOT 404 on if the current route does not match a plugin
     knownRoutes: Object.values(ROUTES),
   },
+  csp: {
+      defaultCSP: {
+        enforced: enforcedDefaultCsp[ENVIRONMENT],
+        reportOnly: reportOnlyDefaultCsp[ENVIRONMENT],
+      },
+      useNonce: true
+    }
 };
 
 const app = magicBoxServer(options);
