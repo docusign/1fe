@@ -48,7 +48,7 @@
   </head>
   <body>
     <div id="root"></div>
-    <script>
+    <script nonce="<%= cspNonceGuid %>">
       function onSystemReady() {
         System.import("<%= criticalLibraryConfigUrls.SystemAMD %>").then(() => {
           // TODO: need to update this to use shellBundleUrl from configs
@@ -56,7 +56,7 @@
         });
       }
     </script>
-    <script src="<%= criticalLibraryConfigUrls.System %>" onload=onSystemReady()></script>
+    <script nonce="<%= cspNonceGuid %>" fetchpriority="high" src="<%= criticalLibraryConfigUrls.System %>" async crossorigin="anonymous" onload=onSystemReady()></script>
     <script fetchpriority="high" src="<%= criticalLibraryConfigUrls.ImportMapOverride %>" async crossorigin="anonymous"></script>
 
     <meta name="importmap-type" content="systemjs-importmap" />

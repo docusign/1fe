@@ -30,12 +30,12 @@ const nonceMiddleware = (
 
       const noncedCspHeader = cspHeader
         .toString()
-        .replace('addCspNonceGuidHere', `'nonce-${cspNonceGuid}'`);
+        .replace(/addCspNonceGuidHere/g, `'nonce-${cspNonceGuid}'`);;
 
       if (cspReportOnlyHeader) {
         const noncedCspReportOnlyHeader = cspReportOnlyHeader
           .toString()
-          .replace('addCspNonceGuidHere', `'nonce-${cspNonceGuid}'`);
+          .replace(/addCspNonceGuidHere/g, `'nonce-${cspNonceGuid}'`);;
         res.setHeader(
           'content-security-policy-report-only',
           noncedCspReportOnlyHeader,

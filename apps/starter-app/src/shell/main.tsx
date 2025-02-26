@@ -8,8 +8,6 @@ const setup = () => {
   const envModeMap: Record<string, string> = {
     development: 'development',
     integration: 'preproduction',
-    stage: 'preproduction',
-    demo: 'production',
     production: 'production',
   };
 
