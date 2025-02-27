@@ -5,13 +5,13 @@ import { useLocation } from 'react-router-dom';
 // import styled from '@emotion/styled';
 // import { PluginConfig } from '../../isomorphic/types/widgetConfigs.types';
 // import { getEnvironmentConfigs } from '../utils';
-// import { getShellLogger } from '../utils/telemetry';
 
 // import { Error } from './Error';
 // import { AdditionalErrorInfo, OneDsErrorBoundary } from './OneDsErrorBoundary';
 // import { readMagicBoxShellConfigs } from '../configs/shell-configs';
 import { PluginConfig } from '../types/widget-config';
 import { SHELL_NAVIGATED_EVENT } from '../constants/event-names';
+import { getShellLogger } from '../utils/telemetry';
 
 export type RouteWrapperProps = {
   children: React.ReactNode;
@@ -24,7 +24,7 @@ export const RouteWrapper: React.FC<RouteWrapperProps> = ({
 }): React.ReactElement => {
   const location = useLocation();
   // TODO: What do we do with logging? Should we support it?
-  // const logger = getShellLogger(plugin?.widgetId);
+  const logger = getShellLogger();
   const previousPathRef = useRef(location?.pathname);
 
   // This catches back/forward button changes (or window.history.back/forward) and dispatches an event to the current plugin so they know to navigate
@@ -35,11 +35,12 @@ export const RouteWrapper: React.FC<RouteWrapperProps> = ({
       }),
     );
 
-    // logger.log({
-    //   message: `[1DS-Shell] Route changed`,
-    //   path: location?.pathname,
-    //   from: previousPathRef.current,
-    // });
+    logger.log({
+      message: `[1DS-Shell] Route changed`,
+      path: location?.pathname,
+      from: previousPathRef.current,
+      widgetId: plugin?.widgetId,
+    });
 
     previousPathRef.current = location?.pathname;
   }, [location]);

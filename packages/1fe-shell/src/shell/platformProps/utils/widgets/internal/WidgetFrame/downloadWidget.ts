@@ -7,6 +7,7 @@ import { WidgetConfig } from '../../../../../types/widget-config';
 import { readMagicBoxShellConfigs } from '../../../../../configs/shell-configs';
 import { isOverrideElementActive } from '../../../../../init/import-map-ui';
 import { isUrl } from './is-url';
+import { getShellLogger } from '../../../../../utils/telemetry';
 
 interface InjectedWidgetFrameProps<TWidgetProps> {
   /**
@@ -45,7 +46,7 @@ export async function downloadWidget<TWidgetProps>(
     hostWidgetId,
     // hostProps,
     widgetOptions,
-    // widgetFrameId,
+    widgetFrameId,
   } = options;
 
   const widgetsInstance = widgets({
@@ -53,7 +54,7 @@ export async function downloadWidget<TWidgetProps>(
     system: System,
   });
 
-  // const logger = getShellLogger((widgetId as string) || widgetFrameId);
+  const logger = getShellLogger();
 
   const isWidgetOverriden = isOverrideElementActive();
   const IS_PROD = readMagicBoxShellConfigs().mode === 'production';
@@ -62,17 +63,17 @@ export async function downloadWidget<TWidgetProps>(
   // const widgetLoadTime = getShellPlatformUtils().appLoadTime;
 
   const logDownloadWidgetError = (message: string, error: unknown) => {
-    // TODO: convert this back to logger
-    // logger.error({
-    //   message,
-    //   parsedWidget: widgetId,
-    //   error,
-    //   widget: isUrl(widgetId)
-    //     ? { widgetId: widgetId.toString(), version: '0.0.0' }
-    //     : requestedWidgetConfigOrUrl,
-    //   url: isUrl(widgetId) ? widgetId.toString() : undefined,
-    //   isOverrideActive: isWidgetOverriden,
-    // });
+    logger.error({
+      message,
+      parsedWidget: widgetId,
+      error,
+      widget: isUrl(widgetId)
+        ? { widgetId: widgetId.toString(), version: '0.0.0' }
+        : requestedWidgetConfigOrUrl,
+      url: isUrl(widgetId) ? widgetId.toString() : undefined,
+      isOverrideActive: isWidgetOverriden,
+      widgetId: (widgetId as string) || widgetFrameId
+    });
   }
     
 
@@ -117,14 +118,15 @@ export async function downloadWidget<TWidgetProps>(
     // FAQ: Where is the markEnd for `widgetLoadTime.mark(widgetId.toString())`?
     // The corresponding end mark is in the widget code: props.platform.utils.appLoadTime.end()
 
-    // logger.log({
-    //   message: `[1DS-Shell] Widget loaded`,
-    //   widget: isUrl(widgetId)
-    //     ? { widgetId: widgetId.toString(), version: '0.0.0' }
-    //     : requestedWidgetConfigOrUrl,
-    //   url: isUrl(widgetId) ? widgetId.toString() : undefined,
-    //   isOverrideActive: isWidgetOverriden,
-    // });
+    logger.log({
+      message: `[1DS-Shell] Widget loaded`,
+      widget: isUrl(widgetId)
+        ? { widgetId: widgetId.toString(), version: '0.0.0' }
+        : requestedWidgetConfigOrUrl,
+      url: isUrl(widgetId) ? widgetId.toString() : undefined,
+      isOverrideActive: isWidgetOverriden,
+      widgetId: (widgetId as string) || widgetFrameId
+    });
 
     if (!isWidgetOverriden) {
       // Only log widget load time if the widget url is not being overridden

@@ -5,7 +5,7 @@ import {
 } from './types';
 import { getNamespacedEvent } from './utils/get-namespaced-event';
 import { broadcastEvent } from './utils/broadcast-event';
-import { emitteryInstance } from './utils/emittery-instance';
+import { getEmitteryInstance } from './utils/emittery-instance';
 import { ONE_FE_SHELL_ID } from '../../../constants/event-bus';
 
 /**
@@ -45,7 +45,7 @@ export const initPublishToEventBus = (
       return;
     } else {
       // Most common usecase for widgets to use
-      emitteryInstance.emit(
+      getEmitteryInstance().emit(
         getNamespacedEvent<EventMap, K>(eventName, targetWidgetId),
         dataPayloadForSubscriber,
       );

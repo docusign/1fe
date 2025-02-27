@@ -15,6 +15,7 @@ import {
   insertPersistentWidgetOverrides,
 } from './init/import-map';
 import { setMagicBoxShellConfigs } from './configs/shell-configs';
+import { getShellLogger } from './utils/telemetry';
 
 export const init = (): Promise<void> => {
   // Initialize import map Promise resolver
@@ -54,12 +55,12 @@ export const init = (): Promise<void> => {
         });
       }
     } catch (e) {
-      // const logger = getShellLogger();
+      const logger = getShellLogger();
 
-      // logger.error({
-      //   message: `[IMPORT MAP ERROR]`,
-      //   error: e,
-      // });
+      logger.error({
+        message: `[IMPORT MAP ERROR]`,
+        error: e,
+      });
 
       // logger.logCounter(
       //   {

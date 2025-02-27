@@ -1,8 +1,7 @@
 import store from 'store2';
 
-// import { getShellLogger } from '../../../utils/telemetry';
-
 import type { AllowedTypes } from './types';
+import { getShellLogger } from '../../../utils/telemetry';
 
 export type { AllowedTypes } from './types';
 
@@ -16,14 +15,15 @@ export type SessionStoragePlatformUtils = {
 };
 
 export const initSessionStorage = (widgetId: string) => {
-  // const logger = getShellLogger(widgetId);
+  const logger = getShellLogger();
 
   if (!widgetId) {
     const errorMessage = 'Invalid widget Id passed to session Storage util';
-    // logger.error({
-    //   message: `${errorMessage}`,
-    //   category: 'utils.storage.sessionStorage',
-    // });
+    logger.error({
+      message: `${errorMessage}`,
+      category: 'utils.storage.sessionStorage',
+      widgetId
+    });
     throw new Error(errorMessage);
   }
 
@@ -34,19 +34,21 @@ export const initSessionStorage = (widgetId: string) => {
       // TODO: Add zod runtime validation in order to support objects
       if (!['string', 'boolean', 'number'].includes(typeof value)) {
         const errMessage = `the type of following value : ${value} is ${typeof value}, it is not supported by this util`;
-        // logger.error({
-        //   message: errMessage,
-        //   category: 'utils.storage.sessionStorage',
-        // });
+        logger.error({
+          message: errMessage,
+          category: 'utils.storage.sessionStorage',
+          widgetId
+        });
         throw new Error(errMessage);
       }
       namespace.session(key, value);
     } catch (e) {
       const errMessage = `exception occured in widget ${namespace} during session storage set of key: ${key}, ${e}`;
-      // logger.error({
-      //   message: errMessage,
-      //   category: 'utils.storage.sessionStorage',
-      // });
+      logger.error({
+        message: errMessage,
+        category: 'utils.storage.sessionStorage',
+        widgetId
+      });
       throw new Error(errMessage);
     }
   };
@@ -56,10 +58,11 @@ export const initSessionStorage = (widgetId: string) => {
       return namespace.session.get(key) as T;
     } catch (e) {
       const errMessage = `exception occured in widget ${namespace} during session storage get: ${e}`;
-      // logger.error({
-      //   message: errMessage,
-      //   category: 'utils.storage.sessionStorage',
-      // });
+      logger.error({
+        message: errMessage,
+        category: 'utils.storage.sessionStorage',
+        widgetId
+      });
       throw new Error(errMessage);
     }
   };
@@ -69,10 +72,11 @@ export const initSessionStorage = (widgetId: string) => {
       return namespace.session.getAll();
     } catch (e) {
       const errMessage = `exception occured in widget ${namespace} during session storage getAll: ${e}`;
-      // logger.error({
-      //   message: errMessage,
-      //   category: 'utils.storage.sessionStorage',
-      // });
+      logger.error({
+        message: errMessage,
+        category: 'utils.storage.sessionStorage',
+        widgetId
+      });
       throw new Error(errMessage);
     }
   };
@@ -82,10 +86,11 @@ export const initSessionStorage = (widgetId: string) => {
       namespace.session.clear();
     } catch (e) {
       const errMessage = `exception occured in widget ${namespace} during session storage clear: ${e}`;
-      // logger.error({
-      //   message: errMessage,
-      //   category: 'utils.storage.sessionStorage',
-      // });
+      logger.error({
+        message: errMessage,
+        category: 'utils.storage.sessionStorage',
+        widgetId
+      });
       throw new Error(errMessage);
     }
   };
@@ -95,10 +100,11 @@ export const initSessionStorage = (widgetId: string) => {
       namespace.session.remove(key);
     } catch (e) {
       const errMessage = `exception occured in widget ${namespace} during session storage remove key: ${e}`;
-      // logger.error({
-      //   message: errMessage,
-      //   category: 'utils.storage.sessionStorage',
-      // });
+      logger.error({
+        message: errMessage,
+        category: 'utils.storage.sessionStorage',
+        widgetId
+      });
       throw new Error(errMessage);
     }
   };
@@ -108,10 +114,11 @@ export const initSessionStorage = (widgetId: string) => {
       return namespace.session.size();
     } catch (e) {
       const errMessage = `exception occured in widget ${namespace} during session storage get size: ${e}`;
-      // logger.error({
-      //   message: errMessage,
-      //   category: 'utils.storage.sessionStorage',
-      // });
+      logger.error({
+        message: errMessage,
+        category: 'utils.storage.sessionStorage',
+        widgetId
+      });
       throw new Error(errMessage);
     }
   };

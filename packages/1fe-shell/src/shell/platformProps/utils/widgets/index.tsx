@@ -1,7 +1,5 @@
 import React, { memo, useMemo } from 'react';
 
-// import { getShellLogger } from '../../../utils/telemetry';
-
 import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../1fe-server/src/server/utils/widget-config-helpers';
 import { WidgetFrame } from './internal/WidgetFrame/WidgetFrame';
 import { queueWidgetPreloadsIfFound } from './internal/utils/widgetConfigUtils';
@@ -17,6 +15,7 @@ import {
     WidgetOptions,
     WidgetProps,
   } from '../../../types/platform-utils';
+import { getShellLogger } from '../../../utils/telemetry';
 
 const EMPTY_WIDGET = () => null;
 
@@ -51,7 +50,7 @@ export const initWidgetsHelper = (
       // The default loading component is a spinner
       Loader = DEFAULT_WIDGET_OPTIONS.Loader,
     } = options || {};
-    // const logger = getShellLogger(hostWidget.widgetId);
+    const logger = getShellLogger();
     const isGetCalledInsideAUseMemo = isInUseMemo();
 
     if (!isGetCalledInsideAUseMemo) {
@@ -131,11 +130,12 @@ export const initWidgetsHelper = (
         );
       }) as React.FC<TWidgetProps>;
     } catch (err) {
-    //   logger.error({
-    //     message: '[WIDGETS][GET] error',
-    //     tag: '[WIDGETS][GET]',
-    //     error: err,
-    //   });
+      logger.error({
+        message: '[WIDGETS][GET] error',
+        tag: '[WIDGETS][GET]',
+        error: err,
+        widgetId: hostWidget.widgetId
+      });
     }
 
     return EMPTY_WIDGET;

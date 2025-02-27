@@ -12,6 +12,7 @@ import {
 import { STATE, WIDGET_URL_OVERRIDES } from '../constants/search-params';
 import { readMagicBoxShellConfigs } from '../configs/shell-configs';
 import { initializeImportMapOverridesReskin } from './import-map-ui';
+import { getShellLogger } from '../utils/telemetry';
 
 export const getQueryURLParams = (): URLSearchParams => {
   const urlParams = new URLSearchParams(window?.location?.search);
@@ -168,7 +169,7 @@ export function insertNewImportMap(
   importMap: System.ImportMap,
   overrideMode = false,
 ): void {
-  // const logger = getShellLogger();
+  const logger = getShellLogger();
   const script = document.createElement('script');
   script.type = 'systemjs-importmap';
   script.textContent = JSON.stringify(importMap);
@@ -177,12 +178,12 @@ export function insertNewImportMap(
     script.setAttribute('data-qa', 'import-map-overrides');
   }
 
-  // script.onerror = (e) => {
-  //   logger.error({
-  //     message: '[IMPORT MAP OVERRIDE ERROR]',
-  //     error: e,
-  //   });
-  // };
+  script.onerror = (e) => {
+    logger.error({
+      message: '[IMPORT MAP OVERRIDE ERROR]',
+      error: e,
+    });
+  };
 
   document.head.appendChild(script);
 }

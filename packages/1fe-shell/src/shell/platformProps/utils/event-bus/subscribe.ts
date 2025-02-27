@@ -1,6 +1,6 @@
 import { EventBusPlatformUtils, SubscriptionToEventBusArgs } from './types';
 import { getNamespacedEvent } from './utils/get-namespaced-event';
-import { emitteryInstance } from './utils/emittery-instance';
+import { getEmitteryInstance } from './utils/emittery-instance';
 
 /**
  * Returns a function that can be used to subscribe to events on the event bus.
@@ -15,7 +15,7 @@ export const initSubscribeToEventBus = (
     eventName,
     listener,
   }: SubscriptionToEventBusArgs<EventMap, K>) {
-    const unsubscribeFunction = emitteryInstance.on(
+    const unsubscribeFunction = getEmitteryInstance().on(
       getNamespacedEvent<EventMap, K>(eventName, widgetId),
       listener,
     );

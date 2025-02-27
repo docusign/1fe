@@ -4,7 +4,7 @@ import { merge } from 'lodash';
 import deepFreeze from 'deep-freeze';
 
 // import { SESSION_ID_UNAVAILABLE } from '../../../constants';
-import { router } from '../../components/Router';
+import { getRouter } from '../../components/Router';
 // import { WidgetConfig } from '../../../isomorphic/types/widgetConfigs.types';
 // import { getSessionIdFromCookie } from '../../utils/cookie-helpers';
 // import { getBaseHrefUrl, getEnvironmentConfigs } from '../../utils/env-helpers';
@@ -67,7 +67,7 @@ export const getPlatformUtils = (
 
   const navigation = initNavigation({
     widgetId,
-    navigateShell: router.navigate,
+    navigateShell: getRouter().navigate,
     eventBus,
   });
 
