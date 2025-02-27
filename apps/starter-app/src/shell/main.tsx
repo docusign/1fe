@@ -1,6 +1,6 @@
 // @ts-ignore
-import renderMagicBoxShell from '@devhub/magicbox-shell';
-import '@devhub/magicbox-shell/dist/index.css';
+import renderMagicBoxShell from '@devhub/1fe-shell';
+// import '@devhub/magicbox-shell/dist/index.css';
 
 const setup = () => {
   const ENVIRONMENT: string = process.env.NODE_ENV || 'integration';

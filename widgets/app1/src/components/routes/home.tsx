@@ -1,4 +1,4 @@
-import { platformProps } from '@devhub/magicbox-shell';
+// import { platformProps } from '@devhub/1fe-shell';
 // import { Interpolate } from '@ds/react-utils';
 import styled from '@emotion/styled';
 import { Flex } from 'antd';

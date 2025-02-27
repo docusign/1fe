@@ -1,4 +1,3 @@
-import { platformProps } from '@devhub/magicbox-shell';
 import { Layout, Menu } from 'antd';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 

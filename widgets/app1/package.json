@@ -25,7 +25,7 @@
     "vite-plugin-single-spa": "^0.1.0"
   },
   "dependencies": {
-    "@devhub/magicbox-shell": "*",
+    "@devhub/1fe-shell": "*",
     "@emotion/react": "11.10.6",
     "@emotion/styled": "11.10.6",
     "@reduxjs/toolkit": "1.9.1",

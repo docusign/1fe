@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { initWidgetsHelper } from '..';
 // import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../isomorphic/widgetConfigs/getWidgetConfigs';
 import { isInUseMemo } from '../internal/utils/isInUseMemo';
-import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../../magicbox-server/src/server/utils/widget-config-helpers';
+import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../../1fe-server/src/server/utils/widget-config-helpers';
 import { ReactElement, ReactNode } from 'react';
 // import { getShellLogger } from '../../../../utils/telemetry';
 
@@ -18,10 +18,10 @@ jest.mock<typeof import('../internal/utils/isInUseMemo')>(
 );
 
 jest.mock<
-  typeof import('../../../../../../../magicbox-server/src/server/utils/widget-config-helpers')
->('../../../../../../../magicbox-server/src/server/utils/widget-config-helpers', () => ({
+  typeof import('../../../../../../../1fe-server/src/server/utils/widget-config-helpers')
+>('../../../../../../../1fe-server/src/server/utils/widget-config-helpers', () => ({
   ...jest.requireActual(
-    '../../../../../../../magicbox-server/src/server/utils/widget-config-helpers',
+    '../../../../../../../1fe-server/src/server/utils/widget-config-helpers',
   ),
   getRequestedWidgetConfigWithoutRuntimeConfig: jest.fn(() => ({
     requestedWidgetConfig: {

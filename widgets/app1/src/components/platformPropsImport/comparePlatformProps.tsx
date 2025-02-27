@@ -1,4 +1,4 @@
-// import { platformProps } from '@devhub/magicbox-shell';
+// import { platformProps } from '@devhub/1fe-shell';
 // import { Button } from 'antd';
 // import { isEqual } from 'lodash';
 // import { useState } from 'react';

@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import path from 'path';
 // @ts-ignore
-import magicBoxServer from '@devhub/magicbox-server';
+import magicBoxServer from '@devhub/1fe-server';
 
 import router from './lib/router';
 import { enforcedDefaultCsp, reportOnlyDefaultCsp } from './csp-configs';
