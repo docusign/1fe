@@ -5,6 +5,7 @@ import { ImportMap, SystemImportMap } from '../types/init';
 import { WidgetConfig } from '../types/widget-config';
 import { generateCDNUrl } from '../utils/url';
 import {
+  DYNAMIC_CONFIGS,
   getWidgetConfigValues,
   LAZY_LOADED_LIB_CONFIGS,
   WIDGET_CONFIGS,
@@ -108,15 +109,7 @@ export const createDynamicImportMap = (): {
   importMap: SystemImportMap;
   overrides?: Record<string, string>;
 } => {
-  // TODO: Read these from configs
-  const allowedSource = [
-    'localhost',
-    '127.0.0.1',
-    'docucdn-a.akamaihd.net',
-    'docutest-a.akamaihd.net',
-    'cdn.jsdelivr.net',
-  ];
-
+  const allowedSources = DYNAMIC_CONFIGS?.importMapOverrides?.allowedSources;
   const widgetConfigs = getWidgetConfigValues(WIDGET_CONFIGS);
 
   const widgets = widgetConfigs.reduce(
@@ -136,10 +129,10 @@ export const createDynamicImportMap = (): {
     {},
   );
 
-  const importUrlOverrides = filterImportMap(
+  const importUrlOverrides = !!allowedSources ? filterImportMap(
     getUrlWidgetOverrides(),
-    allowedSource,
-  );
+    allowedSources,
+  ) : getUrlWidgetOverrides();
 
   return {
     importMap: {

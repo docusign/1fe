@@ -59,12 +59,6 @@ const options = {
   server: {
     // for Integration-env only
     bathtub: true, // automatically on when mode: development
-    importMapOverrides: {
-      // automatically on when mode: development
-      enableUI: true,
-      cdnURL: '',
-    },
-    devtools: true, // automatically on when mode: development
     // known routes are routes that magic box will NOT 404 on if the current route does not match a plugin
     knownRoutes: Object.values(ROUTES),
   },

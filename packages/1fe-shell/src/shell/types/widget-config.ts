@@ -137,6 +137,11 @@ export type WidgetConfig = {
   plugin?: PluginConfigRaw;
 };
 
+export type EnvConfig = {
+  environment: string;
+  mode: 'development' | 'preproduction' | 'production';
+}
+
 export type SystemWidgetConfig = {
   widgetId: string;
   version: string;
