@@ -38,7 +38,8 @@
     "jest-environment-jsdom": "^29.2.1",
     "ts-jest": "^29.0.5",
     "typescript": "5.5.4",
-    "vite": "^5.2.0"
+    "vite": "^5.2.0",
+    "@repo/typescript-config": "*"
   },
   "dependencies": {
     "@emotion/styled": "11.10.6",

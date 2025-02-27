@@ -17,9 +17,9 @@
     "tsup": "^8.0.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
-  "packageManager": "npm@9.8.1",
+  "packageManager": "npm@10.5.1",
   "workspaces": [
     "packages/*",
     "widgets/*",

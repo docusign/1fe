@@ -1,7 +1,8 @@
 {
   "extends": "@repo/typescript-config/react-library.json",
   "compilerOptions": {
-    "lib": ["dom", "ES2015"],
+    "lib": ["dom", "ES2022"],
+    "target": "ES2022",
     "sourceMap": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
@@ -9,6 +10,6 @@
     "module": "ESNext",
     "jsx": "react-jsx"
   },
-  "include": ["../1fe-shell"],
-  "exclude": ["../1fe-shell/dist", "../1fe-shell/build", "../1fe-shell/node_modules"]
+  "include": ["."],
+  "exclude": ["dist", "build", "node_modules"]
 }
