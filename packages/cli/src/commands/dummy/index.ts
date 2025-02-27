@@ -1,15 +1,11 @@
-import { Option } from 'commander';
+import { Option } from '@commander-js/extra-typings';
 
 import action from './action';
 
 const command = 'dummy';
 
 const optionsToAction = [
-
-  new Option(
-    '--silent,',
-    'disable console logs',
-  ).default(false),
+  new Option('--silent,', 'disable console logs').default(false),
 ];
 
 export default {
@@ -18,4 +14,3 @@ export default {
   action,
   optionsToAction,
 };
-

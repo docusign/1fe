@@ -104,7 +104,7 @@
     "cfonts": "^3.1.1",
     "chalk": "4",
     "cli-testing-library": "^2.0.1",
-    "commander": "^9.4.1",
+    "@commander-js/extra-typings": "13.1.0",
     "coverage-diff": "^3.2.0",
     "csp_evaluator": "^1.1.2",
     "css-loader": "^6.7.2",
