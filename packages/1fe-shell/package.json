@@ -1,5 +1,6 @@
 {
-  "name": "@devhub/magicbox-shell",
+  "name": "@devhub/1fe-shell",
+  "private": true,
   "version": "1.0.10",
   "license": "MIT",
   "sideEffects": false,

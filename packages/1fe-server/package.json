@@ -1,5 +1,6 @@
 {
-  "name": "@devhub/magicbox-server",
+  "name": "@devhub/1fe-server",
+  "private": true,
   "version": "1.0.10",
   "license": "MIT",
   "sideEffects": false,

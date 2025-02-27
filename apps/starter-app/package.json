@@ -59,8 +59,8 @@
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
-    "@devhub/magicbox-server": "*",
-    "@devhub/magicbox-shell": "*",
+    "@devhub/1fe-server": "*",
+    "@devhub/1fe-shell": "*",
     "@emotion/styled": "11.10.6",
     "core-js": "^3.40.0",
     "dotenv": "^16.0.3",

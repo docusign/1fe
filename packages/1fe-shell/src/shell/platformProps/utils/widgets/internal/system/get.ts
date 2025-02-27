@@ -4,7 +4,7 @@ import 'react';
 // import { getShellLogger } from '../../../../../utils/telemetry';
 // import { logPlatformUtilUsage } from '../../../logPlatformUtilUsage';
 import { getWidgetPath } from '../../../../context/getWidgetPath';
-import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../../../magicbox-server/src/server/utils/widget-config-helpers';
+import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../../../1fe-server/src/server/utils/widget-config-helpers';
 import { getComponentFromModule as _getComponentFromModule } from '../utils/getComponentFromModule';
 import { DEFAULT_WIDGET_OPTIONS } from '../utils/constants';
 import { WidgetOptions } from '../../../../../types/platform-utils';

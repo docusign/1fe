@@ -2,7 +2,7 @@ import React, { memo, useMemo } from 'react';
 
 // import { getShellLogger } from '../../../utils/telemetry';
 
-import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../magicbox-server/src/server/utils/widget-config-helpers';
+import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../1fe-server/src/server/utils/widget-config-helpers';
 import { WidgetFrame } from './internal/WidgetFrame/WidgetFrame';
 import { queueWidgetPreloadsIfFound } from './internal/utils/widgetConfigUtils';
 import { DEFAULT_WIDGET_OPTIONS } from './internal/utils/constants';

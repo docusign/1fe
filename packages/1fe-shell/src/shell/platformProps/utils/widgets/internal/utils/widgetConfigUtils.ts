@@ -1,4 +1,4 @@
-import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../../../magicbox-server/src/server/utils/widget-config-helpers';
+import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../../../1fe-server/src/server/utils/widget-config-helpers';
 // import {
 //   WIDGET_CONFIGS,
 //   getEnvironmentConfigs,

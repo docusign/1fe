@@ -6,7 +6,7 @@
 
 import { get } from '../get';
 import { isSystemEnv } from '../../utils/isSystem';
-import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../../../../magicbox-server/src/server/utils/widget-config-helpers';
+import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../../../../1fe-server/src/server/utils/widget-config-helpers';
 import { WidgetConfig } from '../../../../../../types/widget-config';
 import { getWidgetBundleCdnUrl } from '../../../../../../utils/url';
 // import { getEnvironmentConfigs } from '../../../../../../utils/env-helpers';
@@ -26,10 +26,10 @@ import { getWidgetBundleCdnUrl } from '../../../../../../utils/url';
 // );
 
 jest.mock<
-  typeof import('../../../../../../../../../magicbox-server/src/server/utils/widget-config-helpers')
->('../../../../../../../../../magicbox-server/src/server/utils/widget-config-helpers', () => ({
+  typeof import('../../../../../../../../../1fe-server/src/server/utils/widget-config-helpers')
+>('../../../../../../../../../1fe-server/src/server/utils/widget-config-helpers', () => ({
   ...jest.requireActual(
-    '../../../../../../../../../magicbox-server/src/server/utils/widget-config-helpers',
+    '../../../../../../../../../1fe-server/src/server/utils/widget-config-helpers',
   ),
   getRequestedWidgetConfigWithoutRuntimeConfig: jest.fn(),
 }));
