@@ -5,6 +5,7 @@ import {
   getParsedRuntimeConfigOverrides,
 } from '../utils/runtime-configs';
 import { WIDGET_URL_OVERRIDES } from '../constants/search-params';
+import { DYNAMIC_CONFIGS } from '../configs/config-helpers';
 
 const isOverrideActive = (element: HTMLElement) => {
   const isActiveImportMapOverride = element.classList?.value.includes(
@@ -183,8 +184,9 @@ export const initializeImportMapOverridesReskin = () => {
    * As a result, `hideImportMapOverrideElement` in the index.html.ejs does not hide the import map overrides button on refresh
    */
   const IS_PROD = readMagicBoxShellConfigs().mode === 'production';
-  const getIsActiveAutomatedTestFramework = false;
-  if (IS_PROD || getIsActiveAutomatedTestFramework) {
+  const enableUI = DYNAMIC_CONFIGS?.importMapOverrides?.enableUI || true;
+  // const getIsActiveAutomatedTestFramework = false;
+  if (IS_PROD || enableUI === false) {
     deleteImportMapOverridesButton();
     return;
   }

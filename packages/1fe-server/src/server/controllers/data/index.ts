@@ -278,22 +278,24 @@ export const dataForRenderingTemplate = async (req: Request) => {
   const slimWidgetConfigsForShell =
     convertServerWidgetConfigToShellWidgetConfig(widgetConfigs);
 
-  const activeAutomatedTestFramework =
-    req.query.automated_test_framework || null;
+  // const activeAutomatedTestFramework =
+  //   req.query.automated_test_framework || null;
 
   const shellBundleUrl = readMagicBoxConfigs().shellBundleUrl;
 
   // TODO: Support meta tags
   return {
     isProduction: readMagicBoxConfigs().mode === 'production',
-    hideImportMapOverrideElement:
-      activeAutomatedTestFramework ||
-      req.cookies[ACTIVE_AUTOMATED_TEST_FRAMEWORK],
+    hideImportMapOverrideElement: readMagicBoxConfigs().dynamicConfigs?.importMapOverrides?.enableUI === false,
     widgetConfigs: slimWidgetConfigsForShell,
     pluginConfigs: getPluginConfigs(),
     dynamicConfigs: convertServerDynamicConfigToShellDynamicConfig(
       readMagicBoxConfigs().dynamicConfigs,
     ),
+    envConfigs: {
+      environment: readMagicBoxConfigs().environment,
+      mode: readMagicBoxConfigs().mode,
+    },
     criticalLibraryConfigUrls: criticalLibs,
     lazyLoadedLibsConfig: lazyLoadedLibs,
     packages: {},

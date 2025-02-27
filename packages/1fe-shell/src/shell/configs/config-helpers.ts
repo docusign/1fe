@@ -1,4 +1,5 @@
 import {
+  EnvConfig,
   PluginConfig,
   WidgetConfig,
   WidgetConfigs,
@@ -67,6 +68,9 @@ export const PLUGIN_CONFIGS = generateWidgetConfigMap(
 export const WIDGET_CONFIGS = generateWidgetConfigMap(
   getConfigArrFromGlobal<WidgetConfig>('widget-config'),
 );
+
+export const ENVIRONMENT_CONFIG =
+  getConfigObjFromGlobal<EnvConfig>('env-config');
 
 /**
  * Map of all widget configs that we have loaded from the global config, keyed by widgetId

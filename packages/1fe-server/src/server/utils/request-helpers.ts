@@ -11,7 +11,6 @@ import { readMagicBoxConfigs } from './magicbox-configs';
 export const LOCAL_HOST_URL = 'http://localhost:3001';
 
 export const getRequestHost = (req: Request) => {
-    // TODO: Can we just return this request host?
     if (readMagicBoxConfigs().mode === "development") {
       return LOCAL_HOST_URL;
     } else {
