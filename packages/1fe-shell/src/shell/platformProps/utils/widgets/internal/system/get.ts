@@ -1,7 +1,5 @@
 import 'react';
-// import { shellConsoleLogger } from '@1ds/helpers/client';
 
-// import { getShellLogger } from '../../../../../utils/telemetry';
 // import { logPlatformUtilUsage } from '../../../logPlatformUtilUsage';
 import { getWidgetPath } from '../../../../context/getWidgetPath';
 import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../../../1fe-server/src/server/utils/widget-config-helpers';
@@ -12,6 +10,8 @@ import { isSystemEnv } from '../utils/isSystem';
 import { WIDGET_CONFIGS } from '../../../../../configs/config-helpers';
 import { isWidgetTypePinned } from '../../../../../utils/widget-type';
 import { getWidgetBundleCdnUrl } from '../../../../../utils/url';
+import { getShellLogger } from '../../../../../utils/telemetry';
+import { isOverrideElementActive } from '../../../../../init/import-map-ui';
 
 /**
  *
@@ -27,7 +27,7 @@ export const get =
       variantId = DEFAULT_WIDGET_OPTIONS.variantId,
     }: WidgetOptions = DEFAULT_WIDGET_OPTIONS, // NOTE: always deconstruct here to individually initialize options
   ): Promise<System.Module> => {
-    // const logger = getShellLogger(requestedWidgetId);
+    const logger = getShellLogger();
 
     const options = { variantId };
 
@@ -46,13 +46,14 @@ export const get =
         options,
         module: await _System.import(widgetId),
         log(message: string, otherData: Record<string, unknown> = {}) {
-          // logger.log({
-          //   ...otherData,
-          //   message,
-          //   category: 'utils.widgets.get',
-          //   isOverrideActive: isOverrideElementActive(),
-          //   ...widgetLogInfo,
-          // });
+          logger.log({
+            ...otherData,
+            message,
+            category: 'utils.widgets.get',
+            widgetId: requestedWidgetId,
+            isOverrideActive: isOverrideElementActive(),
+            ...widgetLogInfo,
+          });
         },
       });
 
@@ -114,13 +115,14 @@ export const get =
 
       console.error(message, error, widgetLogInfo);
 
-      // logger.error({
-      //   error,
-      //   message,
-      //   ...widgetLogInfo,
-      //   category: 'utils.widgets.get',
-      //   isOverrideActive: isOverrideElementActive(),
-      // });
+      logger.error({
+        error,
+        message,
+        ...widgetLogInfo,
+        category: 'utils.widgets.get',
+        isOverrideActive: isOverrideElementActive(),
+        widgetId: requestedWidgetId,
+      });
 
       throw new Error(message);
     }

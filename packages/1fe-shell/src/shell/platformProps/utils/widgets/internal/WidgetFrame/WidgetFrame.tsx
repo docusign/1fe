@@ -1,14 +1,13 @@
 import styled from '@emotion/styled';
 import React, { useEffect } from 'react';
 
-// import { getShellLogger } from '../../../../../utils/telemetry';
-
 import { getRequestedWidgetVersionForConsole } from '../utils/widgetConfigUtils';
 import { WidgetLoader, WidgetURLLoader } from './WidgetLoader';
 import { WidgetRenderStatusType } from './types';
 import { WidgetConfig } from '../../../../../types/widget-config';
 import { WidgetOptions } from '../../../../../types/platform-utils';
 import { readMagicBoxShellConfigs } from '../../../../../configs/shell-configs';
+import { getShellLogger } from '../../../../../utils/telemetry';
 
 interface WidgetFrameProps<TWidgetProps> {
   /**
@@ -153,10 +152,10 @@ function WidgetFrameInner<TWidgetProps>({
  * Exported for unit testing
  */
 export function WidgetNotFoundError(widgetId: string): Error {
-//   const logger = getShellLogger(widgetId);
+  const logger = getShellLogger();
   const errorMsg = `WidgetId ${widgetId} does not exist in import-map config`;
 
-//   logger.error({ tag: '[WIDGETS][GET]', message: errorMsg });
+  logger.error({ tag: '[WIDGETS][GET]', message: errorMsg, widgetId });
 
   throw new Error(`[WIDGETS][GET] ${errorMsg}`);
 }

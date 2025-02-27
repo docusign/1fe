@@ -1,12 +1,11 @@
 import 'react';
-// import { shellConsoleLogger } from '@1ds/helpers/client';
 
-// import { getShellLogger } from '../../../../../utils/telemetry';
 // import { logPlatformUtilUsage } from '../../../logPlatformUtilUsage';
 import { DEFAULT_WIDGET_OPTIONS } from '../utils/constants';
 import { WidgetOptions } from '../../../../../types/platform-utils';
 import { isSystemEnv } from '../utils/isSystem';
 import { getComponentFromModule } from '../utils/getComponentFromModule';
+import { getShellLogger } from '../../../../../utils/telemetry';
 
 export const getByUrl =
   (_System: typeof System, hostWidgetId: string) =>
@@ -16,7 +15,7 @@ export const getByUrl =
       variantId = DEFAULT_WIDGET_OPTIONS.variantId,
     }: Partial<WidgetOptions> = DEFAULT_WIDGET_OPTIONS, // NOTE: always deconstruct here to individually initialize options
   ): Promise<System.Module> => {
-    // const logger = getShellLogger(hostWidgetId);
+    const logger = getShellLogger();
 
     const options = { variantId };
 
@@ -38,23 +37,25 @@ export const getByUrl =
           options,
           module,
           log(message: string) {
-            // logger.log({
-            //   message,
-            //   url: urlAsAString,
-            //   category: 'utils.widgets.getByUrl',
-            // });
+            logger.log({
+              message,
+              url: urlAsAString,
+              category: 'utils.widgets.getByUrl',
+              widgetId: hostWidgetId
+            });
           },
         });
       } catch (error) {
         const message = '[UTILS_API][WIDGETS] Getting widget by URL failed.';
 
         console.error(message, error, urlAsAString, options);
-        // logger.error({
-        //   error,
-        //   message,
-        //   url: urlAsAString,
-        //   category: 'utils.widgets.getByUrl',
-        // });
+        logger.error({
+          error,
+          message,
+          url: urlAsAString,
+          category: 'utils.widgets.getByUrl',
+          widgetId: hostWidgetId
+        });
 
         throw new Error(message);
       }

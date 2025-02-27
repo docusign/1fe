@@ -1,6 +1,6 @@
 import { registeredWidgets } from '..';
 
-import { emitteryInstance } from './emittery-instance';
+import { getEmitteryInstance } from './emittery-instance';
 import { getNamespacedEvent } from './get-namespaced-event';
 
 export const broadcastEvent = <EventMap, K extends keyof EventMap>(
@@ -8,7 +8,7 @@ export const broadcastEvent = <EventMap, K extends keyof EventMap>(
   data: unknown,
 ) => {
   for (const widgetId of registeredWidgets) {
-    emitteryInstance.emit(
+    getEmitteryInstance().emit(
       getNamespacedEvent<EventMap, K>(eventName, widgetId),
       data,
     );

@@ -1,15 +1,15 @@
 import 'react';
 import { isSystemEnv } from '../utils/isSystem';
+import { getShellLogger } from '../../../../../utils/telemetry';
 // import { shellConsoleLogger } from '@1ds/helpers/client';
 
-// import { getShellLogger } from '../../../../../utils/telemetry';
 // import { logPlatformUtilUsage } from '../../../logPlatformUtilUsage';
 
 export const getAsset =
   (_System: typeof System, hostWidgetId: string) =>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async (widgetId: string, path: string): Promise<any> => {
-    // const logger = getShellLogger(widgetId);
+    const logger = getShellLogger();
 
     // logPlatformUtilUsage({
     //   utilNamespace: 'widgets',
@@ -37,12 +37,13 @@ export const getAsset =
         const message = `[UTILS_API][WIDGETS] Getting widget asset by ID failed.`;
 
         console.error(message, error, widgetId, path);
-        // logger.error({
-        //   error,
-        //   message,
-        //   path,
-        //   category: 'utils.widgets.getAsset',
-        // });
+        logger.error({
+          error,
+          message,
+          path,
+          category: 'utils.widgets.getAsset',
+          widgetId
+        });
 
         throw new Error(message);
       }

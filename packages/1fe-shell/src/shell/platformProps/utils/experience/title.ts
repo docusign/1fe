@@ -1,27 +1,29 @@
-// import { getShellLogger } from '../../../utils/telemetry';
 // import { logPlatformUtilUsage } from '../logPlatformUtilUsage';
+
+import { getShellLogger } from "../../../utils/telemetry";
 
 const onedsTitleId = 'oneds-title';
 
 const set =
   (widgetId: string) =>
   (title: string): void => {
-    // const logger = getShellLogger(widgetId);
+    const logger = getShellLogger();
 
     const currentTitle = document.getElementById(onedsTitleId);
     const previousTitle = currentTitle?.innerText;
     if (currentTitle) {
       currentTitle.innerText = title;
     } else {
-      // logger.error({
-      //   message: `Could not set title. DOM element '${onedsTitleId}' not found.`,
-      //   category: 'utils.experience.title.set',
-      //   metaData: {
-      //     arguments: {
-      //       title,
-      //     },
-      //   },
-      // });
+      logger.error({
+        message: `Could not set title. DOM element '${onedsTitleId}' not found.`,
+        category: 'utils.experience.title.set',
+        widgetId,
+        metaData: {
+          arguments: {
+            title,
+          },
+        },
+      });
     }
 
     // logPlatformUtilUsage({

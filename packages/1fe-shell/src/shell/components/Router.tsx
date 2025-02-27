@@ -24,9 +24,9 @@ const RedirectComponent = ({ to }: { to: string }) => {
   return null;
 };
 
-const isProd = readMagicBoxShellConfigs().mode === 'production';
 
 const determineBaseRoute = (): RouteObject[] => {
+  const isProd = readMagicBoxShellConfigs().mode === 'production';
   if (isProd) {
     return [
       {
@@ -69,15 +69,25 @@ const pluginRoutes = getWidgetConfigValues(PLUGIN_CONFIGS).map(
   },
 );
 
-export const routerConfig: RouteObject[] = [
-  ...determineBaseRoute(),
-  ...pluginRoutes,
-  {
-    path: '*',
-    element: <Error type='notFound' />,
-  },
-];
+let router: ReturnType<typeof createBrowserRouter>;
 
-export const router = createBrowserRouter(routerConfig, {
-  basename: basePathname(),
-});
+export const getRouter = () => {
+  if (router) {
+    return router;
+  }
+  
+  const routerConfig: RouteObject[] = [
+    ...determineBaseRoute(),
+    ...pluginRoutes,
+    {
+      path: '*',
+      element: <Error type='notFound' />,
+    },
+  ];
+
+  router = createBrowserRouter(routerConfig, {
+    basename: basePathname(),
+  });
+
+  return router;
+};

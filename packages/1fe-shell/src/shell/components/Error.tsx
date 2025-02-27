@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 
-// import { getShellLogger } from '../utils/telemetry';
-
 // import BrokenPage from './resources/brokenPage.json';
 import { showImportMapOverrideButton } from '../init/import-map-ui';
 import { readMagicBoxShellConfigs } from '../configs/shell-configs';

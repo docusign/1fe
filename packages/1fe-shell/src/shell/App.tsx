@@ -1,6 +1,6 @@
 import React, { useState, Suspense } from 'react';
 import { RouterProvider } from 'react-router-dom';
-import { router } from './components/Router';
+import { getRouter } from './components/Router';
 
 function App(): JSX.Element {
   const [count, setCount] = useState<number>(0);
@@ -11,7 +11,7 @@ function App(): JSX.Element {
   //   (window as any).System.import('@1ds/starter-kit2'),
   // );
   return (
-    <RouterProvider router={router} />
+    <RouterProvider router={getRouter()} />
   );
 }
 
