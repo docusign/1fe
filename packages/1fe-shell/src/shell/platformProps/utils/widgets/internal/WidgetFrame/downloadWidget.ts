@@ -61,18 +61,20 @@ export async function downloadWidget<TWidgetProps>(
   // TODO: Restore widgetLoadTime
   // const widgetLoadTime = getShellPlatformUtils().appLoadTime;
 
-  const logDownloadWidgetError = (message: string, error: unknown) =>
+  const logDownloadWidgetError = (message: string, error: unknown) => {
     // TODO: convert this back to logger
-    console.error({
-      message,
-      parsedWidget: widgetId,
-      error,
-      widget: isUrl(widgetId)
-        ? { widgetId: widgetId.toString(), version: '0.0.0' }
-        : requestedWidgetConfigOrUrl,
-      url: isUrl(widgetId) ? widgetId.toString() : undefined,
-      isOverrideActive: isWidgetOverriden,
-    });
+    // logger.error({
+    //   message,
+    //   parsedWidget: widgetId,
+    //   error,
+    //   widget: isUrl(widgetId)
+    //     ? { widgetId: widgetId.toString(), version: '0.0.0' }
+    //     : requestedWidgetConfigOrUrl,
+    //   url: isUrl(widgetId) ? widgetId.toString() : undefined,
+    //   isOverrideActive: isWidgetOverriden,
+    // });
+  }
+    
 
   try {
     // corresponding end mark is in the widget code: props.platform.utils.appLoadTime.end()

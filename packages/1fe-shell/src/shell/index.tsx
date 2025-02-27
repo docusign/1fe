@@ -54,7 +54,6 @@ export const init = (): Promise<void> => {
         });
       }
     } catch (e) {
-      console.log(e);
       // const logger = getShellLogger();
 
       // logger.error({

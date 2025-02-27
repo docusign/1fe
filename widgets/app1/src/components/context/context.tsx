@@ -9,7 +9,6 @@ import { WidgetContainer } from '../misc/widgetContainer';
 export const Context = (props) => {
   const [isVisible, showWidget] = useReducer(() => true, false);
   const [contextResult, setContextResult] = useState('');
-  console.log(props);
 
   // const t = useTranslate();
 

@@ -12,7 +12,6 @@ export const GetChildWidget: React.FC<{
   props: any;
   widgetId?: string;
 }> = ({ isVisible, props, widgetId = INTERNAL_GENERIC_CHILD }) => {
-  console.log({props});
 
   const Widget = props.platform.utils.widgets.get(widgetId);
   // const Widget = platformProps?.utils.widgets.get(widgetId);
