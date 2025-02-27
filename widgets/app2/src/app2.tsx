@@ -12,13 +12,11 @@ export default function Root(props) {
 
   const listener = useCallback(
     (event: any) => {
-      console.log('LISTERNER HIT');
       setEventBusResult(JSON.stringify(event));
     },
     [setEventBusResult],
   );
 
-  console.log({app2Props: props});
 
   return (
     <>
