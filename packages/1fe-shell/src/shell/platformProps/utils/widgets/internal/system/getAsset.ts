@@ -1,9 +1,8 @@
 import 'react';
 import { isSystemEnv } from '../utils/isSystem';
 import { getShellLogger } from '../../../../../utils/telemetry';
-// import { shellConsoleLogger } from '@1ds/helpers/client';
 
-// import { logPlatformUtilUsage } from '../../../logPlatformUtilUsage';
+import { logPlatformUtilUsage } from '../../../logPlatformUtilUsage';
 
 export const getAsset =
   (_System: typeof System, hostWidgetId: string) =>
@@ -11,13 +10,13 @@ export const getAsset =
   async (widgetId: string, path: string): Promise<any> => {
     const logger = getShellLogger();
 
-    // logPlatformUtilUsage({
-    //   utilNamespace: 'widgets',
-    //   functionName: 'getAsset',
-    //   widgetId: hostWidgetId,
-    //   args: { widgetId, path },
-    //   attributes: { isSystemEnv },
-    // });
+    logPlatformUtilUsage({
+      utilNamespace: 'widgets',
+      functionName: 'getAsset',
+      widgetId: hostWidgetId,
+      args: { widgetId, path },
+      attributes: { isSystemEnv },
+    });
 
     if (widgetId && isSystemEnv()) {
       try {

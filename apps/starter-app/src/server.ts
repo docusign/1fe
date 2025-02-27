@@ -55,7 +55,7 @@ const options = {
     refreshMs: 30 * 1000,
     phasedRelease: true,
   },
-  shellBundleUrl: 'localhost:3000/bundle.js',
+  shellBundleUrl: 'http://localhost:3001/js/bundle.js',
   server: {
     // for Integration-env only
     bathtub: true, // automatically on when mode: development

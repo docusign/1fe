@@ -281,6 +281,8 @@ export const dataForRenderingTemplate = async (req: Request) => {
   const activeAutomatedTestFramework =
     req.query.automated_test_framework || null;
 
+  const shellBundleUrl = readMagicBoxConfigs().shellBundleUrl;
+
   // TODO: Support meta tags
   return {
     isProduction: readMagicBoxConfigs().mode === 'production',
@@ -310,5 +312,6 @@ export const dataForRenderingTemplate = async (req: Request) => {
         ...missingBareSpecifiersMap,
       },
     },
+    shellBundleUrl
   };
 };

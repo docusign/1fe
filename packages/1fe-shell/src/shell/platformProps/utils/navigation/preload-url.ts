@@ -1,6 +1,4 @@
-// import { shellConsoleLogger } from '@1ds/helpers/client';
-
-// import { logPlatformUtilUsage } from '../logPlatformUtilUsage';
+import { logPlatformUtilUsage } from '../logPlatformUtilUsage';
 
 /**
  * This function embeds a hidden iframe in the web page this function is invoked on
@@ -10,14 +8,14 @@
 export const preloadUrl =
   (widgetId: string) =>
   (url: URL, delayInMs = 0): void => {
-    // logPlatformUtilUsage({
-    //   utilNamespace: 'navigation',
-    //   functionName: 'preloadUrl',
-    //   widgetId,
-    //   args: {
-    //     arguments: { url, delayInMs },
-    //   },
-    // });
+    logPlatformUtilUsage({
+      utilNamespace: 'navigation',
+      functionName: 'preloadUrl',
+      widgetId,
+      args: {
+        arguments: { url, delayInMs },
+      },
+    });
 
     if (url && typeof window !== 'undefined') {
       // get url string from URL Type

@@ -32,7 +32,8 @@ const setup = () => {
       error: (logObject: any) => {
         console.error(logObject);
       },
-      logPlatformUtilUsage: true
+      logPlatformUtilUsage: true,
+      redactSensitiveData: true,
     }
   });
 };

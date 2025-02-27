@@ -1,6 +1,6 @@
 import 'react';
 
-// import { logPlatformUtilUsage } from '../../../logPlatformUtilUsage';
+import { logPlatformUtilUsage } from '../../../logPlatformUtilUsage';
 import { DEFAULT_WIDGET_OPTIONS } from '../utils/constants';
 import { WidgetOptions } from '../../../../../types/platform-utils';
 import { isSystemEnv } from '../utils/isSystem';
@@ -19,13 +19,13 @@ export const getByUrl =
 
     const options = { variantId };
 
-    // logPlatformUtilUsage({
-    //   utilNamespace: 'widgets',
-    //   functionName: 'getByUrl',
-    //   widgetId: hostWidgetId,
-    //   args: { url, options },
-    //   attributes: { isSystemEnv },
-    // });
+    logPlatformUtilUsage({
+      utilNamespace: 'widgets',
+      functionName: 'getByUrl',
+      widgetId: hostWidgetId,
+      args: { url, options },
+      attributes: { isSystemEnv },
+    });
 
     if (url && isSystemEnv()) {
       const urlAsAString = url.toString();
