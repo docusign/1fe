@@ -12,6 +12,7 @@ import {
 } from './navigation-options';
 import { RUNTIME_CONFIG_OVERRIDES } from '../../../constants/search-params';
 import { addQueryParamsToPath, getPluginUrlWithRoute } from '../../../utils/url';
+import { logPlatformUtilUsage } from '../logPlatformUtilUsage';
 
 const PERSIST_QUERY_PARAMS_WHITELIST = [RUNTIME_CONFIG_OVERRIDES];
 
@@ -102,14 +103,14 @@ export const navigate1DS = ({
         throw new TypeError(`navigateShell is not defined: ${navigateShell}`);
       }
 
-      // logPlatformUtilUsage({
-      //   utilNamespace: 'navigation',
-      //   functionName: 'navigate1DS',
-      //   widgetId,
-      //   args: {
-      //     arguments: { to, options },
-      //   },
-      // });
+      logPlatformUtilUsage({
+        utilNamespace: 'navigation',
+        functionName: 'navigate1DS',
+        widgetId,
+        args: {
+          arguments: { to, options },
+        },
+      });
 
       const targetHref = getTargetHref(to, options);
 

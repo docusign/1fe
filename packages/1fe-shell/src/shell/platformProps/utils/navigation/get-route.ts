@@ -1,7 +1,7 @@
 import { Route } from '../../../types/url';
 import { getBaseHrefUrl } from '../../../utils/url';
 
-// import { logPlatformUtilUsage } from '../logPlatformUtilUsage';
+import { logPlatformUtilUsage } from '../logPlatformUtilUsage';
 
 /**
  * Returns the route you are on relative to your current widget
@@ -27,13 +27,13 @@ export const getRoute =
       .slice(1)
       .join('/');
 
-    // logPlatformUtilUsage({
-    //   utilNamespace: 'navigation',
-    //   functionName: 'getRoute',
-    //   widgetId,
-    //   args: { excludeQueryParams },
-    //   success: true,
-    // });
+    logPlatformUtilUsage({
+      utilNamespace: 'navigation',
+      functionName: 'getRoute',
+      widgetId,
+      args: { excludeQueryParams },
+      success: true,
+    });
 
     if (excludeQueryParams) {
       return `/${route}`;

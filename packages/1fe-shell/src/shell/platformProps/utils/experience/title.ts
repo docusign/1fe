@@ -1,4 +1,4 @@
-// import { logPlatformUtilUsage } from '../logPlatformUtilUsage';
+import { logPlatformUtilUsage } from '../logPlatformUtilUsage';
 
 import { getShellLogger } from "../../../utils/telemetry";
 
@@ -26,24 +26,24 @@ const set =
       });
     }
 
-    // logPlatformUtilUsage({
-    //   widgetId,
-    //   utilNamespace: 'experience',
-    //   functionName: 'title.set',
-    //   args: { title },
-    //   attributes: { previousTitle },
-    // });
+    logPlatformUtilUsage({
+      widgetId,
+      utilNamespace: 'experience',
+      functionName: 'title.set',
+      args: { title },
+      attributes: { previousTitle },
+    });
   };
 
 const get = (widgetId: string) => (): string | undefined => {
   const currentTitle = document.getElementById(onedsTitleId)?.innerText;
 
-  // logPlatformUtilUsage({
-  //   widgetId,
-  //   utilNamespace: 'experience',
-  //   functionName: 'title.get',
-  //   attributes: { currentTitle: currentTitle },
-  // });
+  logPlatformUtilUsage({
+    widgetId,
+    utilNamespace: 'experience',
+    functionName: 'title.get',
+    attributes: { currentTitle: currentTitle },
+  });
 
   return currentTitle;
 };

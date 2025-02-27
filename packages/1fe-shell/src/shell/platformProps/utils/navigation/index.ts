@@ -6,7 +6,7 @@ import { preloadUrl } from './preload-url';
 import { externalRedirect as initExternalRedirect } from './external-redirect';
 import { getAbsoluteWidgetPath } from './get-absolute-widget-path';
 import { getRoute } from './get-route';
-import { getPluginRoute } from './get-plugin-route';
+import { getPluginRoute, getPluginRouteWithTelemetry } from './get-plugin-route';
 import {
   UseNavigate,
   init1DSWidgetNavigation,
@@ -43,7 +43,7 @@ export const initNavigation = ({
     preloadUrl: preloadUrl(widgetId),
     getAbsoluteWidgetPath,
     getRoute: getRoute(widgetId),
-    getPluginRoute,
+    getPluginRoute: getPluginRouteWithTelemetry(widgetId),
     // This method will throw until it is initialized with the widget's navigation context
     navigate1DS: (() => {
       throw new TypeError(

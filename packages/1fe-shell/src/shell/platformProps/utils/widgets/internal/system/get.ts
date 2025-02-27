@@ -1,6 +1,6 @@
 import 'react';
 
-// import { logPlatformUtilUsage } from '../../../logPlatformUtilUsage';
+import { logPlatformUtilUsage } from '../../../logPlatformUtilUsage';
 import { getWidgetPath } from '../../../../context/getWidgetPath';
 import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../../../1fe-server/src/server/utils/widget-config-helpers';
 import { getComponentFromModule as _getComponentFromModule } from '../utils/getComponentFromModule';
@@ -82,13 +82,13 @@ export const get =
 
       const isPinnedWidget = isWidgetTypePinned(type);
 
-      // logPlatformUtilUsage({
-      //   utilNamespace: 'widgets',
-      //   functionName: 'get',
-      //   widgetId: hostWidgetId,
-      //   args: { requestedWidgetId, isPinnedWidget, options },
-      //   attributes: { isSystemEnv },
-      // });
+      logPlatformUtilUsage({
+        utilNamespace: 'widgets',
+        functionName: 'get',
+        widgetId: hostWidgetId,
+        args: { requestedWidgetId, isPinnedWidget, options },
+        attributes: { isSystemEnv },
+      });
 
       const importMapOverrides =
         window.importMapOverrides?.getOverrideMap() || {};

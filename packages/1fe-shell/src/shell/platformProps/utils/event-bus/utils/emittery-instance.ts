@@ -2,6 +2,7 @@ import Emittery from 'emittery';
 
 import { ONE_FE_SHELL_ID } from '../../../../constants/event-bus';
 import { getShellLogger } from '../../../../utils/telemetry';
+import { readMagicBoxShellConfigs } from '../../../../configs/shell-configs';
 
 let emitteryInstance: Emittery;
 
@@ -13,7 +14,7 @@ export const getEmitteryInstance = (): Emittery => {
   emitteryInstance = new Emittery({
     debug: {
       name: `${ONE_FE_SHELL_ID}_EVENT_BUS:EMITTERY`,
-      enabled: true,
+      enabled: readMagicBoxShellConfigs().mode === 'production',
       logger: (type, debugName, eventName, eventData) => {
         const logger = getShellLogger();
   

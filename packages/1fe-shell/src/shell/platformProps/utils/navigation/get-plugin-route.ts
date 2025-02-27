@@ -1,5 +1,4 @@
-
-// import { logPlatformUtilUsage } from '../logPlatformUtilUsage';
+import { logPlatformUtilUsage } from '../logPlatformUtilUsage';
 
 import { Route } from "../../../types/url";
 import { getBaseHrefUrl } from "../../../utils/url";
@@ -28,12 +27,12 @@ export const getPluginRoute = (): Route => {
   return `/${rootRoute}`;
 };
 
-// export const getPluginRouteWithTelemetry = (widgetId: string) => () => {
-  // logPlatformUtilUsage({
-  //   utilNamespace: 'navigation',
-  //   functionName: 'getPluginRoute',
-  //   widgetId,
-  // });
+export const getPluginRouteWithTelemetry = (widgetId: string) => () => {
+  logPlatformUtilUsage({
+    utilNamespace: 'navigation',
+    functionName: 'getPluginRoute',
+    widgetId,
+  });
 
-//   return getPluginRoute();
-// };
+  return getPluginRoute();
+};
