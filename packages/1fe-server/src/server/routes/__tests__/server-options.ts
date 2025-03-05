@@ -13,8 +13,6 @@ export const serverOptions = {
       // for Integration-env only
       bathtub: true, // automatically on when mode: development
       importMapOverrides: {
-        // automatically on when mode: development
-        enableUI: true,
         cdnURL: '',
       },
       devtools: true, // automatically on when mode: development

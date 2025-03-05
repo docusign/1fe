@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <base href="<%- baseHref %>" />
     <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <meta name="description" content="Docusign" />
-    <meta name="keywords" content="docusign, sign, e-signature" />
     <meta name="robots" content="noindex, nofollow" />
 
-    <title id="oneds-title"><%- pageTitle %></title>
+    <title><%- pageTitle %></title>
     <link rel="icon" type="image/x-icon" href="<%- favicon %>" />
 
     <!-- Hardcoded ds-ui styles since page is .ejs and unable to use ds-ui components-->
@@ -86,18 +83,6 @@
       }
     </style>
   </head>
-  <header>
-    <div id="ds-logo">
-      <a href="/">
-        <img
-          data-qa="header-docusign-logo"
-          alt="Docusign logo"
-          src="https://docucdn-a.akamaihd.net/olive/images/2.65.0/global-assets/ds-logo-default.svg"
-          class="css-1sz9cjp"
-        />
-      </a>
-    </div>
-  </header>
 
   <body>
     <div id="animation">
@@ -195,14 +180,9 @@
     <script nonce="<%= cspNonceGuid %>">
       const button = document.getElementById('try-again-btn');
       const type = '<%= type %>';
-      const redirectOnRetry = '<%= redirectOnRetry %>';
 
       function handleClick() {
         switch (type) {
-          case 'auth-login-loop':
-            // Refresh the window
-            window.location.href = redirectOnRetry;
-            break;
           case 'error':
           default:
             // Go the the page that triggered the error
