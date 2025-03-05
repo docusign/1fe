@@ -9,6 +9,8 @@
     <% });
   } %>
 
+    <link rel="icon" type="image/x-icon" href=<%- favicon %>>
+
     <title id="oneds-title"><%- pageTitle %></title>
     <script type="systemjs-importmap" crossorigin="anonymous">
       <%- JSON.stringify(systemJsImportMapConfig) %>
@@ -52,11 +54,19 @@
   <body>
     <div id="root"></div>
     <script nonce="<%= cspNonceGuid %>">
+      function onError(err) {
+        console.error('Something went wrong initializing 1ds-app', err);
+
+        // Non user initiated calls do not add to history to be able to go back 
+        history.pushState({}, "", window.location.href);
+        window.location.href = `/error?cause=initialization&widgetPath=${window.location.pathname}`
+      }
+
       function onSystemReady() {
         System.import("<%= criticalLibraryConfigUrls.SystemAMD %>").then(() => {
           // TODO: need to update this to use shellBundleUrl from configs
-          System.import('<%= shellBundleUrl %>');
-        });
+          System.import('<%= shellBundleUrl %>').catch(onError);
+        }).catch(onError);
       }
     </script>
     <script nonce="<%= cspNonceGuid %>">
@@ -66,6 +76,7 @@
       systemScript.crossOrigin = 'anonymous';
       systemScript.fetchPriority  = 'high';
       systemScript.onload = onSystemReady;
+      systemScript.onerror = onError;
       document.head.appendChild(systemScript);
     </script>
     <script fetchpriority="high" src="<%= criticalLibraryConfigUrls.ImportMapOverride %>" async crossorigin="anonymous"></script>
