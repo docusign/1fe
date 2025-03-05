@@ -52,9 +52,17 @@ const options = {
   environment: ENVIRONMENT,
   orgName: 'MagicBox',
   configManagement: {
+    getDynamicConfigs: async () => {
+      const response = await fetch(`https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/common-configs/${ENVIRONMENT}.json`);
+
+      if (!response.ok) {
+        throw new Error('Get dynamic configurations failed');
+      }
+      
+      return await response.json();
+    },
     url: `https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/common-configs/${ENVIRONMENT}.json`,
     refreshMs: 30 * 1000,
-    phasedRelease: true,
   },
   shellBundleUrl: 'http://localhost:3001/js/bundle.js',
   server: {

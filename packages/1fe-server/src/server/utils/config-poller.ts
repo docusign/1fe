@@ -55,18 +55,27 @@ const performWidgetBundleRequest = async (
   }
 };
 
-const fetchConfig = async (url: string, options: any) => {
+const fetchConfig = async (options: any) => {
   try {
-    const response = await ky.get(url, {
-      retry: 5,
-      timeout: 30 * 1000,
-    });
+    const getDynamicConfigs = async () => {
+      if (options.configManagement.getDynamicConfigs) {
+        return await options.configManagement.getDynamicConfigs();
+      } else {
+        const url = options.configManagement.url;
+        const response = await ky.get(url, {
+          retry: 5,
+          timeout: 30 * 1000,
+        }); 
 
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        return response.json();
+      }
     }
-
-    const configJson = await response.json();
+    
+    const configJson = await getDynamicConfigs();
 
     const magicBoxConfigs = {
       ...options,
@@ -214,13 +223,12 @@ const processDynamicWidgetConfig = async (config: any): Promise<void> => {
 };
 
 export const pollDynamicConfig = async (options: any) => {
-  const url = options.configManagement.url;
   const intervalMs = options.configManagement.refreshMs;
 
   // Convert seconds to milliseconds for setInterval
   const intervalInMilliseconds = intervalMs;
 
-  const initialConfig = await fetchConfig(url, options);
+  const initialConfig = await fetchConfig(options);
 
   if (initialConfig) {
     processDynamicWidgetConfig(initialConfig.dynamicConfigs);
@@ -231,7 +239,7 @@ export const pollDynamicConfig = async (options: any) => {
 
   // Start the polling loop
   setInterval(async () => {
-    const initialConfig = await fetchConfig(url, options);
+    const initialConfig = await fetchConfig(options);
 
     if (initialConfig) {
       processDynamicWidgetConfig(initialConfig.dynamicConfigs);
