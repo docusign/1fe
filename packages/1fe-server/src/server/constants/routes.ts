@@ -18,6 +18,5 @@ export const ROUTES = {
 export const STATIC_ASSETS = {
   IMAGES: '/images',
   // Query Parameter needed for updating favicon cache
-  FAVICON: '/favicon.ico?v=2',
-  OLD_FAVICON: '/favicon.ico',
+  FAVICON: '/favicon.ico',
 };

@@ -58,8 +58,8 @@ const performWidgetBundleRequest = async (
 const fetchConfig = async (url: string, options: any) => {
   try {
     const response = await ky.get(url, {
-      retry: 3,
-      timeout: 10 * 1000,
+      retry: 5,
+      timeout: 30 * 1000,
     });
 
     if (!response.ok) {
@@ -220,12 +220,13 @@ export const pollDynamicConfig = async (options: any) => {
   // Convert seconds to milliseconds for setInterval
   const intervalInMilliseconds = intervalMs;
 
-  // TODO: What if initial polling fails?
   const initialConfig = await fetchConfig(url, options);
 
   if (initialConfig) {
     processDynamicWidgetConfig(initialConfig.dynamicConfigs);
     processDynamicLibraryConfig(initialConfig.dynamicConfigs);
+  } else {
+    throw new Error('Failed to fetch initial config. Exiting...');
   }
 
   // Start the polling loop
