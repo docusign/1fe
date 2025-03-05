@@ -58,13 +58,7 @@ const WidgetInner: React.FC<WidgetProps> = memo((props) => {
     <Layout>
       <AppHeader />
       <Content id={'main'}>
-        {/* {widgetUrl ? <WidgetRenderer {...props} /> : <WidgetBrowser />} */}
-        {widgetUrl ? (
-          <WidgetRenderer {...props} />
-        ) : (
-        // <div>{'Widget browser coming soon...'}</div>
-        <WidgetBrowser />
-        )}
+        {widgetUrl ? <WidgetRenderer {...props} /> : <WidgetBrowser />}
       </Content>
     </Layout>
   );

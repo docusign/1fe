@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { memo, useEffect } from 'react';
 import Hotkeys from 'react-hot-keys';
-import {Button} from 'antd';
+import { Button } from 'antd';
 
 import { useTranslate } from '../locales';
 import { useAppDispatch, useAppSelector } from '../store';
@@ -40,87 +40,88 @@ const AppHeader = memo(() => {
         skipNavTarget='/bathtub#main'
         skipNavText={t('Bathtub.Header.SkipLink')}
       > */}
-        {/* <Header.Start> */}
-        {/* <Row
+      {/* <Header.Start> */}
+      {/* <Row
         css={{
           gap: '16px',
           'justifyContent': 'flex-start',
           align: 'center'
         }}> */}
 
-            <Row 
-                css={{
-                  gap: '16px',
-                  'justifyContent': 'flex-end',
-                  align: 'center'
-                }}>
+      <Row
+        css={{
+          gap: '16px',
+          justifyContent: 'flex-end',
+          align: 'center',
+        }}
+      >
+        <Hotkeys
+          keyName="cmd+shift+c"
+          onKeyDown={() => {
+            if (widget) {
+              navigator.clipboard.writeText(
+                `https://apps.dev.docusign.net/bathtub/?widget=${widget.widgetId}`,
+              );
+            } else {
+              navigator.clipboard.writeText(window.location.href);
+            }
+          }}
+        >
           <Hotkeys
-            keyName='cmd+shift+c'
+            keyName="cmd+/"
             onKeyDown={() => {
-              if (widget) {
-                navigator.clipboard.writeText(
-                  `https://apps.dev.docusign.net/bathtub/?widget=${widget.widgetId}`,
-                );
-              } else {
-                navigator.clipboard.writeText(window.location.href);
-              }
+              dispatch(appActions.setIsWidgetSwitcherOpen(true));
             }}
           >
-            <Hotkeys
-              keyName='cmd+/'
-              onKeyDown={() => {
-                dispatch(appActions.setIsWidgetSwitcherOpen(true));
-              }}
-            >
-              <WidgetSwitcher
-                trigger={
-                  <Button
-                    type='primary'
-                    data-qa='widget-switcher-launch-button'
-                    // startElement={
-                    //   <span>
-                    //     {widget
-                    //       ? `${widget.widgetId} v.${
-                    //           widget.lastModified.integration?.widgetVersion ??
-                    //           'unknown'
-                    //         }`
-                    //       : '@1fe/bathtub'}
-                    //   </span>
-                    // }
-                    onClick={() => {
-                      dispatch(appActions.setIsWidgetSwitcherOpen(true));
-                    }}
-                  >
-                    {t('Bathtub.Header.Waffle')}
-                  </Button>
-                }
-              />
-            </Hotkeys>
-          </Hotkeys>
-
-          <Hotkeys
-            keyName='cmd+p'
-            onKeyDown={(_, event) => {
-              event.preventDefault();
-              event.stopImmediatePropagation();
-              dispatch(appActions.setIsPropsEditorOpen(true));
-            }}
-          >
-            <WidgetPropEditor
+            <WidgetSwitcher
               trigger={
                 <Button
-                  type='primary'
-                  data-qa='widget-prop-editor-button'
+                  type="primary"
+                  data-qa="widget-switcher-launch-button"
+                  // startElement={
+                  //   <span>
+                  //     {widget
+                  //       ? `${widget.widgetId} v.${
+                  //           widget.lastModified.integration?.widgetVersion ??
+                  //           'unknown'
+                  //         }`
+                  //       : '@1fe/bathtub'}
+                  //   </span>
+                  // }
                   onClick={() => {
-                    dispatch(appActions.setIsPropsEditorOpen(true));
+                    dispatch(appActions.setIsWidgetSwitcherOpen(true));
                   }}
                 >
-                  {t('Bathtub.Header.Editor')}
+                  {t('Bathtub.Header.Waffle')}
                 </Button>
               }
             />
           </Hotkeys>
-          {/* {variants?.length ? (
+        </Hotkeys>
+
+        <Hotkeys
+          keyName="cmd+p"
+          onKeyDown={(_, event) => {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            dispatch(appActions.setIsPropsEditorOpen(true));
+          }}
+        >
+          <WidgetPropEditor
+            trigger={
+              <Button
+                type="primary"
+                data-qa="widget-prop-editor-button"
+                onClick={() => {
+                  dispatch(appActions.setIsPropsEditorOpen(true));
+                }}
+              >
+                {t('Bathtub.Header.Editor')}
+              </Button>
+            }
+          />
+        </Hotkeys>
+        {/* {variants?.length ? (
               <Select
                 label={t('Bathtub.Header.Variant')}
                 onChange={onVariantChange}
@@ -135,23 +136,23 @@ const AppHeader = memo(() => {
                 ))}
               </Select>
             ) : null} */}
-          <Button
-            type='primary'
-            onClick={() => {
-              dispatch(appActions.reset());
-            }}
-          >
-            {t('Bathtub.Header.Reset')}
-          </Button>
-          <Button
-            type='primary'
-            onClick={() => {
-              dispatch(appActions.renderWidget());
-            }}
-          >
-            {t('Bathtub.Header.Render')}
-          </Button>
-        </Row>
+        <Button
+          type="primary"
+          onClick={() => {
+            dispatch(appActions.reset());
+          }}
+        >
+          {t('Bathtub.Header.Reset')}
+        </Button>
+        <Button
+          type="primary"
+          onClick={() => {
+            dispatch(appActions.renderWidget());
+          }}
+        >
+          {t('Bathtub.Header.Render')}
+        </Button>
+      </Row>
     </HeaderWrapper>
   );
 });
