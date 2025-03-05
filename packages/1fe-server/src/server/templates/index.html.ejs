@@ -85,5 +85,17 @@
     <% if (!isProduction && !hideImportMapOverrideElement) { %>
       <import-map-overrides-full></import-map-overrides-full>
     <% } %>
+
+    <script nonce="<%= cspNonceGuid %>">
+      var telemetry = {
+        mark: (name, context) => {
+          if (performance && typeof performance.mark === 'function') {
+            performance.mark(name, context)
+          }
+        }
+      }
+
+      telemetry.mark("@1fe/shell-start");
+    </script>
   </body>
 </html>

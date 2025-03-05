@@ -5,6 +5,7 @@ import { initNavigation } from '../platformProps/utils/navigation';
 import { SessionStoragePlatformUtils } from '../platformProps/utils/sessionStorage';
 import { LocalStoragePlatformUtils } from '../platformProps/utils/localStorage';
 import { initExperience } from '../platformProps/utils/experience';
+import { WidgetAppLoadTimeUtils } from './app-load-time';
 
 export type NavigationUtils = ReturnType<typeof initNavigation>;
 export type ExperienceUtils = ReturnType<typeof initExperience>;
@@ -56,7 +57,7 @@ export type PlatformUtils = {
      * Utilities for measuring the time it takes for the widget to load
      * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/apploadtime/
      */
-    // appLoadTime: WidgetAppLoadTimeUtils;
+    appLoadTime: WidgetAppLoadTimeUtils;
     /**
      * Utilities for handling authentication
      * @link https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/auth/

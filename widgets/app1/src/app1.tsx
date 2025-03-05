@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { default as Widget } from './components/router';
 import withProvider from './withProvider';
 
@@ -9,6 +9,10 @@ import withProvider from './withProvider';
 // }
 // TODO: Strongly type
 const RootWrapper: any = (props) => {
+  useEffect(() => {
+    props.platform.utils.appLoadTime.end();
+  }, []);
+
   return <Widget {...props} />;
 };
 

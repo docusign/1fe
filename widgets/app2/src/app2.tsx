@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect} from "react";
 import { Button } from 'antd';
 
 type WidgetEvents = {
@@ -7,6 +7,10 @@ type WidgetEvents = {
 
 
 export default function Root(props) {
+  useEffect(() => {
+    props.platform.utils.appLoadTime.end();
+  }, []);
+
   const [eventBusResult, setEventBusResult] = useState('unchanged');
   const [unsubscribeFn, setUnsubscribeFn] = useState(() => () => {});
 

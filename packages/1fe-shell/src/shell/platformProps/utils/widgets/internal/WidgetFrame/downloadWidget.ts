@@ -59,8 +59,7 @@ export async function downloadWidget<TWidgetProps>(
   const isWidgetOverriden = isOverrideElementActive();
   const IS_PROD = readMagicBoxShellConfigs().mode === 'production';
   // const widgetLoadingStartTime = Date.now();
-  // TODO: Restore widgetLoadTime
-  // const widgetLoadTime = getShellPlatformUtils().appLoadTime;
+  const widgetLoadTime = getShellPlatformUtils().appLoadTime;
 
   const logDownloadWidgetError = (message: string, error: unknown) => {
     logger.error({
@@ -79,26 +78,10 @@ export async function downloadWidget<TWidgetProps>(
 
   try {
     // corresponding end mark is in the widget code: props.platform.utils.appLoadTime.end()
-    // widgetLoadTime.markStart(widgetId.toString());
+    widgetLoadTime.markStart(widgetId.toString());
 
     // corresponding end mark is below: widgetLoadTime.markEnd(`${widgetId}-download`)
-    // widgetLoadTime.markStart(`${widgetId}-download`);
-
-    // TODO: add better documentation for this escape hatch, how can it be avoided?
-    // Prepare is always fetched with send, but we don't want this fired twice
-    // TODO: Remove this
-    if (widgetId === '@ds/send') {
-      window.performance?.mark('app-bundle-start', {
-        detail: {
-          phase: 'app-bundle',
-          time: Date.now(),
-          markerPostion: 'start',
-          actionType: 'download',
-        },
-      });
-
-      window.performance?.mark('1ds-plugin-browser-end');
-    }
+    widgetLoadTime.markStart(`${widgetId}-download`);
 
     const getModule = isUrl(widgetId)
       ? () => widgetsInstance.getByUrl(widgetId, widgetOptions)
@@ -109,11 +92,11 @@ export async function downloadWidget<TWidgetProps>(
 
     module = await getModule();
 
-    // widgetLoadTime.markEnd(`${widgetId}-download`, {
-    //   detail: {
-    //     status: 'success',
-    //   },
-    // });
+    widgetLoadTime.markEnd(`${widgetId}-download`, {
+      detail: {
+        status: 'success',
+      },
+    });
 
     // FAQ: Where is the markEnd for `widgetLoadTime.mark(widgetId.toString())`?
     // The corresponding end mark is in the widget code: props.platform.utils.appLoadTime.end()
@@ -153,15 +136,15 @@ export async function downloadWidget<TWidgetProps>(
       default: React.FC;
     };
   } catch (error) {
-    // widgetLoadTime.markEnd(`${widgetId}-download`, {
-    //   detail: {
-    //     status: 'failure',
-    //   },
-    // });
+    widgetLoadTime.markEnd(`${widgetId}-download`, {
+      detail: {
+        status: 'failure',
+      },
+    });
 
-    // widgetLoadTime.markEnd(widgetId.toString(), {
-    //   detail: { status: 'failure' },
-    // });
+    widgetLoadTime.markEnd(widgetId.toString(), {
+      detail: { status: 'failure' },
+    });
 
     logDownloadWidgetError(`[1DS-Shell] Widget download failed`, error);
 
