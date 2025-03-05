@@ -141,7 +141,7 @@ export const initWidgetsHelper = (
     return EMPTY_WIDGET;
   },
   getByUrl: isWidgetTypeSystem(hostWidget?.type)
-    ? // onlly system widgets can use getByUrl
+    ? // only system widgets can use getByUrl
       <TWidgetProps = Record<string, unknown>,>(
         url: string,
         {

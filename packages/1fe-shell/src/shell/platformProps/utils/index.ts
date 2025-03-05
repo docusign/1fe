@@ -61,9 +61,6 @@ export const getPlatformUtils = (
 //     widget.widgetId,
 //   );
 
-console.log('--6--6--6--6--6--6--6--');
-console.log(widget);
-console.log('--6--6--6--6--6--6--6--');
   const widgets = initWidgetsHelper(widget);
 
   const eventBus = initEventBus(widget.widgetId);
