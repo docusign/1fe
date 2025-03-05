@@ -27,6 +27,8 @@ import { initLocalStorage } from './localStorage';
 // import { i18n as initi18n } from './i18n';
 import { initExperience } from './experience';
 import { readMagicBoxShellConfigs } from '../../configs/shell-configs';
+import { getAppLoadTimeUtils } from './app-load-time';
+import { WidgetAppLoadTimeUtils } from './app-load-time/types';
 // import { initAnalytics } from './analytics';
 // import { DEFAULT_WIDGET_OPTIONS } from './widgets/internal/utils/constants';
 // import { initOTEL } from './otel';
@@ -57,9 +59,9 @@ export const getPlatformUtils = (
 //   });
 
 //   // Some utils depend on others to execute since they use them
-//   const appLoadTime = getAppLoadTimeUtils<WidgetAppLoadTimeUtils>(
-//     widget.widgetId,
-//   );
+  const appLoadTime = getAppLoadTimeUtils<WidgetAppLoadTimeUtils>(
+    widget.widgetId,
+  );
 
   const widgets = initWidgetsHelper(widget);
 
@@ -102,7 +104,7 @@ export const getPlatformUtils = (
     // network,
     // logger,
     widgets,
-    // appLoadTime,
+    appLoadTime,
     // auth,
     // user,
     eventBus,

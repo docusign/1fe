@@ -8,5 +8,7 @@ export const getShellLogger = () => {
         error: (logObject: any) => {
           console.error(logObject);
         },
+        logPlatformUtilUsage: true,
+        redactSensitiveData: true,
       }
 }
