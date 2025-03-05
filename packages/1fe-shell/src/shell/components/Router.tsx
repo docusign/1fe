@@ -47,10 +47,10 @@ const determineBaseRoute = (): RouteObject[] => {
           // TODO: configure default route
           element: <RedirectComponent to='/app1' />,
         },
-        {
-          path: '/bathtub',
-          element: <RedirectComponent to='/bathtub' />,
-        },
+        // {
+        //   path: '/bathtub',
+        //   element: <RedirectComponent to='/bathtub' />,
+        // },
       ];
 };
 

@@ -1,0 +1,16 @@
+{
+    "extends": "ts-config-single-spa",
+    "compilerOptions": {
+      "jsx": "react-jsx",
+      "declarationDir": "dist",
+      "skipLibCheck": true,
+      "target": "esnext",
+      "jsxImportSource": "@emotion/react",
+    },
+    // "files": [
+    //   "src/widget.tsx"
+    // ],
+    "include": ["src/**/*"],
+    "exclude": ["src/**/*.test*"],
+  }
+  
