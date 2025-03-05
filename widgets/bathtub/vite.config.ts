@@ -15,7 +15,7 @@ export default defineConfig({
       preserveEntrySignatures: 'strict',
       output: {
         format: 'systemjs',
-        entryFileNames: `assets/1fe-bundle.js`,
+        entryFileNames: `assets/[name].js`,
         chunkFileNames: `assets/[name].js`,
         assetFileNames: `assets/[name].[ext]`,
         globals: {
