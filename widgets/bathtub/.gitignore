@@ -31,4 +31,5 @@ reports
 .idea/
 src/locales/locale.d.ts
 src/locales/helpers.ts
-src/locales/index.ts
+# for now we are hardcoding translations
+# src/locales/index.ts
