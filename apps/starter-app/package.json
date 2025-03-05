@@ -74,5 +74,35 @@
     "react-router-dom": "6.9.0",
     "serve-favicon": "^2.5.0",
     "systemjs": "^6.15.1"
-  }
+  },
+  "browserslist": [
+    "ios >= 13",
+    "safari >= 12",
+    "android >= 108",
+    "chrome >= 108",
+    "firefox >= 107",
+    "opera >= 92",
+    "samsung >= 19.0",
+    "kaios >= 2.5",
+    "op_mini all",
+    "op_mob >= 72",
+    "android >= 108",
+    "and_chr >= 111",
+    "and_ff >= 107",
+    "and_qq >= 13.1",
+    "and_uc >= 13.4",
+    "chrome > 50",
+    "ios >= 10",
+    "edge > 78",
+    "safari >= 10",
+    "firefox > 53",
+    "firefox ESR",
+    "samsung>5",
+    "opera>38",
+    "firefox >= 52",
+    "chrome >= 49",
+    "not dead",
+    "not ie > 0",
+    "not edge < 19"
+    ]
 }

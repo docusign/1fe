@@ -25,6 +25,7 @@
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.1.5",
     "@testing-library/react-hooks": "^7.0.2",
+    "@types/browserslist-useragent": "^3.0.7",
     "@types/deep-freeze": "^0.1.5",
     "@types/jest": "^29.2.0",
     "@types/js-cookie": "^3.0.3",
@@ -40,11 +41,11 @@
     "vite": "^5.2.0"
   },
   "dependencies": {
+    "@emotion/styled": "11.10.6",
     "bowser": "^2.11.0",
     "browserslist-useragent": "^4.0.0",
     "deep-freeze": "^0.0.1",
     "emittery": "^1.0.1",
-    "@emotion/styled": "11.10.6",
     "js-cookie": "^3.0.1",
     "lodash": "^4.17.21",
     "lottie-react": "^2.4.0",
