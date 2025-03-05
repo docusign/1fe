@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { ROUTES, STATIC_ASSETS, ERROR_MIDDLEWARE_TYPES } from '../constants';
-const { matchesUA } = require('browserslist-useragent');
+import { ROUTES, STATIC_ASSETS } from '../constants';
+import { readMagicBoxConfigs } from '../utils/magicbox-configs';
+import { matchesUA } from 'browserslist-useragent';
+import { isEmpty } from 'lodash';
 
-// REVISIT: CONSUME CONFIG HERE
-const BROWSERS_LIST: string[] = [];
 const ignoredRoutes = [
   ROUTES.WATCHDOG,
   ROUTES.HEALTH,
@@ -15,15 +15,14 @@ const ignoredRoutes = [
 // STATIC ASSETS
 
 // TODO: [1DS consumption] When consuming back, need to add middleware for isAutomationRun flag to be set
-
-const browsersListConfig = BROWSERS_LIST;
-
 const browsersListMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction,
 ): void => {
   try {
+    const browsersListConfig = readMagicBoxConfigs().dynamicConfigs.browserslistConfig;
+
     const { path } = req || {};
     const activeAutomatedTestFramework =
       req.query.automated_test_framework || null;
@@ -40,13 +39,16 @@ const browsersListMiddleware = (
       !ignoredRoutes.includes(path) &&
       // Ignore redirecting for static assets (Only applicable to local dev mode - Usually served by CDN)
       !path.startsWith(STATIC_ASSETS.IMAGES) &&
-      !path.startsWith(STATIC_ASSETS.FAVICON)
+      !path.startsWith(STATIC_ASSETS.FAVICON) && 
+      !isEmpty(browsersListConfig)
     ) {
-      const matchesUnsupportedBrowser = matchesUA(userAgent, {
+      const matchesSupportedBrowser = matchesUA(userAgent, {
         browsers: browsersListConfig,
+        ignoreMinor: true,
+        ignorePatch: true,
       });
 
-      if (matchesUnsupportedBrowser) {
+      if (!matchesSupportedBrowser) {
         throw new Error('Unsupported Browser');
       }
     }
