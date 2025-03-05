@@ -20,6 +20,7 @@ import { readMagicBoxConfigs } from '../../utils/magicbox-configs';
 import { ACTIVE_AUTOMATED_TEST_FRAMEWORK } from '../../constants/cookie-names';
 import { getRequestHost } from '../../utils/request-helpers';
 import { getWidgetConfigsForIndexHtml } from './widget-config';
+import { STATIC_ASSETS } from '../../constants';
 
 // TODO:
 // import packageJson from '../../../package.json';
@@ -314,6 +315,7 @@ export const dataForRenderingTemplate = async (req: Request) => {
         ...missingBareSpecifiersMap,
       },
     },
+    favicon: STATIC_ASSETS.FAVICON,
     shellBundleUrl
   };
 };

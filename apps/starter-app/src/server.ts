@@ -3,6 +3,7 @@ import express from 'express';
 import path from 'path';
 // @ts-ignore
 import magicBoxServer from '@devhub/1fe-server';
+import favicon from 'serve-favicon';
 
 import router from './lib/router';
 import { enforcedDefaultCsp, reportOnlyDefaultCsp } from './csp-configs';
@@ -35,8 +36,7 @@ const ROUTES = {
   AUTH_FORWARDER: '/auth-forwarder/:widgetId',
   IMAGES: '/images',
   // Query Parameter needed for updating favicon cache
-  FAVICON: '/favicon.ico?v=2',
-  OLD_FAVICON: '/favicon.ico',
+  FAVICON: '/favicon.ico',
   ROOT: '/',
   // TEST: '/test',
   SW: '/sw.js',
@@ -75,6 +75,8 @@ const app = magicBoxServer(options);
 
 // Middleware that parses json and looks at requests where the Content-Type header matches the type option.
 app.use(express.json());
+
+app.use(favicon(path.join(__dirname, 'static/favicon.ico')));
 
 // Serve API requests from the router
 app.use('/api', router);
