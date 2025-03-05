@@ -6,7 +6,6 @@ export const serverOptions = {
     configManagement: {
       url: `https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/common-configs/production.json`,
       refreshMs: 30 * 1000,
-      phasedRelease: true,
     },
     shellBundleUrl: 'http://localhost:3000/bundle.js',
     server: {
