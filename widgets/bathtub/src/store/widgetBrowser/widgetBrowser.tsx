@@ -108,9 +108,8 @@
 
 // export { widgetBrowserActions, widgetBrowserReducer, widgetBrowserSelectors };
 
-
-import { useState, useEffect } from "react";
-import { Table, Typography } from "antd";
+import { useState, useEffect } from 'react';
+import { Table, Typography } from 'antd';
 
 export function WidgetBrowser() {
   const [widgets, setWidgets] = useState([]);
@@ -118,50 +117,50 @@ export function WidgetBrowser() {
   useEffect(() => {
     const widgetConfigScript = document.querySelector(
       // TODO: we should use a different tag
-      'script[data-1ds-config-id="widget-config"]'
+      'script[data-1ds-config-id="widget-config"]',
     );
     if (widgetConfigScript) {
       try {
-        const config = JSON.parse(widgetConfigScript.textContent || "[]");
+        const config = JSON.parse(widgetConfigScript.textContent || '[]');
         setWidgets(config);
       } catch (error) {
-        console.error("Error parsing widget config JSON:", error);
+        console.error('Error parsing widget config JSON:', error);
       }
     }
   }, []);
 
   const columns = [
     {
-      title: "Widget ID",
-      dataIndex: "widgetId",
-      key: "widgetId",
+      title: 'Widget ID',
+      dataIndex: 'widgetId',
+      key: 'widgetId',
     },
     {
-      title: "Route",
-      dataIndex: ["plugin", "route"],
-      key: "route",
+      title: 'Route',
+      dataIndex: ['plugin', 'route'],
+      key: 'route',
     },
     {
-      title: "Version",
-      dataIndex: "version",
-      key: "version",
+      title: 'Version',
+      dataIndex: 'version',
+      key: 'version',
     },
     {
-      title: "Has Auth",
-      dataIndex: ["plugin", "auth"],
-      key: "auth",
-      render: (auth) => (auth ? "true" : "false"),
+      title: 'Has Auth',
+      dataIndex: ['plugin', 'auth'],
+      key: 'auth',
+      render: (auth) => (auth ? 'true' : 'false'),
     },
   ];
 
   return (
     <div>
       <Typography.Title level={2}>Widget Browser</Typography.Title>
-      <Table 
-        dataSource={widgets} 
-        columns={columns} 
-        rowKey="widgetId" 
-        locale={{ emptyText: "No widget configuration found." }}
+      <Table
+        dataSource={widgets}
+        columns={columns}
+        rowKey="widgetId"
+        locale={{ emptyText: 'No widget configuration found.' }}
       />
     </div>
   );

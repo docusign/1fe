@@ -69,17 +69,17 @@ const Fallback: React.FC<
   return (
     <Column gap={spacingS}>
       <Section>
-        <Row css={{alignContent: 'center'}}>
-          <Column justify='center'>
-            <Title data-qa='bathtub.error.type' type='error'>
+        <Row css={{ alignContent: 'center' }}>
+          <Column justify="center">
+            <Title data-qa="bathtub.error.type" type="error">
               {errorData.type}
             </Title>
-            <h2 data-qa='bathtub.error.heading'>
+            <h2 data-qa="bathtub.error.heading">
               {t('Bathtub.Renderer.HelpFailedHeader')}
             </h2>
             <Text>{t('Bathtub.Renderer.HelpFailed')}</Text>
           </Column>
-          <Hotkeys keyName='cmd+esc' onKeyDown={clean}>
+          <Hotkeys keyName="cmd+esc" onKeyDown={clean}>
             <button onClick={clean}>
               {t('Bathtub.Renderer.HelpFailedAction')}
             </button>
@@ -88,28 +88,28 @@ const Fallback: React.FC<
       </Section>
 
       <Section>
-        <Row css={{alignContent: 'center'}}>
-          <Row.Flex flex='1' justify='center'>
-            <Title data-qa='bathtub.error.message' type='error'>
+        <Row css={{ alignContent: 'center' }}>
+          <Row.Flex flex="1" justify="center">
+            <Title data-qa="bathtub.error.message" type="error">
               {errorData.message}
             </Title>
-            <Title data-qa='bathtub.error.location' type='info'>
+            <Title data-qa="bathtub.error.location" type="info">
               {t('Bathtub.Renderer.HelpFailureLocation', {
                 WIDGET: errorData.widget,
                 LOCATION: errorData.location,
               })}
             </Title>
           </Row.Flex>
-          <a href={`${errorData.file}`} target='_blank'>
+          <a href={`${errorData.file}`} target="_blank">
             {t('Bathtub.Renderer.HelpFailureOpenFile')}
           </a>
           {/* <Box>Open in editor: {errorData.file}</Box> */}
         </Row>
       </Section>
 
-      <Column.Flex flex='1'>
+      <Column.Flex flex="1">
         <Section>
-          <h3 data-qa='bathtub.error.stackHeading'>
+          <h3 data-qa="bathtub.error.stackHeading">
             {t('Bathtub.Renderer.HelpFailureStackTrace')}
           </h3>
           <Pre>{errorData.stack}</Pre>
