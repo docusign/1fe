@@ -1,6 +1,6 @@
 import { PlatformContextType, WidgetOptions } from '../../types/platform-utils';
 import { WidgetConfig } from '../../types/widget-config';
-import { DEFAULT_WIDGET_OPTIONS } from '../utils/widgets/internal/utils/constants';
+import { getDefaultWidgetOptions } from '../utils/widgets/internal/utils/constants';
 
 import { getHostWidget } from './getHostWidget';
 // import { getTree } from './getTree';
@@ -8,7 +8,7 @@ import { getHostWidget } from './getHostWidget';
 
 export const getContext = (
   widget: WidgetConfig,
-  options: WidgetOptions = DEFAULT_WIDGET_OPTIONS,
+  options: WidgetOptions = getDefaultWidgetOptions(),
 ): PlatformContextType => {
   return {
     self: {

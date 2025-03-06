@@ -1,7 +1,10 @@
-import React from 'react';
-import { WidgetOptions } from "../../../../../types/platform-utils";
+import { readMagicBoxShellConfigs } from '../../../../../configs/shell-configs';
 
-export const DEFAULT_WIDGET_OPTIONS: WidgetOptions = {
-  variantId: 'default',
-  Loader: <p>Loading...</p>,
-};
+export const getDefaultWidgetOptions = () => {
+  const getLoader = readMagicBoxShellConfigs().components.getLoader;
+
+  return {
+    variantId: 'default',
+    Loader: getLoader()
+  }
+}

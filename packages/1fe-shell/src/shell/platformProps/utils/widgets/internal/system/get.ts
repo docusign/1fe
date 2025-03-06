@@ -4,7 +4,7 @@ import { logPlatformUtilUsage } from '../../../logPlatformUtilUsage';
 import { getWidgetPath } from '../../../../context/getWidgetPath';
 import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../../../1fe-server/src/server/utils/widget-config-helpers';
 import { getComponentFromModule as _getComponentFromModule } from '../utils/getComponentFromModule';
-import { DEFAULT_WIDGET_OPTIONS } from '../utils/constants';
+import { getDefaultWidgetOptions } from '../utils/constants';
 import { WidgetOptions } from '../../../../../types/platform-utils';
 import { isSystemEnv } from '../utils/isSystem';
 import { WIDGET_CONFIGS } from '../../../../../configs/config-helpers';
@@ -24,8 +24,8 @@ export const get =
   async (
     requestedWidgetId: string,
     {
-      variantId = DEFAULT_WIDGET_OPTIONS.variantId,
-    }: WidgetOptions = DEFAULT_WIDGET_OPTIONS, // NOTE: always deconstruct here to individually initialize options
+      variantId = getDefaultWidgetOptions().variantId,
+    }: WidgetOptions = getDefaultWidgetOptions(), // NOTE: always deconstruct here to individually initialize options
   ): Promise<System.Module> => {
     const logger = getShellLogger();
 

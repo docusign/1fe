@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, Suspense, useMemo } from 'react';
 import { MemoryRouter, UNSAFE_LocationContext } from 'react-router-dom';
 
-import { DEFAULT_WIDGET_OPTIONS } from '../utils/constants';
+import { getDefaultWidgetOptions } from '../utils/constants';
 import { downloadWidget } from './downloadWidget';
 import { WidgetRenderStatusType } from './types';
 import { WidgetConfig } from '../../../../../types/widget-config';
@@ -123,7 +123,7 @@ export function WidgetURLLoader<TWidgetProps>({
   hostWidgetId,
   options: { variantId }, // dragon: always deconstruct options to maintain stability in useMemo calls below
 }: WidgetLoaderProps<TWidgetProps, URL>): React.ReactElement | null {
-  const Loader = DEFAULT_WIDGET_OPTIONS.Loader;
+  const Loader = getDefaultWidgetOptions().Loader;
   const platformProps = useMemo(
     () =>
       getPlatformProps(

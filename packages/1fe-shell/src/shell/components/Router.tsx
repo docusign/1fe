@@ -54,20 +54,24 @@ const determineBaseRoute = (): RouteObject[] => {
       ];
 };
 
-const pluginRoutes = getWidgetConfigValues(PLUGIN_CONFIGS).map(
-  // TODO: Fix type
-  (plugin: any): RouteObject => {
-    return {
-      path: `${plugin.route}/*`,
-      element: (
-        <RouteWrapper plugin={plugin}>
-          <PluginLoader plugin={plugin} />
-        </RouteWrapper>
-      ),
-      errorElement: <Error />,
-    };
-  },
-);
+const getPluginRoutes = () => {
+  const getError = readMagicBoxShellConfigs().components.getError;
+
+  return getWidgetConfigValues(PLUGIN_CONFIGS).map(
+    // TODO: Fix type
+    (plugin: any): RouteObject => {
+      return {
+        path: `${plugin.route}/*`,
+        element: (
+          <RouteWrapper plugin={plugin}>
+            <PluginLoader plugin={plugin} />
+          </RouteWrapper>
+        ),
+        errorElement: getError(),
+      };
+    },
+  );
+}
 
 let router: ReturnType<typeof createBrowserRouter>;
 
@@ -75,13 +79,17 @@ export const getRouter = () => {
   if (router) {
     return router;
   }
-  
+
+  const getError = readMagicBoxShellConfigs().components.getError;
+
   const routerConfig: RouteObject[] = [
     ...determineBaseRoute(),
-    ...pluginRoutes,
+    ...getPluginRoutes(),
     {
       path: '*',
-      element: <Error type='notFound' />,
+      element: getError({
+        type: 'notFound'
+      })
     },
   ];
 

@@ -8,6 +8,7 @@ import { WidgetConfig } from '../../../../../types/widget-config';
 import { WidgetOptions } from '../../../../../types/platform-utils';
 import { readMagicBoxShellConfigs } from '../../../../../configs/shell-configs';
 import { getShellLogger } from '../../../../../utils/telemetry';
+import { WidgetErrorBoundary } from './WidgetErrorBoundary';
 
 interface WidgetFrameProps<TWidgetProps> {
   /**
@@ -143,7 +144,14 @@ function WidgetFrameInner<TWidgetProps>({
       // if url given, we don't know if it's a plugin or not, could be engineered
       data-is-plugin={isUrl ? false : !!requestedWidgetConfigOrUrl?.plugin}
     >
+      <WidgetErrorBoundary
+        widgetFrameId={widgetFrameId}
+        requestedWidgetConfigOrUrl={requestedWidgetConfigOrUrl}
+        fallback={fallback}
+        hostWidgetId={hostWidgetId}
+      >
         {mayBeWidget}
+      </WidgetErrorBoundary>
     </WidgetInfo>
   );
 }

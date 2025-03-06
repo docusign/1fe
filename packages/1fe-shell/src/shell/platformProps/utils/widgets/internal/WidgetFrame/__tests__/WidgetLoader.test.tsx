@@ -5,7 +5,7 @@
 // } from '../../platformProps/utils/widgets/internal/WidgetFrame/WidgetLoader';
 
 import { renderWithBrowserRouterWrapper } from '../../../../../../components/__tests__/utils/render-with-router';
-import { DEFAULT_WIDGET_OPTIONS } from '../../utils/constants';
+import { getDefaultWidgetOptions } from '../../utils/constants';
 import { WidgetLoader, WidgetURLLoader } from '../WidgetLoader';
 
 // import { renderWithBrowserRouterWrapper } from './utils';
@@ -43,6 +43,14 @@ jest.mock('../../../../../../utils/url', () => ({
   basePathname: jest.fn(() => '/'),
 }));
 
+jest.mock('../../../../../../configs/shell-configs', () => ({
+  readMagicBoxShellConfigs: jest.fn().mockImplementation(() => ({
+    components: {
+      Loader: () => <p>Loading...</p>
+    }
+  })),
+}));
+
 // jest.mock<typeof import('../../utils/env-helpers')>(
 //   '../../utils/env-helpers',
 //   () => ({
@@ -66,7 +74,7 @@ describe('<WidgetLoader />', () => {
         setWidgetRenderStatus={() => void 0}
         widgetProps={{ hello: 'world' }}
         hostWidgetId='@host/widget'
-        options={DEFAULT_WIDGET_OPTIONS}
+        options={getDefaultWidgetOptions()}
       />,
     );
   });
@@ -83,7 +91,7 @@ describe('<WidgetLoader />', () => {
         setWidgetRenderStatus={() => void 0}
         widgetProps={{ hello: 'world' }}
         hostWidgetId='@host/widget'
-        options={DEFAULT_WIDGET_OPTIONS}
+        options={getDefaultWidgetOptions()}
       />,
     );
   });
@@ -102,7 +110,7 @@ describe('<WidgetURLLoader />', () => {
         setWidgetRenderStatus={() => void 0}
         widgetProps={{ hello: 'world' }}
         hostWidgetId='@host/widget'
-        options={DEFAULT_WIDGET_OPTIONS}
+        options={getDefaultWidgetOptions()}
       />,
     );
   });

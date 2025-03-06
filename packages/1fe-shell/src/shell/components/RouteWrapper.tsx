@@ -12,6 +12,8 @@ import { useLocation } from 'react-router-dom';
 import { PluginConfig } from '../types/widget-config';
 import { SHELL_NAVIGATED_EVENT } from '../constants/event-names';
 import { getShellLogger } from '../utils/telemetry';
+import { readMagicBoxShellConfigs } from '../configs/shell-configs';
+import { AdditionalErrorInfo, OneDsErrorBoundary } from './OneDsErrorBoundary';
 
 export type RouteWrapperProps = {
   children: React.ReactNode;
@@ -45,17 +47,18 @@ export const RouteWrapper: React.FC<RouteWrapperProps> = ({
     previousPathRef.current = location?.pathname;
   }, [location]);
 
-  // const handleError = (error: Error, info: AdditionalErrorInfo) => {
-  //   logger.error({
-  //     message: `[1DS-Shell] Unhandled Route Failure`,
-  //     error,
-  //     info,
-  //     location: location,
-  //   });
-  // };
+  const handleError = (error: Error, info: AdditionalErrorInfo) => {
+    logger.error({
+      message: `[1DS-Shell] Unhandled Route Failure`,
+      error,
+      info,
+      location: location,
+    });
+  };
 
 
-  // const IS_PROD = readMagicBoxShellConfigs().mode === 'production';
+  const IS_PROD = readMagicBoxShellConfigs().mode === 'production';
+  const getError = readMagicBoxShellConfigs().components.getError;
   
   // if (FEATURE_FLAGS.enable1dsDevtool && isIntegrationEnvironment(ENVIRONMENT)) {
   //   return (
@@ -66,17 +69,18 @@ export const RouteWrapper: React.FC<RouteWrapperProps> = ({
   //   );
   // }
 
-  // TODO: Do we want to allow customization of Error Boundary?
-  // if (!IS_PROD) {
+  if (!IS_PROD) {
     return <>{children}</>;
-  // }
+  }
 
-  // return (
-  //   <OneDsErrorBoundary
-  //     fallbackComponent={<Error plugin={plugin} />}
-  //     onError={handleError}
-  //   >
-  //     {children}
-  //   </OneDsErrorBoundary>
-  // );
+  return (
+    <OneDsErrorBoundary
+      fallbackComponent={getError({
+        plugin
+      })}
+      onError={handleError}
+    >
+      {children}
+    </OneDsErrorBoundary>
+  );
 };
