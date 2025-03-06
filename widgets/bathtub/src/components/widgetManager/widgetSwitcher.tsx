@@ -1,8 +1,8 @@
 import { memo, useState } from 'react';
 import Hotkeys from 'react-hot-keys';
-import {Modal, Typography, Button, Input} from 'antd';
+import { Modal, Typography, Button, Input } from 'antd';
 
-import { Box, Column, Row, Text } from '../../components/layout';
+import { Box, Column, Text } from '../../components/layout';
 import { QuickLinks } from '../../components/widgetManager/quickLinks';
 import {
   createShallowSelector,
@@ -26,7 +26,6 @@ const widgetSwitcherStateSelector = createShallowSelector(
 
 const spacingM = '32px';
 const spacingS = '24px';
-const spacingXXS = '8px';
 
 const WidgetSwitcher = memo(({ trigger }: WidgetSwitcherProps) => {
   const { isVisible, widgetUrl } = useAppSelector(widgetSwitcherStateSelector);
@@ -42,30 +41,30 @@ const WidgetSwitcher = memo(({ trigger }: WidgetSwitcherProps) => {
         onCancel={() => dispatch(appActions.setIsWidgetSwitcherOpen(false))}
         footer={[
           <Hotkeys
-          keyName='esc'
-          onKeyDown={() => {
-            dispatch(appActions.setIsWidgetSwitcherOpen(false));
-          }}
-        >
-          <Button
-            type='primary'
-            disabled={!newUrl || newUrl === widgetUrl}
-            onClick={() => {
-              if (newUrl) dispatch(appActions.setActiveWidgetUrl(newUrl));
+            keyName="esc"
+            onKeyDown={() => {
+              dispatch(appActions.setIsWidgetSwitcherOpen(false));
             }}
-            data-qa='apply-widget-url'
           >
-            Apply
-          </Button>
-        </Hotkeys>,
-        <Button
-          type='primary'
-          onClick={() => {
-            dispatch(appActions.setIsWidgetSwitcherOpen(false));
-          }}
-        >
-          Close
-        </Button>
+            <Button
+              type="primary"
+              disabled={!newUrl || newUrl === widgetUrl}
+              onClick={() => {
+                if (newUrl) dispatch(appActions.setActiveWidgetUrl(newUrl));
+              }}
+              data-qa="apply-widget-url"
+            >
+              Apply
+            </Button>
+          </Hotkeys>,
+          <Button
+            type="primary"
+            onClick={() => {
+              dispatch(appActions.setIsWidgetSwitcherOpen(false));
+            }}
+          >
+            Close
+          </Button>,
         ]}
       >
         <Typography.Title level={2}>Widget switcher</Typography.Title>
@@ -88,36 +87,29 @@ const WidgetSwitcher = memo(({ trigger }: WidgetSwitcherProps) => {
             data-qa='widgetUrlInput'
           /> */}
 
-        <label htmlFor='widgetUrl'>Enter a widget url</label>
-        <Input
-          id='widgetUrl'
-          name='widgetUrl'
-          type='url'
-          placeholder='http://127.0.0.1/js/1fe-bundle.js'
-          onChange={(e) => updateUrl(e.target.value)}
-          value={newUrl ?? widgetUrl}
-          data-qa='widgetUrlInput'
-        />
-          {/* <Row
-            css={{gap: `${spacingXXS}`, padding: `${spacingXXS} 0 0 0`, alignContent: 'center'}} > */}
-            <div>
+          <label htmlFor="widgetUrl">Enter a widget url</label>
+          <Input
+            id="widgetUrl"
+            name="widgetUrl"
+            type="url"
+            placeholder="http://127.0.0.1/js/1fe-bundle.js"
+            onChange={(e) => updateUrl(e.target.value)}
+            value={newUrl ?? widgetUrl}
+            data-qa="widgetUrlInput"
+          />
+
+          <div>
             <Text>Quick load: </Text>
-            <QuickLinks port='8080' />
-            <QuickLinks port='8081' />
-            <QuickLinks port='8082' />
-            <QuickLinks port='8083' />
-            </div>
-          {/* </Row> */}
+            <QuickLinks port="8080" />
+            <QuickLinks port="8081" />
+            <QuickLinks port="8082" />
+            <QuickLinks port="8083" />
+          </div>
           <Box padding={`${spacingS} 0`}>
             <p>
               <b>Shortcuts</b>
             </p>
             <table>
-              {/* <thead>
-                  <tr>
-                    <th>Shortcuts</th>
-                    <th></th>
-                  </tr> */}
               <tbody>
                 <tr>
                   <td>Copy</td>
@@ -143,7 +135,6 @@ const WidgetSwitcher = memo(({ trigger }: WidgetSwitcherProps) => {
             </table>
           </Box>
         </Column>
-
       </Modal>
     </>
   );

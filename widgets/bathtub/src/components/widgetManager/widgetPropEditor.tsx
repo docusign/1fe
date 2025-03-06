@@ -11,7 +11,11 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '../../store';
-import { appActions, selectActiveWidgetProps, selectApp } from '../../store/app';
+import {
+  appActions,
+  selectActiveWidgetProps,
+  selectApp,
+} from '../../store/app';
 
 type WidgetPropEditorProps = {
   trigger: React.ReactNode;
@@ -51,38 +55,38 @@ const WidgetPropEditor = memo(({ trigger }: WidgetPropEditorProps) => {
         onCancel={() => dispatch(appActions.setIsPropsEditorOpen(false))}
         footer={[
           <Hotkeys
-          keyName='esc'
-          onKeyDown={() => {
-            dispatch(appActions.setIsPropsEditorOpen(false));
-            dispatch(appActions.clearPropsError());
-          }}
-        >
-            <Button
-            type="primary"
-            onClick={() => {
-              if (draft.current && draft.current !== widgetProps) {
-                dispatch(appActions.setActiveWidgetProps(draft.current));
-              }
+            keyName="esc"
+            onKeyDown={() => {
+              dispatch(appActions.setIsPropsEditorOpen(false));
+              dispatch(appActions.clearPropsError());
             }}
-            data-qa='props-editor-update'
+          >
+            <Button
+              type="primary"
+              onClick={() => {
+                if (draft.current && draft.current !== widgetProps) {
+                  dispatch(appActions.setActiveWidgetProps(draft.current));
+                }
+              }}
+              data-qa="props-editor-update"
             >
               {t('Bathtub.PropEditor.Update')}
             </Button>
             <Button
               type="primary"
               onClick={() => dispatch(appActions.setIsPropsEditorOpen(false))}
-              >
+            >
               Close
             </Button>
-        </Hotkeys>
+          </Hotkeys>,
         ]}
       >
         <Typography.Title level={2}>Widget props</Typography.Title>
         <CodeMirror
-          theme='dark'
+          theme="dark"
           value={widgetProps}
-          width='100%'
-          height='50vh'
+          width="100%"
+          height="50vh"
           extensions={[javascript({ jsx: true })]}
           onChange={(newProps) => {
             draft.current = newProps;
