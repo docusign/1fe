@@ -1,7 +1,7 @@
 import 'react';
 
 import { logPlatformUtilUsage } from '../../../logPlatformUtilUsage';
-import { DEFAULT_WIDGET_OPTIONS } from '../utils/constants';
+import { getDefaultWidgetOptions } from '../utils/constants';
 import { WidgetOptions } from '../../../../../types/platform-utils';
 import { isSystemEnv } from '../utils/isSystem';
 import { getComponentFromModule } from '../utils/getComponentFromModule';
@@ -12,8 +12,8 @@ export const getByUrl =
   async (
     url: URL,
     {
-      variantId = DEFAULT_WIDGET_OPTIONS.variantId,
-    }: Partial<WidgetOptions> = DEFAULT_WIDGET_OPTIONS, // NOTE: always deconstruct here to individually initialize options
+      variantId = getDefaultWidgetOptions().variantId,
+    }: Partial<WidgetOptions> = getDefaultWidgetOptions(), // NOTE: always deconstruct here to individually initialize options
   ): Promise<System.Module> => {
     const logger = getShellLogger();
 

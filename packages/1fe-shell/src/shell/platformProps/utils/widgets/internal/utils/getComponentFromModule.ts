@@ -1,4 +1,4 @@
-import { DEFAULT_WIDGET_OPTIONS } from './constants';
+import { getDefaultWidgetOptions } from './constants';
 import { WidgetOptions } from '../../../../../types/platform-utils';
 import { WIDGET_MODULE_KEYS } from '../../../../../constants/widgets';
 
@@ -18,14 +18,14 @@ export type GetComponentFromModuleParam = {
  */
 export async function getComponentFromModule({
   options: {
-    variantId = DEFAULT_WIDGET_OPTIONS.variantId,
-  } = DEFAULT_WIDGET_OPTIONS,
+    variantId = getDefaultWidgetOptions().variantId,
+  } = getDefaultWidgetOptions(),
   module,
   log,
 }: GetComponentFromModuleParam) {
   const isVariantWidget = module.default?.[WIDGET_MODULE_KEYS.hasVariants];
   const isRequestingDefaultVariant =
-    variantId === DEFAULT_WIDGET_OPTIONS.variantId;
+    variantId === getDefaultWidgetOptions().variantId;
 
   const logSuccessfulGet = ({
     isVariantWidget,

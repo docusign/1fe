@@ -1,6 +1,6 @@
 import { renderWithBrowserRouterWrapper } from '../../../../../../components/__tests__/utils/render-with-router';
 import { WidgetConfig } from '../../../../../../types/widget-config';
-import { DEFAULT_WIDGET_OPTIONS } from '../../utils/constants';
+import { getDefaultWidgetOptions } from '../../utils/constants';
 import { WidgetFrame, WidgetNotFoundError } from '../WidgetFrame';
 
 
@@ -38,7 +38,7 @@ describe('<WidgetFrame />', () => {
         widgetNodeId='bnfiufeaskdloij=-asf'
         fallback={<>fallback page here</>}
         hostWidgetId='@host/widget'
-        options={DEFAULT_WIDGET_OPTIONS}
+        options={getDefaultWidgetOptions()}
       />,
     );
   });

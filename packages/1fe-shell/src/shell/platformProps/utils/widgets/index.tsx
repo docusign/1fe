@@ -3,7 +3,7 @@ import React, { memo, useMemo } from 'react';
 import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../1fe-server/src/server/utils/widget-config-helpers';
 import { WidgetFrame } from './internal/WidgetFrame/WidgetFrame';
 import { queueWidgetPreloadsIfFound } from './internal/utils/widgetConfigUtils';
-import { DEFAULT_WIDGET_OPTIONS } from './internal/utils/constants';
+import { getDefaultWidgetOptions } from './internal/utils/constants';
 import { widgetDependencyTree } from '../../../utils/tree';
 import { isWidgetTypeSystem } from '../../../utils/widget-type';
 import { WIDGET_CONFIGS } from '../../../configs/config-helpers';
@@ -46,9 +46,9 @@ export const initWidgetsHelper = (
   ): React.FC<TWidgetProps> => {
     const {
       // The default variantId is the "default" export
-      variantId = DEFAULT_WIDGET_OPTIONS.variantId,
+      variantId = getDefaultWidgetOptions().variantId,
       // The default loading component is a spinner
-      Loader = DEFAULT_WIDGET_OPTIONS.Loader,
+      Loader = getDefaultWidgetOptions().Loader,
     } = options || {};
     const logger = getShellLogger();
     const isGetCalledInsideAUseMemo = isInUseMemo();
@@ -145,11 +145,11 @@ export const initWidgetsHelper = (
       <TWidgetProps = Record<string, unknown>,>(
         url: string,
         {
-          variantId = DEFAULT_WIDGET_OPTIONS.variantId,
-        }: Partial<WidgetOptions> = DEFAULT_WIDGET_OPTIONS,
+          variantId = getDefaultWidgetOptions().variantId,
+        }: Partial<WidgetOptions> = getDefaultWidgetOptions(),
       ): React.FC<TWidgetProps> => {
         const isGetCalledInsideAUseMemo = isInUseMemo();
-        const Loader = DEFAULT_WIDGET_OPTIONS.Loader;
+        const Loader = getDefaultWidgetOptions().Loader;
 
         const widgetNode = widgetDependencyTree.add(
           url,
