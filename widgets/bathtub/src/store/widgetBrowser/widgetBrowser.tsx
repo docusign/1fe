@@ -116,8 +116,7 @@ export function WidgetBrowser() {
 
   useEffect(() => {
     const widgetConfigScript = document.querySelector(
-      // TODO: we should use a different tag
-      'script[data-1ds-config-id="widget-config"]',
+      'script[data-1fe-config-id="widget-config"]',
     );
     if (widgetConfigScript) {
       try {

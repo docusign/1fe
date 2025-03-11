@@ -15,19 +15,19 @@
     <script type="systemjs-importmap" crossorigin="anonymous">
       <%- JSON.stringify(systemJsImportMapConfig) %>
     </script>
-    <script type="application/json" data-1ds-config-id="plugin-config">
+    <script type="application/json" data-1fe-config-id="plugin-config">
       <%- JSON.stringify(pluginConfigs) %>
     </script>
-    <script type="application/json" data-1ds-config-id="widget-config">
+    <script type="application/json" data-1fe-config-id="widget-config">
       <%- JSON.stringify(widgetConfigs) %>
     </script>
-    <script type="application/json" data-1ds-config-id="dynamic-config">
+    <script type="application/json" data-1fe-config-id="dynamic-config">
       <%- JSON.stringify(dynamicConfigs) %>
     </script>
-    <script type="application/json" data-1ds-config-id="env-config">
+    <script type="application/json" data-1fe-config-id="env-config">
       <%- JSON.stringify(envConfigs) %>
     </script>
-    <script type="application/json" data-1ds-config-id="lazy-loaded-libs-config">
+    <script type="application/json" data-1fe-config-id="lazy-loaded-libs-config">
       <%- JSON.stringify(lazyLoadedLibsConfig) %>
     </script>
 
@@ -64,7 +64,6 @@
 
       function onSystemReady() {
         System.import("<%= criticalLibraryConfigUrls.SystemAMD %>").then(() => {
-          // TODO: need to update this to use shellBundleUrl from configs
           System.import('<%= shellBundleUrl %>').catch(onError);
         }).catch(onError);
       }

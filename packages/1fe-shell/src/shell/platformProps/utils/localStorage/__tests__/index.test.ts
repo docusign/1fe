@@ -1,6 +1,6 @@
 // mock must be placed before import
 // for jest to respect the mock
-// TODO: add logger back
+// TODO[1fe]: add logger back
 // const mockLogger = { error: jest.fn() };
 
 import store from 'store2';

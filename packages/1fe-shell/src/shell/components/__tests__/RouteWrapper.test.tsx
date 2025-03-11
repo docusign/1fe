@@ -71,7 +71,7 @@ describe('<RouteWrapper />', () => {
     expect(getByText('this is my tester widget'));
   });
 
-  // TODO: Fix error boundary
+  // TODO[1fe]: Fix error boundary
   // it('should wrap route with ErrorBoundary in prod environments and catch uncaught errors', () => {
   //   // jest.mocked(getEnvironmentConfigs).mockReturnValue(
   //   //   getTestEnvConfig({

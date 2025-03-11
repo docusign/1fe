@@ -12,6 +12,7 @@ import { getWidgetConfigValues, PLUGIN_CONFIGS } from '../configs/config-helpers
 import { RouteWrapper } from './RouteWrapper';
 import { basePathname } from '../utils/url';
 import PluginLoader from './PluginLoader';
+import { PluginConfig, WidgetConfig } from '../types/widget-config';
 
 // equivelent of react-router's <Redirect /> component
 const RedirectComponent = ({ to }: { to: string }) => {
@@ -31,7 +32,7 @@ const determineBaseRoute = (): RouteObject[] => {
     return [
       {
         path: '/',
-        // TODO: configure default route
+        // TODO[1fe]: configure default route
         element: <RedirectComponent to='/app1' />,
       },
     ];
@@ -44,9 +45,9 @@ const determineBaseRoute = (): RouteObject[] => {
   return [
         {
           path: '/',
-          // TODO: configure default route
-          element: <RedirectComponent to='/app1' />,
+          element: <RedirectComponent to='/bathtub' />,
         },
+        // TODO[1fe]: configure default route
         // {
         //   path: '/bathtub',
         //   element: <RedirectComponent to='/bathtub' />,
@@ -57,9 +58,8 @@ const determineBaseRoute = (): RouteObject[] => {
 const getPluginRoutes = () => {
   const getError = readMagicBoxShellConfigs().components.getError;
 
-  return getWidgetConfigValues(PLUGIN_CONFIGS).map(
-    // TODO: Fix type
-    (plugin: any): RouteObject => {
+  return (getWidgetConfigValues(PLUGIN_CONFIGS)).map(
+    (plugin): RouteObject => {
       return {
         path: `${plugin.route}/*`,
         element: (

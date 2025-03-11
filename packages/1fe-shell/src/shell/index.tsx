@@ -32,7 +32,7 @@ export const init = (): Promise<void> => {
         insertPersistentWidgetOverrides(overrides, importMap);
         // logInsertMapCompletion(importMapLoadStartTime, environment, build);
 
-        // TODO: Uncomment and move later
+        // TODO[1fe]: Uncomment and move later
         // applyRuntimeConfigOverridesForWidgetUrlOverrides();
 
         // if (!IS_PROD) {
@@ -77,7 +77,7 @@ export const init = (): Promise<void> => {
 const renderMagicBoxShell = (options: any) => {
   setMagicBoxShellConfigs(options);
 
-  // TODO: Init utils if needed?
+  // TODO[1fe]: Init utils if needed?
 
   init().then(() =>
     ReactDOM.render(
