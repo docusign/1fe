@@ -104,24 +104,3 @@ const { actions: widgetBrowserActions, reducer: widgetBrowserReducer } =
   widgetBrowserSlice;
 
 export { widgetBrowserActions, widgetBrowserReducer, widgetBrowserSelectors };
-
-/// ===========
-
-// import { createSlice } from '@reduxjs/toolkit';
-
-// export const widgetBrowserSlice = createSlice({
-//   name: 'widget',
-//   initialState: {
-//     widgets: [],
-//   },
-//   reducers: {
-//     setWidgets(state, action) {
-//       state.widgets = action.payload;
-//     },
-//   },
-// });
-
-// export const { setWidgets } = widgetSlice.actions;
-// export const widgetReducer = widgetSlice.reducer;
-
-// widgetBrowserActions;
