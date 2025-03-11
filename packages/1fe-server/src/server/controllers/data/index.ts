@@ -15,9 +15,7 @@ import {
 } from '../../utils/libs';
 import { getMetaTagStringsFromWidgetRuntimeConfig } from '../../utils/meta-tags';
 import { PluginConfig } from '../../types';
-import { getCachedWidgetConfigs } from '../../utils/widget-config';
 import { readMagicBoxConfigs } from '../../utils/magicbox-configs';
-import { ACTIVE_AUTOMATED_TEST_FRAMEWORK } from '../../constants/cookie-names';
 import { getRequestHost } from '../../utils/request-helpers';
 import { getWidgetConfigsForIndexHtml } from './widget-config';
 import { STATIC_ASSETS } from '../../constants';
@@ -222,11 +220,10 @@ import { STATIC_ASSETS } from '../../constants';
 // export * from './plugin-config';
 // export * from './widget-config';
 
-// TODO: Strongly type request
 export const dataForRenderingTemplate = async (req: Request) => {
   // TODO:[1DS consumption] Will enableRuntimeConfigOverrides flag be promoted to production? May need to update this
   const widgetConfigs = await getWidgetConfigsForIndexHtml(req);
-  const activePluginConfig = (req as any).plugin;
+  const activePluginConfig = req.plugin;
 
   const preloadableFetchAPIURLs = getPluginPreloadApiUrls({
     widgetConfigs,
@@ -308,7 +305,7 @@ export const dataForRenderingTemplate = async (req: Request) => {
     ),
     pageTitle: readMagicBoxConfigs().orgName,
     baseHref: `${getRequestHost(req)}/`,
-    cspNonceGuid: (req as any).cspNonceGuid,
+    cspNonceGuid: req.cspNonceGuid,
     systemJsImportMapConfig: {
       imports: {
         ...preloadedLibs,

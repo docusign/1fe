@@ -40,8 +40,6 @@ import { WidgetAppLoadTimeUtils } from './app-load-time/types';
 
 export const getPlatformUtils = (
   widget: WidgetConfig,
-  // TODO: strongly type if needed
-  options: any = {} // DEFAULT_WIDGET_OPTIONS,
 ): PlatformUtils => {
   const { widgetId, type, version } = widget;
   // const { ENVIRONMENT, FEATURE_FLAGS } = getEnvironmentConfigs();

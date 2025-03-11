@@ -31,7 +31,7 @@ const errorMiddleware = (
 
     // return the standard error page
     // TODO: fix any
-    const { cspNonceGuid } = req as any;
+    const { cspNonceGuid } = req;
 
     const pageTitle = error.message || 'Error';
 

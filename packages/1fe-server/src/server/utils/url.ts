@@ -22,8 +22,7 @@ export const getSearchParamsFromHref = (href: string): URLSearchParams => {
  */
 export const getRedirectUri = (req: Request): string | null => {
   try {
-    // TODO: strongly type req
-    const stateParam = (req as any).query[STATE] as string | undefined;
+    const stateParam = req.query[STATE] as string | undefined;
     const parsedStateParam = JSON.parse(stateParam || '{}') as Record<
       string,
       string
@@ -40,8 +39,7 @@ export const getParamFromQueryOrRedirectUri = (
   queryParam: string,
 ): string | null => {
   try {
-    // TODO: strongly type req
-    const queryParamValue = (req as any).query[queryParam] as
+    const queryParamValue = req.query[queryParam] as
       | string
       | undefined;
 
@@ -57,8 +55,7 @@ export const getParamFromQueryOrRedirectUri = (
     }
   } catch (e) {
     console.error('[1DS] Error getting query param', {
-      // TODO: strongly type req
-      query: (req as any).query,
+      query: req.query,
       queryParam,
       error: e,
     });
