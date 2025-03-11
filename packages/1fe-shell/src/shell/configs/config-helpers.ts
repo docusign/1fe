@@ -25,7 +25,7 @@ const getConfigArrFromGlobal = <Return>(
   try {
     const oneDsConfig: Return[] =
       JSON.parse(
-        document?.querySelector(`script[data-1ds-config-id="${configName}"]`)
+        document?.querySelector(`script[data-1fe-config-id="${configName}"]`)
           ?.innerHTML || JSON.stringify(defaultValue),
       ) ?? defaultValue;
 
@@ -37,7 +37,7 @@ const getConfigArrFromGlobal = <Return>(
 
 const getConfigObjFromGlobal = <Return extends object>(
   configName: 'lazy-loaded-libs-config' | '' | 'env-config',
-  overrideSelector = `script[data-1ds-config-id="${configName}"]`,
+  overrideSelector = `script[data-1fe-config-id="${configName}"]`,
 ): Return => {
   try {
     const oneDsConfig: Return =
@@ -58,7 +58,7 @@ const getConfigObjFromGlobal = <Return extends object>(
 /**
  * List of all plugin configs that we have loaded from the global config, keyed by widgetId
  */
-export const PLUGIN_CONFIGS = generateWidgetConfigMap(
+export const PLUGIN_CONFIGS: ReadonlyMap<string, PluginConfig> = generateWidgetConfigMap(
   getConfigArrFromGlobal<PluginConfig>('plugin-config'),
 );
 
@@ -75,14 +75,14 @@ export const ENVIRONMENT_CONFIG =
 /**
  * Map of all widget configs that we have loaded from the global config, keyed by widgetId
  */
-// TODO: strongly type
+// TODO[1fe]: strongly type
 export const DYNAMIC_CONFIGS = getConfigArrFromGlobal<any>('dynamic-config');
 
 export const LAZY_LOADED_LIB_CONFIGS = getConfigObjFromGlobal<
   Record<string, string>
 >('lazy-loaded-libs-config');
 
-// TODO: Duplicated code
+// TODO[1fe]: Duplicated code
 export const getWidgetConfigValues = <
   T extends PluginConfig | WidgetConfig = WidgetConfig,
 >(

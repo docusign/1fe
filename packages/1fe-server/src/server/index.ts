@@ -10,7 +10,7 @@ import { RoutesInterface } from './types';
 import { pollDynamicConfig } from './utils/config-poller';
 
 /*
-    TODO:
+    TODO[1fe]:
     - Strongly type options
 */
 

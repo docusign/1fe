@@ -18,24 +18,7 @@ const loadWidgets = createAsyncThunk(
       // const widgets = getWidgets();
       const widgets = await getWidgetsFromVersionEndpoint();
 
-      // read off DOM instead of /version
-      // const widgetConfigScript = document.querySelector(
-      //   // TODO: we should use a different tag
-      //   'script[data-1ds-config-id="widget-config"]',
-      // );
-      // const widgets = JSON.parse(widgetConfigScript.textContent || '[]');
-
-      // const widgetSuggestions = widgets
-      //   .filter((config) => !!config.lastModified.integration?.widgetVersion)
-      //   .map((config) => ({
-      //     value: config.widgetId,
-      //     type: config.lastModified.integration?.widgetVersion ?? 'unknown',
-      //   }));
-
       const urlParams = new URLSearchParams(window.location.search);
-      console.log('----------------');
-      console.log(urlParams);
-      console.log('----------------');
       const maybeWidgetName = urlParams.get(WIDGET_ID) || urlParams.get(WIDGET);
       const widget = widgets.find(
         (widget) => widget.widgetId === maybeWidgetName,

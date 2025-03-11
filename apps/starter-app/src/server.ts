@@ -20,30 +20,21 @@ const envModeMap: Record<string, string> = {
   production: 'production',
 };
 
-// TODO: Clean this up
 const ROUTES = {
   WATCHDOG: '/watchdog',
   CSP_REPORT_ONLY: '/csp-report-only',
   CSP_REPORT_VIOLATION: '/csp-report-violation',
   HEALTH: '/health',
-  AUTH: '/auth', // 302 to /authenticate
-  LOGOUT: '/logout', // 302 to /logoutUrl
-  // AUTHENTICATE: '/authenticate', // [HTML]
   VERSION: '/version',
   WIDGET_VERSION: '/version/*',
   API: '/api',
-  // LOAD_TEST: '/test/load',
-  // CLM_TEST: '/test/clm',
-  AUTH_FORWARDER: '/auth-forwarder/:widgetId',
   IMAGES: '/images',
   // Query Parameter needed for updating favicon cache
   FAVICON: '/favicon.ico',
   ROOT: '/',
-  // TEST: '/test',
   SW: '/sw.js',
   ONE_DS_BUNDLE: '/js/bundle.js',
   EXAMPLE_BUNDLE: '/main.js',
-  // TODO: Maybe need to add /* back here.
 };
 
 const options = {

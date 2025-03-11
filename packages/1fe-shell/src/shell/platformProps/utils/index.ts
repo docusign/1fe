@@ -115,7 +115,7 @@ export const getPlatformUtils = (
     // UNSAFE_otel,
   }, shellUtilOverrides);
 
-  // TODO: Freeze
+  // TODO[1fe]: Freeze
   return initializedPlatformUtils;
   // return deepFreeze(initializedPlatformUtils);
 };

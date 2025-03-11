@@ -25,7 +25,6 @@ export const RouteWrapper: React.FC<RouteWrapperProps> = ({
   plugin,
 }): React.ReactElement => {
   const location = useLocation();
-  // TODO: What do we do with logging? Should we support it?
   const logger = getShellLogger();
   const previousPathRef = useRef(location?.pathname);
 

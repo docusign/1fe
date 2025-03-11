@@ -15,7 +15,7 @@ const setup = () => {
     production: 'production',
   };
 
-  // TODO: Just read from server configs put on DOM
+  // TODO[1fe]: Just read from server configs put on DOM
   renderMagicBoxShell({
     mode: envModeMap[ENVIRONMENT],
     environment: ENVIRONMENT,
@@ -36,7 +36,7 @@ const setup = () => {
     },
     components: {
       getLoader: () => <Loader />,
-      // TODO: No any
+      // TODO[1fe]: No any
       getError: (props: any) => <Error {...props} />
     }
   });

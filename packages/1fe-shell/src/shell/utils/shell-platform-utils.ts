@@ -5,7 +5,6 @@ import { WidgetConfig } from '../types/widget-config';
 
 const SHELL_WIDGET: WidgetConfig = {
   widgetId: getShellWidgetId(),
-  // TODO: Fill version if needed
   version: '',
   runtime: {},
 };

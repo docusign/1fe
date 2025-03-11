@@ -3,14 +3,14 @@ const commonCsp = {
     "styleSrc": ["'unsafe-inline'"]
 }
 
-// TODO: strongly type
+// TODO[1fe]: strongly type
 export const enforcedDefaultCsp: Record<string, any> = {
     development: commonCsp,
     integration: commonCsp,
     production: commonCsp
 };
 
-// TODO: strongly type
+// TODO[1fe]: strongly type
 export const reportOnlyDefaultCsp: Record<string, any> = {
     development: {
         ...commonCsp,

@@ -22,7 +22,7 @@ describe('title', () => {
     expect(titleElement?.innerText).toBe(testString);
   });
 
-  // TODO: add logger back?
+  // TODO[1fe]: add logger back?
   // it('shoud log error if unable to set title', () => {
   //   const mockError = jest.fn();
   //   jest.spyOn(telemetryModule, 'getShellLogger').mockReturnValueOnce({

@@ -4,9 +4,12 @@ import { HttpException } from '../exceptions/HttpException';
 import { APIException } from '../exceptions/APIException';
 import { APIErrorResponse } from '../types/APIErrorResponse';
 
+// TODO[1fe]: should we expose this?
+type RequestWithCspNonceGuid = Request & { cspNonceGuid?: string };
+
 const errorMiddleware = (
   error: HttpException | APIException,
-  req: Request,
+  req: RequestWithCspNonceGuid,
   res: Response,
   next: NextFunction,
 ): void => {
@@ -30,7 +33,6 @@ const errorMiddleware = (
     }
 
     // return the standard error page
-    // TODO: fix any
     const { cspNonceGuid } = req;
 
     const pageTitle = error.message || 'Error';

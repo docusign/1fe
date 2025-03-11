@@ -133,7 +133,6 @@ function WidgetFrameInner<TWidgetProps>({
     throw WidgetNotFoundError(widgetFrameId);
   }
 
-  // TODO: ADD BACK THE ERROR BOUNDARY
   return (
     <WidgetInfo
       data-qa='widget.frame'
