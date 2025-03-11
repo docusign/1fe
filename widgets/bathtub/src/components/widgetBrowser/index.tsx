@@ -61,3 +61,48 @@
 // });
 
 // export { WidgetBrowser };
+
+import { useState, useEffect } from 'react';
+import { Table, Typography } from 'antd';
+import { useAppSelector } from '../../store';
+import { widgetBrowserSelectors } from '../../store/widgetBrowser';
+
+export function WidgetBrowser() {
+  const widgets = useAppSelector(widgetBrowserSelectors.selectFilteredWidgets);
+
+  const columns = [
+    {
+      title: 'Widget ID',
+      dataIndex: 'widgetId',
+      key: 'widgetId',
+    },
+    {
+      title: 'Route',
+      dataIndex: ['plugin', 'route'],
+      key: 'route',
+    },
+    {
+      title: 'Version',
+      dataIndex: 'version',
+      key: 'version',
+    },
+    {
+      title: 'Has Auth',
+      dataIndex: ['plugin', 'auth'],
+      key: 'auth',
+      render: (auth) => (auth ? 'true' : 'false'),
+    },
+  ];
+
+  return (
+    <div>
+      <Typography.Title level={2}>Widget Browser</Typography.Title>
+      <Table
+        dataSource={widgets}
+        columns={columns}
+        rowKey="widgetId"
+        locale={{ emptyText: 'No widget configuration found.' }}
+      />
+    </div>
+  );
+}
