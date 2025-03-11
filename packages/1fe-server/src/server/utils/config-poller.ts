@@ -26,11 +26,10 @@ import {
 import { setMagicBoxConfigs } from './magicbox-configs';
 
 /*
-TODO:
+TODO[1fe]:
 - Strong type result
 - strongly type dynamicConfig
 - strongly type configs
-- What happens if initial config fetch fails on startup?
 */
 
 interface WidgetBundleRequestResponse {

@@ -51,7 +51,7 @@ type ErrorPageData = {
 
 type ErrorProps = {
   type?: ErrorPageType;
-  // TODO: NO ANY
+  // TODO[1fe]: NO ANY
   plugin?: any;
   message?: string | undefined;
 };

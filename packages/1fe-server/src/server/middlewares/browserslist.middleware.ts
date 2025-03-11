@@ -12,7 +12,6 @@ const ignoredRoutes = [
   ROUTES.API,
   ROUTES.LOAD_TEST,
 ];
-// STATIC ASSETS
 
 // TODO: [1DS consumption] When consuming back, need to add middleware for isAutomationRun flag to be set
 const browsersListMiddleware = (

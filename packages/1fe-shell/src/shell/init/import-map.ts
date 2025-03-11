@@ -1,4 +1,3 @@
-// TODO: Character encoding issues with import map override ui
 import { isEmpty, isObject, pickBy } from 'lodash';
 
 import { ImportMap, SystemImportMap } from '../types/init';

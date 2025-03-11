@@ -15,10 +15,10 @@ export const getPlatformProps = (
   const platformProps = {
     environment: readMagicBoxShellConfigs().environment,
     context: getContext(widget, options),
-    utils: getPlatformUtils(widget, options),
+    utils: getPlatformUtils(widget),
   };
 
   return platformProps;
-  // TODO: FREEZE
+  // TODO[1fe]: FREEZE
   // return deepFreeze(platformProps);
 };

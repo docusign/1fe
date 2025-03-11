@@ -16,13 +16,8 @@ export type CSPPerEnvironment = {
 
 export type CSPTypes = keyof CSPPerEnvironment;
 
-// TODO: change this type
 export type CSPDirectives = {
-  development: CSPPerEnvironment;
-  integration: CSPPerEnvironment;
-  stage: CSPPerEnvironment;
-  demo: CSPPerEnvironment;
-  production: CSPPerEnvironment;
+  [key: string]: CSPPerEnvironment;
 };
 
 export type AuthenticationType = 'required' | 'lazy';
