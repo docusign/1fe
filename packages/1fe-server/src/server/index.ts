@@ -11,7 +11,6 @@ import { pollDynamicConfig } from './utils/config-poller';
 
 /*
     TODO:
-    - Strong type request
     - Strongly type options
 */
 
@@ -24,7 +23,7 @@ const initializeRoutes = (app: express.Application) => {
 
   app.use('/error', (req, res, next) => {
     const error = new Error(
-      `[server] Error Page Triggered - source: ${(req as any).query['cause']}, widgetPath: ${(req as any).query['widget_path']}`,
+      `[server] Error Page Triggered - source: ${req.query['cause']}, widgetPath: ${req.query['widget_path']}`,
     );
     next(error);
   });

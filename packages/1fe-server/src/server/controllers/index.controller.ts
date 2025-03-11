@@ -12,7 +12,6 @@ import { readMagicBoxConfigs } from '../utils/magicbox-configs';
 TODO:
 - [1DS consumption] Set feature flag hash elsewhere
 - [1DS consumption] Set ACTIVE_AUTOMATED_TEST_FRAMEWORK cookie elsewhere
-- Strongly type request
 */
 
 export const getSystemWidgetConfigs = (
@@ -65,7 +64,7 @@ class IndexController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const pluginFound = (req as any).plugin;
+      const pluginFound = req.plugin;
 
       if (pluginFound && ifSystemPluginRequestedOnProd(pluginFound)) {
         res.sendStatus(404);
