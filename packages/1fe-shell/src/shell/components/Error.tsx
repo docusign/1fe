@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 // import Lottie from 'lottie-react';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
+import { Button } from 'antd';
 
 // import BrokenPage from './resources/brokenPage.json';
 import { showImportMapOverrideButton } from '../init/import-map-ui';
@@ -103,9 +104,9 @@ export const Error = ({
     //   FEATURE_FLAGS.enable1dsDevtool &&
     //   isIntegrationEnvironment(ENVIRONMENT)
     // ) {
-      // if we hit this error boundary, it is likely the shell will not be able to render the devtool widget.
-      // We should show the import map override button to allow the user to fix any import map urls.
-      showImportMapOverrideButton();
+    // if we hit this error boundary, it is likely the shell will not be able to render the devtool widget.
+    // We should show the import map override button to allow the user to fix any import map urls.
+    showImportMapOverrideButton();
     // }
 
     // logger.log({
@@ -212,10 +213,9 @@ export const Error = ({
           <SubText>{subText}</SubText>
 
           {!hideMainButton && (
-            <button
-              onClick={errorOnClick}
-              data-qa={`shell.${type}.main.btn`}
-            >{buttonText}</button>
+            <Button onClick={errorOnClick} data-qa={`shell.${type}.main.btn`}>
+              {buttonText}
+            </Button>
           )}
         </div>
       </PageContainer>
