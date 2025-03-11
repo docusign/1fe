@@ -36,7 +36,6 @@ const WidgetInner: React.FC<WidgetProps> = memo((props) => {
   const t = useTranslate();
   const dispatch = useAppDispatch();
 
-  // TODO
   useEffect(() => {
     dispatch(appThunks.loadWidgets());
   }, [dispatch]);

@@ -25,18 +25,14 @@ const loadWidgets = createAsyncThunk(
       );
 
       const getWidgetOverride = () => {
-        if (widget) {
-          return (
-            window.importMapOverrides?.getOverrideMap()?.imports[
-              widget.widgetId
-            ] ?? ''
-          );
+        if (widget && widget.widgetId) {
+          return window.importMapOverrides?.getOverrideMap()?.imports[
+            widget.widgetId
+          ];
         }
 
         return urlParams.get(WIDGET_URL) ?? maybeWidgetName;
       };
-
-      // dispatch(widgetBrowserActions.setWidgets(widgets));
 
       return [widgets, getWidgetOverride()];
     } catch (error) {
