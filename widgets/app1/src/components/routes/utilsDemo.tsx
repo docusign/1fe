@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-
 import { Flex } from 'antd';
 import React from 'react';
 
@@ -24,6 +23,7 @@ import {
   utilsDemoContentStyles,
   utilSectionHeaderStyles,
 } from './styles/utilsDemo.styles';
+import { AppLoadTime } from '../appLoadTime/appLoadTime';
 
 // TODO: strongly type
 const UtilsDemo: React.FC<any> = (props) => {
@@ -44,7 +44,8 @@ const UtilsDemo: React.FC<any> = (props) => {
         <Experience {...props} />
         {/* <Logger /> */}
         <EventBus {...props} />
-        {/* <AppLoadTime />
+        <AppLoadTime {...props} />
+        {/*
         <Analytics />
         <I18n />
         <User /> */}
