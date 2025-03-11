@@ -1,3 +1,4 @@
+import { platformProps } from '@devhub/1fe-shell';
 import React, { useEffect } from "react";
 import { default as Widget } from './components/router';
 import withProvider from './withProvider';
