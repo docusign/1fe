@@ -8,5 +8,5 @@
       "allowJs": false,
       "outDir": "dist/types"
     },
-    "include": ["src/shell-types.ts"]
+    "include": ["src/index.ts"]
   }

@@ -1,18 +1,24 @@
 import { DYNAMIC_CONFIGS } from '../configs/config-helpers';
 import { readMagicBoxShellConfigs } from '../configs/shell-configs';
+import { WidgetConfig } from '../types/widget-config';
+
+type TemplatizeCDNUrlArgs = {
+  widgetId: string;
+  widgetVersion: string;
+  templateFilePath?: string;
+};
 
 const templatizeCDNUrl = ({
   widgetId,
   widgetVersion,
   templateFilePath = 'js/1ds-bundle.js',
-}: any): URL => {
+}: TemplatizeCDNUrlArgs): URL => {
   return new URL(
     `${DYNAMIC_CONFIGS.cdn.widgets.basePrefix}${widgetId}/${widgetVersion}/${templateFilePath}`,
   );
 };
 
-// TODO: strongly type
-export const generateCDNUrl = (widget: any): URL => {
+export const generateCDNUrl = (widget: WidgetConfig): URL => {
   return templatizeCDNUrl({
     widgetId: widget.widgetId,
     widgetVersion: widget.version,

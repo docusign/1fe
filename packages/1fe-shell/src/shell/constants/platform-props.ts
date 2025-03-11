@@ -1,1 +1,1 @@
-export const ONEDS_SHELL_IMPORT_MAP_ID = 'app:@1ds/shell';
+export const ONEDS_SHELL_IMPORT_MAP_ID = 'app:@devhub/1fe-shell';

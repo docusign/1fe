@@ -3,10 +3,6 @@ import { randomUUID } from 'crypto';
 import { NextFunction, Request, Response } from 'express';
 import { readMagicBoxConfigs } from '../utils/magicbox-configs';
 
-/*
-TODO: strongly type request
-*/
-
 const nonceMiddleware = (
   req: Request,
   res: Response,
@@ -43,7 +39,7 @@ const nonceMiddleware = (
       }
 
       res.setHeader('content-security-policy', noncedCspHeader);
-      (req as any).cspNonceGuid = cspNonceGuid;
+      req.cspNonceGuid = cspNonceGuid;
     }
   } catch (error) {
     next(error);

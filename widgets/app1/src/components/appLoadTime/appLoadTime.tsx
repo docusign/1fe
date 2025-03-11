@@ -1,0 +1,67 @@
+import { Button } from 'antd';
+import { useReducer, useState } from 'react';
+import { WidgetContainer } from '../misc/widgetContainer';
+import { GetChildWidget } from '../misc/utils';
+
+export const AppLoadTime = (props: any) => {
+  const [isVisible, showWidget] = useReducer(() => true, false);
+  const [entries, setEntries] = useState<string | null>(null);
+  const [measure, setMeasure] = useState<string | null>(null);
+
+  // const t = useTranslate();
+
+  return (
+    <div data-qa='utils.appLoadTime.container'>
+      <h2>utils.appLoadTime</h2>
+      <Button
+        data-qa='utils.appLoadTime.get.btn'
+        onClick={showWidget}
+      >utils.appLoadTime.Get/MarkEnd</Button>
+      <Button
+        data-qa='utils.appLoadTime.getEntries.btn'
+        onClick={async () => {
+          const resultString = props.platform.utils.appLoadTime
+            .getEntries()
+            .map((entry) => {
+              return `Name: ${entry.name}, Entry Type: ${entry.entryType}, Start Time: ${entry.startTime}, Duration: ${entry.duration}`;
+            })
+            .join('; ');
+          setEntries(resultString);
+        }}
+      >utils.appLoadTime.getEntries</Button>
+
+      {entries && (
+        <div data-qa='utils.appLoadTime.getEntries.result'>{entries}</div>
+      )}
+
+      <Button
+        data-qa='utils.appLoadTime.mark.btn'
+        onClick={() => {
+          props.platform.utils.appLoadTime.markStart('iLove1DSSoMuchMarkTest');
+          setMeasure('Mark started');
+        }}
+      >utils.appLoadTime.markStart</Button>
+      <Button
+        data-qa='utils.appLoadTime.measure.btn'
+        onClick={() => {
+          const result = props.platform.utils.appLoadTime.markEnd(
+            'iLove1DSSoMuchMarkTest',
+          );
+
+          if (result) {
+            setMeasure(`${result.name}  ${result.duration.toString()}`);
+          }
+        }}
+      >utils.appLoadTime.markEnd</Button>
+      {measure && (
+        <div data-qa='utils.appLoadTime.measure.result'>{measure}</div>
+      )}
+
+      {isVisible && (
+        <WidgetContainer data-qa='utils.widgets.appLoadTime.result.container'>
+          <GetChildWidget isVisible={isVisible} props={props} />
+        </WidgetContainer>
+      )}
+    </div>
+  );
+};

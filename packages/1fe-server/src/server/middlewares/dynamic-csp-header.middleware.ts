@@ -6,20 +6,25 @@ import { ROUTES } from '../constants';
 import { getRuntimeCSPConfigs } from '../utils';
 import { readMagicBoxConfigs } from '../utils/magicbox-configs';
 
-/*
-  TODO:
-  - strongly type request
-  - strongly type csp
-*/
+type MergeCSPOptions = {
+  environment?: string | undefined;
+  reportOnly?: boolean;
+  pluginId?: string;
+  req: Request;
+};
 
-type MergeCSPOptions =
-  | {
-      environment?: string | undefined;
-      reportOnly?: boolean;
-      pluginId?: string;
-      req?: Request;
-    }
-  | undefined;
+type GenerateCSPOptions = {
+  // will grab CSP for this environment
+  environment: string | undefined;
+
+  // Grab report only CSP
+  reportOnly?: boolean;
+
+  // grab CSP for this plugin
+  pluginId?: string;
+
+  req: Request;
+};
 
 const kebabToCamel = (kebabCaseString: string): string => {
   return kebabCaseString.replace(/-([a-z])/g, (_, letter) => {
@@ -37,7 +42,7 @@ export const mergeWithUsingUniqueArray = (
   return undefined;
 };
 
-export const getMergedDirectives = (cspOptions: MergeCSPOptions = {}) => {
+export const getMergedDirectives = (cspOptions: MergeCSPOptions) => {
   const { reportOnly = false, pluginId, req } = cspOptions;
 
   const reportEndpoint = reportOnly
@@ -60,7 +65,7 @@ export const getMergedDirectives = (cspOptions: MergeCSPOptions = {}) => {
   // If pluginId is defined, grab only plugin's csp
   if (pluginId) {
     const cspConfigs =
-      getRuntimeCSPConfigs({ pluginId, reportOnly, req: req as Request }) || {};
+      getRuntimeCSPConfigs({ pluginId, reportOnly, req: req }) || {};
 
     return {
       ...mergeWith(
@@ -80,7 +85,7 @@ export const getMergedDirectives = (cspOptions: MergeCSPOptions = {}) => {
   }
 };
 
-export const generateCSPPolicy = (generateOptions: any = {}) => {
+export const generateCSPPolicy = (generateOptions: GenerateCSPOptions) => {
   const {
     environment = 'development',
     reportOnly = false,
@@ -112,7 +117,7 @@ const dynamicCspHeaderMiddleware = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const pluginId = (req as any).plugin?.widgetId;
+    const pluginId = req.plugin?.widgetId;
 
     // Generate plugin csp with helmet
     const helmetCspMiddleware = helmet.contentSecurityPolicy(

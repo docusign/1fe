@@ -12,7 +12,6 @@ import { readMagicBoxConfigs } from '../utils/magicbox-configs';
 
 /*
 TODO:
-- Strongly type request
 - [1DS consumption] New middleware for updateOtelContextWithWidgetId
 - [1DS consumption] New middleware for getPluginFromAuthCallback
 */
@@ -55,7 +54,7 @@ const pluginMiddleware = async (
     }
 
     if (plugin) {
-      (req as any).plugin = plugin;
+      req.plugin = plugin;
 
       pluginBaselineUrl = getPluginBaselineUrl(plugin);
 
