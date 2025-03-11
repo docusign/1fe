@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 
 import { WidgetProps } from '../contract';
-import { useAppSelector } from '../store';
+import { useAppDispatch, useAppSelector } from '../store';
 import { selectActiveWidgetUrl, selectLoadingOrError } from '../store/app';
 
 import { useTranslate } from '../locales';
@@ -10,7 +10,9 @@ import { AppHeader } from './header';
 import { Box } from './layout';
 import { WidgetRenderer } from './widgetManager';
 import { withProvider } from './withProvider';
-import { WidgetBrowser } from '../store/widgetBrowser/widgetBrowser';
+
+import { appThunks } from '../store/app/thunks';
+import { WidgetBrowser } from './widgetBrowser';
 
 const Layout = styled(Box)`
   display: grid;
@@ -32,10 +34,12 @@ const WidgetInner: React.FC<WidgetProps> = memo((props) => {
   const { isLoading, error } = useAppSelector(selectLoadingOrError);
   const widgetUrl = useAppSelector(selectActiveWidgetUrl);
   const t = useTranslate();
+  const dispatch = useAppDispatch();
+
   // TODO
-  // useEffect(() => {
-  //   dispatch(appThunks.loadWidgets());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(appThunks.loadWidgets());
+  }, [dispatch]);
 
   // if (isLoading) {
   //   return (

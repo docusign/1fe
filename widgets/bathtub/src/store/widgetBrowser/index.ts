@@ -1,1 +1,1 @@
-// export * from './widgetBrowser';
+export * from './widgetBrowser';
