@@ -10,7 +10,6 @@ const { commonPlugins } = require('./utils');
  * This config is used for local development of the 1DS shell.
  * Remote development mode builds are handled internally by getProdConfig.
  */
-// TODO[1fe]: Fix mode and NODE_ENV
 const config = getProdConfig({
   mode: 'development',
   devtool: 'source-map',

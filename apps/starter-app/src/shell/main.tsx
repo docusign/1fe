@@ -38,6 +38,9 @@ const setup = () => {
       getLoader: () => <Loader />,
       // TODO[1fe]: No any
       getError: (props: any) => <Error {...props} />
+    },
+    routes: {
+      defaultRoute: '/app1'
     }
   });
 };

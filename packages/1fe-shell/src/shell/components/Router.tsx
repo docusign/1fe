@@ -28,12 +28,12 @@ const RedirectComponent = ({ to }: { to: string }) => {
 
 const determineBaseRoute = (): RouteObject[] => {
   const isProd = readMagicBoxShellConfigs().mode === 'production';
+  const defaultRoute = readMagicBoxShellConfigs()?.routes?.defaultRoute || '/bathtub';
   if (isProd) {
     return [
       {
         path: '/',
-        // TODO[1fe]: configure default route
-        element: <RedirectComponent to='/app1' />,
+        element: <RedirectComponent to={defaultRoute} />,
       },
     ];
   }
@@ -46,12 +46,7 @@ const determineBaseRoute = (): RouteObject[] => {
         {
           path: '/',
           element: <RedirectComponent to='/bathtub' />,
-        },
-        // TODO[1fe]: configure default route
-        // {
-        //   path: '/bathtub',
-        //   element: <RedirectComponent to='/bathtub' />,
-        // },
+        }
       ];
 };
 

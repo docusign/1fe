@@ -1,15 +1,6 @@
-// mock must be placed before import
-// for jest to respect the mock
-// TODO[1fe]: add logger back
-// const mockLogger = { error: jest.fn() };
-
 import store from 'store2';
 
 import { initLocalStorage } from '..';
-
-// jest.mock('../../../../utils/telemetry', () => ({
-//   getShellLogger: jest.fn(() => mockLogger),
-// }));
 
 describe('localStorage', () => {
   const widgetId = 'myWidget';

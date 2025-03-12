@@ -51,7 +51,6 @@ export const logPlatformUtilUsage = ({
   //     args,
   //   });
   // }
-
   const shouldLogPlatformUtilUsage = readMagicBoxShellConfigs().shellLogger.logPlatformUtilUsage;
   if (shouldLogPlatformUtilUsage) {
     getShellLogger().log({

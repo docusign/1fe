@@ -27,7 +27,6 @@ import { setMagicBoxConfigs } from './magicbox-configs';
 
 /*
 TODO[1fe]:
-- Strong type result
 - strongly type dynamicConfig
 - strongly type configs
 */
