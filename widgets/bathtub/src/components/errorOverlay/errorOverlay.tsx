@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 import Hotkeys from 'react-hot-keys';
+import { Button } from 'antd';
 
 import { parseError } from './parseError';
 import { Box, Column, Row } from '../layout';
@@ -80,9 +81,9 @@ const Fallback: React.FC<
             <Text>{t('Bathtub.Renderer.HelpFailed')}</Text>
           </Column>
           <Hotkeys keyName="cmd+esc" onKeyDown={clean}>
-            <button onClick={clean}>
+            <Button onClick={clean}>
               {t('Bathtub.Renderer.HelpFailedAction')}
-            </button>
+            </Button>
           </Hotkeys>
         </Row>
       </Section>
