@@ -1,7 +1,7 @@
 import React, { memo, useMemo } from 'react';
 
 import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../1fe-server/src/server/utils/widget-config-helpers';
-import { WidgetFrame } from './internal/WidgetFrame/WidgetFrame';
+import { WidgetFrame } from './internal/WidgetFrame';
 import { queueWidgetPreloadsIfFound } from './internal/utils/widgetConfigUtils';
 import { getDefaultWidgetOptions } from './internal/utils/constants';
 import { widgetDependencyTree } from '../../../utils/tree';

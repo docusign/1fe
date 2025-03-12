@@ -14,14 +14,14 @@ import {
   insertNonPersistentWidgetOverrides,
   insertPersistentWidgetOverrides,
 } from './init/import-map';
-import { setMagicBoxShellConfigs } from './configs/shell-configs';
+import { readMagicBoxShellConfigs, setMagicBoxShellConfigs } from './configs/shell-configs';
 import { getShellLogger } from './utils/telemetry';
+import { applyRuntimeConfigOverrideForImportMapUi, applyRuntimeConfigOverridesForWidgetUrlOverrides } from './init/runtime-config-overrides';
+import { getShellPlatformUtils as initShellPlatformUtils } from './utils/shell-platform-utils';
 
 export const init = (): Promise<void> => {
   // Initialize import map Promise resolver
   return new Promise((resolve) => {
-    // const IS_PROD = true;
-
     try {
       const { importMap, overrides } = createDynamicImportMap();
 
@@ -32,16 +32,15 @@ export const init = (): Promise<void> => {
         insertPersistentWidgetOverrides(overrides, importMap);
         // logInsertMapCompletion(importMapLoadStartTime, environment, build);
 
-        // TODO[1fe]: Uncomment and move later
-        // applyRuntimeConfigOverridesForWidgetUrlOverrides();
+        applyRuntimeConfigOverridesForWidgetUrlOverrides();
 
-        // if (!IS_PROD) {
-        //   // import-map-overrides:change fires when the import map is updated via the ui
-        //   window.addEventListener(
-        //     'import-map-overrides:change',
-        //     applyRuntimeConfigOverrideForImportMapUi,
-        //   );
-        // }
+        if (readMagicBoxShellConfigs().mode !== 'production') {
+          // import-map-overrides:change fires when the import map is updated via the ui
+          window.addEventListener(
+            'import-map-overrides:change',
+            applyRuntimeConfigOverrideForImportMapUi,
+          );
+        }
 
         return resolve();
       };
@@ -77,8 +76,8 @@ export const init = (): Promise<void> => {
 const renderMagicBoxShell = (options: any) => {
   setMagicBoxShellConfigs(options);
 
-  // TODO[1fe]: Init utils if needed?
-
+  initShellPlatformUtils();
+  
   init().then(() =>
     ReactDOM.render(
       <React.StrictMode>

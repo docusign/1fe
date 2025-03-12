@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
-// import { getShellPlatformUtils } from '../utils/shell-platform-utils';
 
-import { Error } from './Error';
 import { PluginConfig } from '../types/widget-config';
 import { WIDGET_CONFIGS } from '../configs/config-helpers';
 import { getShellPlatformUtils } from '../utils/shell-platform-utils';
