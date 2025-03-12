@@ -8,6 +8,11 @@ jest.mock('../../../../configs/shell-configs', () => ({
   readMagicBoxShellConfigs: jest.fn().mockImplementation(() => ({ mode: 'production' })),
 }));
 
+jest.mock('../../../../utils/url' , () => ({
+  ...jest.requireActual('../../../../utils/url'),
+  basePathname: jest.fn(() => '/'),
+}));
+
 describe('EventBus', () => {
   const widget1Id = 'widget1';
   const widget2Id = 'widget2';
@@ -67,125 +72,134 @@ describe('EventBus', () => {
   });
 });
 
-// TODO[1fe]: Why is this failing??
-// describe('EventBus Interactions Between Widgets', () => {
-//   const widget1 = 'widget1';
-//   const widget2 = 'widget2';
+describe('EventBus Interactions Between Widgets', () => {
+  const widget1 = 'widget1';
+  const widget2 = 'widget2';
 
-//   let widget1EventBus: EventBusPlatformUtils;
-//   let widget2EventBus: EventBusPlatformUtils;
+  let widget1EventBus: EventBusPlatformUtils;
+  let widget2EventBus: EventBusPlatformUtils;
 
-//   type Widget1Events = {
-//     event1: { param1: string; param2: number };
-//   };
+  type Widget1Events = {
+    event1: { param1: string; param2: number };
+  };
 
-//   type Widget3Events = {
-//     event1: { param1: string; param2: number };
-//   };
+  type Widget3Events = {
+    event1: { param1: string; param2: number };
+  };
 
-//   beforeEach(() => {
-//     widget1EventBus = initEventBus(widget1);
-//     widget2EventBus = initEventBus(widget2);
-//   });
+  beforeEach(() => {
+    widget1EventBus = initEventBus(widget1);
+    widget2EventBus = initEventBus(widget2);
+  });
 
-//   afterEach(() => {
-//     jest.clearAllMocks();
-//   });
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
-//   test('Widget2 receives the event when Widget1 publishes and Widget2 subscribes', () => {
-//     const listener = jest.fn();
-//     widget2EventBus.subscribe<Widget1Events, 'event1'>({
-//       eventName: 'event1',
-//       listener,
-//     });
+  test('Widget2 receives the event when Widget1 publishes and Widget2 subscribes', (done) => {
+    const listener = jest.fn();
+    widget2EventBus.subscribe<Widget1Events, 'event1'>({
+      eventName: 'event1',
+      listener
+    });
 
-//     widget1EventBus.publish<Widget1Events, 'event1'>({
-//       targetWidgetId: widget2,
-//       eventName: 'event1',
-//       data: {
-//         param1: 'test',
-//         param2: 10,
-//       },
-//     });
+    widget1EventBus.publish<Widget1Events, 'event1'>({
+      targetWidgetId: widget2,
+      eventName: 'event1',
+      data: {
+        param1: 'test',
+        param2: 10,
+      },
+    });
 
-//     expect(listener).toHaveBeenCalledWith({
-//       data: expect.objectContaining({
-//         param1: 'test',
-//         param2: 10,
-//       }),
-//       eventInfo: expect.objectContaining({
-//         sender: expect.objectContaining({
-//           id: 'widget1',
-//         }),
-//       }),
-//     });
-//   });
+    // This is a hack to make sure the listener is called after the event is published
+    setTimeout(() => {
+      expect(listener).toHaveBeenCalledWith({
+        data: expect.objectContaining({
+          param1: 'test',
+          param2: 10,
+        }),
+        eventInfo: expect.objectContaining({
+          sender: expect.objectContaining({
+            id: 'widget1',
+          }),
+        }),
+      });
 
-//   test('Widget2 does not recieve the event from Widget1 if it has unsubscribed', () => {
-//     const listener = jest.fn();
-//     const unsubscribeFn = widget2EventBus.subscribe<Widget3Events, 'event1'>({
-//       eventName: 'event1',
-//       listener,
-//     });
+      done();
+    }, 0);    
+  });
 
-//     widget1EventBus.publish<Widget1Events, 'event1'>({
-//       targetWidgetId: widget2,
-//       eventName: 'event1',
-//       data: {
-//         param1: 'test1',
-//         param2: 10,
-//       },
-//     });
+  test('Widget2 does not recieve the event from Widget1 if it has unsubscribed', (done) => {
+    const listener = jest.fn();
+    const unsubscribeFn = widget2EventBus.subscribe<Widget3Events, 'event1'>({
+      eventName: 'event1',
+      listener,
+    });
 
-//     expect(listener).toHaveBeenCalledWith({
-//       data: expect.objectContaining({
-//         param1: 'test1',
-//         param2: 10,
-//       }),
-//       eventInfo: expect.objectContaining({
-//         sender: expect.objectContaining({
-//           id: 'widget1',
-//         }),
-//       }),
-//     });
+    widget1EventBus.publish<Widget1Events, 'event1'>({
+      targetWidgetId: widget2,
+      eventName: 'event1',
+      data: {
+        param1: 'test1',
+        param2: 10,
+      },
+    });
 
-//     expect(unsubscribeFn).toBeInstanceOf(Function);
+    // This is a hack to make sure the listener is called after the event is published
+    setTimeout(() => {
+      expect(listener).toHaveBeenCalledWith({
+        data: expect.objectContaining({
+          param1: 'test1',
+          param2: 10,
+        }),
+        eventInfo: expect.objectContaining({
+          sender: expect.objectContaining({
+            id: 'widget1',
+          }),
+        }),
+      });
 
-//     unsubscribeFn();
+      expect(unsubscribeFn).toBeInstanceOf(Function);
 
-//     widget1EventBus.publish<Widget1Events, 'event1'>({
-//       targetWidgetId: widget2,
-//       eventName: 'event1',
-//       data: {
-//         param1: 'test1',
-//         param2: 10,
-//       },
-//     });
+      unsubscribeFn();
 
-//     expect(listener).toHaveBeenCalledWith({
-//       data: expect.objectContaining({
-//         param1: 'test1',
-//         param2: 10,
-//       }),
-//       eventInfo: expect.objectContaining({
-//         sender: expect.objectContaining({
-//           id: 'widget1',
-//         }),
-//       }),
-//     });
-//   });
+      widget1EventBus.publish<Widget1Events, 'event1'>({
+        targetWidgetId: widget2,
+        eventName: 'event1',
+        data: {
+          param1: 'test1',
+          param2: 10,
+        },
+      });
 
-//   test('should return undefined if widget is shell and target us *', () => {
-//     type WidgetEvents = {
-//       event1: { param1: string };
-//     };
-//     const eventBus = initEventBus(ONE_FE_SHELL_ID);
-//     const result = eventBus.publish<WidgetEvents, 'event1'>({
-//       targetWidgetId: '*',
-//       data: { param1: 'asdf' },
-//       eventName: 'event1',
-//     });
+      expect(listener).toHaveBeenCalledWith({
+        data: expect.objectContaining({
+          param1: 'test1',
+          param2: 10,
+        }),
+        eventInfo: expect.objectContaining({
+          sender: expect.objectContaining({
+            id: 'widget1',
+          }),
+        }),
+      });
 
-//     expect(result).toBeUndefined();
-//   });
-// });
+      done();
+    }, 0);
+  });
+
+  test('should return undefined if widget is shell and target us *', () => {
+    type WidgetEvents = {
+      event1: { param1: string };
+    };
+    const eventBus = initEventBus(ONE_FE_SHELL_ID);
+    const result = eventBus.publish<WidgetEvents, 'event1'>({
+      targetWidgetId: '*',
+      data: { param1: 'asdf' },
+      eventName: 'event1',
+    });
+
+    expect(result).toBeUndefined();
+  });
+});
