@@ -5,14 +5,11 @@ import {
   useNavigate,
 } from 'react-router-dom';
 
-// import { CatchAll } from './CatchAll';
-import { Error } from './Error';
 import { readMagicBoxShellConfigs } from '../configs/shell-configs';
 import { getWidgetConfigValues, PLUGIN_CONFIGS } from '../configs/config-helpers';
 import { RouteWrapper } from './RouteWrapper';
 import { basePathname } from '../utils/url';
 import PluginLoader from './PluginLoader';
-import { PluginConfig, WidgetConfig } from '../types/widget-config';
 
 // equivelent of react-router's <Redirect /> component
 const RedirectComponent = ({ to }: { to: string }) => {

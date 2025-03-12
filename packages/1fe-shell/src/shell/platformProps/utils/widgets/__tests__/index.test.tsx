@@ -1,13 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import { initWidgetsHelper } from '..';
-// import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../isomorphic/widgetConfigs/getWidgetConfigs';
 import { isInUseMemo } from '../internal/utils/isInUseMemo';
 import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../../1fe-server/src/server/utils/widget-config-helpers';
-import { ReactElement, ReactNode } from 'react';
-// import { getShellLogger } from '../../../../utils/telemetry';
 
 jest.mock('../internal/utils/widgetConfigUtils');
-// jest.mock('../../../../utils/telemetry');
 
 jest.mock<typeof import('../internal/utils/isInUseMemo')>(
   '../internal/utils/isInUseMemo',
@@ -19,56 +15,41 @@ jest.mock<typeof import('../internal/utils/isInUseMemo')>(
 
 jest.mock<
   typeof import('../../../../../../../1fe-server/src/server/utils/widget-config-helpers')
->('../../../../../../../1fe-server/src/server/utils/widget-config-helpers', () => ({
-  ...jest.requireActual(
-    '../../../../../../../1fe-server/src/server/utils/widget-config-helpers',
-  ),
-  getRequestedWidgetConfigWithoutRuntimeConfig: jest.fn(() => ({
-    requestedWidgetConfig: {
-      activePhasedDeployment: false,
-      runtime: {},
-      version: '5.5.5',
-      widgetId: '@ds/test',
-    },
-  })),
-}));
+>(
+  '../../../../../../../1fe-server/src/server/utils/widget-config-helpers',
+  () => ({
+    ...jest.requireActual(
+      '../../../../../../../1fe-server/src/server/utils/widget-config-helpers',
+    ),
+    getRequestedWidgetConfigWithoutRuntimeConfig: jest.fn(() => ({
+      requestedWidgetConfig: {
+        activePhasedDeployment: false,
+        runtime: {},
+        version: '5.5.5',
+        widgetId: '@ds/test',
+      },
+    })),
+  }),
+);
 
 jest.mock('../../../../utils/url', () => ({
-  getBaseHrefUrl: jest.fn(() => 'https://services.dev.docusign.net/1ds-app/v1.0/'),
+  getBaseHrefUrl: jest.fn(
+    () => 'https://services.dev.docusign.net/1ds-app/v1.0/',
+  ),
   basePathname: jest.fn(() => '/'),
 }));
 
 jest.mock('../../../../utils/widget-type', () => ({
   ...jest.requireActual('../../../../utils/widget-type'),
-  isShellWidget: jest.fn()
+  isShellWidget: jest.fn(),
 }));
 
-// jest.mock<typeof import('../../../../utils/env-helpers')>(
-//   '../../../../utils/env-helpers',
-//   () => ({
-//     ...jest.requireActual('../../../../utils/env-helpers'),
-//     getBaseHrefUrl: jest.fn(() => 'https://apps.docusign.com/'),
-//     basePathname: jest.fn(() => '/'),
-//     isShellWidget: jest.fn(),
-//     getEnvironmentConfigs: jest.fn(() =>
-//       require('../../../../__tests__/constants').getTestEnvConfig(),
-//     ),
-//   }),
-// );
-
 jest.mock<typeof import('../internal/WidgetFrame')>(
-  '../internal/WidgetFrame',
+  '../internal/WidgetFrame/WidgetFrame',
   () => ({
     WidgetFrame: () => <div>widget frame on page</div>,
   }),
 );
-
-// jest.mock<typeof import('../../../../components/Spinner')>(
-//   '../../../../components/Spinner',
-//   () => ({
-//     Spinner: () => <div>default spinner on page</div>,
-//   }),
-// );
 
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
@@ -77,7 +58,15 @@ jest.mock('react', () => ({
   useMemo: jest.fn((fn: any) => fn),
 }));
 
-// TODO[1fe]: Fix these unit tests
+jest.mock('../../../../configs/shell-configs', () => ({
+  readMagicBoxShellConfigs: jest.fn().mockImplementation(() => ({
+    mode: 'production',
+    components: {
+      getLoader: () => <p>Loading...</p>,
+    },
+  })),
+}));
+
 describe('initWidgetsHelper', () => {
   afterEach(() => {
     jest.clearAllMocks();
@@ -96,56 +85,56 @@ describe('initWidgetsHelper', () => {
     expect(typeof widgetsHelper.getByUrl).toBe('function');
   });
 
-  // it('get should return widget frame (get)', () => {
-  //   const widgetsHelper = initWidgetsHelper({
-  //     widgetId: '@ds/test',
-  //     version: '5.5.5',
-  //     runtime: {},
-  //   });
+  it('get should return widget frame (get)', () => {
+    const widgetsHelper = initWidgetsHelper({
+      widgetId: '@ds/test',
+      version: '5.5.5',
+      runtime: {},
+    });
 
-  //   const Widget = widgetsHelper.get('@ds/foo')({});
+    const Widget = widgetsHelper.get('@ds/foo')({});
 
-  //   const Comp = (Widget as any)?.type();
+    const Comp = (Widget as any)?.type();
 
-  //   const { getByText } = render(Comp);
-  //   expect(getByText('widget frame on page')).toBeTruthy();
-  // });
+    const { getByText } = render(Comp);
+    expect(getByText('widget frame on page')).toBeTruthy();
+  });
 
-  // it('get should return empty widget if no matching widget config is found', () => {
-  //   const widgetsHelper = initWidgetsHelper({
-  //     widgetId: '@ds/test',
-  //     version: '5.5.5',
-  //     runtime: {},
-  //   });
+  it('get should return empty widget if no matching widget config is found', () => {
+    const widgetsHelper = initWidgetsHelper({
+      widgetId: '@ds/test',
+      version: '5.5.5',
+      runtime: {},
+    });
 
-  //   jest
-  //     .mocked(getRequestedWidgetConfigWithoutRuntimeConfig)
-  //     .mockReturnValue({ requestedWidgetConfig: undefined as any });
+    jest
+      .mocked(getRequestedWidgetConfigWithoutRuntimeConfig)
+      .mockReturnValue({ requestedWidgetConfig: undefined as any });
 
-  //   const Widget = widgetsHelper.get('@ds/foo')({});
-  //   // const test: string = Widget;
-  //   render((Widget as any)?.type);
-  //   const element = screen.queryByText('widget frame on page');
-  //   expect(element).toBeNull();
-  // });
+    const Widget = widgetsHelper.get('@ds/foo')({});
+    // const test: string = Widget;
+    render((Widget as any)?.type);
+    const element = screen.queryByText('widget frame on page');
+    expect(element).toBeNull();
+  });
 
-  // it('get should return widget frame when outside useMemo (get)', () => {
-  //   const widgetsHelper = initWidgetsHelper({
-  //     widgetId: '@ds/test',
-  //     version: '5.5.5',
-  //     runtime: {},
-  //   });
+  it('get should return widget frame when outside useMemo (get)', () => {
+    const widgetsHelper = initWidgetsHelper({
+      widgetId: '@ds/test',
+      version: '5.5.5',
+      runtime: {},
+    });
 
-  //   jest.mocked(isInUseMemo).mockReturnValueOnce(true);
+    jest.mocked(isInUseMemo).mockReturnValueOnce(true);
 
-  //   const Widget = widgetsHelper.get('@ds/foo');
-  //   // const Widget = widgetsHelper.get('@ds/foo')({});
+    const Widget = widgetsHelper.get('@ds/foo');
+    // const Widget = widgetsHelper.get('@ds/foo')({});
 
-  //   // const Comp = Widget?.type();
+    // const Comp = Widget?.type();
 
-  //   const { getByText } = render(<Widget />);
-  //   expect(getByText('widget frame on page')).toBeTruthy();
-  // });
+    const { getByText } = render(<Widget />);
+    expect(getByText('widget frame on page')).toBeTruthy();
+  });
 
   it('should log error when one is caught (get)', () => {
     const widgetsHelper = initWidgetsHelper({
@@ -194,31 +183,31 @@ describe('initWidgetsHelper', () => {
     );
   });
 
-  // it('return widget frame when in a useMemo (getByUrl)', () => {
-  //   const widgetsHelper = initWidgetsHelper({
-  //     widgetId: '@ds/test',
-  //     version: '5.5.5',
-  //     runtime: {},
-  //     type: 'system',
-  //   });
+  it('return widget frame when in a useMemo (getByUrl)', () => {
+    const widgetsHelper = initWidgetsHelper({
+      widgetId: '@ds/test',
+      version: '5.5.5',
+      runtime: {},
+      type: 'system',
+    });
 
-  //   jest.mocked(isInUseMemo).mockReturnValueOnce(true);
+    jest.mocked(isInUseMemo).mockReturnValueOnce(true);
 
-  //   const Widget = widgetsHelper.getByUrl('https://cdn.com/widget/id');
-  //   const { getByText } = render((Widget as any).type());
-  //   expect(getByText('widget frame on page')).toBeTruthy();
-  // });
+    const Widget = widgetsHelper.getByUrl('https://cdn.com/widget/id');
+    const { getByText } = render((Widget as any).type());
+    expect(getByText('widget frame on page')).toBeTruthy();
+  });
 
-  // it('return widget frame when not in a useMemo (getByUrl)', () => {
-  //   const widgetsHelper = initWidgetsHelper({
-  //     widgetId: '@ds/test',
-  //     version: '5.5.5',
-  //     runtime: {},
-  //     type: 'system',
-  //   });
+  it('return widget frame when not in a useMemo (getByUrl)', () => {
+    const widgetsHelper = initWidgetsHelper({
+      widgetId: '@ds/test',
+      version: '5.5.5',
+      runtime: {},
+      type: 'system',
+    });
 
-  //   const Widget: any = widgetsHelper.getByUrl('https://cdn.com/widget/id');
-  //   const { getByText } = render(Widget().type());
-  //   expect(getByText('widget frame on page')).toBeTruthy();
-  // });
+    const Widget: any = widgetsHelper.getByUrl('https://cdn.com/widget/id');
+    const { getByText } = render(Widget().type());
+    expect(getByText('widget frame on page')).toBeTruthy();
+  });
 });
