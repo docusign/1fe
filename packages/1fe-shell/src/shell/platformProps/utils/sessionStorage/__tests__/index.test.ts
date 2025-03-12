@@ -1,15 +1,14 @@
 // mock must be placed before import
 // for jest to respect the mock
-// TODO[1fe]: add back
-// const mockLogger = { error: jest.fn() };
+const mockLogger = { error: jest.fn() };
 
 import store from 'store2';
 
 import { initSessionStorage } from '..';
 
-// jest.mock('../../../../utils/telemetry', () => ({
-//   getShellLogger: jest.fn(() => mockLogger),
-// }));
+jest.mock('../../../../utils/telemetry', () => ({
+  getShellLogger: jest.fn(() => mockLogger),
+}));
 
 describe('sessionStorage', () => {
   const widgetId = 'myWidget';

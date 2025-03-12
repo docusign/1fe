@@ -46,6 +46,15 @@ jest.mock('../../platformProps/utils', () => ({
   }),
 }));
 
+jest.mock('../../configs/shell-configs', () => ({
+  readMagicBoxShellConfigs: jest.fn().mockImplementation(() => ({
+    mode: 'production',
+    components: {
+      getError: () => <p>An error has occurred</p>
+    }
+  })),
+}));
+
 jest.mock('lottie-react', () => 'lottie');
 
 describe('<RouteWrapper />', () => {
@@ -71,25 +80,19 @@ describe('<RouteWrapper />', () => {
     expect(getByText('this is my tester widget'));
   });
 
-  // TODO[1fe]: Fix error boundary
-  // it('should wrap route with ErrorBoundary in prod environments and catch uncaught errors', () => {
-  //   // jest.mocked(getEnvironmentConfigs).mockReturnValue(
-  //   //   getTestEnvConfig({
-  //   //     IS_PROD: true,
-  //   //   }),
-  //   // );
-  //   const ThrowError = () => {
-  //     throw new Error('Throwing error for testing');
-  //   };
+  it('should wrap route with ErrorBoundary in prod environments and catch uncaught errors', () => {
+    const ThrowError = () => {
+      throw new Error('Throwing error for testing');
+    };
 
-  //   const { getByText } = renderWithBrowserRouterWrapper(
-  //     <RouteWrapper plugin={plugin}>
-  //       <ThrowError />
-  //     </RouteWrapper>,
-  //   );
+    const { getByText } = renderWithBrowserRouterWrapper(
+      <RouteWrapper plugin={plugin}>
+        <ThrowError />
+      </RouteWrapper>,
+    );
 
-  //   expect(getByText('An error has occurred'));
-  // });
+    expect(getByText('An error has occurred'));
+  });
 
   // it('should render devtool when on integration with correct flag value', () => {
   //   // jest.mocked(getEnvironmentConfigs).mockReturnValue(

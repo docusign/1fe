@@ -1,5 +1,16 @@
 import { title } from '../title';
 
+const mockError = jest.fn();
+jest.mock('../../../../configs/shell-configs', () => ({
+  readMagicBoxShellConfigs: jest.fn().mockImplementation(() => ({ 
+    shellLogger: {
+      log: jest.fn(),
+      error: mockError,
+      logPlatformUtilUsage: false
+    }
+  })),
+}));
+
 describe('title', () => {
   let originalDocBodyHtml = document.body.innerHTML;
   beforeEach(() => {
@@ -22,18 +33,11 @@ describe('title', () => {
     expect(titleElement?.innerText).toBe(testString);
   });
 
-  // TODO[1fe]: add logger back?
-  // it('shoud log error if unable to set title', () => {
-  //   const mockError = jest.fn();
-  //   jest.spyOn(telemetryModule, 'getShellLogger').mockReturnValueOnce({
-  //     error: mockError,
-  //     log: jest.fn(),
-  //   } as any);
+  it('shoud log error if unable to set title', () => {
+    title('@ds/test').set('foo');
 
-  //   title('@ds/test').set('foo');
-
-  //   expect(mockError).toHaveBeenCalled();
-  // });
+    expect(mockError).toHaveBeenCalled();
+  });
 
   it('should get the title of the document', () => {
     document.body.innerHTML = `
