@@ -1,9 +1,9 @@
-let magicBoxConfigs: any = {};
+let oneFEConfigs: any = {};
 
-export const readMagicBoxShellConfigs = () => {
-  return magicBoxConfigs;
+export const readOneFEShellConfigs = () => {
+  return oneFEConfigs;
 };
 
-export const setMagicBoxShellConfigs = (newConfigs: any) => {
-  magicBoxConfigs = newConfigs;
+export const setOneFEShellConfigs = (newConfigs: any) => {
+  oneFEConfigs = newConfigs;
 };

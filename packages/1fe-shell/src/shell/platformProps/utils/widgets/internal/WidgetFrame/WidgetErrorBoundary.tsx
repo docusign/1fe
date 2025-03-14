@@ -71,7 +71,7 @@ export function WidgetErrorBoundary({
     renderStartTime.current = Date.now();
 
     logger.log({
-      message: `[1DS-Shell] Widget rendered`,
+      message: `[1FE-Shell] Widget rendered`,
       widget: isUrl
         ? { widgetId: widgetFrameId, version: '0.0.0' }
         : requestedWidgetConfigOrUrl,
@@ -84,7 +84,7 @@ export function WidgetErrorBoundary({
         : { plugin: requestedWidgetConfigOrUrl }),
     });
 
-    // TODO: [1ds-consumption] add logCounter
+    // TODO: [1fe-consumption] add logCounter
     // if (!isWidgetOverriden) {
     //   logger.logCounter(
     //     {
@@ -106,7 +106,7 @@ export function WidgetErrorBoundary({
       const isWidgetOverriden = isOverrideElementActive();
 
       logger.error({
-        message: `[1DS-Shell] Widget failed to render`,
+        message: `[1FE-Shell] Widget failed to render`,
         error,
         info,
         isOverrideActive: isWidgetOverriden,

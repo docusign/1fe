@@ -12,7 +12,7 @@ type GetRequestedWidgetConfigArg = {
 
 export type WidgetType = 'pinned' | 'system';
 
-// TODO:[1DS consumption] Need to add back INTERNAL_PLUGIN_GATING if we consume back in 1ds
+// TODO:[1FE consumption] Need to add back INTERNAL_PLUGIN_GATING if we consume back in 1fe
 
 export const getWidgetConfigValues = <
   T extends PluginConfig | WidgetConfig = WidgetConfig,
@@ -77,7 +77,7 @@ export const convertServerWidgetConfigToShellWidgetConfig = (
   widgetConfigs: WidgetConfigs,
 ): Partial<WidgetConfig>[] => {
   return getWidgetConfigValues(widgetConfigs).map((widget) => {
-    // Remove the following paths that are not needed by the 1DS Shell
+    // Remove the following paths that are not needed by the 1FE Shell
     // widget.runtime.plugin.metaTags
     return omit(widget, ['runtime.plugin.metaTags', 'runtime.headers.csp']);
   });
@@ -137,7 +137,7 @@ export const getRequestedWidgetConfigWithoutRuntimeConfig = ({
 
   if (!requestedWidgetConfig) {
     console.error(
-      '[1DS][platformProps.utils.widgets.get] Unable to find requested widget config in the global WIDGET_CONFIGS map. Returning empty object.',
+      '[1FE][platformProps.utils.widgets.get] Unable to find requested widget config in the global WIDGET_CONFIGS map. Returning empty object.',
       {
         hostWidgetId,
         requestedWidgetId,
@@ -155,7 +155,7 @@ export const getRequestedWidgetConfigWithoutRuntimeConfig = ({
   if (!!requestedWidgetPinnedConfig) {
     if (!isWidgetTypePinned(requestedWidgetConfig.type)) {
       console.warn(
-        '[platformProps.utils.widgets.get][PINNED_WIDGETS] Requested pinned widget is not a pinned widget. The 1ds shell will request the current version instead.',
+        '[platformProps.utils.widgets.get][PINNED_WIDGETS] Requested pinned widget is not a pinned widget. The 1fe shell will request the current version instead.',
       );
 
       return { requestedWidgetConfig };

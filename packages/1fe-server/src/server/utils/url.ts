@@ -39,9 +39,7 @@ export const getParamFromQueryOrRedirectUri = (
   queryParam: string,
 ): string | null => {
   try {
-    const queryParamValue = req.query[queryParam] as
-      | string
-      | undefined;
+    const queryParamValue = req.query[queryParam] as string | undefined;
 
     if (queryParamValue) {
       return queryParamValue;
@@ -54,7 +52,7 @@ export const getParamFromQueryOrRedirectUri = (
       return searchParams.get(queryParam);
     }
   } catch (e) {
-    console.error('[1DS] Error getting query param', {
+    console.error('[1FE] Error getting query param', {
       query: req.query,
       queryParam,
       error: e,

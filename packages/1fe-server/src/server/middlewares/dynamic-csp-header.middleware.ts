@@ -4,7 +4,7 @@ import { mergeWith, mapKeys, isArray, uniq } from 'lodash';
 import helmet from 'helmet';
 import { ROUTES } from '../constants';
 import { getRuntimeCSPConfigs } from '../utils';
-import { readMagicBoxConfigs } from '../utils/magicbox-configs';
+import { readOneFEConfigs } from '../utils/one-fe-configs';
 
 type MergeCSPOptions = {
   environment?: string | undefined;
@@ -50,8 +50,8 @@ export const getMergedDirectives = (cspOptions: MergeCSPOptions) => {
     : ROUTES.CSP_REPORT_VIOLATION;
 
   const mappedDefaultCSPDirectives = reportOnly
-    ? readMagicBoxConfigs().csp?.defaultCSP?.reportOnly
-    : readMagicBoxConfigs().csp?.defaultCSP?.enforced;
+    ? readOneFEConfigs().csp?.defaultCSP?.reportOnly
+    : readOneFEConfigs().csp?.defaultCSP?.enforced;
 
   const defaultDirectives = mapKeys(
     helmet.contentSecurityPolicy.getDefaultDirectives(),
@@ -122,7 +122,7 @@ const dynamicCspHeaderMiddleware = async (
     // Generate plugin csp with helmet
     const helmetCspMiddleware = helmet.contentSecurityPolicy(
       generateCSPPolicy({
-        environment: readMagicBoxConfigs().environment,
+        environment: readOneFEConfigs().environment,
         pluginId,
         req,
       }),
@@ -135,7 +135,7 @@ const dynamicCspHeaderMiddleware = async (
       // Generate plugin report only csp with helmet
       const helmetReportOnlyCspMiddleware = helmet.contentSecurityPolicy(
         generateCSPPolicy({
-          environment: readMagicBoxConfigs().environment,
+          environment: readOneFEConfigs().environment,
           pluginId,
           reportOnly: true,
           req,

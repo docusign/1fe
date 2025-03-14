@@ -37,7 +37,7 @@ export const initPublishToEventBus = (
       data,
     };
 
-    // only 1DS Shell is allowed to broadcast to all widgets
+    // only 1FE Shell is allowed to broadcast to all widgets
     if (widgetId === ONE_FE_SHELL_ID && targetWidgetId === '*') {
       broadcastEvent<EventMap, K>(eventName, dataPayloadForSubscriber);
 

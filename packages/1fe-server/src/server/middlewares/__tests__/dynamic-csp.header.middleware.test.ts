@@ -2,8 +2,10 @@ import { Request, Response, NextFunction } from 'express';
 import httpMocks from 'node-mocks-http';
 import dynamicCspHeaderMiddleware, * as cspHelpers from '../dynamic-csp-header.middleware'; // Replace with the actual path to your middleware function
 
-jest.mock('../../utils/magicbox-configs', () => ({
-  readMagicBoxConfigs: jest.fn().mockImplementation(() => ({ environment: 'development' })),
+jest.mock('../../utils/one-fe-configs', () => ({
+  readOneFEConfigs: jest
+    .fn()
+    .mockImplementation(() => ({ environment: 'development' })),
 }));
 describe('dynamicCspHeaderMiddleware', () => {
   const mockRequest: any = httpMocks.createRequest();
@@ -12,7 +14,7 @@ describe('dynamicCspHeaderMiddleware', () => {
   let mockGenerateCSPPolicy: jest.Mock;
 
   beforeEach(() => {
-    mockRequest.plugin = { widgetId: '@1ds/widget-starter-kit' };
+    mockRequest.plugin = { widgetId: '@1fe/widget-starter-kit' };
     next = jest.fn();
     mockGenerateCSPPolicy = jest.fn().mockImplementation(() => {});
 
@@ -34,7 +36,7 @@ describe('dynamicCspHeaderMiddleware', () => {
 
     expect(mockGenerateCSPPolicy).toHaveBeenCalledWith({
       environment: 'development',
-      pluginId: '@1ds/widget-starter-kit',
+      pluginId: '@1fe/widget-starter-kit',
       req: mockRequest,
     });
 

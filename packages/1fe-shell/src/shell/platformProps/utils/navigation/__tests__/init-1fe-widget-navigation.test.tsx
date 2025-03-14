@@ -5,7 +5,7 @@ import { MemoryRouter, useLocation, useNavigate } from 'react-router-dom';
 import { getRoute } from '../get-route';
 // import { WidgetConfig } from '../../../../../isomorphic/types/widgetConfigs.types';
 import { getPlatformProps } from '../../..';
-import { useSubscribeWidgetDeepLinking } from '../init-1ds-widget-navigation';
+import { useSubscribeWidgetDeepLinking } from '../init-1fe-widget-navigation';
 import { WidgetConfig } from '../../../../types/widget-config';
 jest.mock('../../../../utils/url', () => ({
   getBaseHrefUrl: jest.fn(() => 'https://apps.docusign.com/'),
@@ -54,7 +54,7 @@ const TestWidget = (props: ReturnType<typeof generateProps>) => {
 
   // TODO: What is the purpose of this line?
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // props?.platform?.utils?.navigation?.init1DSWidgetNavigation(
+  // props?.platform?.utils?.navigation?.init1FEWidgetNavigation(
   //   props,
   //   navigate,
   //   useNavigate,
@@ -63,15 +63,15 @@ const TestWidget = (props: ReturnType<typeof generateProps>) => {
   return <div>welcome</div>;
 };
 
-describe('init1DSWidgetNavigation', () => {
-  it('should not let you call `navigate1DS` without initialization', () => {
+describe('init1FEWidgetNavigation', () => {
+  it('should not let you call `navigate1FE` without initialization', () => {
     const props = generateProps();
     expect(() =>
-      props?.platform?.utils?.navigation?.navigate1DS('/route'),
+      props?.platform?.utils?.navigation?.navigate1FE('/route'),
     ).toThrowError();
   });
 
-  it('component (widget) should render without error when `init1DSWidgetNavigation` is called', () => {
+  it('component (widget) should render without error when `init1FEWidgetNavigation` is called', () => {
     expect(() =>
       render(
         <MemoryRouter>
@@ -81,7 +81,7 @@ describe('init1DSWidgetNavigation', () => {
     ).not.toThrowError();
   });
 
-  it('widget should throw error if `init1DSWidgetNavigation` is used in a component that is not a child of its <MemoryRouter />', () => {
+  it('widget should throw error if `init1FEWidgetNavigation` is used in a component that is not a child of its <MemoryRouter />', () => {
     const spy = jest.spyOn(console, 'error').mockImplementation(() => {
       void 0;
     }); // Mute the expected console.errors here

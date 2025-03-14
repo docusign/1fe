@@ -1,11 +1,10 @@
 import deepFreeze from 'deep-freeze';
 
-
 import { getPlatformUtils } from './utils';
 import { getContext } from './context';
 import { getDefaultWidgetOptions } from './utils/widgets/internal/utils/constants';
 import { WidgetConfig } from '../types/widget-config';
-import { readMagicBoxShellConfigs } from '../configs/shell-configs';
+import { readOneFEShellConfigs } from '../configs/shell-configs';
 import { PlatformPropsType, WidgetOptions } from '../types/platform-utils';
 
 export const getPlatformProps = (
@@ -13,7 +12,7 @@ export const getPlatformProps = (
   options: WidgetOptions = getDefaultWidgetOptions(),
 ): PlatformPropsType => {
   const platformProps = {
-    environment: readMagicBoxShellConfigs().environment,
+    environment: readOneFEShellConfigs().environment,
     context: getContext(widget, options),
     utils: getPlatformUtils(widget),
   };

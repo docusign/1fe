@@ -25,12 +25,12 @@ export type InternalLogData = {
 
 export type ShellAppLoadTimeUtils = {
   /**
-   * Used for starting a performance mark within 1DS-Shell
+   * Used for starting a performance mark within 1FE-Shell
    */
   markStart: (markerName: string, markOptions?: PerformanceMarkOptions) => void;
 
   /**
-   * Used for ending and measuring an open performance mark within 1DS-Shell
+   * Used for ending and measuring an open performance mark within 1FE-Shell
    */
   markEnd: (
     markerName: string,
@@ -45,7 +45,7 @@ export type WidgetAppLoadTimeUtils = {
   mark: (markName: string, measureOptions?: PerformanceMeasureOptions) => void;
 
   /**
-   * Used to end the primary performance mark started by the 1DS-Shell. Should only be called once
+   * Used to end the primary performance mark started by the 1FE-Shell. Should only be called once
    */
   end: () => void;
 

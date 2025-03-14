@@ -1,13 +1,13 @@
-import { RuntimeConfig, WidgetConfig } from "../../types";
-import { parseRuntimeConfig } from "../runtime-configs";
+import { RuntimeConfig, WidgetConfig } from '../../types';
+import { parseRuntimeConfig } from '../runtime-configs';
 
 jest.mock('ky', () => ({
   get: jest.fn().mockReturnValue({}),
 }));
 
-jest.mock('../magicbox-configs', () => ({
-  readMagicBoxConfigs: jest.fn().mockImplementation(() => ({
-    environment: 'integration'
+jest.mock('../one-fe-configs', () => ({
+  readOneFEConfigs: jest.fn().mockImplementation(() => ({
+    environment: 'integration',
   })),
 }));
 

@@ -59,14 +59,14 @@ export const get =
 
     if (!requestedWidgetId) {
       const errorMessage =
-        '[platformProps.utils.widgets.get] No widget ID provided, please refer to API documentation: https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/widgets/#get';
+        '[platformProps.utils.widgets.get] No widget ID provided, please refer to API documentation: https://github.docusignhq.com/pages/Core/1fe-docs/widgets/utils/widgets/#get';
       console.error(errorMessage);
       throw new Error(errorMessage);
     }
 
     if (!isSystemEnv()) {
       const errorMessage =
-        '[platformProps.utils.widgets.get] Systemjs not detected. Something is critically wrong. Please reach out to 1DS team.';
+        '[platformProps.utils.widgets.get] Systemjs not detected. Something is critically wrong. Please reach out to 1FE team.';
 
       console.error(errorMessage);
       throw new Error(errorMessage);
@@ -77,7 +77,7 @@ export const get =
         getRequestedWidgetConfigWithoutRuntimeConfig({
           hostWidgetId,
           requestedWidgetId,
-          widgetConfigs: WIDGET_CONFIGS
+          widgetConfigs: WIDGET_CONFIGS,
         });
 
       const isPinnedWidget = isWidgetTypePinned(type);

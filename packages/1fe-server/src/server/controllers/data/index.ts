@@ -15,13 +15,13 @@ import {
 } from '../../utils/libs';
 import { getMetaTagStringsFromWidgetRuntimeConfig } from '../../utils/meta-tags';
 import { PluginConfig } from '../../types';
-import { readMagicBoxConfigs } from '../../utils/magicbox-configs';
+import { readOneFEConfigs } from '../../utils/one-fe-configs';
 import { getRequestHost } from '../../utils/request-helpers';
 import { getWidgetConfigsForIndexHtml } from './widget-config';
 import { STATIC_ASSETS } from '../../constants';
 
 export const dataForRenderingTemplate = async (req: Request) => {
-  // TODO:[1DS consumption] Will enableRuntimeConfigOverrides flag be promoted to production? May need to update this
+  // TODO:[1FE consumption] Will enableRuntimeConfigOverrides flag be promoted to production? May need to update this
   const widgetConfigs = await getWidgetConfigsForIndexHtml(req);
   const activePluginConfig = req.plugin;
 
@@ -45,7 +45,7 @@ export const dataForRenderingTemplate = async (req: Request) => {
 
     Moment: 'moment',
 
-    // @TODO: This part below is unacceptable - 1ds should not
+    // @TODO: This part below is unacceptable - 1fe should not
     // know about a particular widget or plugin
     // @ds/prepare hardcoded requirements
     _react: 'React',
@@ -79,19 +79,20 @@ export const dataForRenderingTemplate = async (req: Request) => {
   // const activeAutomatedTestFramework =
   //   req.query.automated_test_framework || null;
 
-  const shellBundleUrl = readMagicBoxConfigs().shellBundleUrl;
+  const shellBundleUrl = readOneFEConfigs().shellBundleUrl;
 
   return {
-    isProduction: readMagicBoxConfigs().mode === 'production',
-    hideImportMapOverrideElement: readMagicBoxConfigs().dynamicConfigs?.importMapOverrides?.enableUI === false,
+    isProduction: readOneFEConfigs().mode === 'production',
+    hideImportMapOverrideElement:
+      readOneFEConfigs().dynamicConfigs?.importMapOverrides?.enableUI === false,
     widgetConfigs: slimWidgetConfigsForShell,
     pluginConfigs: getPluginConfigs(),
     dynamicConfigs: convertServerDynamicConfigToShellDynamicConfig(
-      readMagicBoxConfigs().dynamicConfigs,
+      readOneFEConfigs().dynamicConfigs,
     ),
     envConfigs: {
-      environment: readMagicBoxConfigs().environment,
-      mode: readMagicBoxConfigs().mode,
+      environment: readOneFEConfigs().environment,
+      mode: readOneFEConfigs().mode,
     },
     criticalLibraryConfigUrls: criticalLibs,
     lazyLoadedLibsConfig: lazyLoadedLibs,
@@ -102,7 +103,7 @@ export const dataForRenderingTemplate = async (req: Request) => {
       widgetConfigs,
       activePluginConfig as PluginConfig,
     ),
-    pageTitle: readMagicBoxConfigs().orgName,
+    pageTitle: readOneFEConfigs().orgName,
     baseHref: `${getRequestHost(req)}/`,
     cspNonceGuid: req.cspNonceGuid,
     systemJsImportMapConfig: {
@@ -112,6 +113,6 @@ export const dataForRenderingTemplate = async (req: Request) => {
       },
     },
     favicon: STATIC_ASSETS.FAVICON,
-    shellBundleUrl
+    shellBundleUrl,
   };
 };

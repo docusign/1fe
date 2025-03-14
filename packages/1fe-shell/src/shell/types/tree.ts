@@ -1,15 +1,14 @@
-import { WidgetConfig } from "./widget-config";
+import { WidgetConfig } from './widget-config';
 
 export type TreeNodeType =
-  | `1DS_SHELL`
+  | `1FE_SHELL`
   | 'widget'
   | 'library'
   | 'bareSpecifier'
   | 'unknown';
 
-  export type WidgetTreeNode = {
-    id: string;
-    data: WidgetConfig;
-    children?: WidgetTreeNode[];
-  };
-  
+export type WidgetTreeNode = {
+  id: string;
+  data: WidgetConfig;
+  children?: WidgetTreeNode[];
+};

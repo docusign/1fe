@@ -1,4 +1,4 @@
-import renderMagicBoxShell from './shell';
+import renderOneFEShell from './shell';
 
-export default renderMagicBoxShell;
+export default renderOneFEShell;
 export { platformProps } from './shell/utils/system-helpers';

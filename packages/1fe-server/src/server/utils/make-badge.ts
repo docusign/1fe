@@ -1,7 +1,7 @@
 import { makeBadge } from 'badge-maker';
 
 /*
-TODO:[1DS consumption]
+TODO:[1FE consumption]
 - update label and color. Currently stubbed
 */
 

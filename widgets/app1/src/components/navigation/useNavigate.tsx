@@ -1,4 +1,4 @@
-// import { platformProps } from '@1ds/shell';
+// import { platformProps } from '@1fe/shell';
 import styled from '@emotion/styled';
 import { Input, Button } from 'antd';
 import { useState } from 'react';
@@ -17,7 +17,7 @@ export const UseNavigate = (props) => {
   // const t = useTranslate();
   const navigate = useNavigate();
 
-  const navigate1ds = props.platform?.utils?.navigation?.useNavigate(
+  const navigate1fe = props.platform?.utils?.navigation?.useNavigate(
     navigate,
     useNavigate,
     useLocation,
@@ -28,32 +28,32 @@ export const UseNavigate = (props) => {
       <Input
         value={widgetUrl}
         onChange={(e) => setWidgetUrl(e.target.value)}
-        data-qa='utils.navigation.useNavigate.normal.input'
+        data-qa="utils.navigation.useNavigate.normal.input"
       />
 
       <Button
-        size='large'
-        data-qa='utils.context.get.btn'
-        onClick={() => navigate1ds(widgetUrl)}
+        size="large"
+        data-qa="utils.context.get.btn"
+        onClick={() => navigate1fe(widgetUrl)}
       >
         {'navigate within widget and update url'}
-        {/* {t('Components.Navigation.Navigation1DS-Normal')} */}
+        {/* {t('Components.Navigation.Navigation1FE-Normal')} */}
       </Button>
       <Button
-        size='large'
-        data-qa='utils.navigation.useNavigate.normal.state.btn'
-        onClick={() => navigate1ds(widgetUrl, { state: 'home' })}
+        size="large"
+        data-qa="utils.navigation.useNavigate.normal.state.btn"
+        onClick={() => navigate1fe(widgetUrl, { state: 'home' })}
       >
         {'navigate within widget and update url (with state)'}
-        {/* {t('Components.Navigation.Navigation1DS-Normal-WithState')} */}
+        {/* {t('Components.Navigation.Navigation1FE-Normal-WithState')} */}
       </Button>
       <Button
-        size='large'
-        data-qa='utils.navigation.useNavigate.noURL.btn'
+        size="large"
+        data-qa="utils.navigation.useNavigate.noURL.btn"
         onClick={() => navigate(widgetUrl)}
       >
-        {'navigate within widget and don\'t update url'}
-        {/* {t('Components.Navigation.Navigation1DS-NoURL')} */}
+        {"navigate within widget and don't update url"}
+        {/* {t('Components.Navigation.Navigation1FE-NoURL')} */}
       </Button>
     </NavigateWithTextboxContainer>
   );
@@ -63,26 +63,26 @@ export const UseNavigate = (props) => {
       <Input
         value={pluginUrl}
         onChange={(e) => setPluginUrl(e.target.value)}
-        data-qa='utils.navigation.useNavigate.p2p.input'
+        data-qa="utils.navigation.useNavigate.p2p.input"
       />
 
       <Button
-        size='large'
-        data-qa='utils.navigation.useNavigate.p2p.btn'
+        size="large"
+        data-qa="utils.navigation.useNavigate.p2p.btn"
         onClick={() =>
-          navigate1ds(pluginUrl, {
+          navigate1fe(pluginUrl, {
             pluginToPluginNavigation: true,
           })
         }
       >
         {'navigate between plugins'}
-        {/* {t('Components.Navigation.Navigation1DS-P2P-ButtonText')} */}
+        {/* {t('Components.Navigation.Navigation1FE-P2P-ButtonText')} */}
       </Button>
     </NavigateWithTextboxContainer>
   );
 
   return (
-    <div data-qa='utils.navigation.useNavigate.container'>
+    <div data-qa="utils.navigation.useNavigate.container">
       {/* <h3>{t('Components.Navigation.UseNavigate-new')}</h3> */}
       {widgetNavigation}
       {pluginNavigation}

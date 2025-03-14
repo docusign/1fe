@@ -1,18 +1,18 @@
 import React, { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
-// import { isIntegrationEnvironment } from '@1ds/helpers/isomorphic';
+// import { isIntegrationEnvironment } from '@1fe/helpers/isomorphic';
 // import styled from '@emotion/styled';
 // import { PluginConfig } from '../../isomorphic/types/widgetConfigs.types';
 // import { getEnvironmentConfigs } from '../utils';
 
 // import { Error } from './Error';
 // import { AdditionalErrorInfo, OneDsErrorBoundary } from './OneDsErrorBoundary';
-// import { readMagicBoxShellConfigs } from '../configs/shell-configs';
+// import { readOneFEShellConfigs } from '../configs/shell-configs';
 import { PluginConfig } from '../types/widget-config';
 import { SHELL_NAVIGATED_EVENT } from '../constants/event-names';
 import { getShellLogger } from '../utils/telemetry';
-import { readMagicBoxShellConfigs } from '../configs/shell-configs';
+import { readOneFEShellConfigs } from '../configs/shell-configs';
 import { AdditionalErrorInfo, OneDsErrorBoundary } from './OneDsErrorBoundary';
 
 export type RouteWrapperProps = {
@@ -37,7 +37,7 @@ export const RouteWrapper: React.FC<RouteWrapperProps> = ({
     );
 
     logger.log({
-      message: `[1DS-Shell] Route changed`,
+      message: `[1FE-Shell] Route changed`,
       path: location?.pathname,
       from: previousPathRef.current,
       widgetId: plugin?.widgetId,
@@ -48,18 +48,17 @@ export const RouteWrapper: React.FC<RouteWrapperProps> = ({
 
   const handleError = (error: Error, info: AdditionalErrorInfo) => {
     logger.error({
-      message: `[1DS-Shell] Unhandled Route Failure`,
+      message: `[1FE-Shell] Unhandled Route Failure`,
       error,
       info,
       location: location,
     });
   };
 
+  const IS_PROD = readOneFEShellConfigs().mode === 'production';
+  const getError = readOneFEShellConfigs().components.getError;
 
-  const IS_PROD = readMagicBoxShellConfigs().mode === 'production';
-  const getError = readMagicBoxShellConfigs().components.getError;
-  
-  // if (FEATURE_FLAGS.enable1dsDevtool && isIntegrationEnvironment(ENVIRONMENT)) {
+  // if (FEATURE_FLAGS.enable1feDevtool && isIntegrationEnvironment(ENVIRONMENT)) {
   //   return (
   //     <RootContainer>
   //       <DevtoolOrNull />
@@ -75,7 +74,7 @@ export const RouteWrapper: React.FC<RouteWrapperProps> = ({
   return (
     <OneDsErrorBoundary
       fallbackComponent={getError({
-        plugin
+        plugin,
       })}
       onError={handleError}
     >

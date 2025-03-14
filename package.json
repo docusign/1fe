@@ -1,5 +1,5 @@
 {
-  "name": "@devhub/magicbox",
+  "name": "@devhub/1fe",
   "private": true,
   "scripts": {
     "build": "turbo run build",

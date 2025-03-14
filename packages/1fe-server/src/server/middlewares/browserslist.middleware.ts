@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
 import { ROUTES, STATIC_ASSETS } from '../constants';
-import { readMagicBoxConfigs } from '../utils/magicbox-configs';
+import { readOneFEConfigs } from '../utils/one-fe-configs';
 import { matchesUA } from 'browserslist-useragent';
 import { isEmpty } from 'lodash';
 
@@ -13,14 +13,15 @@ const ignoredRoutes = [
   ROUTES.LOAD_TEST,
 ];
 
-// TODO: [1DS consumption] When consuming back, need to add middleware for isAutomationRun flag to be set
+// TODO: [1FE consumption] When consuming back, need to add middleware for isAutomationRun flag to be set
 const browsersListMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction,
 ): void => {
   try {
-    const browsersListConfig = readMagicBoxConfigs().dynamicConfigs.browserslistConfig;
+    const browsersListConfig =
+      readOneFEConfigs().dynamicConfigs.browserslistConfig;
 
     const { path } = req || {};
     const activeAutomatedTestFramework =
@@ -38,7 +39,7 @@ const browsersListMiddleware = (
       !ignoredRoutes.includes(path) &&
       // Ignore redirecting for static assets (Only applicable to local dev mode - Usually served by CDN)
       !path.startsWith(STATIC_ASSETS.IMAGES) &&
-      !path.startsWith(STATIC_ASSETS.FAVICON) && 
+      !path.startsWith(STATIC_ASSETS.FAVICON) &&
       !isEmpty(browsersListConfig)
     ) {
       const matchesSupportedBrowser = matchesUA(userAgent, {

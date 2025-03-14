@@ -4,12 +4,12 @@
  * Mock the getTree function to return a tree with a plugin mounted
  */
 
-import { getPlugin } from "..";
+import { getPlugin } from '..';
 
 jest.mock('../../getTree', () => ({
   getTree: jest.fn(() => [
     {
-      id: '1DS_SHELL',
+      id: '1FE_SHELL',
       data: {},
       children: [
         {
@@ -30,7 +30,7 @@ describe('getPlugin', () => {
   it('should return null if there is no plugin mounted', () => {
     jest.spyOn(require('../../getTree'), 'getTree').mockReturnValueOnce([
       {
-        id: '1DS_SHELL',
+        id: '1FE_SHELL',
         data: {},
         children: [],
       },

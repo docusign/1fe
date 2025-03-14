@@ -5,7 +5,7 @@ import { type EventBusPlatformUtils } from '../event-bus/types';
 
 import { getPluginRoute } from './get-plugin-route';
 import { getRoute } from './get-route';
-import { navigate1DS } from './navigate-1ds';
+import { navigate1FE } from './navigate-1fe';
 import { externalRedirect } from './external-redirect';
 import { PlatformPropsType } from '../../../types/platform-utils';
 
@@ -17,7 +17,7 @@ type UseNavigateWidgetArgs = {
 
 export const SHELL_NAVIGATED_EVENT = '[shell] navigated';
 
-// use1DSNavigationHandler gets called with every use of platformProps.utils.navigation.useNavigate()
+// use1FENavigationHandler gets called with every use of platformProps.utils.navigation.useNavigate()
 // We only want to sync the widget's memory router with the browser router once
 const alreadyDeepLinkedWidgets: Record<string, number> = {};
 
@@ -66,7 +66,7 @@ export const useSubscribeWidgetDeepLinking = ({
 /**
  * Internal hook to initialize deep linking and back/forward button handling. Executes in the consuming widget's react context.
  */
-const use1DSNavigationHandler = ({
+const use1FENavigationHandler = ({
   widgetId,
   useNavigateWidget,
   useLocationWidget,
@@ -110,7 +110,7 @@ const use1DSNavigationHandler = ({
   }, [locationWidget]); // <- This is vital for the value for the checks against .pathname to be the right value each time the effect runs
 };
 
-type Init1DSWidgetNavigationArgs = {
+type Init1FEWidgetNavigationArgs = {
   widgetId: string;
   navigateShell?: NavigateFunction;
   eventBus: EventBusPlatformUtils;
@@ -118,14 +118,14 @@ type Init1DSWidgetNavigationArgs = {
   returnCallback?: boolean;
 };
 
-export type Navigate1DSFunction = ReturnType<typeof navigate1DS>;
+export type Navigate1FEFunction = ReturnType<typeof navigate1FE>;
 export type UseNavigate = (
   navigateWidget: NavigateFunction,
   useNavigateWidget: typeof useNavigate,
   useLocationWidget: typeof useLocation,
-) => Navigate1DSFunction;
+) => Navigate1FEFunction;
 
-export type Init1DSWidgetNavigation = <HostT>(
+export type Init1FEWidgetNavigation = <HostT>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   props: any, // desperately needing platform props types package https://jira.corp.docusign.com/browse/ONEDS-57
   navigateWidget: NavigateFunction,
@@ -134,36 +134,36 @@ export type Init1DSWidgetNavigation = <HostT>(
 ) => { platform: PlatformPropsType; host: HostT };
 
 // platformProps.utils.navigation.useNavigate() can be called an unlimited number of times in the in each widget, but we only want to define it once.
-const navigate1dsCallbackHashMap: Record<string, UseNavigate> = {};
+const navigate1feCallbackHashMap: Record<string, UseNavigate> = {};
 
-export const init1DSWidgetNavigation = <
-  ReturnT extends UseNavigate | Init1DSWidgetNavigation,
+export const init1FEWidgetNavigation = <
+  ReturnT extends UseNavigate | Init1FEWidgetNavigation,
 >({
   widgetId,
   navigateShell,
   eventBus,
   externalRedirect,
   returnCallback = false,
-}: Init1DSWidgetNavigationArgs): ReturnT => {
+}: Init1FEWidgetNavigationArgs): ReturnT => {
   // if returnCallback, we want return a callback from platformProps.utils.navigation.useNavigate()
-  // if !returnCallback, we want to monkey patch platformProps with navigate1DS defined
+  // if !returnCallback, we want to monkey patch platformProps with navigate1FE defined
   if (returnCallback) {
-    if (!navigate1dsCallbackHashMap[widgetId]) {
-      const navigate1dsCallback: UseNavigate = (
+    if (!navigate1feCallbackHashMap[widgetId]) {
+      const navigate1feCallback: UseNavigate = (
         navigateWidget,
         useNavigateWidget,
         useLocationWidget,
       ) => {
         // __REACT SCOPE__
         // anything executed here is inside the consuming widget's react context
-        // eslint-disable-next-line react-hooks/rules-of-hooks -- This is unsafe -- init1DSWidgetNavigation should be removed
-        use1DSNavigationHandler({
+        // eslint-disable-next-line react-hooks/rules-of-hooks -- This is unsafe -- init1FEWidgetNavigation should be removed
+        use1FENavigationHandler({
           widgetId,
           useNavigateWidget,
           useLocationWidget,
         });
 
-        return navigate1DS({
+        return navigate1FE({
           navigateShell,
           navigateWidget,
           widgetId,
@@ -172,22 +172,22 @@ export const init1DSWidgetNavigation = <
         });
       };
 
-      navigate1dsCallbackHashMap[widgetId] = navigate1dsCallback;
+      navigate1feCallbackHashMap[widgetId] = navigate1feCallback;
     }
 
-    return navigate1dsCallbackHashMap[widgetId] as ReturnT;
+    return navigate1feCallbackHashMap[widgetId] as ReturnT;
   }
 
-  const _init1DSWidgetNavigation: Init1DSWidgetNavigation = (
+  const _init1FEWidgetNavigation: Init1FEWidgetNavigation = (
     props,
     navigateWidget,
     useNavigateWidget,
     useLocationWidget,
   ) => {
-    use1DSNavigationHandler({ widgetId, useNavigateWidget, useLocationWidget });
+    use1FENavigationHandler({ widgetId, useNavigateWidget, useLocationWidget });
 
-    // Monkey patches platform props to init navigate1DS
-    // Encourage teams to switch to platformProps.utils.navigation.useNavigate1DS
+    // Monkey patches platform props to init navigate1FE
+    // Encourage teams to switch to platformProps.utils.navigation.useNavigate1FE
     return {
       ...props,
       platform: {
@@ -196,7 +196,7 @@ export const init1DSWidgetNavigation = <
           ...props.platform.utils,
           navigation: {
             ...props.platform.utils.navigation,
-            navigate1DS: navigate1DS({
+            navigate1FE: navigate1FE({
               navigateShell,
               navigateWidget,
               widgetId,
@@ -209,5 +209,5 @@ export const init1DSWidgetNavigation = <
     };
   };
 
-  return _init1DSWidgetNavigation as ReturnT;
+  return _init1FEWidgetNavigation as ReturnT;
 };

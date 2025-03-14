@@ -1,7 +1,7 @@
 import { isEqual as _isEqual } from 'lodash';
 import { IMPORT_MAP_OVERRIDE_LIB_NEXT, SYSTEM_LOADER } from '../constants';
 import { ExternalLibConfig, InstalledLibConfig } from '../types';
-import { readMagicBoxConfigs } from './magicbox-configs';
+import { readOneFEConfigs } from './one-fe-configs';
 
 let libraryConfigs: (ExternalLibConfig | InstalledLibConfig)[] = [];
 export const getLibraryConfigs = (): (
@@ -30,8 +30,7 @@ const getCDNLibraryUrl = (
   version: string,
   path: string,
 ): string => {
-  const libBaseUrl =
-    readMagicBoxConfigs().dynamicConfigs.cdn.libraries.basePrefix;
+  const libBaseUrl = readOneFEConfigs().dynamicConfigs.cdn.libraries.basePrefix;
   return `${libBaseUrl}${id}/${version}/${path}`;
 };
 
@@ -70,21 +69,21 @@ export const getCriticalLibs = () => ({
   System: getCDNLibraryUrl(
     SYSTEM_LOADER.id,
     SYSTEM_LOADER.version,
-    readMagicBoxConfigs().mode === 'production'
+    readOneFEConfigs().mode === 'production'
       ? 'dist/system.min.js'
       : 'dist/system.js',
   ),
   SystemAMD: getCDNLibraryUrl(
     SYSTEM_LOADER.id,
     SYSTEM_LOADER.version,
-    readMagicBoxConfigs().mode === 'production'
+    readOneFEConfigs().mode === 'production'
       ? 'dist/extras/amd.min.js'
       : 'dist/extras/amd.js',
   ),
   ImportMapOverride: getCDNLibraryUrl(
     IMPORT_MAP_OVERRIDE_LIB_NEXT.id,
     IMPORT_MAP_OVERRIDE_LIB_NEXT.version,
-    readMagicBoxConfigs().mode === 'production'
+    readOneFEConfigs().mode === 'production'
       ? 'dist/import-map-overrides-api.js'
       : 'dist/import-map-overrides.js',
   ),

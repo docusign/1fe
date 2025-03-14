@@ -3,10 +3,10 @@ import { RUNTIME_CONFIG_OVERRIDES } from '../constants';
 import { RuntimeConfig } from '../types';
 import { getParamFromQueryOrRedirectUri } from './url';
 import { getCachedWidgetConfigs } from './widget-config';
-import { readMagicBoxConfigs } from './magicbox-configs';
+import { readOneFEConfigs } from './one-fe-configs';
 
 /**
- * Get runtime csp configurations. (defined in .1ds.config.ts)
+ * Get runtime csp configurations. (defined in .1fe.config.ts)
  *
  * @param pluginId plugin's widgetId
  * @param reportOnly is the csp report-only or enforced
@@ -23,7 +23,7 @@ export const getRuntimeCSPConfigs = ({
   req: Request;
 }) => {
   // Only want to override in local or integration. Not in higher environments.
-  if (readMagicBoxConfigs().mode !== 'production') {
+  if (readOneFEConfigs().mode !== 'production') {
     // get stringified runtime configs
     const runtimeConfigOverridesParam = getParamFromQueryOrRedirectUri(
       req,

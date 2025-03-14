@@ -23,7 +23,7 @@ import {
   getCachedWidgetConfigs,
   setCachedWidgetConfigs,
 } from './widget-config';
-import { setMagicBoxConfigs } from './magicbox-configs';
+import { setOneFEConfigs } from './one-fe-configs';
 
 /*
 TODO[1fe]:
@@ -63,7 +63,7 @@ const fetchConfig = async (options: any) => {
         const response = await ky.get(url, {
           retry: 5,
           timeout: 30 * 1000,
-        }); 
+        });
 
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -71,17 +71,17 @@ const fetchConfig = async (options: any) => {
 
         return response.json();
       }
-    }
-    
+    };
+
     const configJson = await getDynamicConfigs();
 
-    const magicBoxConfigs = {
+    const oneFEConfigs = {
       ...options,
       dynamicConfigs: configJson,
     };
-    setMagicBoxConfigs(magicBoxConfigs);
+    setOneFEConfigs(oneFEConfigs);
 
-    return magicBoxConfigs;
+    return oneFEConfigs;
   } catch (error) {
     console.error('Error fetching config:', error);
     return null;

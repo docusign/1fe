@@ -1,19 +1,14 @@
 const CopyPlugin = require('copy-webpack-plugin');
 const { resolve } = require('path');
-const {
-  EnvironmentPlugin,
-} = require('webpack');
+const { EnvironmentPlugin } = require('webpack');
 const merge = require('webpack-merge');
 const swConfig = require('./sw');
-const {
-  commonPlugins,
-  shouldUseDevelopmentMode,
-} = require('./utils');
+const { commonPlugins, shouldUseDevelopmentMode } = require('./utils');
 
 const tsconfigClient = resolve(__dirname, '../../tsconfig.json');
 
 /**
- * The production webpack configuration for the 1DS shell is also treated as the "common" configuration.
+ * The production webpack configuration for the 1FE shell is also treated as the "common" configuration.
  *
  * @param configOverrides
  */
@@ -46,9 +41,9 @@ const getProdConfig = async (configOverrides) => {
       chunkIds: 'named',
     },
     externals: {
-      "react": "React",
-      "react-dom": "ReactDOM",
-      "lodash": "_",
+      react: 'React',
+      'react-dom': 'ReactDOM',
+      lodash: '_',
     },
     plugins: [
       ...commonPlugins,
@@ -80,10 +75,7 @@ const getProdConfig = async (configOverrides) => {
         },
         {
           test: /\.css$/,
-          use: [
-            'style-loader',
-            'css-loader',
-          ],
+          use: ['style-loader', 'css-loader'],
         },
         {
           test: /\.[cm]?js$/,
@@ -99,7 +91,10 @@ const getProdConfig = async (configOverrides) => {
   };
 
   return [
-    merge.mergeWithCustomize({ plugins: 'replace' })(prodConfig, configOverrides),
+    merge.mergeWithCustomize({ plugins: 'replace' })(
+      prodConfig,
+      configOverrides,
+    ),
     swConfig,
   ];
 };

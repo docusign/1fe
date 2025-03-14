@@ -1,9 +1,12 @@
 import * as widgetConfig from '../widget-config';
-import { generateWidgetConfigMap, getPluginConfigs } from '../widget-config-helpers';
+import {
+  generateWidgetConfigMap,
+  getPluginConfigs,
+} from '../widget-config-helpers';
 
 const mockWidgetConfigs = generateWidgetConfigMap([
   {
-    widgetId: '@1ds/widget-starter-kit',
+    widgetId: '@1fe/widget-starter-kit',
     activePhasedDeployment: false,
     version: '0.0.0',
     plugin: {
@@ -23,7 +26,7 @@ const mockWidgetConfigs = generateWidgetConfigMap([
     runtime: {},
   },
   {
-    widgetId: '@internal/1ds-plugin-with-auth-example-2',
+    widgetId: '@internal/1fe-plugin-with-auth-example-2',
     activePhasedDeployment: false,
     version: '0.0.0',
     plugin: {
@@ -56,9 +59,9 @@ jest
 
 describe('Get Plugin Config Tests', () => {
   // it.each([
-  //   ['@1ds/widget-starter-kit', true],
+  //   ['@1fe/widget-starter-kit', true],
   //   ['@internal/plugin-with-auth-example', true],
-  //   ['@internal/1ds-plugin-with-auth-example-2', true],
+  //   ['@internal/1fe-plugin-with-auth-example-2', true],
   //   ['test/pluginId', true],
   //   ['test/widgetId', false],
   // ])(
@@ -74,9 +77,9 @@ describe('Get Plugin Config Tests', () => {
   // );
 
   it.each([
-    ['@1ds/widget-starter-kit', true],
+    ['@1fe/widget-starter-kit', true],
     ['@internal/plugin-with-auth-example', true],
-    ['@internal/1ds-plugin-with-auth-example-2', true],
+    ['@internal/1fe-plugin-with-auth-example-2', true],
     ['test/pluginId', true],
     ['test/widgetId', false],
   ])(

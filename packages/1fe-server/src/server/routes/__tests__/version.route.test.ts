@@ -8,7 +8,7 @@ import * as dataModule from '../../controllers/data';
 import VersionController, {
   validateWidgetInputs,
 } from '../../controllers/version.controller';
-import { magicBoxServer } from '../..';
+import { oneFEServer } from '../..';
 import { serverOptions } from './server-options';
 import { WidgetConfig } from '../../types';
 import { getCachedWidgetConfigs } from '../../utils/widget-config';
@@ -17,13 +17,13 @@ import { generateWidgetConfigMap } from '../../utils';
 jest.mock('ky', () => ({
   get: jest.fn().mockResolvedValue({
     json: () => Promise.resolve({}),
-      ok: true,
-      status: 200,
+    ok: true,
+    status: 200,
   }),
 }));
 
-jest.mock('../../utils/magicbox-configs', () => ({
-  readMagicBoxConfigs: jest.fn().mockImplementation(() => (serverOptions)),
+jest.mock('../../utils/one-fe-configs', () => ({
+  readOneFEConfigs: jest.fn().mockImplementation(() => serverOptions),
 }));
 
 jest.mock('../../utils/widget-config', () => ({
@@ -36,7 +36,7 @@ jest.mock('../../utils/config-poller', () => ({
 
 describe('Given Version Endpoint to test', () => {
   // to avoid redeclaring app and version route inside all tests in this block.
-  let app: ReturnType<typeof magicBoxServer>;
+  let app: ReturnType<typeof oneFEServer>;
 
   // before this describe block runs
   beforeAll(async () => {
@@ -49,14 +49,14 @@ describe('Given Version Endpoint to test', () => {
     jest.mocked(getCachedWidgetConfigs).mockReturnValue(
       generateWidgetConfigMap([
         {
-          widgetId: '@1ds/widget-starter-kit',
+          widgetId: '@1fe/widget-starter-kit',
           version: '1.4059.5',
           activePhasedDeployment: false,
         },
       ] as unknown as WidgetConfig[]),
     );
 
-    app = magicBoxServer(serverOptions);
+    app = oneFEServer(serverOptions);
   });
 
   // after describe block ends.
@@ -174,7 +174,7 @@ describe('Given Version Endpoint to test', () => {
 
   it('returns widget version', async () => {
     const response = await request(app).get(
-      `${ROUTES.VERSION}/@1ds/widget-starter-kit/current`,
+      `${ROUTES.VERSION}/@1fe/widget-starter-kit/current`,
     );
 
     expect(response.body.version).toBe('1.4059.5');
@@ -183,12 +183,12 @@ describe('Given Version Endpoint to test', () => {
 
   it('returns widget bundle', async () => {
     const response = await request(app).get(
-      `${ROUTES.VERSION}/@1ds/widget-starter-kit/current/bundle`,
+      `${ROUTES.VERSION}/@1fe/widget-starter-kit/current/bundle`,
     );
 
     expect(
       response.headers.location.includes(
-        '1ds/widgets/@1ds/widget-starter-kit/1.4059.5/js/1ds-bundle.js',
+        '1fe/widgets/@1fe/widget-starter-kit/1.4059.5/js/1fe-bundle.js',
       ),
     ).toBe(true);
     expect(response.status).toBe(302);
@@ -196,11 +196,11 @@ describe('Given Version Endpoint to test', () => {
 
   it('returns widget contact', async () => {
     const response = await request(app).get(
-      `${ROUTES.VERSION}/@1ds/widget-starter-kit/current`,
+      `${ROUTES.VERSION}/@1fe/widget-starter-kit/current`,
     );
 
     expect(response.body.contract).toBe(
-      'https://docutest-a.akamaihd.net/production/1ds/widgets/@1ds/widget-starter-kit/1.4059.5/types/contract.rolledUp.d.ts',
+      'https://docutest-a.akamaihd.net/production/1fe/widgets/@1fe/widget-starter-kit/1.4059.5/types/contract.rolledUp.d.ts',
     );
     expect(response.status).toBe(200);
   });
@@ -208,7 +208,7 @@ describe('Given Version Endpoint to test', () => {
 
 // describe('Get badge from version endpoint test', () => {
 //   // to avoid redeclaring app and version route inside all tests in this block.
-//   let app: ReturnType<typeof magicBoxServer>;
+//   let app: ReturnType<typeof oneFEServer>;
 
 //   // before this describe block runs
 //   beforeAll(async () => {
@@ -218,7 +218,7 @@ describe('Given Version Endpoint to test', () => {
 //       status: 200,
 //     } as any);
 
-//     app = magicBoxServer(serverOptions);
+//     app = oneFEServer(serverOptions);
 //   });
 
 //   // after describe block ends.
@@ -243,7 +243,7 @@ describe('Given Version Endpoint to test', () => {
 //     } as any);
 
 //     const response = await request(app).get(
-//       `${ROUTES.VERSION}/@1ds/widget-starter-kit/current/badge`,
+//       `${ROUTES.VERSION}/@1fe/widget-starter-kit/current/badge`,
 //     );
 
 //     expect(response.status).toBe(200);
@@ -258,7 +258,7 @@ describe('Given Version Endpoint to test', () => {
 //     } as any);
 
 //     const response = await request(app).get(
-//       `${ROUTES.VERSION}/@1ds/widget-starter-kit/current/badge`,
+//       `${ROUTES.VERSION}/@1fe/widget-starter-kit/current/badge`,
 //     );
 
 //     expect(response.status).toBe(200);
@@ -274,7 +274,7 @@ describe('Given Version Endpoint to test', () => {
 //     } as any);
 
 //     const response = await request(app).get(
-//       `${ROUTES.VERSION}/@1ds/widget-starter-kit/1.4059.5/badge`,
+//       `${ROUTES.VERSION}/@1fe/widget-starter-kit/1.4059.5/badge`,
 //     );
 
 //     expect(response.status).toBe(400);
@@ -292,7 +292,7 @@ describe('Given Version Endpoint to test', () => {
 //     } as any);
 
 //     const response = await request(app).get(
-//       `${ROUTES.VERSION}/@1ds/widget-starter-kit/current/badge`,
+//       `${ROUTES.VERSION}/@1fe/widget-starter-kit/current/badge`,
 //     );
 
 //     expect(response.status).toBe(200);
@@ -312,7 +312,7 @@ describe('validateWidgetInputs', () => {
 
     expect(result).toEqual({
       data: undefined,
-      error: `Missing org, example: '@1ds'`,
+      error: `Missing org, example: '@1fe'`,
     });
   });
 

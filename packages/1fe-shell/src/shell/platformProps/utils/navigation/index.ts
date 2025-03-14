@@ -6,12 +6,15 @@ import { preloadUrl } from './preload-url';
 import { externalRedirect as initExternalRedirect } from './external-redirect';
 import { getAbsoluteWidgetPath } from './get-absolute-widget-path';
 import { getRoute } from './get-route';
-import { getPluginRoute, getPluginRouteWithTelemetry } from './get-plugin-route';
+import {
+  getPluginRoute,
+  getPluginRouteWithTelemetry,
+} from './get-plugin-route';
 import {
   UseNavigate,
-  init1DSWidgetNavigation,
-} from './init-1ds-widget-navigation';
-import { navigate1DS } from './navigate-1ds';
+  init1FEWidgetNavigation,
+} from './init-1fe-widget-navigation';
+import { navigate1FE } from './navigate-1fe';
 import { initGo } from './go';
 // import { buildCreateLinkComponentFn } from './link';
 // import { useLinkClickHandler } from './use-link-click-handler';
@@ -30,7 +33,7 @@ export const initNavigation = ({
   navigateShell,
 }: NavigationArgs) => {
   const externalRedirect = initExternalRedirect(widgetId);
-  const useNavigate = init1DSWidgetNavigation<UseNavigate>({
+  const useNavigate = init1FEWidgetNavigation<UseNavigate>({
     widgetId,
     navigateShell,
     eventBus,
@@ -45,12 +48,12 @@ export const initNavigation = ({
     getRoute: getRoute(widgetId),
     getPluginRoute: getPluginRouteWithTelemetry(widgetId),
     // This method will throw until it is initialized with the widget's navigation context
-    navigate1DS: (() => {
+    navigate1FE: (() => {
       throw new TypeError(
-        'call init1DSWidgetNavigation first to use this method',
+        'call init1FEWidgetNavigation first to use this method',
       );
       // We need to cast the type to the function's type after it is initialized
-    }) as ReturnType<typeof navigate1DS>,
+    }) as ReturnType<typeof navigate1FE>,
     useNavigate,
     go: initGo(widgetId),
     // createLinkComponent: buildCreateLinkComponentFn({

@@ -1,7 +1,7 @@
 import { NavigateFunction } from 'react-router-dom';
-// import { shellConsoleLogger } from '@1ds/helpers/client';
+// import { shellConsoleLogger } from '@1fe/helpers/client';
 
-import { navigate1DS as _navigate1DS } from '../navigate-1ds';
+import { navigate1FE as _navigate1FE } from '../navigate-1fe';
 // import { getEnvironmentConfigs } from '../../../../utils';
 import { type EventBusPlatformUtils } from '../../event-bus/types';
 
@@ -16,8 +16,8 @@ import { type EventBusPlatformUtils } from '../../event-bus/types';
 //   }),
 // }));
 
-// jest.mock('@1ds/helpers/client', () => ({
-//   ...jest.requireActual('@1ds/helpers/client'),
+// jest.mock('@1fe/helpers/client', () => ({
+//   ...jest.requireActual('@1fe/helpers/client'),
 //   shellConsoleLogger: {
 //     warn: jest.fn(),
 //   },
@@ -41,7 +41,7 @@ const eventBusSpy = {
 
 const widgetId = '@x/test';
 
-const navigate1DS = _navigate1DS({
+const navigate1FE = _navigate1FE({
   navigateShell: navigateShellSpy,
   navigateWidget: navigateWidgetSpy,
   externalRedirect: externalRedirectSpy,
@@ -57,13 +57,13 @@ Object.defineProperty(window, 'location', {
   writable: true,
 });
 
-describe('navigate1DS', () => {
+describe('navigate1FE', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it('should call the shell navigate function and the widget navigate function by default', () => {
-    navigate1DS('/documents');
+    navigate1FE('/documents');
 
     expect(navigateWidgetSpy).toHaveBeenCalledWith('/documents', undefined);
     expect(navigateShellSpy).toHaveBeenCalledWith('/test/documents', undefined);
@@ -71,7 +71,7 @@ describe('navigate1DS', () => {
   });
 
   it('should call the shell navigate function and the widget navigate function with RRD options', () => {
-    navigate1DS('/documents', {
+    navigate1FE('/documents', {
       replace: true,
       state: 'foo',
       relative: 'path',
@@ -91,7 +91,7 @@ describe('navigate1DS', () => {
   });
 
   it('should not call the widget navigate function when `pluginToPluginNavigation` is set', () => {
-    navigate1DS('/test/documents', { pluginToPluginNavigation: true });
+    navigate1FE('/test/documents', { pluginToPluginNavigation: true });
 
     expect(navigateWidgetSpy).not.toBeCalled();
     expect(externalRedirectSpy).toHaveBeenCalledWith(
@@ -101,7 +101,7 @@ describe('navigate1DS', () => {
   });
 
   it('should not call the shell navigate function when `doNotUpdateUrl` is set', () => {
-    navigate1DS('/documents', { doNotUpdateUrl: true });
+    navigate1FE('/documents', { doNotUpdateUrl: true });
 
     expect(navigateWidgetSpy).toHaveBeenCalledWith('/documents', undefined);
     expect(navigateShellSpy).not.toBeCalled();
@@ -115,7 +115,7 @@ describe('navigate1DS', () => {
     // });
 
     // @ts-expect-error intentionally passing an unsupported option
-    navigate1DS('/documents', { iAmNotSupported: 'hello' });
+    navigate1FE('/documents', { iAmNotSupported: 'hello' });
 
     // expect(shellConsoleLogger.warn).toHaveBeenCalledWith(
     //   expect.stringContaining(
@@ -125,7 +125,7 @@ describe('navigate1DS', () => {
   });
 
   it('should publish navigating event when shellNavigate is called', () => {
-    navigate1DS('/documents');
+    navigate1FE('/documents');
 
     expect(navigateWidgetSpy).toHaveBeenCalledWith('/documents', undefined);
     expect(navigateShellSpy).toBeCalled();

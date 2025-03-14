@@ -23,7 +23,7 @@ describe('Testing isInUseMemo', () => {
   it('should return false when function is not called from inside a useMemo', () => {
     global.Error = jest.fn(() => ({
       stack:
-        'definitelyNotMemo@https://docucdn-a.akamaihd.net/production/1ds/libs/react-dom/17.0.2/umd/react-dom.production.min.js:109:151',
+        'definitelyNotMemo@https://docucdn-a.akamaihd.net/production/1fe/libs/react-dom/17.0.2/umd/react-dom.production.min.js:109:151',
     })) as any;
     expect(isInUseMemo()).toBe(false);
   });
@@ -54,7 +54,7 @@ describe('Testing isInUseMemo', () => {
 
     global.Error = jest.fn(() => ({
       stack:
-        'wh@https://docucdn-a.akamaihd.net/production/1ds/libs/react-dom/17.0.2/umd/react-dom.production.min.js:109:151',
+        'wh@https://docucdn-a.akamaihd.net/production/1fe/libs/react-dom/17.0.2/umd/react-dom.production.min.js:109:151',
     })) as any;
 
     function minifiedMemoInProd() {

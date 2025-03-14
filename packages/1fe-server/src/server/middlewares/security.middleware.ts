@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { readMagicBoxConfigs } from '../utils/magicbox-configs';
+import { readOneFEConfigs } from '../utils/one-fe-configs';
 
 const securityMiddleware = (
   // @ts-ignore
@@ -8,10 +8,7 @@ const securityMiddleware = (
   next: NextFunction,
 ) => {
   try {
-    res.setHeader(
-      'x-powered-by',
-      readMagicBoxConfigs().orgName,
-    );
+    res.setHeader('x-powered-by', readOneFEConfigs().orgName);
     res.setHeader('cache-control', 'no-store');
     res.setHeader(
       'strict-transport-security',

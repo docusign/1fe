@@ -29,7 +29,7 @@ export const getAsset =
               )
           : _System.resolve(widgetId));
 
-        const cdnBaseUrl = oneDsBundleUrl.replace(/js\/1ds-bundle\.js$/, '');
+        const cdnBaseUrl = oneDsBundleUrl.replace(/js\/1fe-bundle\.js$/, '');
 
         return await _System.import(`${cdnBaseUrl}${path}`);
       } catch (error) {
@@ -41,7 +41,7 @@ export const getAsset =
           message,
           path,
           category: 'utils.widgets.getAsset',
-          widgetId
+          widgetId,
         });
 
         throw new Error(message);

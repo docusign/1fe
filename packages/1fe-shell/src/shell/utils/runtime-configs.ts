@@ -30,7 +30,7 @@ export const getParsedRuntimeConfigOverrides = (): Record<
     return param ? JSON.parse(param) : {};
   } catch (e) {
     console.error(
-      `[1DS][RUNTIME_CONFIG_OVERRIDES] Unable to parse JSON in ${RUNTIME_CONFIG_OVERRIDES} param`,
+      `[1FE][RUNTIME_CONFIG_OVERRIDES] Unable to parse JSON in ${RUNTIME_CONFIG_OVERRIDES} param`,
     );
 
     return {};
@@ -53,7 +53,7 @@ export const overrideWidgetConfigRuntime = (
   if (!widgetConfig) {
     // this is expected for libraries or widgetIds with a typo
     console.warn(
-      '[1DS][overrideWidgetConfigRuntime] The key for you import map override does not exist in the global WIDGET_CONFIGS map. This could be because of a typo in a widgetId or because you are overriding a library.',
+      '[1FE][overrideWidgetConfigRuntime] The key for you import map override does not exist in the global WIDGET_CONFIGS map. This could be because of a typo in a widgetId or because you are overriding a library.',
     );
     return;
   }
@@ -62,7 +62,7 @@ export const overrideWidgetConfigRuntime = (
     ...widgetConfig,
     runtime: parseRuntimeConfig({
       runtimeConfig,
-      widgetConfig
+      widgetConfig,
     }),
   });
 };
@@ -70,4 +70,4 @@ export const overrideWidgetConfigRuntime = (
 export const widgetRuntimeConfigUrlFilename = 'widget-runtime-config.json';
 
 export const getRuntimeConfigUrlFromBundleUrl = (bundleUrl: string): string =>
-  bundleUrl.replace('js/1ds-bundle.js', widgetRuntimeConfigUrlFilename);
+  bundleUrl.replace('js/1fe-bundle.js', widgetRuntimeConfigUrlFilename);

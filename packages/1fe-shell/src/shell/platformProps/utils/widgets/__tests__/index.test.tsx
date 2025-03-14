@@ -34,7 +34,7 @@ jest.mock<
 
 jest.mock('../../../../utils/url', () => ({
   getBaseHrefUrl: jest.fn(
-    () => 'https://services.dev.docusign.net/1ds-app/v1.0/',
+    () => 'https://services.dev.docusign.net/1fe-app/v1.0/',
   ),
   basePathname: jest.fn(() => '/'),
 }));
@@ -59,7 +59,7 @@ jest.mock('react', () => ({
 }));
 
 jest.mock('../../../../configs/shell-configs', () => ({
-  readMagicBoxShellConfigs: jest.fn().mockImplementation(() => ({
+  readOneFEShellConfigs: jest.fn().mockImplementation(() => ({
     mode: 'production',
     components: {
       getLoader: () => <p>Loading...</p>,

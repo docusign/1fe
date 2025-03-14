@@ -47,11 +47,11 @@ jest.mock('../../platformProps/utils', () => ({
 }));
 
 jest.mock('../../configs/shell-configs', () => ({
-  readMagicBoxShellConfigs: jest.fn().mockImplementation(() => ({
+  readOneFEShellConfigs: jest.fn().mockImplementation(() => ({
     mode: 'production',
     components: {
-      getError: () => <p>An error has occurred</p>
-    }
+      getError: () => <p>An error has occurred</p>,
+    },
   })),
 }));
 
@@ -100,7 +100,7 @@ describe('<RouteWrapper />', () => {
   //   //     ENVIRONMENT: 'integration',
   //   //     IS_PROD: false,
   //   //     FEATURE_FLAGS: getDefaultClientFeatureFlagsWithOverrides({
-  //   //       enable1dsDevtool: true,
+  //   //       enable1feDevtool: true,
   //   //     }),
   //   //   }),
   //   // );
