@@ -6,7 +6,7 @@ import { logPlatformUtilUsage } from '../logPlatformUtilUsage';
 import { ShellAppLoadTimeUtils, WidgetAppLoadTimeUtils } from './types';
 import { isShellWidget } from '../../../utils/widget-type';
 import { getSessionIdFromCookie } from '../../../utils/cookie-helpers';
-import { readMagicBoxShellConfigs } from '../../../configs/shell-configs';
+import { readOneFEShellConfigs } from '../../../configs/shell-configs';
 
 export const _customMark = (
   markName: string,
@@ -14,9 +14,9 @@ export const _customMark = (
 ): void => {
   window.performance?.mark(markName, measureOptions);
 
-  if (readMagicBoxShellConfigs().mode !== 'production') {
+  if (readOneFEShellConfigs().mode !== 'production') {
     // eslint-disable-next-line no-console
-    console.log('[1ds][util][appLoadTime] mark: ' + markName);
+    console.log('[1fe][util][appLoadTime] mark: ' + markName);
   }
 };
 
@@ -27,7 +27,7 @@ export const _measure = (
   try {
     return window.performance?.measure(measureName, measureOptions);
   } catch (err) {
-    console.error('[1ds][util][appLoadTime] measure error', err);
+    console.error('[1fe][util][appLoadTime] measure error', err);
   }
 };
 
@@ -72,7 +72,7 @@ export const getAppLoadTimeUtils = <
 
         if (!activeMarkers.includes(startMark)) {
           console.error(
-            `[1ds][util][appLoadTime] markEnd called before markStart for ${markerName}`,
+            `[1fe][util][appLoadTime] markEnd called before markStart for ${markerName}`,
           );
           return;
         }
@@ -90,7 +90,7 @@ export const getAppLoadTimeUtils = <
           markOptions,
           widgetId,
           measure,
-          message: `[1DS][WIDGET] appLoadTime data recorded for ${markerName}`,
+          message: `[1FE][WIDGET] appLoadTime data recorded for ${markerName}`,
           // Including metaData to maintain old shape. Some of this is available in the shell logger's baseLogObject
           metaData: {
             widgetId,
@@ -107,7 +107,7 @@ export const getAppLoadTimeUtils = <
 
         return measure;
       } catch (err) {
-        console.error('[1ds][util][appLoadTime] markEnd error', err);
+        console.error('[1fe][util][appLoadTime] markEnd error', err);
       }
     };
 

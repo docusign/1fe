@@ -1,5 +1,5 @@
 // @ts-ignore
-import renderMagicBoxShell from '@devhub/1fe-shell';
+import renderOneFEShell from '@devhub/1fe-shell';
 import React from 'react';
 
 import { Loader } from './components/Loader';
@@ -16,7 +16,7 @@ const setup = () => {
   };
 
   // TODO[1fe]: Just read from server configs put on DOM
-  renderMagicBoxShell({
+  renderOneFEShell({
     mode: envModeMap[ENVIRONMENT],
     environment: ENVIRONMENT,
     utils: {},
@@ -26,8 +26,8 @@ const setup = () => {
         return true;
       },
       unauthedCallback: (widgetId: string) => {
-        console.log(widgetId, ' is not authenticated.');         
-      }
+        console.log(widgetId, ' is not authenticated.');
+      },
     },
     shellLogger: {
       ...shellLogger,
@@ -37,11 +37,11 @@ const setup = () => {
     components: {
       getLoader: () => <Loader />,
       // TODO[1fe]: No any
-      getError: (props: any) => <Error {...props} />
+      getError: (props: any) => <Error {...props} />,
     },
     routes: {
-      defaultRoute: '/app1'
-    }
+      defaultRoute: '/app1',
+    },
   });
 };
 

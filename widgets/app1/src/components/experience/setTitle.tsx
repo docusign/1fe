@@ -1,4 +1,4 @@
-// import { platformProps } from '@1ds/shell';
+// import { platformProps } from '@1fe/shell';
 import styled from '@emotion/styled';
 import { Button, Input } from 'antd';
 import { useState } from 'react';
@@ -18,12 +18,12 @@ export const SetTitle = (props) => {
     <NavigateWithTextboxContainer>
       <Input
         // placeholder={t('Components.Experience.SetTitle-PlaceholderText')}
-        data-qa='utils.experience.set-title.normal.input'
+        data-qa="utils.experience.set-title.normal.input"
         onChange={(e) => setTitle(e.target.value)}
         value={title}
       />
       <Button
-        data-qa='utils.experience.title.set'
+        data-qa="utils.experience.title.set"
         onClick={() => props.platform.utils.experience.title.set(title)}
       >
         utils.experience.title.set

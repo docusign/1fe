@@ -2,12 +2,12 @@ import { title } from '../title';
 
 const mockError = jest.fn();
 jest.mock('../../../../configs/shell-configs', () => ({
-  readMagicBoxShellConfigs: jest.fn().mockImplementation(() => ({ 
+  readOneFEShellConfigs: jest.fn().mockImplementation(() => ({
     shellLogger: {
       log: jest.fn(),
       error: mockError,
-      logPlatformUtilUsage: false
-    }
+      logPlatformUtilUsage: false,
+    },
   })),
 }));
 

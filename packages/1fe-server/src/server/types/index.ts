@@ -43,7 +43,7 @@ type HeadersConfig = {
 type AuthConfig = {
   clientAppId: string;
   scopes?: string[];
-  /** required means the whole plugin is auth-restricted and handled by 1ds, whereas lazy means the user is responsible for gating parts of their plugin using 1DS utils . */
+  /** required means the whole plugin is auth-restricted and handled by 1fe, whereas lazy means the user is responsible for gating parts of their plugin using 1FE utils . */
   authenticationType: AuthenticationType;
   secretKeyName?: string;
   callbackUri?: string;
@@ -54,7 +54,7 @@ type AuthConfig = {
   logoutUri?: string;
   generateAuthTxnId?: boolean;
   useNativeAuth?: boolean;
-  ramp1DSAuthPercent?: number;
+  ramp1FEAuthPercent?: number;
   authCookiesToClear?: string[];
   skiplogoutUriForBaselineRedirect?: boolean;
 };
@@ -106,16 +106,16 @@ export type WidgetConfigRaw = {
   plugin?: PluginConfigRaw;
 };
 
-// corresponds to the installed library JSONs in 1ds-configs
-// https://github.docusignhq.com/Core/1ds-configs/blob/main/integration/libraries/%401ds-cli.json
+// corresponds to the installed library JSONs in 1fe-configs
+// https://github.docusignhq.com/Core/1fe-configs/blob/main/integration/libraries/%401fe-cli.json
 export type InstalledLibConfig = {
   id: string;
   version: string;
   type: 'installed';
 };
 
-// corresponds to the external library JSONs in 1ds-configs
-// e.g. https://github.docusignhq.com/Core/1ds-configs/blob/main/integration/libraries/react.json
+// corresponds to the external library JSONs in 1fe-configs
+// e.g. https://github.docusignhq.com/Core/1fe-configs/blob/main/integration/libraries/react.json
 export type ExternalLibConfig = {
   id: string;
   name: string;

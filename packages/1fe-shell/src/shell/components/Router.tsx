@@ -5,8 +5,11 @@ import {
   useNavigate,
 } from 'react-router-dom';
 
-import { readMagicBoxShellConfigs } from '../configs/shell-configs';
-import { getWidgetConfigValues, PLUGIN_CONFIGS } from '../configs/config-helpers';
+import { readOneFEShellConfigs } from '../configs/shell-configs';
+import {
+  getWidgetConfigValues,
+  PLUGIN_CONFIGS,
+} from '../configs/config-helpers';
 import { RouteWrapper } from './RouteWrapper';
 import { basePathname } from '../utils/url';
 import PluginLoader from './PluginLoader';
@@ -22,10 +25,10 @@ const RedirectComponent = ({ to }: { to: string }) => {
   return null;
 };
 
-
 const determineBaseRoute = (): RouteObject[] => {
-  const isProd = readMagicBoxShellConfigs().mode === 'production';
-  const defaultRoute = readMagicBoxShellConfigs()?.routes?.defaultRoute || '/bathtub';
+  const isProd = readOneFEShellConfigs().mode === 'production';
+  const defaultRoute =
+    readOneFEShellConfigs()?.routes?.defaultRoute || '/bathtub';
   if (isProd) {
     return [
       {
@@ -40,30 +43,28 @@ const determineBaseRoute = (): RouteObject[] => {
   // When in higher environments, we want to redirect the user to the send page
   // and all routes to bathtub should be redirected to send
   return [
-        {
-          path: '/',
-          element: <RedirectComponent to='/bathtub' />,
-        }
-      ];
+    {
+      path: '/',
+      element: <RedirectComponent to='/bathtub' />,
+    },
+  ];
 };
 
 const getPluginRoutes = () => {
-  const getError = readMagicBoxShellConfigs().components.getError;
+  const getError = readOneFEShellConfigs().components.getError;
 
-  return (getWidgetConfigValues(PLUGIN_CONFIGS)).map(
-    (plugin): RouteObject => {
-      return {
-        path: `${plugin.route}/*`,
-        element: (
-          <RouteWrapper plugin={plugin}>
-            <PluginLoader plugin={plugin} />
-          </RouteWrapper>
-        ),
-        errorElement: getError(),
-      };
-    },
-  );
-}
+  return getWidgetConfigValues(PLUGIN_CONFIGS).map((plugin): RouteObject => {
+    return {
+      path: `${plugin.route}/*`,
+      element: (
+        <RouteWrapper plugin={plugin}>
+          <PluginLoader plugin={plugin} />
+        </RouteWrapper>
+      ),
+      errorElement: getError(),
+    };
+  });
+};
 
 let router: ReturnType<typeof createBrowserRouter>;
 
@@ -72,7 +73,7 @@ export const getRouter = () => {
     return router;
   }
 
-  const getError = readMagicBoxShellConfigs().components.getError;
+  const getError = readOneFEShellConfigs().components.getError;
 
   const routerConfig: RouteObject[] = [
     ...determineBaseRoute(),
@@ -80,8 +81,8 @@ export const getRouter = () => {
     {
       path: '*',
       element: getError({
-        type: 'notFound'
-      })
+        type: 'notFound',
+      }),
     },
   ];
 

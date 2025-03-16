@@ -1,7 +1,7 @@
 import ky from 'ky';
 import request from 'supertest';
 
-import { magicBoxServer } from '../..';
+import { oneFEServer } from '../..';
 import { serverOptions } from './server-options';
 
 jest.mock('ky', () => ({
@@ -12,12 +12,12 @@ jest.mock('../../utils/config-poller', () => ({
   pollDynamicConfig: jest.fn(),
 }));
 
-jest.mock('../../utils/magicbox-configs', () => ({
-  readMagicBoxConfigs: jest.fn().mockImplementation(() => (serverOptions)),
+jest.mock('../../utils/one-fe-configs', () => ({
+  readOneFEConfigs: jest.fn().mockImplementation(() => serverOptions),
 }));
 
 describe('Testing Index', () => {
-  let app: ReturnType<typeof magicBoxServer>;
+  let app: ReturnType<typeof oneFEServer>;
 
   afterAll(async () => {
     jest.resetAllMocks();
@@ -30,7 +30,7 @@ describe('Testing Index', () => {
       status: 200,
     } as any);
 
-    app = magicBoxServer(serverOptions);
+    app = oneFEServer(serverOptions);
   });
 
   describe('[GET] /', () => {

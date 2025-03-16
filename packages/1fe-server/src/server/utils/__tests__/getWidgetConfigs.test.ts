@@ -1,7 +1,12 @@
-import { PINNED_WIDGET_TYPE } from "../../constants";
-import { getSystemWidgetConfigs } from "../../controllers/index.controller";
-import { WidgetConfig } from "../../types";
-import { generateWidgetConfigMap, getPinnedWidgets, getRequestedWidgetConfigWithoutRuntimeConfig, getWidgetConfigValues } from "../widget-config-helpers";
+import { PINNED_WIDGET_TYPE } from '../../constants';
+import { getSystemWidgetConfigs } from '../../controllers/index.controller';
+import { WidgetConfig } from '../../types';
+import {
+  generateWidgetConfigMap,
+  getPinnedWidgets,
+  getRequestedWidgetConfigWithoutRuntimeConfig,
+  getWidgetConfigValues,
+} from '../widget-config-helpers';
 
 jest.mock('ky', () => ({
   get: jest.fn().mockReturnValue({}),
@@ -12,7 +17,6 @@ const pinnedWidgetConfig = {
   version: '1.1.0',
   type: PINNED_WIDGET_TYPE,
 } as WidgetConfig;
-
 
 const expectedPinnedVersion = '1.0.0'; // different from pinnedWidgetConfig
 
@@ -114,7 +118,7 @@ describe('getRequestedWidgetConfigWithoutRuntimeConfig', () => {
       requestedWidgetId: notPinnedWidget.widgetId,
       assertions: (result) => {
         expect(consoleWarnMock).toHaveBeenCalledWith(
-          '[platformProps.utils.widgets.get][PINNED_WIDGETS] Requested pinned widget is not a pinned widget. The 1ds shell will request the current version instead.',
+          '[platformProps.utils.widgets.get][PINNED_WIDGETS] Requested pinned widget is not a pinned widget. The 1fe shell will request the current version instead.',
         );
         expect(result.requestedWidgetConfig).toEqual(notPinnedWidget);
         expect(result.type).toBeUndefined();
@@ -143,7 +147,7 @@ describe('getRequestedWidgetConfigWithoutRuntimeConfig', () => {
     });
 
     expect(consoleErrorMock).toHaveBeenCalledWith(
-      '[1DS][platformProps.utils.widgets.get] Unable to find requested widget config in the global WIDGET_CONFIGS map. Returning empty object.',
+      '[1FE][platformProps.utils.widgets.get] Unable to find requested widget config in the global WIDGET_CONFIGS map. Returning empty object.',
       {
         hostWidgetId: 'testPlugin',
         requestedWidgetId: nonExistentWidgetId,

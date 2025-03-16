@@ -1,3 +1,3 @@
-import { magicBoxServer } from './server';
+import { oneFEServer } from './server';
 
-export default magicBoxServer;
+export default oneFEServer;

@@ -3,8 +3,10 @@ import httpMocks from 'node-mocks-http';
 
 import securityMiddleware from '../security.middleware';
 
-jest.mock('../../utils/magicbox-configs', () => ({
-  readMagicBoxConfigs: jest.fn().mockImplementation(() => ({ orgName: 'TestOrg' })),
+jest.mock('../../utils/one-fe-configs', () => ({
+  readOneFEConfigs: jest
+    .fn()
+    .mockImplementation(() => ({ orgName: 'TestOrg' })),
 }));
 
 describe('security.middleware tests', () => {

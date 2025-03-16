@@ -8,12 +8,12 @@ import {
   getPluginById,
 } from '../utils/plugin-helpers';
 import { PluginConfig } from '../types';
-import { readMagicBoxConfigs } from '../utils/magicbox-configs';
+import { readOneFEConfigs } from '../utils/one-fe-configs';
 
 /*
 TODO:
-- [1DS consumption] New middleware for updateOtelContextWithWidgetId
-- [1DS consumption] New middleware for getPluginFromAuthCallback
+- [1FE consumption] New middleware for updateOtelContextWithWidgetId
+- [1FE consumption] New middleware for getPluginFromAuthCallback
 */
 
 const pluginMiddleware = async (
@@ -28,10 +28,11 @@ const pluginMiddleware = async (
 
     // for /auth/logout, /test/load, etc.
     // For OSS, combined KNOWN_PATHS and IGNORED_PATHS
-    // TODO: [1DS Consumption]. Going to comment this out for now. Could cause unwanted side effects
+    // TODO: [1FE Consumption]. Going to comment this out for now. Could cause unwanted side effects
     // const topTwoLevelsPath = `/${path.split('/').slice(1, 3).join('/')}`;
-    const knownPaths = new Set(readMagicBoxConfigs().server.knownRoutes);
-    const shouldIgnorePath = knownPaths.has(topLevelPath) || knownPaths.has(topTwoLevelsPath);
+    const knownPaths = new Set(readOneFEConfigs().server.knownRoutes);
+    const shouldIgnorePath =
+      knownPaths.has(topLevelPath) || knownPaths.has(topTwoLevelsPath);
 
     if (shouldIgnorePath) {
       return next();
@@ -65,7 +66,7 @@ const pluginMiddleware = async (
           try {
             const baselineUrl = new URL(pluginBaselineUrl);
 
-            // plugin should not redirect to 1DS if `plugin_disabled=1`
+            // plugin should not redirect to 1FE if `plugin_disabled=1`
             baselineUrl.searchParams.append(PLUGIN_DISABLED, '1');
             res.redirect(baselineUrl.href);
             return next();
@@ -77,7 +78,7 @@ const pluginMiddleware = async (
         should404 = true;
       }
     } else {
-      should404 = !knownPaths.has(topLevelPath)
+      should404 = !knownPaths.has(topLevelPath);
     }
 
     if (should404) {

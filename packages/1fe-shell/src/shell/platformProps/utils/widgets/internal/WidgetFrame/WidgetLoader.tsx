@@ -101,7 +101,7 @@ export function WidgetLoader<TWidgetProps>({
       // TODO: switch to a shimmer
       // Text is hidden via styling. Removing this breaks the loading-spinner e2e snapshot test as:
       //  - The text node in the document triggers CSS font fetches
-      //  - The e2e test adds artificial delay to the 1ds-bundle via page.route handler
+      //  - The e2e test adds artificial delay to the 1fe-bundle via page.route handler
       //  - Playwright does not fully support this, and it causes _all_ subsequent routes to pend as well
       //  - Playwright snapshots also delay snapshots until fonts are loaded (document.fonts.ready)
       //  - By removing the text node here, the snapshot test will no longer work

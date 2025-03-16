@@ -33,7 +33,7 @@ export const OneDsErrorBoundary = ({
 
   useEffect(() => {
     logger.log({
-      message: `[1DS Shell] Rendering widget `,
+      message: `[1FE Shell] Rendering widget `,
       widget,
     });
   }, [widget]);
@@ -44,8 +44,8 @@ export const OneDsErrorBoundary = ({
     } else {
       logger.error({
         message: widget
-          ? `[1DS-Shell] Failure with the following: \n ${widget?.plugin?.route} \n ${widget.widgetId} \n ${widget.version}`
-          : `[1DS-Shell] An error has occured.`,
+          ? `[1FE-Shell] Failure with the following: \n ${widget?.plugin?.route} \n ${widget.widgetId} \n ${widget.version}`
+          : `[1FE-Shell] An error has occured.`,
         error,
         info,
         widget,

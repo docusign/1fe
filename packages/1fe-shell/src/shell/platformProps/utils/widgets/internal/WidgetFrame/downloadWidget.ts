@@ -2,9 +2,12 @@ import { getShellPlatformUtils } from '../../../../../utils/shell-platform-utils
 import { widgets } from '../system';
 
 import { WidgetRenderStatusType } from './types';
-import { PlatformPropsType, WidgetOptions } from '../../../../../types/platform-utils';
+import {
+  PlatformPropsType,
+  WidgetOptions,
+} from '../../../../../types/platform-utils';
 import { WidgetConfig } from '../../../../../types/widget-config';
-import { readMagicBoxShellConfigs } from '../../../../../configs/shell-configs';
+import { readOneFEShellConfigs } from '../../../../../configs/shell-configs';
 import { isOverrideElementActive } from '../../../../../init/import-map-ui';
 import { isUrl } from './is-url';
 import { getShellLogger } from '../../../../../utils/telemetry';
@@ -57,7 +60,7 @@ export async function downloadWidget<TWidgetProps>(
   const logger = getShellLogger();
 
   const isWidgetOverriden = isOverrideElementActive();
-  const IS_PROD = readMagicBoxShellConfigs().mode === 'production';
+  const IS_PROD = readOneFEShellConfigs().mode === 'production';
   // const widgetLoadingStartTime = Date.now();
   const widgetLoadTime = getShellPlatformUtils().appLoadTime;
 
@@ -71,10 +74,9 @@ export async function downloadWidget<TWidgetProps>(
         : requestedWidgetConfigOrUrl,
       url: isUrl(widgetId) ? widgetId.toString() : undefined,
       isOverrideActive: isWidgetOverriden,
-      widgetId: (widgetId as string) || widgetFrameId
+      widgetId: (widgetId as string) || widgetFrameId,
     });
-  }
-    
+  };
 
   try {
     // corresponding end mark is in the widget code: props.platform.utils.appLoadTime.end()
@@ -88,7 +90,6 @@ export async function downloadWidget<TWidgetProps>(
       : () => widgetsInstance.get(widgetId, widgetOptions);
 
     let module: System.Module;
-  
 
     module = await getModule();
 
@@ -102,13 +103,13 @@ export async function downloadWidget<TWidgetProps>(
     // The corresponding end mark is in the widget code: props.platform.utils.appLoadTime.end()
 
     logger.log({
-      message: `[1DS-Shell] Widget loaded`,
+      message: `[1FE-Shell] Widget loaded`,
       widget: isUrl(widgetId)
         ? { widgetId: widgetId.toString(), version: '0.0.0' }
         : requestedWidgetConfigOrUrl,
       url: isUrl(widgetId) ? widgetId.toString() : undefined,
       isOverrideActive: isWidgetOverriden,
-      widgetId: (widgetId as string) || widgetFrameId
+      widgetId: (widgetId as string) || widgetFrameId,
     });
 
     if (!isWidgetOverriden) {
@@ -146,7 +147,7 @@ export async function downloadWidget<TWidgetProps>(
       detail: { status: 'failure' },
     });
 
-    logDownloadWidgetError(`[1DS-Shell] Widget download failed`, error);
+    logDownloadWidgetError(`[1FE-Shell] Widget download failed`, error);
 
     if (!isWidgetOverriden) {
       // Only log widget load time if the widget url is not being overridden

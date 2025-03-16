@@ -10,7 +10,7 @@ import {
   WIDGET_CONFIGS,
 } from '../configs/config-helpers';
 import { STATE, WIDGET_URL_OVERRIDES } from '../constants/search-params';
-import { readMagicBoxShellConfigs } from '../configs/shell-configs';
+import { readOneFEShellConfigs } from '../configs/shell-configs';
 import { initializeImportMapOverridesReskin } from './import-map-ui';
 import { getShellLogger } from '../utils/telemetry';
 
@@ -30,8 +30,8 @@ export const getUrlWidgetOverrides = (): Record<string, string> => {
   try {
     const urlParams = getQueryURLParams();
 
-    // https://jira.corp.docusign.com/confu/display/ONEDS/URL+Overrides+in+the+1DS+Ecosystem
-    // example: ?widget_url_overrides={"@ds/send":"http://localhost:8080/js/1ds-bundle.js"}
+    // https://jira.corp.docusign.com/confu/display/ONEDS/URL+Overrides+in+the+1FE+Ecosystem
+    // example: ?widget_url_overrides={"@ds/send":"http://localhost:8080/js/1fe-bundle.js"}
     const overrides = urlParams?.get(WIDGET_URL_OVERRIDES);
 
     if (overrides) {
@@ -128,10 +128,9 @@ export const createDynamicImportMap = (): {
     {},
   );
 
-  const importUrlOverrides = !!allowedSources ? filterImportMap(
-    getUrlWidgetOverrides(),
-    allowedSources,
-  ) : getUrlWidgetOverrides();
+  const importUrlOverrides = !!allowedSources
+    ? filterImportMap(getUrlWidgetOverrides(), allowedSources)
+    : getUrlWidgetOverrides();
 
   return {
     importMap: {
@@ -188,14 +187,14 @@ export const insertPersistentWidgetOverrides = (
 
   // const { IS_PROD, FEATURE_FLAGS, ENVIRONMENT } = getEnvironmentConfigs();
 
-  const IS_PROD = readMagicBoxShellConfigs().mode === 'production';
+  const IS_PROD = readOneFEShellConfigs().mode === 'production';
   if (!IS_PROD) {
     initializeImportMapOverridesReskin();
 
     // TODO (POST_MVP): Uncomment and add dev tools later
     // try {
     //   if (
-    //     FEATURE_FLAGS.enable1dsDevtool &&
+    //     FEATURE_FLAGS.enable1feDevtool &&
     //     isIntegrationEnvironment(ENVIRONMENT)
     //   ) {
     //     hideImportMapOverrideButton();
@@ -206,7 +205,7 @@ export const insertPersistentWidgetOverrides = (
   if (overrides && Object.keys(overrides).length > 0) {
     if (!window?.importMapOverrides) {
       console.warn(
-        '[1DS][IMPORT MAP OVERRIDES] Overrides have not been applied since the Shell booted before the import-map-overrides. Please reload the page and ensure Cache is not disabled.',
+        '[1FE][IMPORT MAP OVERRIDES] Overrides have not been applied since the Shell booted before the import-map-overrides. Please reload the page and ensure Cache is not disabled.',
       );
     }
 

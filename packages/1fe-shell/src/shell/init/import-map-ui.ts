@@ -1,5 +1,5 @@
 import { isEmpty } from 'lodash';
-import { readMagicBoxShellConfigs } from '../configs/shell-configs';
+import { readOneFEShellConfigs } from '../configs/shell-configs';
 import {
   clearRuntimeConfigOverrides,
   getParsedRuntimeConfigOverrides,
@@ -18,9 +18,9 @@ const isOverrideActive = (element: HTMLElement) => {
 };
 
 const selectImportMapOverrideButton = () =>
-    selectImportMapOverrideUi()?.querySelector(
-      'button.imo-trigger',
-    ) as HTMLButtonElement;
+  selectImportMapOverrideUi()?.querySelector(
+    'button.imo-trigger',
+  ) as HTMLButtonElement;
 
 export const selectImportMapOverrideUi = () =>
   document.querySelector('import-map-overrides-full')?.shadowRoot;
@@ -45,12 +45,12 @@ export const isOverrideElementActive = () => {
  * in case the user has a broken override url ao they can reset/fix it.
  */
 export const showImportMapOverrideButton = () => {
-    const button = selectImportMapOverrideButton();
-  
-    if (button) {
-      button.style.display = 'flex';
-    }
-  };
+  const button = selectImportMapOverrideButton();
+
+  if (button) {
+    button.style.display = 'flex';
+  }
+};
 
 // flash red when override is active
 const animateImportMapButtonIfOverrides = () => {
@@ -179,11 +179,11 @@ export const initializeImportMapOverridesReskin = () => {
    * Workaround to ensure the import map button is hidden on refresh.
    *
    * Reason:
-   * When the stale-while-revalidate service worker fetches index.html, it is not allowed to use cookies like '@1ds/active-automated-test-framework'
+   * When the stale-while-revalidate service worker fetches index.html, it is not allowed to use cookies like '@1fe/active-automated-test-framework'
    *
    * As a result, `hideImportMapOverrideElement` in the index.html.ejs does not hide the import map overrides button on refresh
    */
-  const IS_PROD = readMagicBoxShellConfigs().mode === 'production';
+  const IS_PROD = readOneFEShellConfigs().mode === 'production';
   const enableUI = DYNAMIC_CONFIGS?.importMapOverrides?.enableUI || true;
   // const getIsActiveAutomatedTestFramework = false;
   if (IS_PROD || enableUI === false) {
@@ -252,9 +252,9 @@ export const initializeImportMapOverridesReskin = () => {
       if (overrideShadowRoot?.querySelector('.imo-header h1')) {
         (
           overrideShadowRoot.querySelector('.imo-header h1') as Element
-        ).innerHTML = '1DS Widget Overrides';
+        ).innerHTML = '1FE Widget Overrides';
         (overrideShadowRoot.querySelector('.imo-header p a') as any).href =
-          'https://github.docusignhq.com/pages/Core/1ds-docs/widgets/development/overrides/';
+          'https://github.docusignhq.com/pages/Core/1fe-docs/widgets/development/overrides/';
       }
 
       // add copy import map overrides button

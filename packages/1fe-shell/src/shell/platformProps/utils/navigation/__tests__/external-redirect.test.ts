@@ -11,13 +11,13 @@ describe('externalRedirect', () => {
     window = Object.create(window);
     Object.defineProperty(window, 'location', {
       value: {
-        href: 'https://services.dev.docusign.net/1ds-app/v1.0/send',
+        href: 'https://services.dev.docusign.net/1fe-app/v1.0/send',
       },
       writable: true,
     });
 
     expect(window.location.href).toBe(
-      'https://services.dev.docusign.net/1ds-app/v1.0/send',
+      'https://services.dev.docusign.net/1fe-app/v1.0/send',
     );
 
     const widgetId = '@x/test';

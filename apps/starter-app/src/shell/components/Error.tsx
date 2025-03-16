@@ -81,16 +81,12 @@ const SideLine = () => {
   );
 };
 
-export const Error = ({
-  type = 'error',
-  plugin,
-  message
-}: ErrorProps) => {
-//   const logger = getShellLogger(plugin?.widgetId);
+export const Error = ({ type = 'error', plugin, message }: ErrorProps) => {
+  //   const logger = getShellLogger(plugin?.widgetId);
 
   useEffect(() => {
     shellLogger.log({
-      message: '[1DS-Shell] error page rendered',
+      message: '[1FE-Shell] error page rendered',
       errorComponent: {
         type,
         plugin,

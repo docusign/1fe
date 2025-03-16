@@ -1,18 +1,21 @@
 import { RouterProvider } from 'react-router-dom';
 import { getRouter } from './components/Router';
-import { AdditionalErrorInfo, OneDsErrorBoundary } from './components/OneDsErrorBoundary';
-import { readMagicBoxShellConfigs } from './configs/shell-configs';
+import {
+  AdditionalErrorInfo,
+  OneDsErrorBoundary,
+} from './components/OneDsErrorBoundary';
+import { readOneFEShellConfigs } from './configs/shell-configs';
 import { getShellLogger } from './utils/telemetry';
 
 function App(): JSX.Element {
   const logger = getShellLogger();
-  const getError = readMagicBoxShellConfigs().components.getError;
+  const getError = readOneFEShellConfigs().components.getError;
 
   const handleError = (error: Error, info: AdditionalErrorInfo): void => {
     const pathname = window?.location?.pathname;
 
     logger.error({
-      message: `[1DS-Shell] Unhandled App Failure`,
+      message: `[1FE-Shell] Unhandled App Failure`,
       error,
       info,
       path: pathname,
@@ -34,7 +37,7 @@ function App(): JSX.Element {
     const pathname = window?.location?.pathname;
 
     logger.log({
-      message: `[1DS-Shell] App Rendered Successfully`,
+      message: `[1FE-Shell] App Rendered Successfully`,
       path: pathname,
     });
 

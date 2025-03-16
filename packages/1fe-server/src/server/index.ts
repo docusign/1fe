@@ -32,7 +32,7 @@ const initializeRoutes = (app: express.Application) => {
   app.use('/', new IndexRoute().router);
 };
 
-export const magicBoxServer = (options: any) => {
+export const oneFEServer = (options: any) => {
   const app = express();
   app.use(cookieParser());
   app.use(combinedMiddleware);

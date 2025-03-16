@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto';
 
 import { NextFunction, Request, Response } from 'express';
-import { readMagicBoxConfigs } from '../utils/magicbox-configs';
+import { readOneFEConfigs } from '../utils/one-fe-configs';
 
 const nonceMiddleware = (
   req: Request,
@@ -10,7 +10,7 @@ const nonceMiddleware = (
 ): void => {
   try {
     // calculate nonce
-    if (readMagicBoxConfigs()?.csp?.useNonce) {
+    if (readOneFEConfigs()?.csp?.useNonce) {
       const cspNonceGuid = `${randomUUID()}`;
 
       const cspHeader = res.getHeader('content-security-policy');
@@ -26,12 +26,12 @@ const nonceMiddleware = (
 
       const noncedCspHeader = cspHeader
         .toString()
-        .replace(/addCspNonceGuidHere/g, `'nonce-${cspNonceGuid}'`);;
+        .replace(/addCspNonceGuidHere/g, `'nonce-${cspNonceGuid}'`);
 
       if (cspReportOnlyHeader) {
         const noncedCspReportOnlyHeader = cspReportOnlyHeader
           .toString()
-          .replace(/addCspNonceGuidHere/g, `'nonce-${cspNonceGuid}'`);;
+          .replace(/addCspNonceGuidHere/g, `'nonce-${cspNonceGuid}'`);
         res.setHeader(
           'content-security-policy-report-only',
           noncedCspReportOnlyHeader,

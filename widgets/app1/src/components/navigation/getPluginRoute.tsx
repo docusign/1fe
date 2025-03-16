@@ -1,4 +1,4 @@
-// import { platformProps } from '@1ds/shell';
+// import { platformProps } from '@1fe/shell';
 import { Button } from 'antd';
 
 // import { useTranslate } from 'src/locales';
@@ -6,9 +6,9 @@ export const GetPluginRoute = (props) => {
   // const t = useTranslate();
   const { utils } = props.platform;
   return (
-    <div data-qa='utils.navigation.getPluginRoute.container'>
+    <div data-qa="utils.navigation.getPluginRoute.container">
       <Button
-        data-qa='utils.navigation.getPluginRoute.btn'
+        data-qa="utils.navigation.getPluginRoute.btn"
         onClick={() => {
           const pluginRoute = utils.navigation.getPluginRoute();
           window.alert(pluginRoute);

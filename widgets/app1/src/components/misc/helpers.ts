@@ -1,5 +1,5 @@
-// This util is only to be used by the 1DS team for our e2e tests.
-// If you are looking for this functionality to read cookies on the client, please reach out to #1ds-help.
+// This util is only to be used by the 1FE team for our e2e tests.
+// If you are looking for this functionality to read cookies on the client, please reach out to #1fe-help.
 export const getCookie = (name: string): string | null => {
   const cookies = document.cookie.split(';');
   for (let i = 0; i < cookies.length; i++) {

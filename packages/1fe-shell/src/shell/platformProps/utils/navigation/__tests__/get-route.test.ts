@@ -79,13 +79,13 @@ describe('getRoute', () => {
     window = Object.create(window);
     Object.defineProperty(window, 'location', {
       value: {
-        href: 'https://apps.dev.docusign.net/starter-kit?widget_url_overrides={%22@1ds/widget-starter-kit%22:%22http://127.0.0.1:8080/js/1ds-bundle.js%22}',
+        href: 'https://apps.dev.docusign.net/starter-kit?widget_url_overrides={%22@1fe/widget-starter-kit%22:%22http://127.0.0.1:8080/js/1fe-bundle.js%22}',
       },
       writable: true,
     });
 
     expect(getRoute()).toBe(
-      '/?widget_url_overrides={%22@1ds/widget-starter-kit%22:%22http://127.0.0.1:8080/js/1ds-bundle.js%22}',
+      '/?widget_url_overrides={%22@1fe/widget-starter-kit%22:%22http://127.0.0.1:8080/js/1fe-bundle.js%22}',
     );
   });
 
@@ -94,13 +94,13 @@ describe('getRoute', () => {
     window = Object.create(window);
     Object.defineProperty(window, 'location', {
       value: {
-        href: 'https://apps.dev.docusign.net/starter-kit?widget_url_overrides={"@1ds/widget-starter-kit":"https://docutest-a.akamaihd.net/integration/1ds/widgets/@1ds/widget-starter-kit/1.0.60/js/1ds-bundle.js"}',
+        href: 'https://apps.dev.docusign.net/starter-kit?widget_url_overrides={"@1fe/widget-starter-kit":"https://docutest-a.akamaihd.net/integration/1fe/widgets/@1fe/widget-starter-kit/1.0.60/js/1fe-bundle.js"}',
       },
       writable: true,
     });
 
     expect(getRoute()).toBe(
-      '/?widget_url_overrides={%22@1ds/widget-starter-kit%22:%22https://docutest-a.akamaihd.net/integration/1ds/widgets/@1ds/widget-starter-kit/1.0.60/js/1ds-bundle.js%22}',
+      '/?widget_url_overrides={%22@1fe/widget-starter-kit%22:%22https://docutest-a.akamaihd.net/integration/1fe/widgets/@1fe/widget-starter-kit/1.0.60/js/1fe-bundle.js%22}',
     );
   });
 
@@ -148,7 +148,7 @@ describe('getRoute', () => {
     window = Object.create(window);
     Object.defineProperty(window, 'location', {
       value: {
-        href: 'https://apps.dev.docusign.net/starter-kit?widget_url_overrides={"@1ds/widget-starter-kit":"https://docutest-a.akamaihd.net/integration/1ds/widgets/@1ds/widget-starter-kit/1.0.60/js/1ds-bundle.js"}',
+        href: 'https://apps.dev.docusign.net/starter-kit?widget_url_overrides={"@1fe/widget-starter-kit":"https://docutest-a.akamaihd.net/integration/1fe/widgets/@1fe/widget-starter-kit/1.0.60/js/1fe-bundle.js"}',
       },
       writable: true,
     });
@@ -161,7 +161,7 @@ describe('getRoute', () => {
     window = Object.create(window);
     Object.defineProperty(window, 'location', {
       value: {
-        href: 'https://apps.dev.docusign.net/starter-kit/foo?widget_url_overrides={"@1ds/widget-starter-kit":"https://docutest-a.akamaihd.net/integration/1ds/widgets/@1ds/widget-starter-kit/1.0.60/js/1ds-bundle.js"}',
+        href: 'https://apps.dev.docusign.net/starter-kit/foo?widget_url_overrides={"@1fe/widget-starter-kit":"https://docutest-a.akamaihd.net/integration/1fe/widgets/@1fe/widget-starter-kit/1.0.60/js/1fe-bundle.js"}',
       },
       writable: true,
     });

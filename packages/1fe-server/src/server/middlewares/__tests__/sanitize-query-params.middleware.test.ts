@@ -6,10 +6,12 @@ import sanitizeQueryParamsMiddleware, {
 } from '../sanitize-query-params.middleware';
 import * as Configs from '../../configs';
 import { WIDGET_URL_OVERRIDES } from '../../constants';
-import { readMagicBoxConfigs } from '../../utils/magicbox-configs';
+import { readOneFEConfigs } from '../../utils/one-fe-configs';
 
-jest.mock('../../utils/magicbox-configs', () => ({
-  readMagicBoxConfigs: jest.fn().mockImplementation(() => ({ mode: 'production' })),
+jest.mock('../../utils/one-fe-configs', () => ({
+  readOneFEConfigs: jest
+    .fn()
+    .mockImplementation(() => ({ mode: 'production' })),
 }));
 
 describe('sanitizeQueryParamsMiddleware', () => {
@@ -55,7 +57,9 @@ describe('sanitizeQueryParamsMiddleware', () => {
   });
 
   it('should return an error if runtime_config_overrides is not a valid JSON object', async () => {
-    jest.mocked(readMagicBoxConfigs).mockImplementationOnce(() => ({ mode: 'preproduction' }));
+    jest
+      .mocked(readOneFEConfigs)
+      .mockImplementationOnce(() => ({ mode: 'preproduction' }));
     jest.spyOn(res, 'status');
     jest.spyOn(res, 'send');
     const url = '/test?runtime_config_overrides={invalid: "json"}';

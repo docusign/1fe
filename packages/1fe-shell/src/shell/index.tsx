@@ -14,9 +14,15 @@ import {
   insertNonPersistentWidgetOverrides,
   insertPersistentWidgetOverrides,
 } from './init/import-map';
-import { readMagicBoxShellConfigs, setMagicBoxShellConfigs } from './configs/shell-configs';
+import {
+  readOneFEShellConfigs,
+  setOneFEShellConfigs,
+} from './configs/shell-configs';
 import { getShellLogger } from './utils/telemetry';
-import { applyRuntimeConfigOverrideForImportMapUi, applyRuntimeConfigOverridesForWidgetUrlOverrides } from './init/runtime-config-overrides';
+import {
+  applyRuntimeConfigOverrideForImportMapUi,
+  applyRuntimeConfigOverridesForWidgetUrlOverrides,
+} from './init/runtime-config-overrides';
 import { getShellPlatformUtils as initShellPlatformUtils } from './utils/shell-platform-utils';
 
 export const init = (): Promise<void> => {
@@ -34,7 +40,7 @@ export const init = (): Promise<void> => {
 
         applyRuntimeConfigOverridesForWidgetUrlOverrides();
 
-        if (readMagicBoxShellConfigs().mode !== 'production') {
+        if (readOneFEShellConfigs().mode !== 'production') {
           // import-map-overrides:change fires when the import map is updated via the ui
           window.addEventListener(
             'import-map-overrides:change',
@@ -73,11 +79,11 @@ export const init = (): Promise<void> => {
   });
 };
 
-const renderMagicBoxShell = (options: any) => {
-  setMagicBoxShellConfigs(options);
+const renderOneFEShell = (options: any) => {
+  setOneFEShellConfigs(options);
 
   initShellPlatformUtils();
-  
+
   init().then(() =>
     ReactDOM.render(
       <React.StrictMode>
@@ -88,4 +94,4 @@ const renderMagicBoxShell = (options: any) => {
   );
 };
 
-export default renderMagicBoxShell;
+export default renderOneFEShell;

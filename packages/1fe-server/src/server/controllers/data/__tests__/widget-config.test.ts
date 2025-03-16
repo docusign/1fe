@@ -13,8 +13,11 @@ import {
 import { fetchRuntimeConfigsForWidgetUrlOverrides } from '../../../utils/request-helpers';
 import { RuntimeConfig, WidgetConfig } from '../../../types';
 import { getParamFromQueryOrRedirectUri } from '../../../utils/url';
-import { convertServerWidgetConfigToShellWidgetConfig, generateWidgetConfigMap } from '../../../utils';
-import { readMagicBoxConfigs } from '../../../utils/magicbox-configs';
+import {
+  convertServerWidgetConfigToShellWidgetConfig,
+  generateWidgetConfigMap,
+} from '../../../utils';
+import { readOneFEConfigs } from '../../../utils/one-fe-configs';
 
 const cachedWidgetConfig = generateWidgetConfigMap([
   { widgetId: 'widget1', runtime: { key: 'cached-value' } },
@@ -34,8 +37,10 @@ jest.mock('../../../utils/request-helpers', () => ({
   fetchRuntimeConfigsForWidgetUrlOverrides: jest.fn(),
 }));
 
-jest.mock('../../../utils/magicbox-configs', () => ({
-  readMagicBoxConfigs: jest.fn().mockImplementation(() => ({ mode: 'preproduction' })),
+jest.mock('../../../utils/one-fe-configs', () => ({
+  readOneFEConfigs: jest
+    .fn()
+    .mockImplementation(() => ({ mode: 'preproduction' })),
 }));
 
 jest.mock('../../../utils/widget-config', () => ({
@@ -75,7 +80,7 @@ describe('getWidgetConfigsForIndexHtml', () => {
   });
 
   it('should return overridden configs if runtime_config_overrides query param is present and environment is preprod', async () => {
-    jest.mocked(readMagicBoxConfigs).mockReturnValue({ mode: 'preproduction' });
+    jest.mocked(readOneFEConfigs).mockReturnValue({ mode: 'preproduction' });
 
     const expectedRuntime = { key: 'new-value' };
     runtimeConfigOverrides = JSON.stringify({
@@ -105,7 +110,9 @@ describe('getWidgetConfigsForIndexHtml', () => {
         widget3: { key: 'new-widgetUrlOverride-value' },
       } as Record<string, RuntimeConfig>;
 
-      jest.mocked(readMagicBoxConfigs).mockReturnValue({ mode: isProd ? 'production' : 'preproduction' });
+      jest
+        .mocked(readOneFEConfigs)
+        .mockReturnValue({ mode: isProd ? 'production' : 'preproduction' });
       jest
         .mocked(fetchRuntimeConfigsForWidgetUrlOverrides)
         .mockReturnValue(

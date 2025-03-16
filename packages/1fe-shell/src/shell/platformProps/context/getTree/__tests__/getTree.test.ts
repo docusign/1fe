@@ -1,6 +1,6 @@
-import { createTree } from "..";
-import { WidgetConfig } from "../../../../types/widget-config";
-import { Tree } from "../../../../utils/tree";
+import { createTree } from '..';
+import { WidgetConfig } from '../../../../types/widget-config';
+import { Tree } from '../../../../utils/tree';
 
 jest.mock('crypto', () => ({
   getRandomValues: (_arr: Uint8Array) => {
@@ -61,7 +61,7 @@ describe('createTree', () => {
 
     expect(tree).toEqual([
       {
-        id: '1DS_SHELL',
+        id: '1FE_SHELL',
         // data is empty for the root node
         data: {},
         children: [],
@@ -109,7 +109,7 @@ describe('createTree', () => {
 
     expect(tree).toEqual([
       {
-        id: '1DS_SHELL',
+        id: '1FE_SHELL',
         data: {},
         children: [
           {
@@ -164,7 +164,7 @@ describe('createTree', () => {
 
     expect(tree).toEqual([
       {
-        id: '1DS_SHELL',
+        id: '1FE_SHELL',
         data: {},
         children: [
           {

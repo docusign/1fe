@@ -7,7 +7,10 @@ import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../
 // } from '../../../../../utils';
 // import { isWidgetTypePinned } from '../../../../../../isomorphic/widgetConfigs/widgetType';
 import { WidgetConfig } from '../../../../../types/widget-config';
-import { isShellWidget, isWidgetTypePinned } from '../../../../../utils/widget-type';
+import {
+  isShellWidget,
+  isWidgetTypePinned,
+} from '../../../../../utils/widget-type';
 import { WIDGET_CONFIGS } from '../../../../../configs/config-helpers';
 import { injectPreloadTags } from '../../../../../utils/dom-helpers';
 import { getWidgetBundleCdnUrl } from '../../../../../utils/url';
@@ -17,7 +20,7 @@ import { getWidgetBundleCdnUrl } from '../../../../../utils/url';
  * This is done dynamically at runtime to reduce the initial load time of the widget's depdendencies on other widgets.
  *
  * @param hostWidget The requestor/host/parent widget config
- * @param requestedWidgetConfig Widget config of a widget declared in their .1ds.config.ts runtime section
+ * @param requestedWidgetConfig Widget config of a widget declared in their .1fe.config.ts runtime section
  */
 export const queueWidgetPreloadsIfFound = (
   hostWidget: WidgetConfig,

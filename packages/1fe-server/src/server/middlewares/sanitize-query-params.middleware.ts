@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { query } from 'express-validator';
 
 import { RUNTIME_CONFIG_OVERRIDES, WIDGET_URL_OVERRIDES } from '../constants';
-import { readMagicBoxConfigs } from '../utils/magicbox-configs';
+import { readOneFEConfigs } from '../utils/one-fe-configs';
 
 export const ALLOWED_USER_AGENTS_FOR_WIDGET_OVERRIDE = ['test.userAgent'];
 
@@ -25,7 +25,7 @@ const redirectIfForbiddenQueryParams = (req: Request, res: Response) => {
   const widgetOverrideSanitizeRequired =
     hasWidgetOverride &&
     !validUAForOverride &&
-    readMagicBoxConfigs().mode === 'production';
+    readOneFEConfigs().mode === 'production';
 
   const needsRedirect =
     forbiddenQueryParams.find((param) => param in req.query) ||
@@ -59,7 +59,7 @@ const validateRuntimeConfigOverrides = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
-  if (readMagicBoxConfigs().mode === 'production') {
+  if (readOneFEConfigs().mode === 'production') {
     delete req.query.runtime_config_overrides;
     return;
   }

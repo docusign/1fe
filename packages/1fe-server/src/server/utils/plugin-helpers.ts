@@ -3,7 +3,7 @@ import { getCachedWidgetConfigs } from './widget-config';
 import { getWidgetConfigValues } from './widget-config-helpers';
 
 /**
- * [Server Side Only Util] Return plugin baseline url from in-memory widget runtime config; default to 1ds-config if not found
+ * [Server Side Only Util] Return plugin baseline url from in-memory widget runtime config; default to 1fe-config if not found
  * @param pluginConfig widget's plugin config
  * @returns plugin baseline url
  */

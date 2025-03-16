@@ -1,5 +1,5 @@
-// If we want to use methods from @1ds/utils use them from here instead of having to import `platform1DSUtils` and call it
-// DO NOT IMPORT FROM @1ds/utils you will get no contexual information
+// If we want to use methods from @1fe/utils use them from here instead of having to import `platform1FEUtils` and call it
+// DO NOT IMPORT FROM @1fe/utils you will get no contexual information
 import { merge } from 'lodash';
 import deepFreeze from 'deep-freeze';
 
@@ -26,7 +26,7 @@ import { initLocalStorage } from './localStorage';
 // import { initExperiments } from './experiments';
 // import { i18n as initi18n } from './i18n';
 import { initExperience } from './experience';
-import { readMagicBoxShellConfigs } from '../../configs/shell-configs';
+import { readOneFEShellConfigs } from '../../configs/shell-configs';
 import { getAppLoadTimeUtils } from './app-load-time';
 import { WidgetAppLoadTimeUtils } from './app-load-time/types';
 // import { initAnalytics } from './analytics';
@@ -38,9 +38,7 @@ import { WidgetAppLoadTimeUtils } from './app-load-time/types';
 // } from './otel/setup';
 // import { initUserUtils } from './user';
 
-export const getPlatformUtils = (
-  widget: WidgetConfig,
-): PlatformUtils => {
+export const getPlatformUtils = (widget: WidgetConfig): PlatformUtils => {
   const { widgetId, type, version } = widget;
   // const { ENVIRONMENT, FEATURE_FLAGS } = getEnvironmentConfigs();
   // const sessionId = getSessionIdFromCookie() ?? SESSION_ID_UNAVAILABLE;
@@ -50,13 +48,13 @@ export const getPlatformUtils = (
   //   initializeOpenTelemetryMetrics(version, ENVIRONMENT);
   // }
 
-//   const logger = initLogger({
-//     widget,
-//     sessionId,
-//     options,
-//   });
+  //   const logger = initLogger({
+  //     widget,
+  //     sessionId,
+  //     options,
+  //   });
 
-//   // Some utils depend on others to execute since they use them
+  //   // Some utils depend on others to execute since they use them
   const appLoadTime = getAppLoadTimeUtils<WidgetAppLoadTimeUtils>(
     widget.widgetId,
   );
@@ -71,49 +69,53 @@ export const getPlatformUtils = (
     eventBus,
   });
 
-//   const auth = initAuth(widget);
+  //   const auth = initAuth(widget);
 
-//   const network = initNetwork({
-//     widgetId,
-//     auth,
-//     logger,
-//   });
+  //   const network = initNetwork({
+  //     widgetId,
+  //     auth,
+  //     logger,
+  //   });
 
-//   const user = initUserUtils(widget);
+  //   const user = initUserUtils(widget);
 
   const sessionStorage = initSessionStorage(widgetId);
 
   const localStorage = initLocalStorage(widgetId);
 
-//   const experiments = initExperiments(ENVIRONMENT, widgetId, logger);
+  //   const experiments = initExperiments(ENVIRONMENT, widgetId, logger);
 
-//   const i18n = initi18n(widgetId);
+  //   const i18n = initi18n(widgetId);
 
   const experience = initExperience(widgetId);
 
-//   const analytics = initAnalytics(widgetId);
+  //   const analytics = initAnalytics(widgetId);
 
-//   const UNSAFE_otel = initOTEL(widget, options);
+  //   const UNSAFE_otel = initOTEL(widget, options);
 
-  const shellUtilOverrides = readMagicBoxShellConfigs().utils;
+  const shellUtilOverrides = readOneFEShellConfigs().utils;
 
-  const initializedPlatformUtils = merge({}, {
-    navigation,
-    // network,
-    // logger,
-    widgets,
-    appLoadTime,
-    // auth,
-    // user,
-    eventBus,
-    sessionStorage,
-    localStorage,
-    // experiments,
-    // i18n,
-    experience,
-    // analytics,
-    // UNSAFE_otel,
-  }, shellUtilOverrides);
+  const initializedPlatformUtils = merge(
+    {},
+    {
+      navigation,
+      // network,
+      // logger,
+      widgets,
+      appLoadTime,
+      // auth,
+      // user,
+      eventBus,
+      sessionStorage,
+      localStorage,
+      // experiments,
+      // i18n,
+      experience,
+      // analytics,
+      // UNSAFE_otel,
+    },
+    shellUtilOverrides,
+  );
 
   return deepFreeze(initializedPlatformUtils);
 };
