@@ -2,7 +2,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const { resolve } = require('path');
 const { EnvironmentPlugin } = require('webpack');
 const merge = require('webpack-merge');
-const swConfig = require('./sw');
+// const swConfig = require('./sw');
 const { commonPlugins, shouldUseDevelopmentMode } = require('./utils');
 
 const tsconfigClient = resolve(__dirname, '../../tsconfig.json');
@@ -95,7 +95,7 @@ const getProdConfig = async (configOverrides) => {
       prodConfig,
       configOverrides,
     ),
-    swConfig,
+    // swConfig,
   ];
 };
 
