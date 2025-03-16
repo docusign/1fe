@@ -1,4 +1,4 @@
-// import { platformProps } from '@1ds/shell';
+// import { platformProps } from '@1fe/shell';
 import styled from '@emotion/styled';
 import { Input, Button } from 'antd';
 import { useState } from 'react';

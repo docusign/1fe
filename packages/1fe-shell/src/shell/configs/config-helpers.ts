@@ -58,9 +58,10 @@ const getConfigObjFromGlobal = <Return extends object>(
 /**
  * List of all plugin configs that we have loaded from the global config, keyed by widgetId
  */
-export const PLUGIN_CONFIGS: ReadonlyMap<string, PluginConfig> = generateWidgetConfigMap(
-  getConfigArrFromGlobal<PluginConfig>('plugin-config'),
-);
+export const PLUGIN_CONFIGS: ReadonlyMap<string, PluginConfig> =
+  generateWidgetConfigMap(
+    getConfigArrFromGlobal<PluginConfig>('plugin-config'),
+  );
 
 /**
  * Map of all widget configs that we have loaded from the global config, keyed by widgetId
@@ -90,7 +91,7 @@ export const getWidgetConfigValues = <
 ): T[] => Array.from(widgetConfigs.values());
 
 /**
- * Get the plugin baseline url from runtime config if it exists, otherwise fallback to 1ds-config
+ * Get the plugin baseline url from runtime config if it exists, otherwise fallback to 1fe-config
  * @param plugin
  * @returns baseline url
  */

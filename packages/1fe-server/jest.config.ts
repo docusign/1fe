@@ -57,7 +57,7 @@ const config: Config = {
         '**/?(*.)+(spec|test).[jt]s?(x)',
         '!**/?(*.)+(rollout|canary|endtoend|endToEnd).(spec|test).[jt]s?(x)',
         '!**/e2e/**',
-        '!**/1ds-shell/**',
+        '!**/1fe-shell/**',
         '!**/isomorphic/**',
         '!**/sw.test.ts',
       ],
@@ -89,19 +89,19 @@ const config: Config = {
     '!src/**/types/**/*',
     '!src/**/*-types.ts',
     '!src/**/types.ts',
-    '!src/1ds-shell/index.ts',
+    '!src/1fe-shell/index.ts',
     // constants
     '!src/**/constants.ts',
     '!src/**/constants/**/*',
     // deprecated code
-    '!src/1ds-shell/platformProps/utils/navigation/react-router-dom-overrides.ts',
-    '!src/1ds-shell/platformProps/utils/navigation/use-search-params.ts',
+    '!src/1fe-shell/platformProps/utils/navigation/react-router-dom-overrides.ts',
+    '!src/1fe-shell/platformProps/utils/navigation/use-search-params.ts',
     // overrides utils
-    '!src/1ds-shell/init/widget-overrides/import-map-reskin.ts',
-    '!src/1ds-shell/init/widget-overrides/isOverrideActive.ts',
-    '!src/1ds-shell/init/widget-overrides/utils.ts',
+    '!src/1fe-shell/init/widget-overrides/import-map-reskin.ts',
+    '!src/1fe-shell/init/widget-overrides/isOverrideActive.ts',
+    '!src/1fe-shell/init/widget-overrides/utils.ts',
     // devtool
-    '!src/1ds-shell/components/system-widgets/Devtool/**/*',
+    '!src/1fe-shell/components/system-widgets/Devtool/**/*',
     // load testing
     '!src/controllers/loadTest.controller.ts',
     '!src/routes/loadTest.route.ts',

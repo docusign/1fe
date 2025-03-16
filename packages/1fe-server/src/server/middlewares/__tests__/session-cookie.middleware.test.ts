@@ -2,7 +2,10 @@ import { randomUUID } from 'crypto';
 
 import { Request, Response, NextFunction } from 'express';
 
-import { SESSION_ID, sessionCookieMiddleware } from '../session-cookie.middleware';
+import {
+  SESSION_ID,
+  sessionCookieMiddleware,
+} from '../session-cookie.middleware';
 
 describe('sessionCookieMiddleware', () => {
   let req: Request, res: Response, next: NextFunction;
@@ -25,7 +28,7 @@ describe('sessionCookieMiddleware', () => {
     next = jest.fn() as NextFunction;
   });
 
-  it('sets the @1ds_session_id cookie if not present', () => {
+  it('sets the @1fe_session_id cookie if not present', () => {
     sessionCookieMiddleware()(req, res, next);
 
     expect(res.cookie).toHaveBeenCalledWith(SESSION_ID, expect.any(String), {
@@ -40,7 +43,7 @@ describe('sessionCookieMiddleware', () => {
     expect(next).toHaveBeenCalled();
   });
 
-  it('does not set a new @1ds_session_id cookie if one is already present', () => {
+  it('does not set a new @1fe_session_id cookie if one is already present', () => {
     req.cookies[SESSION_ID] = randomUUID();
     sessionCookieMiddleware()(req, res, next);
     expect(res.cookie).not.toHaveBeenCalled();

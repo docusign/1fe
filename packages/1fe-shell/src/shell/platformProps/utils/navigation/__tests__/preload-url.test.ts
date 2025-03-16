@@ -1,4 +1,4 @@
-// import { shellConsoleLogger } from '@1ds/helpers/client';
+// import { shellConsoleLogger } from '@1fe/helpers/client';
 import { preloadUrl } from '../preload-url';
 
 // jest.mock('../../logPlatformUtilUsage', () => ({
@@ -12,7 +12,7 @@ import { preloadUrl } from '../preload-url';
 //   }),
 // }));
 
-// jest.mock('@1ds/helpers/client', () => ({
+// jest.mock('@1fe/helpers/client', () => ({
 //   shellConsoleLogger: {
 //     warn: jest.fn(),
 //   },

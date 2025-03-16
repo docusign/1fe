@@ -1,7 +1,6 @@
-import { WidgetConfigs } from "../../types";
-import { getPluginPreloadApiUrls, getPluginPreloadAssetUrls } from "../preload";
-import { generateWidgetConfigMap } from "../widget-config-helpers";
-
+import { WidgetConfigs } from '../../types';
+import { getPluginPreloadApiUrls, getPluginPreloadAssetUrls } from '../preload';
+import { generateWidgetConfigMap } from '../widget-config-helpers';
 
 const pluginWithPreloads = {
   activePhasedDeployment: true,
@@ -47,8 +46,8 @@ jest.mock('ky', () => ({
   get: jest.fn().mockReturnValue({}),
 }));
 
-jest.mock('../magicbox-configs', () => ({
-  readMagicBoxConfigs: jest.fn().mockImplementation(() => ({
+jest.mock('../one-fe-configs', () => ({
+  readOneFEConfigs: jest.fn().mockImplementation(() => ({
     dynamicConfigs: {
       cdn: {
         widgets: {
@@ -56,9 +55,9 @@ jest.mock('../magicbox-configs', () => ({
         },
         libraries: {
           basePrefix: 'https://example.com/cdn/libraries/',
-        }
-      }
-    }
+        },
+      },
+    },
   })),
 }));
 
@@ -88,7 +87,9 @@ describe('getPluginPreloadAssetUrls', () => {
     });
 
     expect(result.length).toBe(1);
-    expect(result[0]).toBe('https://example.com/cdn/widgets/plugin-with-no-preloads/1.2.3/js/1ds-bundle.js');
+    expect(result[0]).toBe(
+      'https://example.com/cdn/widgets/plugin-with-no-preloads/1.2.3/js/1fe-bundle.js',
+    );
   });
 
   it('should return preload urls array for plugin', () => {
@@ -103,8 +104,12 @@ describe('getPluginPreloadAssetUrls', () => {
     });
 
     expect(result.length).toBe(2);
-    expect(result[0]).toBe('https://example.com/cdn/widgets/plugin1/1.2.3/js/1ds-bundle.js');
-    expect(result[1]).toBe('https://example.com/cdn/widgets/widget/1.2.3/js/1ds-bundle.js');
+    expect(result[0]).toBe(
+      'https://example.com/cdn/widgets/plugin1/1.2.3/js/1fe-bundle.js',
+    );
+    expect(result[1]).toBe(
+      'https://example.com/cdn/widgets/widget/1.2.3/js/1fe-bundle.js',
+    );
   });
 });
 

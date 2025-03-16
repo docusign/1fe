@@ -1,4 +1,4 @@
-import { readMagicBoxShellConfigs } from '../../configs/shell-configs';
+import { readOneFEShellConfigs } from '../../configs/shell-configs';
 import { PlatformUtils } from '../../types/platform-utils';
 import { getShellLogger } from '../../utils/telemetry';
 
@@ -41,7 +41,6 @@ export const logPlatformUtilUsage = ({
   attributes,
   topLevelAttributes,
 }: LogPlatformUtilUsageArgs): void => {
-
   // if (isIntegrationEnvironment(ENVIRONMENT)) {
   //   addToPlatformUtilHistory({
   //     invokingWidgetId: widgetId,
@@ -51,7 +50,8 @@ export const logPlatformUtilUsage = ({
   //     args,
   //   });
   // }
-  const shouldLogPlatformUtilUsage = readMagicBoxShellConfigs().shellLogger.logPlatformUtilUsage;
+  const shouldLogPlatformUtilUsage =
+    readOneFEShellConfigs().shellLogger.logPlatformUtilUsage;
   if (shouldLogPlatformUtilUsage) {
     getShellLogger().log({
       message: `utils.${utilNamespace}.${functionName} called`,

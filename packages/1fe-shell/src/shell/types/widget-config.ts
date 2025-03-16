@@ -31,11 +31,11 @@ type AuthZConfig = {
   csp?: DynamicCsp;
 };
 
-// 1ds-config Baseline auth config
+// 1fe-config Baseline auth config
 type AuthConfig = {
   clientAppId: string;
   scopes?: string[];
-  /** required means the whole plugin is auth-restricted and handled by 1ds, whereas lazy means the user is responsible for gating parts of their plugin using 1DS utils . */
+  /** required means the whole plugin is auth-restricted and handled by 1fe, whereas lazy means the user is responsible for gating parts of their plugin using 1FE utils . */
   authenticationType: AuthenticationType;
   secretKeyName?: string;
   callbackUri?: string;
@@ -46,7 +46,7 @@ type AuthConfig = {
   logoutUri?: string;
   generateAuthTxnId?: boolean;
   useNativeAuth?: boolean;
-  ramp1DSAuthPercent?: number;
+  ramp1FEAuthPercent?: number;
   authCookiesToClear?: string[];
   skiplogoutUriForBaselineRedirect?: boolean;
 };
@@ -135,7 +135,7 @@ export type WidgetConfig = {
 export type EnvConfig = {
   environment: string;
   mode: 'development' | 'preproduction' | 'production';
-}
+};
 
 export type SystemWidgetConfig = {
   widgetId: string;

@@ -1,4 +1,4 @@
-// import { HOSTED_ENVIRONMENTS } from '@1ds/helpers/isomorphic';
+// import { HOSTED_ENVIRONMENTS } from '@1fe/helpers/isomorphic';
 import { render } from '@testing-library/react';
 
 // import { PluginConfig } from '../../../isomorphic/types/widgetConfigs.types';
@@ -46,15 +46,15 @@ jest.mock('lottie-react', () => 'lottie');
 //   basePathname: jest.fn(() => '/'),
 //   isIntegration: jest.fn().mockReturnValue(true),
 // }));
-global["Request"] = jest.fn().mockImplementation(() => ({
+global['Request'] = jest.fn().mockImplementation(() => ({
   signal: {
     removeEventListener: () => {},
     addEventListener: () => {},
   },
 }));
 
-jest.mock('../../utils/url' , () => ({
-    getBaseHrefUrl: jest.fn(() => 'https://test.com/'),
+jest.mock('../../utils/url', () => ({
+  getBaseHrefUrl: jest.fn(() => 'https://test.com/'),
   basePathname: jest.fn(() => '/'),
 }));
 

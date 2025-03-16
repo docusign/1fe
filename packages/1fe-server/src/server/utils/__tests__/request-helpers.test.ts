@@ -3,9 +3,13 @@ import ky from 'ky';
 import { Request } from 'express';
 import { WidgetConfig } from '../../types';
 import { generateWidgetConfigMap } from '../widget-config-helpers';
-import { fetchRuntimeConfigsForWidgetUrlOverrides, getRequestHost, LOCAL_HOST_URL } from '../request-helpers';
+import {
+  fetchRuntimeConfigsForWidgetUrlOverrides,
+  getRequestHost,
+  LOCAL_HOST_URL,
+} from '../request-helpers';
 import { getCachedWidgetConfigs } from '../widget-config';
-import { readMagicBoxConfigs } from '../magicbox-configs';
+import { readOneFEConfigs } from '../one-fe-configs';
 
 const widgetConfigs = [
   { widgetId: 'widget1' },
@@ -23,15 +27,15 @@ jest.mock('ky', () => ({
   get: jest.fn(),
 }));
 
-jest.mock('../magicbox-configs', () => ({
-  readMagicBoxConfigs: jest.fn().mockImplementation(() => ({
-    mode: 'production'
+jest.mock('../one-fe-configs', () => ({
+  readOneFEConfigs: jest.fn().mockImplementation(() => ({
+    mode: 'production',
   })),
 }));
 
 describe('getRequestHost', () => {
   it('should return localhost for local development', () => {
-    jest.mocked(readMagicBoxConfigs).mockReturnValue({ mode: 'development' });
+    jest.mocked(readOneFEConfigs).mockReturnValue({ mode: 'development' });
 
     const req = {
       hostname: LOCAL_HOST_URL,
@@ -43,7 +47,7 @@ describe('getRequestHost', () => {
   });
 
   it('should return host value if not in production, regardless of whitelist ', () => {
-    jest.mocked(readMagicBoxConfigs).mockReturnValue({ mode: 'preproduction' });
+    jest.mocked(readOneFEConfigs).mockReturnValue({ mode: 'preproduction' });
 
     const protocol = 'https';
     const hostname = 'one-ds-app.com';
@@ -59,7 +63,7 @@ describe('getRequestHost', () => {
   });
 
   it('should return host value if in production and value is in whitelist ', () => {
-    jest.mocked(readMagicBoxConfigs).mockReturnValue({ mode: 'production' });
+    jest.mocked(readOneFEConfigs).mockReturnValue({ mode: 'production' });
 
     const protocol = 'https';
     const hostname = 'apps.dev.docusign.com';
@@ -75,7 +79,6 @@ describe('getRequestHost', () => {
   });
 
   it('should return host value if in production and value is in whitelist, regardless of the casing', () => {
-
     const hostnames = [
       ['https', 'Apps-Eu.Docusign.Com'],
       ['https', 'S1-Jp.Apps.docusign.Com'],
@@ -162,12 +165,11 @@ describe('fetchRuntimeConfigsForWidgetUrlOverrides', () => {
 
   it('should not fetch runtime configs if widget is missing from cached configs', async () => {
     const widgetUrlOverrides = {
-      '@ds/ui': `http://example/cdn/libraries/js/1ds-bundle.js`,
+      '@ds/ui': `http://example/cdn/libraries/js/1fe-bundle.js`,
     };
 
-    const result = await fetchRuntimeConfigsForWidgetUrlOverrides(
-      widgetUrlOverrides,
-    );
+    const result =
+      await fetchRuntimeConfigsForWidgetUrlOverrides(widgetUrlOverrides);
 
     expect(ky.get).not.toHaveBeenCalled();
     expect(result).toEqual({});
@@ -175,9 +177,9 @@ describe('fetchRuntimeConfigsForWidgetUrlOverrides', () => {
 
   it('should fetch runtime configs for widget URL overrides if valid cdn', async () => {
     const widgetUrlOverrides = {
-      widget1: `http://example/cdn/widgets/js/1ds-bundle.js`,
-      widget2: `http://example/cdn/widgets/js/1ds-bundle.js`,
-      // widget3: 'https://invalid.com/js/1ds-bundle.js',
+      widget1: `http://example/cdn/widgets/js/1fe-bundle.js`,
+      widget2: `http://example/cdn/widgets/js/1fe-bundle.js`,
+      // widget3: 'https://invalid.com/js/1fe-bundle.js',
     };
 
     (ky.get as jest.Mock).mockResolvedValueOnce({
@@ -188,9 +190,8 @@ describe('fetchRuntimeConfigsForWidgetUrlOverrides', () => {
       json: () => Promise.resolve({ someConfig: 2 }),
     });
 
-    const result = await fetchRuntimeConfigsForWidgetUrlOverrides(
-      widgetUrlOverrides,
-    );
+    const result =
+      await fetchRuntimeConfigsForWidgetUrlOverrides(widgetUrlOverrides);
 
     expect(ky.get).toHaveBeenCalledTimes(2);
     expect(result).toEqual({
@@ -202,21 +203,18 @@ describe('fetchRuntimeConfigsForWidgetUrlOverrides', () => {
   it('should handle errors and return partial results', async () => {
     const consoleErrorMock = jest.spyOn(console, 'error');
     const widgetUrlOverrides = {
-      widget1: `http://example/cdn/widgets/js/1ds-bundle.js`,
-      widget2: `http://example/cdn/widgets/js/1ds-bundle.js`,
+      widget1: `http://example/cdn/widgets/js/1fe-bundle.js`,
+      widget2: `http://example/cdn/widgets/js/1fe-bundle.js`,
     };
 
     (ky.get as jest.Mock).mockResolvedValueOnce({
       json: () => Promise.resolve({ someConfig: 1 }),
     });
 
-    (ky.get as jest.Mock).mockRejectedValueOnce(
-      new Error('Fetch failed'),
-    );
+    (ky.get as jest.Mock).mockRejectedValueOnce(new Error('Fetch failed'));
 
-    const result = await fetchRuntimeConfigsForWidgetUrlOverrides(
-      widgetUrlOverrides,
-    );
+    const result =
+      await fetchRuntimeConfigsForWidgetUrlOverrides(widgetUrlOverrides);
 
     expect(ky.get).toHaveBeenCalledTimes(2);
     expect(result).toEqual({
@@ -224,7 +222,7 @@ describe('fetchRuntimeConfigsForWidgetUrlOverrides', () => {
     });
 
     const message =
-      '[1DS][WIDGET_URL_OVERRIDES][fetchRuntimeConfigsForWidgetUrlOverrides] Failed to fetch runtime configs for widgets';
+      '[1FE][WIDGET_URL_OVERRIDES][fetchRuntimeConfigsForWidgetUrlOverrides] Failed to fetch runtime configs for widgets';
 
     const error = [new Error('Fetch failed')];
 

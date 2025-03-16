@@ -18,7 +18,7 @@ export const createTree = (
 
   // check if node is unmounted/still visible;
   if (
-    node.type !== '1DS_SHELL' &&
+    node.type !== '1FE_SHELL' &&
     !document.querySelector(
       `div[data-qa="widget.frame"][data-widget-id="${widgetId}"][data-widget-version="${version}"]`,
     )
@@ -37,7 +37,7 @@ export const createTree = (
 
 export const getTree: () => WidgetTreeNode[] =
   /**
-   * This utility function returns a tree of the 1DS_SHELL at the root, it's plugin and widget as its children
+   * This utility function returns a tree of the 1FE_SHELL at the root, it's plugin and widget as its children
    * @returns {WidgetTree[]} - resultant tree reflecting the current state of the Shell
    */
   () => createTree(widgetDependencyTree.root);

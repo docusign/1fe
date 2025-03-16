@@ -11,17 +11,17 @@ jest.mock('../../../../utils/url', () => ({
 
 jest.mock('../../../../utils/widget-type', () => ({
   ...jest.requireActual('../../../../utils/widget-type'),
-  isShellWidget: jest.fn()
+  isShellWidget: jest.fn(),
 }));
 
 jest.mock('../../../../configs/shell-configs', () => ({
-  readMagicBoxShellConfigs: jest.fn().mockImplementation(() => ({ 
+  readOneFEShellConfigs: jest.fn().mockImplementation(() => ({
     mode: 'preproduction',
     shellLogger: {
       logPlatformUtilUsage: false,
       log: jest.fn(),
-      error: jest.fn()
-    }
+      error: jest.fn(),
+    },
   })),
 }));
 
@@ -70,7 +70,7 @@ describe('appLoadTimeUtils', () => {
 
   describe('getAppLoadTimeUtils', () => {
     describe('when isShellWidget is true', () => {
-      const shellWidgetId = '@1ds/shell';
+      const shellWidgetId = '@1fe/shell';
 
       beforeEach(() => {
         jest.mocked(isShellWidget).mockReturnValue(true);

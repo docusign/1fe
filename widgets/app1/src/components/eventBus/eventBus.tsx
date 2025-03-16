@@ -1,4 +1,4 @@
-// import { platformProps } from '@1ds/shell';
+// import { platformProps } from '@1fe/shell';
 import { Button } from 'antd';
 import { useReducer } from 'react';
 
@@ -16,19 +16,19 @@ export const EventBus = (props: any) => {
   };
 
   return (
-    <div data-qa='utils.eventBus.container'>
+    <div data-qa="utils.eventBus.container">
       <h1>utils.eventBus</h1>
       {/* <h1>{t('Components.EventBus.Index')}</h1> */}
-      <Button data-qa='utils.eventBus.get.btn' onClick={showWidget}>
+      <Button data-qa="utils.eventBus.get.btn" onClick={showWidget}>
         utils.eventBus.get.test
         {/* {t('Components.EventBus.GetButtonText')} */}
       </Button>
       <Button
-        data-qa='utils.eventBus.publish1.btn'
+        data-qa="utils.eventBus.publish1.btn"
         onClick={() => {
           // @ts-ignore
           props.platform.utils.eventBus.publish<WidgetEvents, 'event1'>({
-            targetWidgetId: '@1ds/starter-kit2',
+            targetWidgetId: '@1fe/starter-kit2',
             eventName: 'event1',
             data: { param1: 'Listener is working!' },
           });
@@ -44,7 +44,7 @@ export const EventBus = (props: any) => {
         {/* {t('Components.EventBus.PublishButtonText1')} */}
       </Button>
       <Button
-        data-qa='utils.eventBus.publish2.btn'
+        data-qa="utils.eventBus.publish2.btn"
         onClick={() => {
           // @ts-ignore
           props.platform.utils.eventBus.publish<WidgetEvents, 'event2'>({
@@ -52,7 +52,7 @@ export const EventBus = (props: any) => {
             eventName: 'event2',
             data: { param2: 'Test 2 should not fire' },
           });
-          
+
           // platformProps.utils.eventBus.publish<WidgetEvents, 'event2'>({
           //   targetWidgetId: '@internal/generic-child-widget',
           //   eventName: 'event2',
@@ -64,8 +64,12 @@ export const EventBus = (props: any) => {
         {/* {t('Components.EventBus.PublishButtonText2')} */}
       </Button>
       {isVisible && (
-        <WidgetContainer data-qa='utils.widgets.eventBus.result.container'>
-          <GetChildWidget isVisible={isVisible} props={props} widgetId={'@1ds/starter-kit2'} />
+        <WidgetContainer data-qa="utils.widgets.eventBus.result.container">
+          <GetChildWidget
+            isVisible={isVisible}
+            props={props}
+            widgetId={'@1fe/starter-kit2'}
+          />
         </WidgetContainer>
       )}
     </div>

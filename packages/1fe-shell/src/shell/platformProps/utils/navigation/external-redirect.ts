@@ -1,11 +1,12 @@
-import { readMagicBoxShellConfigs } from "../../../configs/shell-configs";
-import { redactSensitiveData } from "../../../utils/logging-helpers";
-import { logPlatformUtilUsage } from "../logPlatformUtilUsage";
+import { readOneFEShellConfigs } from '../../../configs/shell-configs';
+import { redactSensitiveData } from '../../../utils/logging-helpers';
+import { logPlatformUtilUsage } from '../logPlatformUtilUsage';
 
 export const externalRedirect =
   (widgetId?: string | null | undefined) =>
   (url: string): void => {
-    const shouldRedactSensitiveData = readMagicBoxShellConfigs().shellLogger.redactSensitiveData;
+    const shouldRedactSensitiveData =
+      readOneFEShellConfigs().shellLogger.redactSensitiveData;
 
     logPlatformUtilUsage({
       utilNamespace: 'navigation',

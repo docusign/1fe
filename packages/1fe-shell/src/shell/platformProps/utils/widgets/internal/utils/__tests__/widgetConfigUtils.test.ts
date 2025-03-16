@@ -1,9 +1,12 @@
-// import { HOSTED_ENVIRONMENTS } from '@1ds/helpers/isomorphic';
+// import { HOSTED_ENVIRONMENTS } from '@1fe/helpers/isomorphic';
 // import { WidgetConfig } from '../../../../../../../isomorphic/types/widgetConfigs.types';
 import { WIDGET_CONFIGS } from '../../../../../../configs/config-helpers';
 import { WidgetConfig } from '../../../../../../types/widget-config';
 import { injectPreloadTags } from '../../../../../../utils/dom-helpers';
-import { isShellWidget, isWidgetTypePinned } from '../../../../../../utils/widget-type';
+import {
+  isShellWidget,
+  isWidgetTypePinned,
+} from '../../../../../../utils/widget-type';
 import {
   getRequestedWidgetVersionForConsole,
   queueWidgetPreloadsIfFound,
@@ -19,7 +22,7 @@ import {
 jest.mock('../../../../../../utils/widget-type', () => ({
   ...jest.requireActual('../../../../../../utils/widget-type'),
   isWidgetTypePinned: jest.fn(),
-  isShellWidget: jest.fn()
+  isShellWidget: jest.fn(),
 }));
 
 jest.mock('../../../../../../utils/dom-helpers', () => ({
@@ -30,17 +33,17 @@ jest.mock('../../../../../../configs/config-helpers', () => ({
   WIDGET_CONFIGS: {
     get: jest.fn(),
     values: jest.fn(),
-  }
+  },
 }));
 
 jest.mock('../../../../../../configs/shell-configs', () => ({
-  readMagicBoxShellConfigs: jest.fn().mockImplementation(() => ({ 
+  readOneFEShellConfigs: jest.fn().mockImplementation(() => ({
     mode: 'production',
     cdn: {
       widgets: {
-        basePrefix: 'https://docucdn-a.akamaihd.net/production/1ds/widgets',
-      }
-    } 
+        basePrefix: 'https://docucdn-a.akamaihd.net/production/1fe/widgets',
+      },
+    },
   })),
 }));
 
@@ -106,7 +109,7 @@ describe('queueWidgetPreloadsIfFound', () => {
     expect(injectPreloadTags).toHaveBeenNthCalledWith(
       1,
       [
-        `https://docucdn-a.akamaihd.net/production/1ds/widgets/${widgetPreloadedByRequestedWidget.widgetId}/${widgetPreloadedByRequestedWidget.version}/js/1ds-bundle.js`,
+        `https://docucdn-a.akamaihd.net/production/1fe/widgets/${widgetPreloadedByRequestedWidget.widgetId}/${widgetPreloadedByRequestedWidget.version}/js/1fe-bundle.js`,
       ],
       'script',
     );

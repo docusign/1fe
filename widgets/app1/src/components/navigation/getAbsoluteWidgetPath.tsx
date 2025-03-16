@@ -1,13 +1,13 @@
-// import { platformProps } from '@1ds/shell';
+// import { platformProps } from '@1fe/shell';
 import { Button } from 'antd';
 
 // import { useTranslate } from 'src/locales';
 export const GetAbsoluteWidgetPath = (props) => {
   // const t = useTranslate();
   return (
-    <div data-qa='utils.navigation.getAbsoluteWidgetPath.container'>
+    <div data-qa="utils.navigation.getAbsoluteWidgetPath.container">
       <Button
-        data-qa='utils.navigation.getAbsoluteWidgetPath.btn'
+        data-qa="utils.navigation.getAbsoluteWidgetPath.btn"
         onClick={() => {
           const absoluteWidgetPath =
             props.platform.utils.navigation.getAbsoluteWidgetPath();

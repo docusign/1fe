@@ -6,12 +6,12 @@ import { WidgetConfigs, SystemWidgetConfig, PluginConfig } from '../types';
 import { getWidgetConfigValues } from '../utils';
 import { dataForRenderingTemplate } from './data';
 import { getCachedWidgetConfigs } from '../utils/widget-config';
-import { readMagicBoxConfigs } from '../utils/magicbox-configs';
+import { readOneFEConfigs } from '../utils/one-fe-configs';
 
 /*
 TODO:
-- [1DS consumption] Set feature flag hash elsewhere
-- [1DS consumption] Set ACTIVE_AUTOMATED_TEST_FRAMEWORK cookie elsewhere
+- [1FE consumption] Set feature flag hash elsewhere
+- [1FE consumption] Set ACTIVE_AUTOMATED_TEST_FRAMEWORK cookie elsewhere
 */
 
 export const getSystemWidgetConfigs = (
@@ -30,7 +30,7 @@ export const getSystemWidgetConfigs = (
 export const allowUnsafeEvalForSystemPluginsOnPreprod = (
   plugin: PluginConfig,
 ): boolean => {
-  if (readMagicBoxConfigs().mode === 'production') {
+  if (readOneFEConfigs().mode === 'production') {
     return false;
   }
 
@@ -50,7 +50,7 @@ export const ifSystemPluginRequestedOnProd = (
   const widgetConfigs = getCachedWidgetConfigs();
 
   return (
-    readMagicBoxConfigs().mode === 'production' &&
+    readOneFEConfigs().mode === 'production' &&
     getSystemWidgetConfigs(widgetConfigs).some(
       (widget) => widget.widgetId === plugin?.widgetId,
     )

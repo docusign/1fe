@@ -14,7 +14,7 @@ import {
   getWidgetConfigValues,
 } from './widget-config-helpers';
 import { getCachedWidgetConfigs } from './widget-config';
-import { readMagicBoxConfigs } from './magicbox-configs';
+import { readOneFEConfigs } from './one-fe-configs';
 
 type ParseRuntimeConfigArgs = {
   runtimeConfig: RuntimeConfig;
@@ -57,9 +57,9 @@ export const parseRuntimeConfig = ({
               WIDGET_VERSION: widgetConfig.version,
               WIDGET_ID: widgetConfig.widgetId,
 
-              // If 1ds-app is running locally, the environment is development.
+              // If 1fe-app is running locally, the environment is development.
               // There is no cdn for development, so we use integration instead.
-              ENVIRONMENT: readMagicBoxConfigs().environment,
+              ENVIRONMENT: readOneFEConfigs().environment,
             }),
           };
         }

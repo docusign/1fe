@@ -11,7 +11,10 @@ import {
   isSupportedOneDsNavOption,
 } from './navigation-options';
 import { RUNTIME_CONFIG_OVERRIDES } from '../../../constants/search-params';
-import { addQueryParamsToPath, getPluginUrlWithRoute } from '../../../utils/url';
+import {
+  addQueryParamsToPath,
+  getPluginUrlWithRoute,
+} from '../../../utils/url';
 import { logPlatformUtilUsage } from '../logPlatformUtilUsage';
 
 const PERSIST_QUERY_PARAMS_WHITELIST = [RUNTIME_CONFIG_OVERRIDES];
@@ -20,7 +23,7 @@ type NavigationEvents = {
   navigating: null;
 };
 
-type Navigate1dsArgs = {
+type Navigate1feArgs = {
   navigateShell: NavigateFunction | undefined; // only undefined if used outside platform.props
   navigateWidget: NavigateFunction;
   eventBus: EventBusPlatformUtils;
@@ -77,13 +80,13 @@ const widgetsRequiringRouterSyncOnNav = [
   '@ds/send', // Uses ui-router
 ];
 
-export const navigate1DS = ({
+export const navigate1FE = ({
   navigateShell,
   navigateWidget,
   widgetId,
   eventBus,
   externalRedirect,
-}: Navigate1dsArgs) =>
+}: Navigate1feArgs) =>
   (() => {
     function _publishNavigation(): void {
       widgetsRequiringRouterSyncOnNav.forEach((targetWidgetId) =>
@@ -95,7 +98,7 @@ export const navigate1DS = ({
       );
     }
 
-    return function _navigate1DS(
+    return function _navigate1FE(
       to: string,
       options?: ReactRouterNavigateOptions | SupportedOneDsNavOptions,
     ): void {
@@ -105,7 +108,7 @@ export const navigate1DS = ({
 
       logPlatformUtilUsage({
         utilNamespace: 'navigation',
-        functionName: 'navigate1DS',
+        functionName: 'navigate1FE',
         widgetId,
         args: {
           arguments: { to, options },

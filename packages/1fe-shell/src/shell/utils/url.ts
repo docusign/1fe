@@ -1,5 +1,5 @@
 import { DYNAMIC_CONFIGS } from '../configs/config-helpers';
-import { readMagicBoxShellConfigs } from '../configs/shell-configs';
+import { readOneFEShellConfigs } from '../configs/shell-configs';
 import { WidgetConfig } from '../types/widget-config';
 
 type TemplatizeCDNUrlArgs = {
@@ -11,7 +11,7 @@ type TemplatizeCDNUrlArgs = {
 const templatizeCDNUrl = ({
   widgetId,
   widgetVersion,
-  templateFilePath = 'js/1ds-bundle.js',
+  templateFilePath = 'js/1fe-bundle.js',
 }: TemplatizeCDNUrlArgs): URL => {
   return new URL(
     `${DYNAMIC_CONFIGS.cdn.widgets.basePrefix}${widgetId}/${widgetVersion}/${templateFilePath}`,
@@ -33,7 +33,7 @@ export const generateCDNUrl = (widget: WidgetConfig): URL => {
 export const getBaseHrefUrl = (doc = document) => {
   const baseHref = doc
     ?.querySelector('base')
-    ?.getAttribute('href') as `http${string}/`; // TODO: remove cast when 1ds/utils is dead
+    ?.getAttribute('href') as `http${string}/`; // TODO: remove cast when 1fe/utils is dead
 
   if (!baseHref) {
     const error = 'missing href attribute on base html element';
@@ -79,8 +79,8 @@ export const getWidgetBundleCdnUrl = ({
   widgetId,
   version,
 }: GetWidgetBaseCdnUrlArgs): string => {
-  const widgetBundlePath = '/js/1ds-bundle.js';
-  const baseUrl = `${readMagicBoxShellConfigs().cdn.widgets.basePrefix}/${widgetId}/${version}`;
+  const widgetBundlePath = '/js/1fe-bundle.js';
+  const baseUrl = `${readOneFEShellConfigs().cdn.widgets.basePrefix}/${widgetId}/${version}`;
 
   return `${baseUrl}${widgetBundlePath}`;
 };

@@ -55,7 +55,7 @@
     <div id="root"></div>
     <script nonce="<%= cspNonceGuid %>">
       function onError(err) {
-        console.error('Something went wrong initializing 1ds-app', err);
+        console.error('Something went wrong initializing 1fe-app', err);
 
         // Non user initiated calls do not add to history to be able to go back 
         history.pushState({}, "", window.location.href);

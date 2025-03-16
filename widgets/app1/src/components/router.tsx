@@ -11,7 +11,7 @@ import UtilsDemo from './routes/utilsDemo';
 const Router: React.FC<any> = (props) => {
   const navigate = useNavigate();
 
-  const navigate1ds = props.platform.utils.navigation.useNavigate(
+  const navigate1fe = props.platform.utils.navigation.useNavigate(
     navigate,
     useNavigate,
     useLocation,
@@ -34,20 +34,20 @@ const Router: React.FC<any> = (props) => {
         }}
       >
         <Menu
-          theme='light'
-          mode='horizontal'
+          theme="light"
+          mode="horizontal"
           defaultSelectedKeys={['0']}
           items={[
             {
               key: 'HOME',
               label: 'Home',
-              onClick: () => navigate1ds('/'),
+              onClick: () => navigate1fe('/'),
               // 'data-qa': 'wsk.header.button.home',
             },
             {
               key: 'UTILS',
               label: 'Utils',
-              onClick: () => navigate1ds('/utils'),
+              onClick: () => navigate1fe('/utils'),
               // 'data-qa': 'wsk.header.button.utils',
             },
           ]}
@@ -58,8 +58,8 @@ const Router: React.FC<any> = (props) => {
         />
       </Header>
       <Routes>
-        <Route path='/' element={<Home {...props} />} />
-        <Route path='/utils' element={<UtilsDemo {...props} />} />
+        <Route path="/" element={<Home {...props} />} />
+        <Route path="/utils" element={<UtilsDemo {...props} />} />
         {/* <Route path='/foo' element={<Foo />} />
         <Route path='/utils' element={<UtilsDemo {...props} />} />
         <Route path='/utils/foo/:id' element={<GetDeepLinked />} /> */}
@@ -67,10 +67,7 @@ const Router: React.FC<any> = (props) => {
           path='/*'
           element={<h1>{t('Components.Router.RouteHeader')}</h1>}
         /> */}
-        <Route
-          path='/*'
-          element={<h1>{'Components.Router.RouteHeader'}</h1>}
-        />
+        <Route path="/*" element={<h1>{'Components.Router.RouteHeader'}</h1>} />
       </Routes>
     </>
   );

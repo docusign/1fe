@@ -3,7 +3,7 @@ import { logPlatformUtilUsage } from '../logPlatformUtilUsage';
 /**
  * This function embeds a hidden iframe in the web page this function is invoked on
  * This allows web apps to preload assets via an html page
- * Often used in conjunction with the npm library: @1ds/webpack-asset-preloader-plugin
+ * Often used in conjunction with the npm library: @1fe/webpack-asset-preloader-plugin
  */
 export const preloadUrl =
   (widgetId: string) =>

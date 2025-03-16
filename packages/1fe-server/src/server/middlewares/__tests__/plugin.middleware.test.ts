@@ -7,8 +7,10 @@ import * as helpers from '../../utils/plugin-helpers';
 import PluginMiddleware from '../plugin.middleware';
 import { PluginConfig } from '../../types';
 
-jest.mock('../../utils/magicbox-configs', () => ({
-  readMagicBoxConfigs: jest.fn().mockImplementation(() => ({ server: { knownRoutes: ['/test'] } })),
+jest.mock('../../utils/one-fe-configs', () => ({
+  readOneFEConfigs: jest
+    .fn()
+    .mockImplementation(() => ({ server: { knownRoutes: ['/test'] } })),
 }));
 
 describe('plugin.middleware tests', () => {

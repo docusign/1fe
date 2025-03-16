@@ -6,7 +6,7 @@ import { WidgetLoader, WidgetURLLoader } from './WidgetLoader';
 import { WidgetRenderStatusType } from './types';
 import { WidgetConfig } from '../../../../../types/widget-config';
 import { WidgetOptions } from '../../../../../types/platform-utils';
-import { readMagicBoxShellConfigs } from '../../../../../configs/shell-configs';
+import { readOneFEShellConfigs } from '../../../../../configs/shell-configs';
 import { getShellLogger } from '../../../../../utils/telemetry';
 import { WidgetErrorBoundary } from './WidgetErrorBoundary';
 
@@ -75,7 +75,7 @@ function WidgetFrameInner<TWidgetProps>({
     React.useState<WidgetRenderStatusType>('loading');
 
   useEffect(() => {
-    if (readMagicBoxShellConfigs().mode === 'production') {
+    if (readOneFEShellConfigs().mode === 'production') {
       return;
     }
 
@@ -91,7 +91,7 @@ function WidgetFrameInner<TWidgetProps>({
     const consoleLogMountEvent = (event: 'mounted' | 'unmounted') => {
       // eslint-disable-next-line no-console
       console.log(
-        `[1DS] %c${hostWidgetId} %c${event} %c${requestedWidgetStr}`,
+        `[1FE] %c${hostWidgetId} %c${event} %c${requestedWidgetStr}`,
         'font-weight:bold',
         '',
         'font-weight:bold',

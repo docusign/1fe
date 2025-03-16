@@ -5,10 +5,12 @@ import { EventBusPlatformUtils } from '../types';
 // jest.mock('emittery');
 
 jest.mock('../../../../configs/shell-configs', () => ({
-  readMagicBoxShellConfigs: jest.fn().mockImplementation(() => ({ mode: 'production' })),
+  readOneFEShellConfigs: jest
+    .fn()
+    .mockImplementation(() => ({ mode: 'production' })),
 }));
 
-jest.mock('../../../../utils/url' , () => ({
+jest.mock('../../../../utils/url', () => ({
   ...jest.requireActual('../../../../utils/url'),
   basePathname: jest.fn(() => '/'),
 }));
@@ -100,7 +102,7 @@ describe('EventBus Interactions Between Widgets', () => {
     const listener = jest.fn();
     widget2EventBus.subscribe<Widget1Events, 'event1'>({
       eventName: 'event1',
-      listener
+      listener,
     });
 
     widget1EventBus.publish<Widget1Events, 'event1'>({
@@ -127,7 +129,7 @@ describe('EventBus Interactions Between Widgets', () => {
       });
 
       done();
-    }, 0);    
+    }, 0);
   });
 
   test('Widget2 does not recieve the event from Widget1 if it has unsubscribed', (done) => {

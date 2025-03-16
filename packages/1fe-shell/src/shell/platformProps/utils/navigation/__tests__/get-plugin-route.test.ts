@@ -37,11 +37,11 @@ describe('getRootRoute', () => {
       expected: '/send',
     },
     {
-      href: 'https://apps.dev.docusign.net/starter-kit?widget_url_overrides={%22@1ds/widget-starter-kit%22:%22http://',
+      href: 'https://apps.dev.docusign.net/starter-kit?widget_url_overrides={%22@1fe/widget-starter-kit%22:%22http://',
       expected: '/starter-kit',
     },
     {
-      href: 'https://apps.dev.docusign.net/starter-kit?widget_url_overrides={"@1ds/widget-starter-kit":"https://',
+      href: 'https://apps.dev.docusign.net/starter-kit?widget_url_overrides={"@1fe/widget-starter-kit":"https://',
       expected: '/starter-kit',
     },
     {

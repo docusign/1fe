@@ -31,7 +31,11 @@ export class TreeNode<T> {
     return this._data;
   }
 
-  constructor(public readonly key: string, type: TreeNodeType, data: T) {
+  constructor(
+    public readonly key: string,
+    type: TreeNodeType,
+    data: T,
+  ) {
     this.id = getNodeId();
     this.type = type;
     this.parents = new Set();
@@ -83,7 +87,7 @@ export class Tree<T> {
   constructor() {
     this._refs = new Map();
     this.keyMap = new Map();
-    this.root = new TreeNode('#', '1DS_SHELL', {} as T);
+    this.root = new TreeNode('#', '1FE_SHELL', {} as T);
   }
 
   get refs() {

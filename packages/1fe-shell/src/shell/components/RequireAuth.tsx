@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from 'react';
 
-import { readMagicBoxShellConfigs } from '../configs/shell-configs';
+import { readOneFEShellConfigs } from '../configs/shell-configs';
 import { PluginConfig } from '../types/widget-config';
 
 interface AuthenticateInterface {
@@ -17,10 +17,12 @@ const RequireAuth = ({ pluginConfig, children }: AuthenticateInterface) => {
     }
 
     if (pluginConfig.auth?.authenticationType === 'required') {
-      const shouldShowChildren = readMagicBoxShellConfigs().auth.isAuthedCallback(pluginConfig.widgetId);
+      const shouldShowChildren = readOneFEShellConfigs().auth.isAuthedCallback(
+        pluginConfig.widgetId,
+      );
 
       if (!shouldShowChildren) {
-        readMagicBoxShellConfigs().auth.unauthedCallback(pluginConfig.widgetId);
+        readOneFEShellConfigs().auth.unauthedCallback(pluginConfig.widgetId);
       }
 
       setShouldShowChildren(shouldShowChildren);

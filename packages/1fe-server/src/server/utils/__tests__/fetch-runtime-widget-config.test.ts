@@ -1,17 +1,22 @@
 // import { getIsColdStart } from '../../app';
 import ky from 'ky';
-import { generateWidgetConfigMap, getWidgetConfigValues, mapAndGenerateWidgetConfigMap } from '../widget-config-helpers';
+import {
+  generateWidgetConfigMap,
+  getWidgetConfigValues,
+  mapAndGenerateWidgetConfigMap,
+} from '../widget-config-helpers';
 import { RuntimeConfig, WidgetConfig } from '../../types';
 import * as runtimeConfigs from '../runtime-configs';
 
-const { _fetchSingleWidgetRuntimeConfig, fetchAllWidgetRuntimeConfigs } = runtimeConfigs;
+const { _fetchSingleWidgetRuntimeConfig, fetchAllWidgetRuntimeConfigs } =
+  runtimeConfigs;
 
 // jest.mock('../../app', () => ({
 //   getIsColdStart: jest.fn(),
 // }));
 
 jest.mock('ky', () => ({
-  get: jest.fn()
+  get: jest.fn(),
 }));
 
 const runtimeConfig: RuntimeConfig = {
@@ -34,7 +39,7 @@ const runtimeConfig: RuntimeConfig = {
 const mockedBadWidgetConfigs = generateWidgetConfigMap<WidgetConfig>([
   // @ts-expect-error this is intentionally missing runtime config
   {
-    widgetId: '@1ds/widget-starter-kit',
+    widgetId: '@1fe/widget-starter-kit',
     version: '0.0.0',
     plugin: {
       enabled: true,
@@ -88,26 +93,24 @@ const mockResponse400 = {
 
 describe('fetchAllWidgetRuntimeConfigs', () => {
   it('should fallback on 4xx and update on 2xx', async () => {
-    jest.mocked(ky.get)
+    jest
+      .mocked(ky.get)
       .mockResolvedValueOnce({
-          status: 400,
-          json: async () => ({
-            data: 'Something is not right',
-          }),
-        } as Response
-      )
+        status: 400,
+        json: async () => ({
+          data: 'Something is not right',
+        }),
+      } as Response)
       .mockResolvedValueOnce({
-          status: 400,
-          json: async () => ({
-            data: 'Something is not right',
-          }),
-        } as Response,
-      )
+        status: 400,
+        json: async () => ({
+          data: 'Something is not right',
+        }),
+      } as Response)
       .mockResolvedValueOnce({
-          status: 200,
-          json: async () => ({ ...runtimeConfig, dependsOn: ['@ds/prepare'] }),
-        } as Response,
-      );
+        status: 200,
+        json: async () => ({ ...runtimeConfig, dependsOn: ['@ds/prepare'] }),
+      } as Response);
 
     const newWidgetConfigs = await fetchAllWidgetRuntimeConfigs(
       mockedBadWidgetConfigs,
@@ -126,12 +129,11 @@ describe('fetchAllWidgetRuntimeConfigs', () => {
 
   it('should fallback if fetch runtime configs returns 4xx', async () => {
     jest.mocked(ky.get).mockResolvedValueOnce({
-        status: 400,
-        json: async () => ({
-          data: 'Something is not right',
-        }),
-      } as Response,
-    );
+      status: 400,
+      json: async () => ({
+        data: 'Something is not right',
+      }),
+    } as Response);
 
     const newWidgetConfigs = await fetchAllWidgetRuntimeConfigs(
       mockedBadWidgetConfigs,
@@ -210,7 +212,8 @@ describe('_fetchSingleWidgetRuntimeConfig', () => {
   it('should retry 3 times and then fallback on 5xx after startup', async () => {
     jest.spyOn(runtimeConfigs, 'getIsColdStart').mockReturnValueOnce(false);
 
-    jest.mocked(ky.get)
+    jest
+      .mocked(ky.get)
       .mockResolvedValueOnce(mockResponse500)
       .mockResolvedValueOnce(mockResponse500);
 

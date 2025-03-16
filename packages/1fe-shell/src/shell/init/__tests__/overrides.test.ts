@@ -1,10 +1,15 @@
-import { insertNewImportMap, insertPersistentWidgetOverrides } from "../import-map";
-import { initializeImportMapOverridesReskin } from "../import-map-ui";
+import {
+  insertNewImportMap,
+  insertPersistentWidgetOverrides,
+} from '../import-map';
+import { initializeImportMapOverridesReskin } from '../import-map-ui';
 
 jest.mock('../import-map-ui');
 
 jest.mock('../../configs/shell-configs', () => ({
-  readMagicBoxShellConfigs: jest.fn().mockImplementation(() => ({ mode: 'preproduction' })),
+  readOneFEShellConfigs: jest
+    .fn()
+    .mockImplementation(() => ({ mode: 'preproduction' })),
 }));
 
 describe('insertNewImportMap', () => {

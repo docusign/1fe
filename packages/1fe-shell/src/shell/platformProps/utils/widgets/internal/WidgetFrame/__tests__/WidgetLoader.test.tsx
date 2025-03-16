@@ -44,10 +44,10 @@ jest.mock('../../../../../../utils/url', () => ({
 }));
 
 jest.mock('../../../../../../configs/shell-configs', () => ({
-  readMagicBoxShellConfigs: jest.fn().mockImplementation(() => ({
+  readOneFEShellConfigs: jest.fn().mockImplementation(() => ({
     components: {
-      Loader: () => <p>Loading...</p>
-    }
+      Loader: () => <p>Loading...</p>,
+    },
   })),
 }));
 
@@ -104,7 +104,7 @@ describe('<WidgetURLLoader />', () => {
         widgetFrameId='@x/tester'
         requestedWidgetConfigOrUrl={
           new URL(
-            'https://docutest-a.akamaihd.net/integration/1ds/widgets/@1ds/tester/1.2.3/js/1ds-bundle.js',
+            'https://docutest-a.akamaihd.net/integration/1fe/widgets/@1fe/tester/1.2.3/js/1fe-bundle.js',
           )
         }
         setWidgetRenderStatus={() => void 0}

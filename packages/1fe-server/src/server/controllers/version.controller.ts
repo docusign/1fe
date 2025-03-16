@@ -6,11 +6,11 @@ import { dataForRenderingTemplate } from './data';
 import { getWidgetConfigValues } from '../utils';
 import { version } from '../../../package.json';
 import { getCachedWidgetConfigs } from '../utils/widget-config';
-import { readMagicBoxConfigs } from '../utils/magicbox-configs';
+import { readOneFEConfigs } from '../utils/one-fe-configs';
 import { WidgetConfigs } from '../types';
 
 /*
-TODO: [1DS consumption] BadgeMaker
+TODO: [1FE consumption] BadgeMaker
 */
 
 const SERVER_VERSION = version;
@@ -27,10 +27,10 @@ type TemplatizeCDNUrlArgs = {
 export const templatizeCDNUrl = ({
   widgetId,
   widgetVersion,
-  templateFilePath = 'js/1ds-bundle.js',
+  templateFilePath = 'js/1fe-bundle.js',
 }: TemplatizeCDNUrlArgs): URL => {
   return new URL(
-    `${readMagicBoxConfigs().dynamicConfigs.cdn.widgets.basePrefix}${widgetId}/${widgetVersion}/${templateFilePath}`,
+    `${readOneFEConfigs().dynamicConfigs.cdn.widgets.basePrefix}${widgetId}/${widgetVersion}/${templateFilePath}`,
   );
 };
 
@@ -53,10 +53,10 @@ class VersionController {
         dataForRenderingTemplatePayload;
 
       res.send({
-        environment: readMagicBoxConfigs().environment,
+        environment: readOneFEConfigs().environment,
         version: SERVER_VERSION,
         nodeVersion: process.version,
-        ...(!(readMagicBoxConfigs().mode === 'production')
+        ...(!(readOneFEConfigs().mode === 'production')
           ? {
               buildNumber: SERVER_BUILD_NUMBER,
               branch: SERVER_GIT_BRANCH,
@@ -172,7 +172,7 @@ export async function validateWidgetInputs(
   const { org, widgetId, version } = req.params;
 
   if (!org) {
-    return { data: undefined, error: `Missing org, example: '@1ds'` };
+    return { data: undefined, error: `Missing org, example: '@1fe'` };
   }
 
   if (!widgetId) {
@@ -214,7 +214,7 @@ export async function validateWidgetInputs(
     widgetVersion: resolvedVersion,
     templateFilePath: '',
   })}`;
-  const widgetBundleUrl = `${widgetCdnUrl}js/1ds-bundle.js`;
+  const widgetBundleUrl = `${widgetCdnUrl}js/1fe-bundle.js`;
   const widgetContractUrl = `${widgetCdnUrl}types/contract.rolledUp.d.ts`;
 
   return {

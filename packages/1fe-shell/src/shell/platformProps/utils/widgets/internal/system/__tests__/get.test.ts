@@ -1,8 +1,8 @@
 // import {
 //   HOSTED_ENVIRONMENTS,
 //   getWidgetBundleCdnUrl,
-// } from '@1ds/helpers/isomorphic';
-// import { shellConsoleLogger } from '@1ds/helpers/client';
+// } from '@1fe/helpers/isomorphic';
+// import { shellConsoleLogger } from '@1fe/helpers/client';
 
 import { get } from '../get';
 import { isSystemEnv } from '../../utils/isSystem';
@@ -27,12 +27,15 @@ import { getWidgetBundleCdnUrl } from '../../../../../../utils/url';
 
 jest.mock<
   typeof import('../../../../../../../../../1fe-server/src/server/utils/widget-config-helpers')
->('../../../../../../../../../1fe-server/src/server/utils/widget-config-helpers', () => ({
-  ...jest.requireActual(
-    '../../../../../../../../../1fe-server/src/server/utils/widget-config-helpers',
-  ),
-  getRequestedWidgetConfigWithoutRuntimeConfig: jest.fn(),
-}));
+>(
+  '../../../../../../../../../1fe-server/src/server/utils/widget-config-helpers',
+  () => ({
+    ...jest.requireActual(
+      '../../../../../../../../../1fe-server/src/server/utils/widget-config-helpers',
+    ),
+    getRequestedWidgetConfigWithoutRuntimeConfig: jest.fn(),
+  }),
+);
 
 // const mockShellLogger = jest.fn();
 // const mockShellError = jest.fn();
@@ -60,8 +63,8 @@ jest.mock('../../../../../../utils/url', () => ({
 
 jest.mock('../../../../../context/getWidgetPath');
 
-// jest.mock('@1ds/helpers/isomorphic', () => ({
-//   ...jest.requireActual('@1ds/helpers/isomorphic'),
+// jest.mock('@1fe/helpers/isomorphic', () => ({
+//   ...jest.requireActual('@1fe/helpers/isomorphic'),
 //   getWidgetBundleCdnUrl: jest.fn(),
 // }));
 
@@ -99,7 +102,7 @@ beforeEach(() => {
 
 it('should throw an error when no widget ID provided', async () => {
   await expect(get(_System, hostWidgetId)('')).rejects.toThrowError(
-    '[platformProps.utils.widgets.get] No widget ID provided, please refer to API documentation: https://github.docusignhq.com/pages/Core/1ds-docs/widgets/utils/widgets/#get',
+    '[platformProps.utils.widgets.get] No widget ID provided, please refer to API documentation: https://github.docusignhq.com/pages/Core/1fe-docs/widgets/utils/widgets/#get',
   );
 });
 
@@ -109,7 +112,7 @@ it('should throw an error when Systemjs is not detected', async () => {
   await expect(
     get(_System, hostWidgetId)(normalRequestedWidgetConfig.widgetId),
   ).rejects.toThrowError(
-    '[platformProps.utils.widgets.get] Systemjs not detected. Something is critically wrong. Please reach out to 1DS team.',
+    '[platformProps.utils.widgets.get] Systemjs not detected. Something is critically wrong. Please reach out to 1FE team.',
   );
 });
 

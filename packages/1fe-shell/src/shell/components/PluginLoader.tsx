@@ -5,7 +5,7 @@ import { WIDGET_CONFIGS } from '../configs/config-helpers';
 import { getShellPlatformUtils } from '../utils/shell-platform-utils';
 import RequireAuth from './RequireAuth';
 import { getShellWidgetId } from '../constants/shell';
-import { readMagicBoxShellConfigs } from '../configs/shell-configs';
+import { readOneFEShellConfigs } from '../configs/shell-configs';
 
 interface PluginLoaderInterface {
   plugin: PluginConfig;
@@ -14,7 +14,7 @@ interface PluginLoaderInterface {
 /**
  * Direct container of a plugin.
  *
- * 1DS is a multi page application (MPA), meaning this should NEVER re-render or unmount under any circumstance.
+ * 1FE is a multi page application (MPA), meaning this should NEVER re-render or unmount under any circumstance.
  */
 const PluginLoader = ({
   plugin,
@@ -28,11 +28,11 @@ const PluginLoader = ({
 
   const parsedWidget = WIDGET_CONFIGS.get(plugin.widgetId);
   if (!parsedWidget?.widgetId) {
-    const getError = readMagicBoxShellConfigs().components.getError;
+    const getError = readOneFEShellConfigs().components.getError;
     return getError({
       plugin,
-      message: 'No such experience found'
-    })
+      message: 'No such experience found',
+    });
   }
 
   // TODO: @Quinn-Relyea When `widgets.Frame` is introduced, let's refactor this to consume that API

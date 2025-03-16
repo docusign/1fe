@@ -3,9 +3,9 @@ import { getShellPlatformUtils } from '../../utils/shell-platform-utils';
 import * as utils from '../../utils/url';
 import * as importMap from '../import-map';
 
-const { createDynamicImportMap, getQueryURLParams, getUrlWidgetOverrides } = importMap;
+const { createDynamicImportMap, getQueryURLParams, getUrlWidgetOverrides } =
+  importMap;
 // import { createDynamicImportMap, getQueryURLParams, getUrlWidgetOverrides } from '../import-map';
-
 
 // jest.mock('../runtime-config-overrides', () => ({
 //   applyRuntimeConfigOverridesForWidgetUrlOverrides: jest.fn(),
@@ -83,10 +83,10 @@ describe('getUrlWidgetOverrides', () => {
 
   it("ensures the override is found in the account server's state query params", () => {
     const overrides = {
-      '@ds/send': 'http://127.0.0.1/js/1ds-bundle.foobar.js',
+      '@ds/send': 'http://127.0.0.1/js/1fe-bundle.foobar.js',
     };
 
-    const authServerMockReturn = `authenticate?code=eyJ0eXAiOiJNVCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiZmZhYjYyYmEtYTRhNy00NjhjLWJhOGEtNDEwMmM0NGFkYjA2In0.AQoAAAABAAYABwCAfEXlocXbSAgAgAjMLKLF20gCABzA4QpkmchPggxLk8F2PMQVAAEAAAAYABQAAAAFAAAAUQAAADcAAABlAAAAfwAAAHoAAACFAAAAhgAAAGsAAABsAAAAwgAAAAYAAAAJAQAADwEAAOsAAAA-AQAA8QAAADQBAACYAAAAOAAAAA0AJAAAADJjYzU2ZGM5LTRiY2QtNGI1NS04YWIwLThiYTYwYmFlMTA2NSIAJAAAADJjYzU2ZGM5LTRiY2QtNGI1NS04YWIwLThiYTYwYmFlMTA2NTcAAGjZeniw6EixUXfO8IPrnTAAAMbD9J_F20g.dpKd8M1WCO5iJB7AysPu9xLwCCxCSOD2nTfBuOZjnDlnzt5pXthqQVTMzG8gJjcT6gMqcMUfcOlOVLt8sBVgfYX1oMB7vDiCtlYquXR14BgGA8wNegmV-SjJ2-EStE7NowiAAgYuURsQ1oFMzV2gX9MxBR1U1_RwyPFEtT9kb5x4MvjovpvUbhnvuHkBOdv0DKwukc88p8cyuTu6VcZ5dGu-Sb5QHIMeokHTHawtILmccJisGMyHX_7y4goyE0bm4F4PKxdGoIZioQ4Js61Lzx45CpVvDk-SXpIX5Xasc6QudEeqFmNlRYG70sWsJfptqTgkTgIRH-iTIhWgESyyxA&state={%22widgetId%22%3A%22%40ds%2Fsend%22%2C%22xsrfToken%22%3A%22Z60fqHX23bYdB%2FOgTMFgL8W5ucqr0bMU3SbW4Uu4INcjZaNK82b1WkkxWC8uHY1W9uYkC8nfk3um8BfsSRamfNVyKpjfOfcgWsilsYpabk34NLx5N%2FDE6NYqlCWB3XmgC3f5Q05lHk3QjeAvxv8qLtNIZ188kVM4th0g7Vd5TTo%3D%22%2C%22redirectUri%22%3A%22%2Fsend%3Fwidget_url_overrides%3D{%2522%40ds%2Fsend%2522%3A%2520%2522http%3A%2F%2F127.0.0.1%2Fjs%2F1ds-bundle.foobar.js%2522}%22}`;
+    const authServerMockReturn = `authenticate?code=eyJ0eXAiOiJNVCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiZmZhYjYyYmEtYTRhNy00NjhjLWJhOGEtNDEwMmM0NGFkYjA2In0.AQoAAAABAAYABwCAfEXlocXbSAgAgAjMLKLF20gCABzA4QpkmchPggxLk8F2PMQVAAEAAAAYABQAAAAFAAAAUQAAADcAAABlAAAAfwAAAHoAAACFAAAAhgAAAGsAAABsAAAAwgAAAAYAAAAJAQAADwEAAOsAAAA-AQAA8QAAADQBAACYAAAAOAAAAA0AJAAAADJjYzU2ZGM5LTRiY2QtNGI1NS04YWIwLThiYTYwYmFlMTA2NSIAJAAAADJjYzU2ZGM5LTRiY2QtNGI1NS04YWIwLThiYTYwYmFlMTA2NTcAAGjZeniw6EixUXfO8IPrnTAAAMbD9J_F20g.dpKd8M1WCO5iJB7AysPu9xLwCCxCSOD2nTfBuOZjnDlnzt5pXthqQVTMzG8gJjcT6gMqcMUfcOlOVLt8sBVgfYX1oMB7vDiCtlYquXR14BgGA8wNegmV-SjJ2-EStE7NowiAAgYuURsQ1oFMzV2gX9MxBR1U1_RwyPFEtT9kb5x4MvjovpvUbhnvuHkBOdv0DKwukc88p8cyuTu6VcZ5dGu-Sb5QHIMeokHTHawtILmccJisGMyHX_7y4goyE0bm4F4PKxdGoIZioQ4Js61Lzx45CpVvDk-SXpIX5Xasc6QudEeqFmNlRYG70sWsJfptqTgkTgIRH-iTIhWgESyyxA&state={%22widgetId%22%3A%22%40ds%2Fsend%22%2C%22xsrfToken%22%3A%22Z60fqHX23bYdB%2FOgTMFgL8W5ucqr0bMU3SbW4Uu4INcjZaNK82b1WkkxWC8uHY1W9uYkC8nfk3um8BfsSRamfNVyKpjfOfcgWsilsYpabk34NLx5N%2FDE6NYqlCWB3XmgC3f5Q05lHk3QjeAvxv8qLtNIZ188kVM4th0g7Vd5TTo%3D%22%2C%22redirectUri%22%3A%22%2Fsend%3Fwidget_url_overrides%3D{%2522%40ds%2Fsend%2522%3A%2520%2522http%3A%2F%2F127.0.0.1%2Fjs%2F1fe-bundle.foobar.js%2522}%22}`;
 
     jest
       .spyOn(importMap, 'getQueryURLParams')
@@ -131,8 +131,7 @@ describe('createDynamicImportMap', () => {
   });
 
   it('createDynamicImportMap should include url override', async () => {
-    jest
-      .spyOn(importMap, 'getQueryURLParams').mockReturnValueOnce(
+    jest.spyOn(importMap, 'getQueryURLParams').mockReturnValueOnce(
       new URLSearchParams(
         `${WIDGET_URL_OVERRIDES}=${JSON.stringify({
           widgetId: 'https://docucdn-a.akamaihd.net/widget_id',
@@ -171,7 +170,7 @@ describe('createDynamicImportMap', () => {
         react: maliciousUrls,
       };
       jest
-      .spyOn(importMap, 'getQueryURLParams')
+        .spyOn(importMap, 'getQueryURLParams')
         .mockReturnValueOnce(
           new URLSearchParams(
             `${WIDGET_URL_OVERRIDES}=${JSON.stringify(widgetUrlOverrides)}`,
@@ -202,7 +201,7 @@ describe('createDynamicImportMap', () => {
         react: maliciousUrls,
       };
       jest
-      .spyOn(importMap, 'getQueryURLParams')
+        .spyOn(importMap, 'getQueryURLParams')
         .mockReturnValueOnce(
           new URLSearchParams(
             `${WIDGET_URL_OVERRIDES}=${JSON.stringify(widgetUrlOverrides)}`,

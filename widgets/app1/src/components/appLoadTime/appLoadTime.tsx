@@ -11,14 +11,13 @@ export const AppLoadTime = (props: any) => {
   // const t = useTranslate();
 
   return (
-    <div data-qa='utils.appLoadTime.container'>
+    <div data-qa="utils.appLoadTime.container">
       <h2>utils.appLoadTime</h2>
+      <Button data-qa="utils.appLoadTime.get.btn" onClick={showWidget}>
+        utils.appLoadTime.Get/MarkEnd
+      </Button>
       <Button
-        data-qa='utils.appLoadTime.get.btn'
-        onClick={showWidget}
-      >utils.appLoadTime.Get/MarkEnd</Button>
-      <Button
-        data-qa='utils.appLoadTime.getEntries.btn'
+        data-qa="utils.appLoadTime.getEntries.btn"
         onClick={async () => {
           const resultString = props.platform.utils.appLoadTime
             .getEntries()
@@ -28,37 +27,43 @@ export const AppLoadTime = (props: any) => {
             .join('; ');
           setEntries(resultString);
         }}
-      >utils.appLoadTime.getEntries</Button>
+      >
+        utils.appLoadTime.getEntries
+      </Button>
 
       {entries && (
-        <div data-qa='utils.appLoadTime.getEntries.result'>{entries}</div>
+        <div data-qa="utils.appLoadTime.getEntries.result">{entries}</div>
       )}
 
       <Button
-        data-qa='utils.appLoadTime.mark.btn'
+        data-qa="utils.appLoadTime.mark.btn"
         onClick={() => {
-          props.platform.utils.appLoadTime.markStart('iLove1DSSoMuchMarkTest');
+          props.platform.utils.appLoadTime.markStart('iLove1FESoMuchMarkTest');
           setMeasure('Mark started');
         }}
-      >utils.appLoadTime.markStart</Button>
+      >
+        utils.appLoadTime.markStart
+      </Button>
       <Button
-        data-qa='utils.appLoadTime.measure.btn'
+        data-qa="utils.appLoadTime.measure.btn"
         onClick={() => {
           const result = props.platform.utils.appLoadTime.markEnd(
-            'iLove1DSSoMuchMarkTest',
+            'iLove1FESoMuchMarkTest',
           );
 
           if (result) {
             setMeasure(`${result.name}  ${result.duration.toString()}`);
           }
         }}
-      >utils.appLoadTime.markEnd</Button>
+      >
+        utils.appLoadTime.markEnd
+      </Button>
       {measure && (
-        <div data-qa='utils.appLoadTime.measure.result'>{measure}</div>
+        <div data-qa="utils.appLoadTime.measure.result">{measure}</div>
       )}
 
       {isVisible && (
-        <WidgetContainer data-qa='utils.widgets.appLoadTime.result.container'>
+        <WidgetContainer data-qa="utils.widgets.appLoadTime.result.container">
           <GetChildWidget isVisible={isVisible} props={props} />
         </WidgetContainer>
       )}

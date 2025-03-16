@@ -4,8 +4,8 @@ import { CookieOptions, NextFunction, Request, Response } from 'express';
 
 /*
 TODO: 
- - [1DS consumption] When consuming back, need new middleware to force native auth via session id
- - [1DS consumption] When consuming back, need new middleware for updateOtelContextWithSessionId
+ - [1FE consumption] When consuming back, need new middleware to force native auth via session id
+ - [1FE consumption] When consuming back, need new middleware for updateOtelContextWithSessionId
 */
 
 export const SESSION_ID = 'session_id';

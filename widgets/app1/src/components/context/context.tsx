@@ -1,4 +1,4 @@
-// import { platformProps } from '@1ds/shell';
+// import { platformProps } from '@1fe/shell';
 import { Button, Flex } from 'antd';
 import { useReducer, useState } from 'react';
 
@@ -13,22 +13,22 @@ export const Context = (props) => {
   // const t = useTranslate();
 
   return (
-    <div data-qa='utils.context.container'>
+    <div data-qa="utils.context.container">
       <h1>utils.context</h1>
       {/* <h1>{t('Components.Context.Index')}</h1> */}
 
       <Flex>
         <Button
-          size='large'
-          data-qa='utils.context.get.btn'
+          size="large"
+          data-qa="utils.context.get.btn"
           onClick={showWidget}
         >
           utils.context.get
           {/* {t('Components.Context.GetButtonText')} */}
         </Button>
         <Button
-          size='large'
-          data-qa='utils.context.get.btn'
+          size="large"
+          data-qa="utils.context.get.btn"
           onClick={() => {
             setContextResult(JSON.stringify(props.platform.context.self));
             // setContextResult(JSON.stringify(platformProps.context.self));
@@ -38,8 +38,8 @@ export const Context = (props) => {
           {/* {t('Components.Context.SelfButtonText')} */}
         </Button>
         <Button
-          size='large'
-          data-qa='utils.context.get.btn'
+          size="large"
+          data-qa="utils.context.get.btn"
           onClick={() => {
             setContextResult(JSON.stringify(props.platform.context.getHost()));
             // setContextResult(JSON.stringify(platformProps.context.getHost()));
@@ -50,10 +50,10 @@ export const Context = (props) => {
         </Button>
       </Flex>
 
-      <div data-qa='wsk.context.result.container'>{contextResult}</div>
+      <div data-qa="wsk.context.result.container">{contextResult}</div>
 
       {isVisible && (
-        <WidgetContainer data-qa='utils.widgets.context.result.container'>
+        <WidgetContainer data-qa="utils.widgets.context.result.container">
           <GetChildWidget isVisible={isVisible} props={props} />
         </WidgetContainer>
       )}

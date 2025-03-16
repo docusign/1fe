@@ -8,7 +8,7 @@ import { WidgetTreeNode } from '../types';
  */
 export const getPlugin = (): WidgetTreeNode | null => {
   const tree = getTree();
-  const shell = tree.find((node) => node.id === '1DS_SHELL');
+  const shell = tree.find((node) => node.id === '1FE_SHELL');
 
   const shellChildren = shell?.children as WidgetTreeNode[];
 
