@@ -19,7 +19,9 @@ async function buildWebpack(buildOptions: BuildCommandOptions) {
       await getWebpackConfig({
         mode: buildOptions.mode,
         isCI: onefeProgram.getOptionValue('ci'),
-        environment: onefeProgram.getOptionValue('environment'),
+        environment:
+          buildOptions.liveVersionEnv ||
+          onefeProgram.getOptionValue('environment'),
       }),
     );
 

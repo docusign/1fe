@@ -1,8 +1,5 @@
 import { Configuration as WebpackConfig } from 'webpack';
-import {
-  getBaseConfig,
-  getCommonConfigs,
-} from '../../../../lib/config/getConfig';
+import { getCommonConfigs } from '../../../../lib/config/getConfig';
 
 export async function getExternalsLayer(
   environment: string,
