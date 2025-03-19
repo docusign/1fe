@@ -1,38 +1,33 @@
 #!/usr/bin/env node
 
-import { preActionHook } from './commands/pre-action';
-import { checkNodeVersion } from './utils/node-check';
-import { CliConfigOptions } from './types';
+import { onefeProgram } from './oneFeProgram/oneFeProgram';
 import { buildCommand } from './commands/build/build-command';
-import { ofeProgram } from './ofe-program/ofe-program';
+import { contractsCommand } from './commands/contracts/contracts-command';
+import { getLogger } from './lib/getLogger';
+import { checkNodeVersion } from './lib/nodeCheck';
 
-/**
- * BROWSERSLIST_IGNORE_OLD_DATA suppresses the warning below. We do not want widget teams modifying browserslist.
- *
- * Browserslist: caniuse-lite is outdated. Please run:
- *    npx update-browserslist-db@latest
- *    Why you should do it regularly: https://github.com/browserslist/update-db#readme
- */
-process.env.BROWSERSLIST_IGNORE_OLD_DATA = 'true';
+const main = async () => {
+  const logger = getLogger('[1fe]');
 
-const main = async (options?: CliConfigOptions) => {
-  // const {commonConfigs, environment, isCi, mode, webpackConfigs, debug} = options;
+  try {
+    await checkNodeVersion();
 
-  console.log(`CLI started with ${JSON.stringify(options)} options`);
+    onefeProgram.addCommand(buildCommand);
+    onefeProgram.addCommand(contractsCommand);
 
-  // Check node at the top to avoid fetch() in fetchLiveVersions throwing problems for people with older node versions
-  await checkNodeVersion();
-
-  ofeProgram.addCommand(buildCommand);
-
-  await ofeProgram.parseAsync(process.argv);
+    await onefeProgram.parseAsync(process.argv);
+  } catch (error) {
+    logger.error('An error occurred:', error);
+    process.exit(1);
+  }
 };
 
-export type { CliConfigOptions, PinnedWidget, Preload } from './types';
+export type { OneFeConfiguration as OneFeConfiguration } from './lib/config/config.types';
 
-export const CLI = (options: CliConfigOptions) => {
-  return main(options);
-};
+// TODO - CLI sub commands have options. How do we pass them to the main function if we expose this CLI function?
+// export const CLI = (options: CliConfigOptions) => {
+//   return main(options);
+// };
 
 // Kick off CLI execution, only when this file is executed
 if (require.main === module) {

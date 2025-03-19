@@ -9,9 +9,6 @@
       "src/*": ["./src/*"]
     }
   },
-  "files": [
-    "src/app1.tsx"
-  ],
   "include": ["src/**/*"],
   "exclude": ["src/**/*.test*"]
 }

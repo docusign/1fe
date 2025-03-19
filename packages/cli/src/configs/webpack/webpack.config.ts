@@ -1,17 +1,28 @@
 import { DefinePlugin, Configuration as WebpackConfig } from 'webpack';
+import SystemJSPublicPathWebpackPlugin from 'systemjs-webpack-interop/SystemJSPublicPathWebpackPlugin';
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 import WebpackBar from 'webpackbar';
 import { merge } from 'webpack-merge';
-import { withAnalyzerPlugin } from './layers/analyzerPlugin';
-import { isCI } from '../../utils/env-helpers';
-import { buildCommand } from '../../commands/build/build-command';
-import { resolve } from 'path/posix';
-import { getPaths } from '../../utils/paths/paths';
-import { BuildCommandOptions } from '../../commands/build/build-command.types';
+import { getBundleAnalyzerLayer } from './layers/getBundleAnalyzerLayer';
+import { getKnownPaths } from '../../lib/paths/getKnownPaths';
+import { WEBPACK_BUNDLES } from './webpack.constants';
+import { getVariantsEntryLayer } from './layers/variants/variantsLayer';
+import { getScenesLayer } from './layers/scenes/scenesLayer';
+import { getExternalsLayer } from './layers/externals/externalsLayer';
 
-export function getWebpackConfig(
-  buildOptions: BuildCommandOptions, // TODO - should --dev command be just build command with --dev flag?
-): WebpackConfig {
+type GetWebpackConfigOptions = {
+  mode: WebpackConfig['mode'];
+  transpileOnly?: boolean;
+  isCI?: boolean;
+  environment: string;
+};
+
+export async function getWebpackConfig({
+  mode,
+  transpileOnly,
+  isCI = false,
+  environment,
+}: GetWebpackConfigOptions): Promise<WebpackConfig> {
   // All extensions that are supported by module loader plugins below are listed here.
   const extensions = [
     '.json',
@@ -28,41 +39,60 @@ export function getWebpackConfig(
     '.gif',
     '.webp',
     '.svg',
-  ]; // TODO - add custom extensions here.
+  ];
 
-  const isProduction = buildOptions.mode === 'production';
-  const isDevelopment = buildOptions.mode === 'development';
-
-  const shouldTranspileOnly = buildOptions.transpileOnly && buildOptions.dev;
+  const isProduction = mode === 'production';
+  const isDevelopment = mode === 'development';
 
   return merge(
     {
       entry: {
-        '1fe-bundle.js': getPaths().widgetEntry,
+        [WEBPACK_BUNDLES.MAIN]: getKnownPaths().webpack.widgetEntry,
       },
-      target: 'broweserslist',
-      mode: buildOptions.mode as WebpackConfig['mode'],
+    },
+    await getVariantsEntryLayer(),
+    getScenesLayer(),
+    await getExternalsLayer(environment),
+    {
+      target: 'browserslist',
+      mode: mode as WebpackConfig['mode'],
       devtool: isProduction ? false : 'source-map',
       resolve: {
-        // alias: {
-        //   '@1ds/shell': false,
-        // },
+        alias: {
+          // TODO - add shell package alias here
+        },
         extensions,
         plugins: [
           new TsconfigPathsPlugin({
-            configFile: getPaths().tsconfig,
+            configFile: getKnownPaths().tsconfig,
             extensions,
           }),
         ],
       },
+      output: {
+        filename: 'js/[name].js',
+        path: getKnownPaths().distDir,
+        publicPath: '/',
+        clean: true,
+        library: {
+          type: 'system',
+        },
+      },
       plugins: [
         new WebpackBar({
           color: '#4b00fe', // Docusign Purple
-          fancy: !isCI(),
-          basic: isCI(),
+          fancy: !isCI,
+          basic: isCI,
         }),
         new DefinePlugin({
           NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        }),
+        new SystemJSPublicPathWebpackPlugin({
+          /**
+           * If you need the webpack public path to "chop off" some of the directories in the current module's url, you can specify a "root directory level".
+           * Note that the root directory level is read from right-to-left, with `1` indicating "current directory" and `2` indicating "up one directory":
+           */
+          rootDirectoryLevel: 2,
         }),
       ],
       module: {
@@ -84,7 +114,7 @@ export function getWebpackConfig(
               {
                 loader: require.resolve('ts-loader'),
                 options: {
-                  transpileOnly: shouldTranspileOnly,
+                  transpileOnly,
                 },
               },
             ],
@@ -122,8 +152,8 @@ export function getWebpackConfig(
         ],
       },
     },
-    // TODO add a layer for prodSourceMap
-    // TODO - add variants and scenes entry as layers
-    withAnalyzerPlugin(),
+    getBundleAnalyzerLayer({
+      enabled: isCI,
+    }),
   );
 }

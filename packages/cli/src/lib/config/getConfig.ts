@@ -1,21 +1,21 @@
 import { getKnownPaths } from '../paths/getKnownPaths';
-import { load } from 'ts-import';
-import { getLogger } from '../get-logger';
 import { validateConfig } from './validateConfig';
-import { OneFeBaseConfigObject } from './config.types';
+import { OneFeConfiguration } from './config.types';
+import { getLogger } from '../getLogger';
+import { loadTsDefault } from '../loadTs';
+import ky from 'ky';
+import { memoize } from 'lodash';
+import { CommonConfig } from '../types/commonConfigType';
 
 export async function getConfig() {
   const logger = getLogger('[get-config]');
   try {
-    const config = await load(getKnownPaths().config);
-
-    if (typeof config.baseConfig === 'string') {
-      config.baseConfig = await require(config.baseConfig);
-    } else if (typeof config.baseConfig === 'function') {
-      config.baseConfig = await config.baseConfig();
-    } else if (typeof config.baseConfig === 'object') {
-      config.baseConfig = config.baseConfig;
-    }
+    const config: OneFeConfiguration = await loadTsDefault(
+      getKnownPaths().oneFeConfig,
+      {
+        useCache: false,
+      },
+    );
 
     return validateConfig(config);
   } catch (error) {
@@ -24,6 +24,17 @@ export async function getConfig() {
   }
 }
 
-export async function getBaseConfig() {
-  return (await getConfig()).baseConfig as OneFeBaseConfigObject;
-}
+export const getCommonConfigs = memoize(async (environment: string) => {
+  const { baseConfig } = await getConfig();
+  if (!baseConfig.environments[environment]) {
+    throw new Error(
+      `No base configuration found for environment "${environment}"`,
+    );
+  }
+
+  const commonConfig: CommonConfig = await ky
+    .get(baseConfig.environments[environment].commonConfigsUrl)
+    .json();
+
+  return commonConfig;
+});

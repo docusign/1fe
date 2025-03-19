@@ -3,13 +3,12 @@ import { OneFeConfiguration } from '@devhub/cli';
 const confiugration: OneFeConfiguration = {
   baseConfig: {
     environments: {
-      intergration: {
+      integration: {
         commonConfigsUrl:
           'https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/common-configs/integration.json',
       },
     },
   },
-  runtimeConfig: {},
 };
 
 export default confiugration;

@@ -1,5 +1,5 @@
 import { Command } from '@commander-js/extra-typings';
-import { contractsInstallCommand } from './commands/contractsInstallCommand';
+import { contractsInstallCommand } from './install/contractsInstallCommand';
 
 export const contractsCommand = new Command('contracts')
   .description('Manage widget contracts')

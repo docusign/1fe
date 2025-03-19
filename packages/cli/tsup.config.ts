@@ -1,4 +1,5 @@
 import { copy } from 'esbuild-plugin-copy';
+import { raw } from 'esbuild-raw-plugin';
 import { defineConfig } from 'tsup';
 import { baseConfig } from '../../tsup.config.base';
 
@@ -33,6 +34,9 @@ export default defineConfig({
         from: ['.browserslistrc'],
         to: ['./dist/.browserslistrc'],
       },
+    }),
+    raw({
+      textExtensions: ['.ejs'],
     }),
   ],
 });

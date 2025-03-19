@@ -1,10 +1,9 @@
-import React, { useState, useCallback, useEffect} from "react";
+import { useState, useCallback, useEffect } from 'react';
 import { Button } from 'antd';
 
 type WidgetEvents = {
   event1: { param1: string };
 };
-
 
 export default function Root(props) {
   useEffect(() => {
@@ -21,12 +20,11 @@ export default function Root(props) {
     [setEventBusResult],
   );
 
-
   return (
     <>
       <p>My component from app2 is mounted!</p>
       <Button
-        data-qa='eventBus.subscribe.btn'
+        data-qa="eventBus.subscribe.btn"
         onClick={() => {
           // @ts-ignore
           const unsubFn = props.platform.utils.eventBus.subscribe<
@@ -39,15 +37,19 @@ export default function Root(props) {
           setEventBusResult('subscribed');
           setUnsubscribeFn(() => unsubFn);
         }}
-      >utils.eventBus.subscribe</Button>
+      >
+        utils.eventBus.subscribe
+      </Button>
       <Button
-        data-qa='eventBus.unsubscribe.btn'
+        data-qa="eventBus.unsubscribe.btn"
         onClick={() => {
           setEventBusResult('unsubscribed');
           unsubscribeFn();
         }}
-      >utils.eventBus.unsubscribe</Button>
-      <div data-qa='eventBus.result.container'>{eventBusResult}</div>
+      >
+        utils.eventBus.unsubscribe
+      </Button>
+      <div data-qa="eventBus.result.container">{eventBusResult}</div>
     </>
   );
 }

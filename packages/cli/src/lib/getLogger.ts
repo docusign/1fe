@@ -10,25 +10,29 @@ import chalk from 'chalk';
 export function getLogger(prefix: `[${string}]`) {
   const trace = onefeProgram.opts().trace;
 
-  const coloredPrefix = chalk.dim(prefix);
+  const coloredPrefix = chalk.gray(prefix);
 
   return {
     /** General purpose log. Shows up always */
-    log: (...args: any[]) => console.log(`${prefix}`, ...args),
+    log: (...args: any[]) => console.log(`${coloredPrefix}`, ...args),
 
     /** Debug log. Shows up only when trace is enabled */
     debug: (...args: any[]) =>
-      trace ? console.debug(`${prefix}`, ...args) : undefined,
+      trace ? console.debug(`${coloredPrefix}`, ...args) : undefined,
 
     /** Info log. Shows up only when trace is enabled */
     info: (...args: any[]) =>
-      trace ? console.log(`${prefix}`, ...args) : undefined,
+      trace ? console.log(`${coloredPrefix}`, ...args) : undefined,
 
     /** Warning log. Shows up only when trace is enabled */
     warn: (...args: any[]) =>
-      trace ? console.warn(`${prefix}`, ...args) : undefined,
+      trace ? console.warn(`${coloredPrefix}`, ...args) : undefined,
 
     /** Error log. Shows up always */
-    error: (...args: any[]) => console.error(`${prefix}`, ...args),
+    error: (...args: any[]) =>
+      console.error(
+        `${coloredPrefix}`,
+        ...args.map((arg) => (typeof arg === 'string' ? chalk.red(arg) : arg)),
+      ),
   };
 }

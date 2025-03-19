@@ -1,37 +1,27 @@
-import { getLogger } from '../get-logger';
-import {
-  baseConfigSchema,
-  OneFeConfiguration,
-  onefeConfigurationSchema,
-} from './config.types';
+import { getLogger } from '../getLogger';
+import { fromError } from 'zod-validation-error';
+import { OneFeConfiguration, onefeConfigurationSchema } from './config.types';
 
 export async function validateConfig(
   config: OneFeConfiguration,
 ): Promise<OneFeConfiguration> {
   const logger = getLogger('[validate-config]');
 
-  const baseConfigValidationResult = baseConfigSchema.safeParse(
-    config.baseConfig,
+  logger.info(
+    'Validation configuration\n\n',
+    JSON.stringify(config, null, 2),
+    '\n',
   );
 
-  if (baseConfigValidationResult.error) {
-    logger.error(
-      'Error validating your base configuration:',
-      baseConfigValidationResult.error,
-    );
-
-    throw baseConfigValidationResult.error;
-  }
-
-  const configValidationResult = onefeConfigurationSchema.safeParse(config);
-
-  if (configValidationResult.error) {
+  try {
+    onefeConfigurationSchema.parse(config);
+  } catch (error) {
     logger.error(
       'Error validating your configuration:',
-      configValidationResult.error,
+      fromError(error).toString(),
     );
 
-    throw configValidationResult.error;
+    process.exit(1);
   }
 
   return config;

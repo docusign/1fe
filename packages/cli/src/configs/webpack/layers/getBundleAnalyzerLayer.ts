@@ -1,17 +1,22 @@
 import { Configuration as WebpackConfig } from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import { getPaths } from '../../../utils/paths/paths';
-import { isCI } from '../../../utils/env-helpers';
+import { getKnownPaths } from '../../../lib/paths/getKnownPaths';
 
-export function withAnalyzerPlugin(forceEnable = false): WebpackConfig {
-  if (!isCI() || !forceEnable) return {};
+type ConditionalBundleAnalyzerOptions = {
+  enabled: boolean;
+};
+
+export function getBundleAnalyzerLayer({
+  enabled,
+}: ConditionalBundleAnalyzerOptions): WebpackConfig {
+  if (!enabled) return {};
 
   return {
     plugins: [
       new BundleAnalyzerPlugin({
         generateStatsFile: true,
-        statsFilename: getPaths().webpack.analyzerPlugin.statsJson,
-        reportFilename: getPaths().webpack.analyzerPlugin.reportHtml,
+        statsFilename: getKnownPaths().webpack.analyzerPlugin.statsJson,
+        reportFilename: getKnownPaths().webpack.analyzerPlugin.reportHtml,
         analyzerMode: 'static',
         openAnalyzer: false,
         statsOptions: {
