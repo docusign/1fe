@@ -1,6 +1,6 @@
 import { Extractor, ExtractorConfig } from '@microsoft/api-extractor';
 import { getLogger } from '../../../lib/getLogger';
-import { apiExtractorConfig } from '../../../configs/api-extractor/api-extractor.config';
+import { apiExtractorConfig } from '../../../configs/apiExtractor/apiExtractor.config';
 import { getKnownPaths } from '../../../lib/paths/getKnownPaths';
 
 export async function contractsGenerateAction() {
