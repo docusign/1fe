@@ -59,13 +59,13 @@ export async function getVariantsEntryLayer(): Promise<WebpackConfig> {
 
     // The virtual module plugin will add the variants entry file to the webpack build without writing it to disk.
     const virtualModulePlugin = new VirtualModulesPlugin({
-      [getKnownPaths().variants.variantsEntry]: variantsEntryFileContent,
+      [getKnownPaths().virtual.variantsEntry]: variantsEntryFileContent,
     });
 
     return {
       plugins: [virtualModulePlugin],
       entry: {
-        [WEBPACK_BUNDLES.MAIN]: [getKnownPaths().variants.variantsEntry],
+        [WEBPACK_BUNDLES.MAIN]: [getKnownPaths().virtual.variantsEntry],
       },
     };
   } catch (e) {

@@ -12,5 +12,5 @@ export const baseConfig = defineConfig({
   // by default tsup will exclude monorepo dependencies
   // but we wish to bundle them
   // noExternal: [/@1fe/],
-  // noExternal: [ /(.*)/ ],
+  // noExternal: [/(.*)/],
 });

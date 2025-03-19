@@ -1,5 +1,5 @@
 import { memoize } from 'lodash';
-import { join, resolve } from 'path/posix';
+import { join, resolve } from 'path';
 
 export const getKnownPaths = memoize(function getPathsRaw(
   projectDir = process.cwd(),
@@ -16,7 +16,7 @@ export const getKnownPaths = memoize(function getPathsRaw(
 
     oneFeConfig: resolve(projectDir, '.1fe.config.ts'),
     tsconfig: resolve(projectDir, 'tsconfig.json'),
-    packageJson: resolve(projectDir, 'package.json'),
+    widgetPackageJson: resolve(projectDir, 'package.json'),
 
     /**
      * Some of the paths we need to use point to files that
@@ -24,11 +24,11 @@ export const getKnownPaths = memoize(function getPathsRaw(
      */
     virtual: {
       apiExtractorConfig: join(projectDir, 'api-extractor.json'),
+      variantsEntry: resolve(srcDir, 'variantsEntry.ts'),
     },
 
     variants: {
       configsGlob: resolve(srcDir, 'variants', '*', '.1fe.variant.config.ts'),
-      variantsEntry: resolve(srcDir, 'variantsEntry.ts'),
       getVariantIndex(variantDirName: string) {
         return resolve(srcDir, 'variants', variantDirName, 'variant.ts');
       },

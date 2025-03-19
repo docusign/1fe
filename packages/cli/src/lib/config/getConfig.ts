@@ -1,15 +1,14 @@
 import { getKnownPaths } from '../paths/getKnownPaths';
 import { validateConfig } from './validateConfig';
-import {
-  OneFeBaseConfiguration,
-  OneFeConfiguration,
-  OneFeConfigurationObject,
-} from './config.types';
 import { getLogger } from '../getLogger';
 import { loadTsDefault } from '../loadTs';
 import ky from 'ky';
 import { memoize } from 'lodash';
-import { CommonConfig } from '../types/commonConfigType';
+import { OneFeConfiguration } from '../..';
+import {
+  OneFeConfigurationObject,
+  OneFeBaseConfiguration,
+} from './config.types';
 
 export async function getConfig(): Promise<OneFeConfigurationObject> {
   const logger = getLogger('[get-config]');
@@ -44,9 +43,5 @@ export const getCommonConfigs = memoize(async (environment: string) => {
     );
   }
 
-  const commonConfig: CommonConfig = await ky
-    .get(baseConfig.environments[environment].commonConfigsUrl)
-    .json();
-
-  return commonConfig;
+  return baseConfig.environments[environment].commonConfig;
 });

@@ -1,6 +1,6 @@
 import { Command, Option } from '@commander-js/extra-typings';
 import packageJson from '../../package.json';
-import { preActionHook } from './pre-action';
+import { preActionHook } from './preAction';
 
 export const onefeProgram = new Command()
   .name(packageJson.name)

@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "@devhub/cli": "*",
+    "@repo/widget-base-config": "*",
     "@types/react": "^18.2.62",
     "@types/react-dom": "^18.2.19",
     "@vitejs/plugin-react": "^4.3.4",

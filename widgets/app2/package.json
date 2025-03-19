@@ -9,6 +9,7 @@
     "check-format": "prettier --check ."
   },
   "devDependencies": {
+    "@repo/widget-base-config": "*",
     "@vitejs/plugin-react": "^4.3.4",
     "cross-env": "^7.0.3",
     "eslint": "^7.32.0",

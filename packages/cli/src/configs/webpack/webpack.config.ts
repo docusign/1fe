@@ -2,7 +2,7 @@ import { DefinePlugin, Configuration as WebpackConfig } from 'webpack';
 import SystemJSPublicPathWebpackPlugin from 'systemjs-webpack-interop/SystemJSPublicPathWebpackPlugin';
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 import WebpackBar from 'webpackbar';
-import { merge } from 'webpack-merge';
+import { mergeWithRules } from 'webpack-merge';
 import { getBundleAnalyzerLayer } from './layers/getBundleAnalyzerLayer';
 import { getKnownPaths } from '../../lib/paths/getKnownPaths';
 import { WEBPACK_BUNDLES } from './webpack.constants';
@@ -16,6 +16,12 @@ type GetWebpackConfigOptions = {
   isCI?: boolean;
   environment: string;
 };
+
+const merge = mergeWithRules({
+  plugins: 'prepend',
+  output: 'replace',
+  externals: 'append',
+});
 
 export async function getWebpackConfig({
   mode,
@@ -45,6 +51,7 @@ export async function getWebpackConfig({
   const isDevelopment = mode === 'development';
 
   return merge(
+    // TODO - apply webpackConfigs overrides from config file
     {
       entry: {
         [WEBPACK_BUNDLES.MAIN]: getKnownPaths().webpack.widgetEntry,

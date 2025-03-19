@@ -1,14 +1,8 @@
 import { OneFeConfiguration } from '@devhub/cli';
+import { getBaseConfig } from '@repo/widget-base-config'; // this is the redistributed package for the organization
 
 const confiugration: OneFeConfiguration = {
-  baseConfig: {
-    environments: {
-      integration: {
-        commonConfigsUrl:
-          'https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/common-configs/integration.json',
-      },
-    },
-  },
+  baseConfig: getBaseConfig,
 };
 
 export default confiugration;

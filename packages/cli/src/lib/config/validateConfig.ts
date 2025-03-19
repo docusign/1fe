@@ -1,9 +1,7 @@
 import { getLogger } from '../getLogger';
 import { fromError } from 'zod-validation-error';
-import {
-  OneFeConfigurationObject,
-  onefeConfigurationSchema,
-} from './config.types';
+import { onefeConfigurationSchema } from './configSchema';
+import { OneFeConfigurationObject } from './config.types';
 
 export async function validateConfig(
   config: OneFeConfigurationObject,
