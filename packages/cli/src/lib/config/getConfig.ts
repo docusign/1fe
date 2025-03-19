@@ -1,13 +1,17 @@
 import { getKnownPaths } from '../paths/getKnownPaths';
 import { validateConfig } from './validateConfig';
-import { OneFeConfiguration } from './config.types';
+import {
+  OneFeBaseConfiguration,
+  OneFeConfiguration,
+  OneFeConfigurationObject,
+} from './config.types';
 import { getLogger } from '../getLogger';
 import { loadTsDefault } from '../loadTs';
 import ky from 'ky';
 import { memoize } from 'lodash';
 import { CommonConfig } from '../types/commonConfigType';
 
-export async function getConfig() {
+export async function getConfig(): Promise<OneFeConfigurationObject> {
   const logger = getLogger('[get-config]');
   try {
     const config: OneFeConfiguration = await loadTsDefault(
@@ -17,7 +21,15 @@ export async function getConfig() {
       },
     );
 
-    return validateConfig(config);
+    if (typeof config.baseConfig === 'string') {
+      config.baseConfig = await ky
+        .get(config.baseConfig)
+        .json<OneFeBaseConfiguration>();
+    } else if (typeof config.baseConfig === 'function') {
+      config.baseConfig = await config.baseConfig();
+    }
+
+    return validateConfig(config as OneFeConfigurationObject);
   } catch (error) {
     logger.error('Error loading config file:', error);
     process.exit(1);

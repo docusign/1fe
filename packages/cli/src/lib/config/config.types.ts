@@ -38,18 +38,24 @@ const runtimeConfigRecordSchema = z.record(
   z.record(z.string(), runtimeConfigSchema).optional(),
 );
 
+export const baseConfigObjectSchema = z.object({
+  environments: z.record(
+    z.string(),
+    z.object({
+      commonConfigsUrl: z.string().url(),
+    }),
+  ),
+});
+
 export const onefeConfigurationSchema = z.object({
   /**
    * Part of the configuration that should be externalized and distributed
    */
-  baseConfig: z.object({
-    environments: z.record(
-      z.string(),
-      z.object({
-        commonConfigsUrl: z.string().url(),
-      }),
-    ),
-  }),
+  baseConfig: z.union([
+    baseConfigObjectSchema,
+    z.string().url(),
+    z.function().returns(z.promise(baseConfigObjectSchema)),
+  ]),
 
   /**
    * Runtime configuration for the application, per Environment.
@@ -63,3 +69,10 @@ export const onefeConfigurationSchema = z.object({
 });
 
 export type OneFeConfiguration = z.infer<typeof onefeConfigurationSchema>;
+export type OneFeBaseConfiguration = z.infer<typeof baseConfigObjectSchema>;
+export type OneFeConfigurationObject = Omit<
+  OneFeConfiguration,
+  'baseConfig'
+> & {
+  baseConfig: OneFeBaseConfiguration;
+};
