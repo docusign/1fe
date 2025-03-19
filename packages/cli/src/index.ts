@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { onefeProgram } from './oneFeProgram/oneFeProgram';
-import { buildCommand } from './commands/build/build-command';
+import { buildCommand } from './commands/build/buildCommand';
 import { contractsCommand } from './commands/contracts/contracts-command';
 import { getLogger } from './lib/getLogger';
 import { checkNodeVersion } from './lib/nodeCheck';
@@ -17,7 +17,7 @@ const main = async () => {
 
     await onefeProgram.parseAsync(process.argv);
   } catch (error) {
-    logger.error('An error occurred:', error);
+    logger.error('An error occurred running the 1fe cli.', error);
     process.exit(1);
   }
 };

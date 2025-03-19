@@ -1,5 +1,5 @@
 import { Command, Option } from '@commander-js/extra-typings';
-import { buildAction } from './build-action';
+import { buildAction } from './buildAction';
 
 export const buildCommand = new Command()
   .name('build')

@@ -8,7 +8,7 @@ export const preActionHook = async (
   thisCommand: Command<[], {}, {}>,
   actionCommand: CommandUnknownOpts,
 ) => {
-  const logger = getLogger('[cli][pre-action]');
+  const logger = getLogger('[1fe][pre-action]');
 
   if (!existsSync(getKnownPaths().oneFeConfig)) {
     logger.error(

@@ -1,6 +1,6 @@
 import { webpack } from 'webpack';
 import { getWebpackConfig } from '../../configs/webpack/webpack.config';
-import { BuildCommandOptions } from './build-command.types';
+import { BuildCommandOptions } from './buildCommand.types';
 import { contractsInstallAction } from '../contracts/install/contractsInstallAction';
 import { onefeProgram } from '../../oneFeProgram/oneFeProgram';
 import { getLogger } from '../../lib/getLogger';
