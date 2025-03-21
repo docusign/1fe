@@ -7,4 +7,5 @@ export async function parseEnv(envValue: string) {
       `No base configuration found for environment "${envValue}". Are you sure you have the correct --environment ?`,
     );
   }
+  return envValue;
 }
