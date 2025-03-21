@@ -1,19 +1,19 @@
+import { CSPPerEnvironment } from '@devhub/1fe-shell';
+
 const commonCsp = {
     "scriptSrc": ["*", 'addCspNonceGuidHere'],
     "styleSrc": ["'unsafe-inline'"]
 }
 
-// TODO[1fe]: strongly type
-export const enforcedDefaultCsp: Record<string, any> = {
+export const enforcedDefaultCsp: Record<string, CSPPerEnvironment> = {
     development: commonCsp,
     integration: commonCsp,
     production: commonCsp
 };
 
-// TODO[1fe]: strongly type
-export const reportOnlyDefaultCsp: Record<string, any> = {
+export const reportOnlyDefaultCsp: Record<string, CSPPerEnvironment> = {
     development: {
         ...commonCsp,
-        frameAncestor: ["test-domain.com"]
+        frameAncestors: ["test-domain.com"]
       }
 }

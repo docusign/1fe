@@ -41,7 +41,7 @@ const options = {
   // points to common flat file
   mode: envModeMap[ENVIRONMENT],
   environment: ENVIRONMENT,
-  orgName: 'MagicBox',
+  orgName: '1FE Starter App',
   configManagement: {
     getDynamicConfigs: async () => {
       const response = await fetch(

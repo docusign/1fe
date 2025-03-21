@@ -1,5 +1,4 @@
 import { DYNAMIC_CONFIGS } from '../configs/config-helpers';
-import { readOneFEShellConfigs } from '../configs/shell-configs';
 import { WidgetConfig } from '../types/widget-config';
 
 type TemplatizeCDNUrlArgs = {
@@ -80,7 +79,7 @@ export const getWidgetBundleCdnUrl = ({
   version,
 }: GetWidgetBaseCdnUrlArgs): string => {
   const widgetBundlePath = '/js/1fe-bundle.js';
-  const baseUrl = `${readOneFEShellConfigs().cdn.widgets.basePrefix}/${widgetId}/${version}`;
+  const baseUrl = `${DYNAMIC_CONFIGS.cdn.widgets.basePrefix}/${widgetId}/${version}`;
 
   return `${baseUrl}${widgetBundlePath}`;
 };

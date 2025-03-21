@@ -3,11 +3,9 @@ import hash from 'object-hash';
 
 import { badgeMaker } from '../utils/make-badge';
 import { dataForRenderingTemplate } from './data';
-import { getWidgetConfigValues } from '../utils';
 import { version } from '../../../package.json';
 import { getCachedWidgetConfigs } from '../utils/widget-config';
 import { readOneFEConfigs } from '../utils/one-fe-configs';
-import { WidgetConfigs } from '../types';
 
 /*
 TODO: [1FE consumption] BadgeMaker

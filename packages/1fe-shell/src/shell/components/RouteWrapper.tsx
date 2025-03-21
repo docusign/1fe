@@ -14,6 +14,7 @@ import { SHELL_NAVIGATED_EVENT } from '../constants/event-names';
 import { getShellLogger } from '../utils/telemetry';
 import { readOneFEShellConfigs } from '../configs/shell-configs';
 import { AdditionalErrorInfo, OneDsErrorBoundary } from './OneDsErrorBoundary';
+import { getGenericError } from './GenericError';
 
 export type RouteWrapperProps = {
   children: React.ReactNode;
@@ -56,7 +57,7 @@ export const RouteWrapper: React.FC<RouteWrapperProps> = ({
   };
 
   const IS_PROD = readOneFEShellConfigs().mode === 'production';
-  const getError = readOneFEShellConfigs().components.getError;
+  const getError = readOneFEShellConfigs()?.components?.getError || getGenericError;
 
   // if (FEATURE_FLAGS.enable1feDevtool && isIntegrationEnvironment(ENVIRONMENT)) {
   //   return (

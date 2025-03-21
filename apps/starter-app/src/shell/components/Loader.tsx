@@ -1,3 +1,3 @@
 import React from 'react';
 
-export const Loader = () => <p>Loading...</p>;
+export const Loader = () => <p>Starter App Loading...</p>;
