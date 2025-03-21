@@ -7,7 +7,7 @@ export const checkNodeVersion = async () => {
 
   if (currentMajorNodeVersion !== requiredMajorNodeVersion) {
     throw new Error(
-      `[CLI][NODE-VERSION] Your detected major node version, ${currentMajorNodeVersion} does not match the major node version used by the 1FE ecosystem, ${requiredMajorNodeVersion}`
+      `Your detected major node version, ${currentMajorNodeVersion} does not match the major node version used by the 1FE ecosystem, ${requiredMajorNodeVersion}`,
     );
   }
 };
