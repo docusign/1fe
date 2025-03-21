@@ -1,6 +1,12 @@
 import { memoize } from 'lodash';
 import { join, resolve } from 'path';
 
+/**
+ * This is one place to find all paths used in the cli for any reason.
+ * This is useful to monitor all files that are important for the CLI to function in one single place
+ * and to have the flexibility to change the paths in one place if and when needed.
+ */
+
 export const getKnownPaths = memoize(function getPathsRaw(
   projectDir = process.cwd(),
 ) {
