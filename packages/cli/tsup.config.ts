@@ -1,9 +1,10 @@
 import { copy } from 'esbuild-plugin-copy';
+import { raw } from 'esbuild-raw-plugin';
 import { defineConfig } from 'tsup';
 import { baseConfig } from '../../tsup.config.base';
 
 export default defineConfig({
-    ...baseConfig,
+  ...baseConfig,
   entry: [
     'src/index.ts',
 
@@ -22,6 +23,7 @@ export default defineConfig({
     'src/commands/edge-worker/jest.edge-worker.config.ts',
   ],
   format: ['cjs'],
+  target: 'es2022',
   shims: true,
   esbuildPlugins: [
     copy({
@@ -32,6 +34,9 @@ export default defineConfig({
         from: ['.browserslistrc'],
         to: ['./dist/.browserslistrc'],
       },
+    }),
+    raw({
+      textExtensions: ['.ejs'],
     }),
   ],
 });

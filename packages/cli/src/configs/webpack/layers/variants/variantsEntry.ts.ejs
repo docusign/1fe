@@ -1,0 +1,50 @@
+<%#
+This file is used to create `variantsEntry.ts` file for any widget that happens to contain `src/variants/*/.1fe.variant.config.ts` files.
+This is an example of how the compiled file will look like:
+
+```ts
+export default {
+  __hasVariants: true,
+  __variants: [
+    'variant1',
+    'variant2',
+  ],
+  __getWidget: () => {
+    return import(/* webpackChunkName: "1fe-variants/default" */ "./widget");
+  },
+  __getVariant: (variantId: string) => {
+    switch(variantId) {
+      case 'variant1': return import(/* webpackChunkName: "1fe-variants/variant1" */ './variants/variant1/variant.ts');
+      case 'variant2': return import(/* webpackChunkName: "1fe-variants/variant2" */ './variants/variant2/variant.ts');
+    }
+    throw Error(`[1fe][shell] Requested variant "${variantId}" not found on widget "@scope/myWidgetName"`)
+  },
+}
+```
+%>
+export default {
+  <%# Whether this widget has variants: always `true` for this file. %>
+  __hasVariants: true,
+
+  <%# List of all variant IDs %>
+  __variants: [
+  <% configs.forEach(function (config) { %>
+    '<%= config.variantId %>',
+  <% }) %>
+  ],
+
+  <%# Function that returns the widget %>
+  __getWidget: () => {
+    return import(/* webpackChunkName: "1fe-variants/default" */ "./widget");
+  },
+
+  <%# Function that returns the variant %>
+  __getVariant: (variantId: string) => {
+    switch(variantId) {
+<% configs.forEach(function (config) { %>
+      case '<%= config.variantId %>': return import(/* webpackChunkName: "1fe-variants/<%= config.variantId %>" */ '<%= config.variantIndexFilePathNoExtension %>')
+<% }) %>
+    }
+    throw Error(`[1fe][shell] Requested variant "${variantId}" not found on widget "<%= widgetId %>"`)
+  },
+}

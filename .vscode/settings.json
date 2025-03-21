@@ -1,5 +1,7 @@
 {
   "editor.formatOnSave": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
   "[typescript][javascript][typescriptreact][json][md][mdx][yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode" // Use prettier as default formatter
   }

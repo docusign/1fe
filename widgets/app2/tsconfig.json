@@ -4,11 +4,9 @@
     "jsx": "react-jsx",
     "declarationDir": "dist",
     "skipLibCheck": true,
-    "target": "esnext"
+    "target": "esnext",
+    "emitDeclarationOnly": false
   },
-  "files": [
-    "src/app2.tsx"
-  ],
   "include": ["src/**/*"],
-  "exclude": ["src/**/*.test*"]
+  "exclude": ["src/**/*.test.*"]
 }

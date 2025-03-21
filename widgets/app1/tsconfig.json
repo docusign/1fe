@@ -2,16 +2,16 @@
   "extends": "ts-config-single-spa",
   "compilerOptions": {
     "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
     "declarationDir": "dist",
     "skipLibCheck": true,
     "target": "esnext",
+    "emitDeclarationOnly": false,
     "paths": {
-      "src/*": ["./src/*"]
+      "react": ["../../node_modules/@types/react"],
+      "react-dom": ["../../node_modules/@types/react-dom"]
     }
   },
-  "files": [
-    "src/app1.tsx"
-  ],
   "include": ["src/**/*"],
   "exclude": ["src/**/*.test*"]
 }
