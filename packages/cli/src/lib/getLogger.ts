@@ -8,8 +8,8 @@ import chalk from 'chalk';
  However, calling this inside an action for a command is ok because commander would have parsed the cli params by then
  */
 export function getLogger(prefix: `[${string}]`) {
-  const debug = oneFeProgram.opts().trace;
-  const trace = oneFeProgram.opts().trace;
+  const debug = oneFeProgram.getOptionValue('debug');
+  const trace = oneFeProgram.getOptionValue('trace');
 
   const coloredPrefix = chalk.gray(prefix);
 

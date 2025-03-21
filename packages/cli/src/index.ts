@@ -5,6 +5,7 @@ import { buildCommand } from './commands/build/buildCommand';
 import { contractsCommand } from './commands/contracts/contracts-command';
 import { getLogger } from './lib/getLogger';
 import { checkNodeVersion } from './lib/nodeCheck';
+import { devCommand } from './commands/dev/devCommand';
 
 const main = async () => {
   const logger = getLogger('[1fe]');
@@ -13,6 +14,7 @@ const main = async () => {
     await checkNodeVersion();
 
     oneFeProgram.addCommand(buildCommand);
+    oneFeProgram.addCommand(devCommand);
     oneFeProgram.addCommand(contractsCommand);
 
     await oneFeProgram.parseAsync(process.argv);

@@ -23,17 +23,13 @@ export const oneFeProgram = new Command()
     new Option(
       '--trace',
       'log extra information to the terminal for beter insight into what the CLI is doing.',
-    )
-      .conflicts('debug')
-      .default(false as boolean),
+    ).default(false as boolean),
   )
   .addOption(
     new Option(
       '--debug',
       'Enables --trace by default and logs options and parameters in various processes to the terminal for debugging',
-    )
-      .conflicts('trace')
-      .default(false as boolean),
+    ).default(false as boolean),
   )
   .option(
     '--ci',

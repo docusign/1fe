@@ -26,6 +26,7 @@ async function buildWebpack(buildOptions: BuildCommandOptions) {
         isCI: oneFeProgram.getOptionValue('ci'),
         environment: buildOptions.liveVersionEnv || environment,
         overrides: webpackConfigs?.[environment],
+        enableAnalyzer: buildOptions.analyze,
       }),
     );
 

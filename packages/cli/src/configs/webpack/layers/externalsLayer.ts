@@ -1,6 +1,6 @@
 import { Configuration as WebpackConfig } from 'webpack';
-import { getCommonConfigs } from '../../../../lib/config/getCommonConfigs';
-import { getLogger } from '../../../../lib/getLogger';
+import { getCommonConfigs } from '../../../lib/config/getCommonConfigs';
+import { getLogger } from '../../../lib/getLogger';
 
 export async function getExternalsLayer(
   environment: string,
@@ -15,7 +15,7 @@ export async function getExternalsLayer(
     }))
     .reduce((acc, curr) => ({ ...acc, ...curr }), {});
 
-  logger.info('Using externals:', externals);
+  logger.debug('Using externals:', externals);
 
   return {
     externals,
