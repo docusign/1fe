@@ -2,9 +2,10 @@ import { webpack } from 'webpack';
 import { getWebpackConfig } from '../../configs/webpack/webpack.config';
 import { BuildCommandOptions } from './buildCommand.types';
 import { contractsInstallAction } from '../contracts/install/contractsInstallAction';
-import { onefeProgram } from '../../oneFeProgram/oneFeProgram';
+import { oneFeProgram } from '../../oneFeProgram/oneFeProgram';
 import { getLogger } from '../../lib/getLogger';
 import { contractsGenerateAction } from '../contracts/generate/contractsGenerateAction';
+import { getConfig } from '../../lib/config/getConfig';
 
 export const buildAction = async (buildOptions: BuildCommandOptions) => {
   await buildWebpack(buildOptions);
@@ -15,13 +16,16 @@ async function buildWebpack(buildOptions: BuildCommandOptions) {
   return new Promise<void>(async (resolve, reject) => {
     const logger = getLogger('[build]');
 
+    const environment = oneFeProgram.getOptionValue('environment');
+
+    const { webpackConfigs } = await getConfig();
+
     const compiler = webpack(
       await getWebpackConfig({
         mode: buildOptions.mode,
-        isCI: onefeProgram.getOptionValue('ci'),
-        environment:
-          buildOptions.liveVersionEnv ||
-          onefeProgram.getOptionValue('environment'),
+        isCI: oneFeProgram.getOptionValue('ci'),
+        environment: buildOptions.liveVersionEnv || environment,
+        overrides: webpackConfigs?.[environment],
       }),
     );
 

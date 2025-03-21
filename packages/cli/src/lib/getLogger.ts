@@ -1,4 +1,4 @@
-import { onefeProgram } from '../oneFeProgram/oneFeProgram';
+import { oneFeProgram } from '../oneFeProgram/oneFeProgram';
 import chalk from 'chalk';
 
 /**
@@ -8,7 +8,7 @@ import chalk from 'chalk';
  However, calling this inside an action for a command is ok because commander would have parsed the cli params by then
  */
 export function getLogger(prefix: `[${string}]`) {
-  const trace = onefeProgram.opts().trace;
+  const trace = oneFeProgram.opts().trace;
 
   const coloredPrefix = chalk.gray(prefix);
 

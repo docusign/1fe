@@ -1,5 +1,5 @@
 import { Command, CommandUnknownOpts } from '@commander-js/extra-typings';
-import { onefeProgram } from './oneFeProgram';
+import { oneFeProgram } from './oneFeProgram';
 import { getLogger } from '../lib/getLogger';
 import { existsSync } from 'fs';
 import { getKnownPaths } from '../lib/paths/getKnownPaths';
@@ -17,5 +17,5 @@ export const preActionHook = async (
     process.exit(1);
   }
 
-  logger.log('Starting the CLI with options:', onefeProgram.opts());
+  logger.log('Starting the CLI with options:', oneFeProgram.opts());
 };

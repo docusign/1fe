@@ -22,6 +22,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.23.3",
     "@jest/globals": "^29.7.0",
+    "@repo/typescript-config": "*",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.1.5",
     "@testing-library/react-hooks": "^7.0.2",
@@ -38,8 +39,7 @@
     "jest-environment-jsdom": "^29.2.1",
     "ts-jest": "^29.0.5",
     "typescript": "5.5.4",
-    "vite": "^5.2.0",
-    "@repo/typescript-config": "*"
+    "vite": "^5.2.0"
   },
   "dependencies": {
     "@emotion/styled": "11.10.6",

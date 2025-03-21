@@ -1,6 +1,7 @@
 import { Configuration as WebpackConfig } from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { getKnownPaths } from '../../../lib/paths/getKnownPaths';
+import { getLogger } from '../../../lib/getLogger';
 
 type ConditionalBundleAnalyzerOptions = {
   enabled: boolean;
@@ -9,7 +10,14 @@ type ConditionalBundleAnalyzerOptions = {
 export function getBundleAnalyzerLayer({
   enabled,
 }: ConditionalBundleAnalyzerOptions): WebpackConfig {
-  if (!enabled) return {};
+  const logger = getLogger('[webpack][bundle-analyzer]');
+
+  if (!enabled) {
+    logger.info('Bundle analyzer is disabled');
+    return {};
+  }
+
+  logger.info('Bundle analyzer is enabled');
 
   return {
     plugins: [

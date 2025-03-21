@@ -3,7 +3,6 @@ import { validateConfig } from './validateConfig';
 import { getLogger } from '../getLogger';
 import { loadTsDefault } from '../loadTs';
 import ky from 'ky';
-import { memoize } from 'lodash';
 import { OneFeConfiguration } from '../..';
 import {
   OneFeConfigurationObject,
@@ -34,14 +33,3 @@ export async function getConfig(): Promise<OneFeConfigurationObject> {
     process.exit(1);
   }
 }
-
-export const getCommonConfigs = memoize(async (environment: string) => {
-  const { baseConfig } = await getConfig();
-  if (!baseConfig.environments[environment]) {
-    throw new Error(
-      `No base configuration found for environment "${environment}"`,
-    );
-  }
-
-  return baseConfig.environments[environment].commonConfig;
-});

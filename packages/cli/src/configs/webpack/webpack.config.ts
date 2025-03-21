@@ -9,12 +9,14 @@ import { WEBPACK_BUNDLES } from './webpack.constants';
 import { getVariantsEntryLayer } from './layers/variants/variantsLayer';
 import { getScenesLayer } from './layers/scenes/scenesLayer';
 import { getExternalsLayer } from './layers/externals/externalsLayer';
+import { getTargetLayer } from './layers/target/targetLayer';
 
 type GetWebpackConfigOptions = {
   mode: WebpackConfig['mode'];
   transpileOnly?: boolean;
   isCI?: boolean;
   environment: string;
+  overrides?: WebpackConfig;
 };
 
 const merge = mergeWithRules({
@@ -28,6 +30,7 @@ export async function getWebpackConfig({
   transpileOnly,
   isCI = false,
   environment,
+  overrides = {},
 }: GetWebpackConfigOptions): Promise<WebpackConfig> {
   // All extensions that are supported by module loader plugins below are listed here.
   const extensions = [
@@ -51,7 +54,6 @@ export async function getWebpackConfig({
   const isDevelopment = mode === 'development';
 
   return merge(
-    // TODO - apply webpackConfigs overrides from config file
     {
       entry: {
         [WEBPACK_BUNDLES.MAIN]: getKnownPaths().webpack.widgetEntry,
@@ -60,8 +62,8 @@ export async function getWebpackConfig({
     await getVariantsEntryLayer(),
     getScenesLayer(),
     await getExternalsLayer(environment),
+    await getTargetLayer(environment),
     {
-      target: 'browserslist',
       mode: mode as WebpackConfig['mode'],
       devtool: isProduction ? false : 'source-map',
       resolve: {
@@ -162,5 +164,6 @@ export async function getWebpackConfig({
     getBundleAnalyzerLayer({
       enabled: isCI,
     }),
+    overrides,
   );
 }

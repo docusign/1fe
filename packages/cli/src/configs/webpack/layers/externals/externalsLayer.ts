@@ -1,9 +1,11 @@
 import { Configuration as WebpackConfig } from 'webpack';
-import { getCommonConfigs } from '../../../../lib/config/getConfig';
+import { getCommonConfigs } from '../../../../lib/config/getCommonConfigs';
+import { getLogger } from '../../../../lib/getLogger';
 
 export async function getExternalsLayer(
   environment: string,
 ): Promise<WebpackConfig> {
+  const logger = getLogger('[webpack][externals]');
   const commonConfig = await getCommonConfigs(environment);
 
   const externals = commonConfig.cdn.libraries.managed
@@ -12,6 +14,8 @@ export async function getExternalsLayer(
       [lib.id]: lib.name,
     }))
     .reduce((acc, curr) => ({ ...acc, ...curr }), {});
+
+  logger.info('Using externals:', externals);
 
   return {
     externals,

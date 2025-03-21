@@ -2,7 +2,7 @@ import { Command, Option } from '@commander-js/extra-typings';
 import packageJson from '../../package.json';
 import { preActionHook } from './preAction';
 
-export const onefeProgram = new Command()
+export const oneFeProgram = new Command()
   .name(packageJson.name)
   .description(packageJson.description)
   .version(packageJson.version)
