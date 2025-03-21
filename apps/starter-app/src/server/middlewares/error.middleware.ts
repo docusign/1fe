@@ -4,7 +4,6 @@ import { HttpException } from '../exceptions/HttpException';
 import { APIException } from '../exceptions/APIException';
 import { APIErrorResponse } from '../types/APIErrorResponse';
 
-// TODO[1fe]: should we expose this?
 type RequestWithCspNonceGuid = Request & { cspNonceGuid?: string };
 
 const errorMiddleware = (

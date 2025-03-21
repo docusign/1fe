@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
-// import Lottie from 'lottie-react';
 import styled from '@emotion/styled';
 import { shellLogger } from '../logger';
-
-// import BrokenPage from './resources/brokenPage.json';
-// import { PluginConfig } from '../types/widget-config';
+import { OneFEErrorComponentProps } from '@devhub/1fe-shell';
 
 const PageContainer = styled.div({
   fontFamily: 'DSIndigo',
@@ -39,7 +36,7 @@ const SubText = styled.p({
   marginTop: '8px',
 });
 
-type ErrorPageType = 'error' | 'notFound' | 'authCallbackError';
+type ErrorPageType = 'error' | 'notFound';
 
 type ErrorPageData = {
   [key in ErrorPageType]: {
@@ -51,8 +48,7 @@ type ErrorPageData = {
 
 type ErrorProps = {
   type?: ErrorPageType;
-  // TODO[1fe]: NO ANY
-  plugin?: any;
+  plugin?: OneFEErrorComponentProps["plugin"];
   message?: string | undefined;
 };
 
@@ -81,9 +77,7 @@ const SideLine = () => {
   );
 };
 
-export const Error = ({ type = 'error', plugin, message }: ErrorProps) => {
-  //   const logger = getShellLogger(plugin?.widgetId);
-
+export const Error = ({ type = 'error', plugin, message }: ErrorProps = {}) => {
   useEffect(() => {
     shellLogger.log({
       message: '[1FE-Shell] error page rendered',
@@ -109,12 +103,7 @@ export const Error = ({ type = 'error', plugin, message }: ErrorProps) => {
       titleText: 'Looks like this page is not here',
       subText: 'Check your URL, or go back',
       buttonText: 'Go Back',
-    },
-    authCallbackError: {
-      titleText: 'Something went wrong',
-      subText: 'Make sure your connection is stable and try again',
-      buttonText: 'Try Again',
-    },
+    }
   };
 
   const mainText = message ?? ErrorPageData[type].titleText;

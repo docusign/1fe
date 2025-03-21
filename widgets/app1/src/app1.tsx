@@ -13,7 +13,7 @@ const RootWrapper: any = (props) => {
   useEffect(() => {
     props.platform.utils.appLoadTime.end();
   }, []);
-
+  
   return <Widget {...props} />;
 };
 

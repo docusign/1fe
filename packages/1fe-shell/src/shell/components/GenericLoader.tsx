@@ -1,0 +1,1 @@
+export const getGenericLoader = () => <p>Loading...</p>

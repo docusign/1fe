@@ -2,7 +2,7 @@ export const serverOptions = {
   // points to common flat file
   mode: 'production',
   environment: 'production',
-  orgName: 'MagicBox',
+  orgName: 'OneFE Starter App',
   configManagement: {
     url: `https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/common-configs/production.json`,
     refreshMs: 30 * 1000,

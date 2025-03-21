@@ -1,5 +1,4 @@
-// @ts-ignore
-import renderOneFEShell from '@devhub/1fe-shell';
+import renderOneFEShell, { OneFEMode, OneFEErrorComponentProps } from '@devhub/1fe-shell';
 import React from 'react';
 
 import { Loader } from './components/Loader';
@@ -9,7 +8,7 @@ import { shellLogger } from './logger';
 const setup = () => {
   const ENVIRONMENT: string = process.env.NODE_ENV || 'integration';
 
-  const envModeMap: Record<string, string> = {
+  const envModeMap: Record<string, OneFEMode> = {
     development: 'development',
     integration: 'preproduction',
     production: 'production',
@@ -19,7 +18,16 @@ const setup = () => {
   renderOneFEShell({
     mode: envModeMap[ENVIRONMENT],
     environment: ENVIRONMENT,
-    utils: {},
+    utils: {
+      logger: (widgetId: string) => ({
+        log: (message: string) => {
+          console.log(widgetId, message);
+        },
+        error: (message: string) => {
+          console.error(widgetId, message);
+        }
+      })
+    },
     auth: {
       isAuthedCallback: (widgetId: string): boolean => {
         console.log(widgetId, ' is authenticated.');
@@ -36,8 +44,7 @@ const setup = () => {
     },
     components: {
       getLoader: () => <Loader />,
-      // TODO[1fe]: No any
-      getError: (props: any) => <Error {...props} />,
+      getError: (props?: OneFEErrorComponentProps) => <Error {...props} />,
     },
     routes: {
       defaultRoute: '/app1',

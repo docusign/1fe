@@ -2,7 +2,7 @@ import { readOneFEShellConfigs } from '../configs/shell-configs';
 
 export const getShellLogger = () => {
   return (
-    readOneFEShellConfigs().shellLogger || {
+    readOneFEShellConfigs()?.shellLogger || {
       log: (logObject: any) => {
         console.log(logObject);
       },

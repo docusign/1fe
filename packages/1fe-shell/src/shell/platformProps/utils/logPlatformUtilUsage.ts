@@ -51,7 +51,7 @@ export const logPlatformUtilUsage = ({
   //   });
   // }
   const shouldLogPlatformUtilUsage =
-    readOneFEShellConfigs().shellLogger.logPlatformUtilUsage;
+    readOneFEShellConfigs()?.shellLogger?.logPlatformUtilUsage || false;
   if (shouldLogPlatformUtilUsage) {
     getShellLogger().log({
       message: `utils.${utilNamespace}.${functionName} called`,

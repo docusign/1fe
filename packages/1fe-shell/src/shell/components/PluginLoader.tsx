@@ -6,6 +6,7 @@ import { getShellPlatformUtils } from '../utils/shell-platform-utils';
 import RequireAuth from './RequireAuth';
 import { getShellWidgetId } from '../constants/shell';
 import { readOneFEShellConfigs } from '../configs/shell-configs';
+import { getGenericError } from './GenericError';
 
 interface PluginLoaderInterface {
   plugin: PluginConfig;
@@ -28,7 +29,7 @@ const PluginLoader = ({
 
   const parsedWidget = WIDGET_CONFIGS.get(plugin.widgetId);
   if (!parsedWidget?.widgetId) {
-    const getError = readOneFEShellConfigs().components.getError;
+    const getError = readOneFEShellConfigs()?.components?.getError || getGenericError;
     return getError({
       plugin,
       message: 'No such experience found',

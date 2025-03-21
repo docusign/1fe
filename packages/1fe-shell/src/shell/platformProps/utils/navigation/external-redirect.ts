@@ -6,7 +6,7 @@ export const externalRedirect =
   (widgetId?: string | null | undefined) =>
   (url: string): void => {
     const shouldRedactSensitiveData =
-      readOneFEShellConfigs().shellLogger.redactSensitiveData;
+      readOneFEShellConfigs()?.shellLogger?.redactSensitiveData || false;
 
     logPlatformUtilUsage({
       utilNamespace: 'navigation',

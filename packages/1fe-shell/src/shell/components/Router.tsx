@@ -13,6 +13,7 @@ import {
 import { RouteWrapper } from './RouteWrapper';
 import { basePathname } from '../utils/url';
 import PluginLoader from './PluginLoader';
+import { getGenericError } from './GenericError';
 
 // equivelent of react-router's <Redirect /> component
 const RedirectComponent = ({ to }: { to: string }) => {
@@ -51,7 +52,7 @@ const determineBaseRoute = (): RouteObject[] => {
 };
 
 const getPluginRoutes = () => {
-  const getError = readOneFEShellConfigs().components.getError;
+  const getError = readOneFEShellConfigs()?.components?.getError || getGenericError;
 
   return getWidgetConfigValues(PLUGIN_CONFIGS).map((plugin): RouteObject => {
     return {
@@ -73,7 +74,7 @@ export const getRouter = () => {
     return router;
   }
 
-  const getError = readOneFEShellConfigs().components.getError;
+  const getError = readOneFEShellConfigs()?.components?.getError || getGenericError;
 
   const routerConfig: RouteObject[] = [
     ...determineBaseRoute(),

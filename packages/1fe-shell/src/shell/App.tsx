@@ -6,10 +6,11 @@ import {
 } from './components/OneDsErrorBoundary';
 import { readOneFEShellConfigs } from './configs/shell-configs';
 import { getShellLogger } from './utils/telemetry';
+import { getGenericError } from './components/GenericError';
 
 function App(): JSX.Element {
   const logger = getShellLogger();
-  const getError = readOneFEShellConfigs().components.getError;
+  const getError = readOneFEShellConfigs()?.components?.getError || getGenericError;
 
   const handleError = (error: Error, info: AdditionalErrorInfo): void => {
     const pathname = window?.location?.pathname;

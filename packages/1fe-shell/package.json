@@ -9,7 +9,7 @@
   ],
   "main": "dist/index.mjs",
   "module": "dist/index.mjs",
-  "types": "dist/main.d.mts",
+  "types": "dist/index.d.mts",
   "scripts": {
     "build": "npx tsup",
     "clean": "rm -rf dist",

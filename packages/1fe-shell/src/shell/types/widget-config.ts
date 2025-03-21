@@ -23,14 +23,6 @@ export type CSPDirectives = {
 export type AuthenticationType = 'required' | 'lazy';
 export type WidgetType = 'pinned' | 'system';
 
-export type DynamicCsp = {
-  enableDynamicCspHeader: boolean;
-};
-
-type AuthZConfig = {
-  csp?: DynamicCsp;
-};
-
 // 1fe-config Baseline auth config
 type AuthConfig = {
   clientAppId: string;
@@ -116,7 +108,6 @@ export type PluginConfig = {
   route: string;
   widgetId: string;
   auth?: AuthConfig;
-  authZ?: AuthZConfig;
   baselineUrl?: string;
 };
 
@@ -147,18 +138,3 @@ export type SystemWidgetConfig = {
 export type WidgetConfigs<
   T extends PluginConfig | WidgetConfig = WidgetConfig,
 > = ReadonlyMap<string, T>;
-
-// export type EnvConfig = {
-//   IS_DEVELOPMENT: boolean;
-//   IS_PROD: boolean;
-//   ENVIRONMENT: HostedEnvironment;
-//   VERSION: string;
-//   SERVER_BUILD_NUMBER: string;
-//   IS_CDN_ENVIRONMENT: boolean;
-//   TELEMETRY_INSTRUMENTATION_KEY: Guid;
-//   APP_NAME: string;
-//   FEATURE_FLAGS: ClientFeatureFlags;
-//   IP_ADDRESS: string;
-//   HTTP_404_NOT_FOUND_URL: string;
-//   IS_AUTOMATION_RUN?: boolean;
-// };
