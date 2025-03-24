@@ -7,7 +7,7 @@ import { RoutesInterface } from '../types';
 class IndexRoute implements RoutesInterface {
   public path = ROUTES.INDEX;
 
-  public router = Router();
+  public router: ReturnType<typeof Router> = Router();
 
   constructor() {
     this.initializeRoutes();

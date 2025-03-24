@@ -59,7 +59,7 @@ export const parseRuntimeConfig = ({
 
               // If 1fe-app is running locally, the environment is development.
               // There is no cdn for development, so we use integration instead.
-              ENVIRONMENT: readOneFEConfigs().environment,
+              ENVIRONMENT: readOneFEConfigs()?.environment,
             }),
           };
         }

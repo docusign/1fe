@@ -25,7 +25,7 @@ const redirectIfForbiddenQueryParams = (req: Request, res: Response) => {
   const widgetOverrideSanitizeRequired =
     hasWidgetOverride &&
     !validUAForOverride &&
-    readOneFEConfigs().mode === 'production';
+    readOneFEConfigs()?.mode === 'production';
 
   const needsRedirect =
     forbiddenQueryParams.find((param) => param in req.query) ||
@@ -59,7 +59,7 @@ const validateRuntimeConfigOverrides = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
-  if (readOneFEConfigs().mode === 'production') {
+  if (readOneFEConfigs()?.mode === 'production') {
     delete req.query.runtime_config_overrides;
     return;
   }

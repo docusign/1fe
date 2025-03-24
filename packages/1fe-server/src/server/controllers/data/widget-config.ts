@@ -89,7 +89,7 @@ export const getWidgetConfigsForIndexHtml = async (
 
     // We do not support the runtime_config_overrides query param higher envs for security reasons
     const runtimeConfigOverridesToApply =
-      readOneFEConfigs().mode !== 'production'
+      readOneFEConfigs()?.mode !== 'production'
         ? {
             ...widgetUrlOverrideRuntimeConfigOverrides,
             // parsedRuntimeConfigOverrides intentionally comes second.

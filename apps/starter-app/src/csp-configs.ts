@@ -1,4 +1,4 @@
-import { CSPPerEnvironment } from '@devhub/1fe-shell';
+import { CSPPerEnvironment } from '@devhub/1fe-server';
 
 const commonCsp = {
     "scriptSrc": ["*", 'addCspNonceGuidHere'],

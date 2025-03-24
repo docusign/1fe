@@ -25,22 +25,7 @@ export type WidgetType = 'pinned' | 'system';
 
 // 1fe-config Baseline auth config
 type AuthConfig = {
-  clientAppId: string;
-  scopes?: string[];
-  /** required means the whole plugin is auth-restricted and handled by 1fe, whereas lazy means the user is responsible for gating parts of their plugin using 1FE utils . */
-  authenticationType: AuthenticationType;
-  secretKeyName?: string;
-  callbackUri?: string;
-  callbackUriIncludeAppToken?: boolean;
-  callbackUriHeaders?: Record<string, string>;
-  state?: Record<string, any>;
-  cookieDomain?: string;
-  logoutUri?: string;
-  generateAuthTxnId?: boolean;
-  useNativeAuth?: boolean;
-  ramp1FEAuthPercent?: number;
-  authCookiesToClear?: string[];
-  skiplogoutUriForBaselineRedirect?: boolean;
+  authenticationType?: AuthenticationType;
 };
 
 export type UserExperienceConfig = {
@@ -50,7 +35,6 @@ export type UserExperienceConfig = {
 type MetaTags = Record<string, string>[];
 
 type RuntimePluginConfig = {
-  auth?: AuthConfig;
   metaTags?: MetaTags;
   baselineUrl?: string;
 };

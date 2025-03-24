@@ -1,8 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import path from 'path';
-// @ts-ignore
-import oneFEServer from '@devhub/1fe-server';
+import oneFEServer, { OneFEServerOptions } from '@devhub/1fe-server';
 import favicon from 'serve-favicon';
 
 import router from './lib/router';
@@ -14,7 +13,7 @@ const { PORT = 3001 } = process.env;
 
 const ENVIRONMENT: string = process.env.NODE_ENV || 'development';
 
-const envModeMap: Record<string, string> = {
+const envModeMap: Record<string, OneFEServerOptions["mode"]> = {
   development: 'development',
   integration: 'preproduction',
   production: 'production',
@@ -69,7 +68,6 @@ const options = {
       enforced: enforcedDefaultCsp[ENVIRONMENT],
       reportOnly: reportOnlyDefaultCsp[ENVIRONMENT],
     },
-    useNonce: true,
   },
 };
 
@@ -78,6 +76,7 @@ const app = oneFEServer(options);
 // Middleware that parses json and looks at requests where the Content-Type header matches the type option.
 app.use(express.json());
 
+// @ts-ignore
 app.use(favicon(path.join(__dirname, 'static/favicon.ico')));
 
 // Serve API requests from the router

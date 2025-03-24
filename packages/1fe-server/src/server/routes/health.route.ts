@@ -7,7 +7,7 @@ import { RoutesInterface } from '../types';
 class HealthRoute implements RoutesInterface {
   public path = ROUTES.HEALTH;
 
-  public router = Router();
+  public router: ReturnType<typeof Router> = Router();
 
   constructor() {
     this.initializeRoutes();
