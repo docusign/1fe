@@ -30,15 +30,16 @@ export const applyRuntimeConfigOverridesForWidgetUrlOverrides = () => {
     window.importMapOverrides?.getOverrideMap()?.imports || {};
 
   Object.entries(importMapOverrides)
-    .filter(
-      ([widgetId, url]) =>
-        isAllowedSource(
-          url,
-          DYNAMIC_CONFIGS.importMapOverrides.allowedSources,
-        ) &&
+    .filter(([widgetId, url]) => {
+      const isSourceAllowed = DYNAMIC_CONFIGS?.importMapOverrides?.allowedSources ? isAllowedSource(
+        url,
+        DYNAMIC_CONFIGS.importMapOverrides.allowedSources,
+      ) : true;
+
+      return isSourceAllowed &&
         !runtimeConfigOverrides[widgetId] && // runtime_config_overrides param should take precedence over widget_url_overrides/importMap
-        WIDGET_CONFIGS.get(widgetId), // exclude non-widget overrides, e.g. @ds/ui
-    )
+        WIDGET_CONFIGS.get(widgetId) // exclude non-widget overrides, e.g. @ds/ui
+    })
     .forEach(([widgetId]) => {
       // The widget was in the widget_url_overrides param, therefore
       // the server applied the runtime config override before returning the index.html

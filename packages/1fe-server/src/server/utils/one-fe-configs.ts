@@ -1,9 +1,11 @@
-let oneFEConfigs: any = {};
+import { OneFEProcessedConfigs } from "../types/one-fe-server";
 
-export const readOneFEConfigs = () => {
+let oneFEConfigs: OneFEProcessedConfigs | null = null;
+
+export const readOneFEConfigs = (): OneFEProcessedConfigs | null => {
   return oneFEConfigs;
 };
 
-export const setOneFEConfigs = (newConfigs: any) => {
+export const setOneFEConfigs = (newConfigs: OneFEProcessedConfigs) => {
   oneFEConfigs = newConfigs;
 };

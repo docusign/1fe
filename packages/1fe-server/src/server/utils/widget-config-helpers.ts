@@ -3,6 +3,7 @@ import { omit } from 'lodash';
 import { PluginConfig, WidgetConfig, WidgetConfigs } from '../types';
 import { PINNED_WIDGET_TYPE } from '../constants';
 import { getCachedWidgetConfigs } from './widget-config';
+import { OneFEDynamicConfigs } from '../types/one-fe-server';
 
 type GetRequestedWidgetConfigArg = {
   hostWidgetId: string;
@@ -91,10 +92,9 @@ export const convertServerWidgetConfigToShellWidgetConfig = (
  * @param widgetConfigs
  * @returns widget config map
  */
-// TODO[1fe]: Strongly type input output
 export const convertServerDynamicConfigToShellDynamicConfig = (
-  dynamicConfigs: any,
-): any => {
+  dynamicConfigs: OneFEDynamicConfigs,
+): Partial<OneFEDynamicConfigs> => {
   return omit(dynamicConfigs, [
     'cdn.libraries.managed',
     'cdn.widgets.releaseConfig',

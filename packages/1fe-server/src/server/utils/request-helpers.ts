@@ -11,7 +11,7 @@ import { readOneFEConfigs } from './one-fe-configs';
 export const LOCAL_HOST_URL = 'http://localhost:3001';
 
 export const getRequestHost = (req: Request) => {
-  if (readOneFEConfigs().mode === 'development') {
+  if (readOneFEConfigs()?.mode === 'development') {
     return LOCAL_HOST_URL;
   } else {
     return `https://${req.hostname}`;

@@ -28,7 +28,7 @@ export const templatizeCDNUrl = ({
   templateFilePath = 'js/1fe-bundle.js',
 }: TemplatizeCDNUrlArgs): URL => {
   return new URL(
-    `${readOneFEConfigs().dynamicConfigs.cdn.widgets.basePrefix}${widgetId}/${widgetVersion}/${templateFilePath}`,
+    `${readOneFEConfigs()?.dynamicConfigs.cdn.widgets.basePrefix}${widgetId}/${widgetVersion}/${templateFilePath}`,
   );
 };
 
@@ -51,10 +51,10 @@ class VersionController {
         dataForRenderingTemplatePayload;
 
       res.send({
-        environment: readOneFEConfigs().environment,
+        environment: readOneFEConfigs()?.environment,
         version: SERVER_VERSION,
         nodeVersion: process.version,
-        ...(!(readOneFEConfigs().mode === 'production')
+        ...(!(readOneFEConfigs()?.mode === 'production')
           ? {
               buildNumber: SERVER_BUILD_NUMBER,
               branch: SERVER_GIT_BRANCH,

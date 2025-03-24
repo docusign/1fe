@@ -7,7 +7,7 @@ import { RoutesInterface } from '../types';
 class VersionRoute implements RoutesInterface {
   public path = ROUTES.VERSION;
 
-  public router = Router();
+  public router: ReturnType<typeof Router> = Router();
 
   public widgetVersion = `${this.path}/:org/:widgetId/:version`;
 

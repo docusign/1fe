@@ -24,12 +24,7 @@ import {
   setCachedWidgetConfigs,
 } from './widget-config';
 import { setOneFEConfigs } from './one-fe-configs';
-
-/*
-TODO[1fe]:
-- strongly type dynamicConfig
-- strongly type configs
-*/
+import { OneFEDynamicConfigs, OneFEProcessedConfigs, OneFEServerOptions } from '../types/one-fe-server';
 
 interface WidgetBundleRequestResponse {
   widgetId: string;
@@ -53,12 +48,12 @@ const performWidgetBundleRequest = async (
   }
 };
 
-const fetchConfig = async (options: any) => {
+const fetchConfig = async (options: OneFEServerOptions): Promise<OneFEProcessedConfigs | null>=> {
   try {
-    const getDynamicConfigs = async () => {
+    const getDynamicConfigs = async (): Promise<OneFEDynamicConfigs> => {
       if (options.configManagement.getDynamicConfigs) {
         return await options.configManagement.getDynamicConfigs();
-      } else {
+      } else if (options.configManagement.url) {
         const url = options.configManagement.url;
         const response = await ky.get(url, {
           retry: 5,
@@ -70,6 +65,8 @@ const fetchConfig = async (options: any) => {
         }
 
         return response.json();
+      } else {
+        throw new Error('No configManagement method provided');
       }
     };
 
@@ -142,7 +139,7 @@ const verifyWidgetCDNUrls = async (widgetConfigsToVerify: WidgetConfigs) => {
     });
 };
 
-export const processDynamicLibraryConfig = (config: any): void => {
+export const processDynamicLibraryConfig = (config: OneFEDynamicConfigs): void => {
   try {
     const libraryConfigsPayload: (ExternalLibConfig | InstalledLibConfig)[] =
       config?.cdn?.libraries?.managed || [];
@@ -170,7 +167,7 @@ export const processDynamicLibraryConfig = (config: any): void => {
   }
 };
 
-const processDynamicWidgetConfig = async (config: any): Promise<void> => {
+const processDynamicWidgetConfig = async (config: OneFEDynamicConfigs): Promise<void> => {
   try {
     const widgetConfigsPayload = config?.cdn?.widgets?.releaseConfig || [];
     const cachedWidgetConfigsEmptyMessage =
@@ -220,7 +217,7 @@ const processDynamicWidgetConfig = async (config: any): Promise<void> => {
   }
 };
 
-export const pollDynamicConfig = async (options: any) => {
+export const pollDynamicConfig = async (options: OneFEServerOptions) => {
   const intervalMs = options.configManagement.refreshMs;
 
   // Convert seconds to milliseconds for setInterval
