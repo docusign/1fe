@@ -8,11 +8,7 @@ import VersionRoute from './routes/version.route';
 import IndexRoute from './routes/index.route';
 import { RoutesInterface } from './types';
 import { pollDynamicConfig } from './utils/config-poller';
-
-/*
-    TODO[1fe]:
-    - Strongly type options
-*/
+import { OneFEServerOptions } from './types/one-fe-server';
 
 const initializeRoutes = (app: express.Application) => {
   const routes: RoutesInterface[] = [new HealthRoute(), new VersionRoute()];
@@ -32,7 +28,7 @@ const initializeRoutes = (app: express.Application) => {
   app.use('/', new IndexRoute().router);
 };
 
-export const oneFEServer = (options: any) => {
+export const oneFEServer = (options: OneFEServerOptions): ReturnType<typeof express> => {
   const app = express();
   app.use(cookieParser());
   app.use(combinedMiddleware);

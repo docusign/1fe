@@ -79,20 +79,21 @@ export const dataForRenderingTemplate = async (req: Request) => {
   // const activeAutomatedTestFramework =
   //   req.query.automated_test_framework || null;
 
-  const shellBundleUrl = readOneFEConfigs().shellBundleUrl;
+  const shellBundleUrl = readOneFEConfigs()?.shellBundleUrl;
 
   return {
-    isProduction: readOneFEConfigs().mode === 'production',
+    isProduction: readOneFEConfigs()?.mode === 'production',
     hideImportMapOverrideElement:
-      readOneFEConfigs().dynamicConfigs?.importMapOverrides?.enableUI === false,
+      readOneFEConfigs()?.dynamicConfigs?.importMapOverrides?.enableUI ===
+      false,
     widgetConfigs: slimWidgetConfigsForShell,
     pluginConfigs: getPluginConfigs(),
     dynamicConfigs: convertServerDynamicConfigToShellDynamicConfig(
-      readOneFEConfigs().dynamicConfigs,
+      readOneFEConfigs()?.dynamicConfigs,
     ),
     envConfigs: {
-      environment: readOneFEConfigs().environment,
-      mode: readOneFEConfigs().mode,
+      environment: readOneFEConfigs()?.environment,
+      mode: readOneFEConfigs()?.mode,
     },
     criticalLibraryConfigUrls: criticalLibs,
     lazyLoadedLibsConfig: lazyLoadedLibs,
@@ -103,7 +104,7 @@ export const dataForRenderingTemplate = async (req: Request) => {
       widgetConfigs,
       activePluginConfig as PluginConfig,
     ),
-    pageTitle: readOneFEConfigs().orgName,
+    pageTitle: readOneFEConfigs()?.orgName,
     baseHref: `${getRequestHost(req)}/`,
     cspNonceGuid: req.cspNonceGuid,
     systemJsImportMapConfig: {

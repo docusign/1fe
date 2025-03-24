@@ -19,7 +19,7 @@ export type PluginConfig = {
   baselineUrl?: string;
 };
 
-type CSPPerEnvironment = {
+export type CSPPerEnvironment = {
   scriptSrc?: string[];
   connectSrc?: string[];
   imgSrc?: string[];
@@ -33,7 +33,7 @@ type CSPPerEnvironment = {
   fontSrc?: string[];
 };
 
-type HeadersConfig = {
+export type HeadersConfig = {
   csp?: {
     enforced?: CSPPerEnvironment;
     reportOnly?: CSPPerEnvironment;

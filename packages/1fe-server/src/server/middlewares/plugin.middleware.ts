@@ -30,7 +30,7 @@ const pluginMiddleware = async (
     // For OSS, combined KNOWN_PATHS and IGNORED_PATHS
     // TODO: [1FE Consumption]. Going to comment this out for now. Could cause unwanted side effects
     // const topTwoLevelsPath = `/${path.split('/').slice(1, 3).join('/')}`;
-    const knownPaths = new Set(readOneFEConfigs().server.knownRoutes);
+    const knownPaths = new Set(readOneFEConfigs()?.server.knownRoutes);
     const shouldIgnorePath =
       knownPaths.has(topLevelPath) || knownPaths.has(topTwoLevelsPath);
 

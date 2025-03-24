@@ -30,7 +30,8 @@ const getCDNLibraryUrl = (
   version: string,
   path: string,
 ): string => {
-  const libBaseUrl = readOneFEConfigs().dynamicConfigs.cdn.libraries.basePrefix;
+  const libBaseUrl =
+    readOneFEConfigs()?.dynamicConfigs.cdn.libraries.basePrefix;
   return `${libBaseUrl}${id}/${version}/${path}`;
 };
 
@@ -69,21 +70,21 @@ export const getCriticalLibs = () => ({
   System: getCDNLibraryUrl(
     SYSTEM_LOADER.id,
     SYSTEM_LOADER.version,
-    readOneFEConfigs().mode === 'production'
+    readOneFEConfigs()?.mode === 'production'
       ? 'dist/system.min.js'
       : 'dist/system.js',
   ),
   SystemAMD: getCDNLibraryUrl(
     SYSTEM_LOADER.id,
     SYSTEM_LOADER.version,
-    readOneFEConfigs().mode === 'production'
+    readOneFEConfigs()?.mode === 'production'
       ? 'dist/extras/amd.min.js'
       : 'dist/extras/amd.js',
   ),
   ImportMapOverride: getCDNLibraryUrl(
     IMPORT_MAP_OVERRIDE_LIB_NEXT.id,
     IMPORT_MAP_OVERRIDE_LIB_NEXT.version,
-    readOneFEConfigs().mode === 'production'
+    readOneFEConfigs()?.mode === 'production'
       ? 'dist/import-map-overrides-api.js'
       : 'dist/import-map-overrides.js',
   ),
