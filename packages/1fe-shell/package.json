@@ -20,6 +20,7 @@
     "publish:packages": "npm publish --access public"
   },
   "devDependencies": {
+    "@devhub/eslint-config": "*",
     "@babel/preset-env": "^7.23.3",
     "@jest/globals": "^29.7.0",
     "@repo/typescript-config": "*",
