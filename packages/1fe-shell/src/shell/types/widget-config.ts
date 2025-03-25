@@ -103,7 +103,6 @@ export type WidgetConfig = {
   version: string;
   runtime: RuntimeConfig;
   type?: WidgetType;
-  _url?: string;
   plugin?: PluginConfigRaw;
 };
 

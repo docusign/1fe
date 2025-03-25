@@ -14,6 +14,7 @@ import {
 import { WIDGET_CONFIGS } from '../../../../../configs/config-helpers';
 import { injectPreloadTags } from '../../../../../utils/dom-helpers';
 import { getWidgetBundleCdnUrl } from '../../../../../utils/url';
+import { WidgetConfigs } from '../../../../../../../../1fe-server/src/server/types';
 
 /**
  * Queue preloads for the API fetch GET calls and dependent child widgets if found in the requested widget's runtime config.
@@ -57,7 +58,7 @@ export const queueWidgetPreloadsIfFound = (
         getRequestedWidgetConfigWithoutRuntimeConfig({
           hostWidgetId: requestedWidgetConfig.widgetId,
           requestedWidgetId: preloadedWidgetConfig.widgetId,
-          widgetConfigs: WIDGET_CONFIGS,
+          widgetConfigs: WIDGET_CONFIGS as WidgetConfigs,
         });
 
       const requestedWidgetConfigBundleCdnUrl = getWidgetBundleCdnUrl({
@@ -97,7 +98,7 @@ export const getRequestedWidgetVersionForConsole = (
   const { type } = getRequestedWidgetConfigWithoutRuntimeConfig({
     hostWidgetId,
     requestedWidgetId: widgetRequest.widgetId,
-    widgetConfigs: WIDGET_CONFIGS,
+    widgetConfigs: WIDGET_CONFIGS as WidgetConfigs,
   });
 
   const version = isWidgetTypePinned(type)

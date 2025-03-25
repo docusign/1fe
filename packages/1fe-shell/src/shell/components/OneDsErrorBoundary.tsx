@@ -1,18 +1,14 @@
 import { ErrorBoundary } from 'react-error-boundary';
-import { ReactElement, useEffect } from 'react';
+import { ReactElement, useEffect, ErrorInfo } from 'react';
 
 import { getShellLogger } from '../utils/telemetry';
 import { WidgetConfig } from '../types/widget-config';
-
-export type AdditionalErrorInfo = {
-  componentStack: string;
-};
 
 type OneDsErrorBoundaryProps = {
   widget?: WidgetConfig;
   fallbackComponent?: ReactElement;
   children: React.ReactNode;
-  onError?: (e: Error, i: AdditionalErrorInfo) => void;
+  onError?: (e: Error, i: ErrorInfo) => void;
   onRender?: () => void;
 };
 
@@ -38,7 +34,7 @@ export const OneDsErrorBoundary = ({
     });
   }, [widget]);
 
-  const handleError = (error: Error, info: AdditionalErrorInfo): void => {
+  const handleError = (error: Error, info: ErrorInfo): void => {
     if (onError) {
       onError(error, info);
     } else {

@@ -115,10 +115,10 @@ export const createDynamicImportMap = (): {
     // eslint-disable-next-line no-underscore-dangle
     (itr, e: WidgetConfig) => {
       // eslint-disable-next-line no-underscore-dangle
-      if (e?._url) {
-        // eslint-disable-next-line no-underscore-dangle
-        return { ...itr, [e.widgetId]: e._url };
-      }
+      // if (e?._url) {
+      //   // eslint-disable-next-line no-underscore-dangle
+      //   return { ...itr, [e.widgetId]: e._url };
+      // }
 
       return {
         ...itr,
