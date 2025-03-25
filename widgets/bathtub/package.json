@@ -8,9 +8,6 @@
     "type": "git",
     "url": ""
   },
-  "bugs": {
-    "url": ""
-  },
   "homepage": "",
   "main": "./dist/js/1fe-bundle.js",
   "files": [
@@ -32,6 +29,7 @@
   },
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.2",
+    "@codemirror/view": "6.36.4",
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.0",
     "@reduxjs/toolkit": "1.9.1",
@@ -46,11 +44,14 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@babel/runtime": "7.27.0",
     "@commitlint/cli": "^17.8.1",
     "@commitlint/config-conventional": "^17.8.1",
+    "@devhub/cli": "workspace:*",
     "@emotion/jest": "^11.13.0",
     "@eslint-community/eslint-plugin-eslint-comments": "^4.4.1",
     "@repo/widget-base-config": "*",
+    "@testing-library/dom": "10.4.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^29.5.14",
     "@types/node": "^18.19.70",
@@ -91,8 +92,10 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "rimraf": "^3.0.2",
+    "ts-config-single-spa": "3.0.0",
     "ts-jest": "^29.2.5",
-    "ts-node": "10.9.2"
+    "ts-node": "10.9.2",
+    "typescript": "5.8.2"
   },
   "eslint-formatter-multiple": {
     "formatters": [
@@ -106,8 +109,5 @@
         "path": "reports/lint-results.xml"
       }
     ]
-  },
-  "resolutions": {
-    "@playwright/test": "1.44.1"
   }
 }

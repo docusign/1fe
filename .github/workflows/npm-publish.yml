@@ -7,7 +7,7 @@ on:
   push:
     branches:
       - main
-    
+
 permissions:
   contents: write
 
@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm ci
+      - run: yarn --immutable
 
   publish-npm:
     needs: build
@@ -35,14 +35,14 @@ jobs:
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: npm ci
-      - run: npx turbo build --filter=@abetest/ui
+      - run: yarn --immutable
+      - run: yarn turbo build --filter=@abetest/ui
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
           # This expects you to have a script called release which does a build for your packages and calls changeset publish
-          publish: npx turbo run publish:packages --filter=@abetest/ui && changeset publish
+          publish: yarn turbo run publish:packages --filter=@abetest/ui && changeset publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

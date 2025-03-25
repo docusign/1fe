@@ -9,11 +9,11 @@
     "client:build": "cross-env NODE_ENV=production npx webpack --config ./bundle/client/build.js",
     "client-types": "npx tsc --project ./tsconfig-shell.types.json",
     "client-types:dev": "tsc-watch --project ./tsconfig-shell.types.json --onSuccess 'npx yalc push'",
-    "client-types:extract": "npm run client-types && npx api-extractor run --local",
-    "client-types:check": "npm run client-types && npx api-extractor run",
+    "client-types:extract": "yarn client-types && npx api-extractor run --local",
+    "client-types:check": "yarn client-types && npx api-extractor run",
     "server:dev": "ts-node-dev --project tsconfig.server.json --respawn --ignore-watch node_modules src/server",
     "server:build": "tsc --project tsconfig.server.json",
-    "build": "npm run clean && npm run server:build && npm run client:build",
+    "build": "yarn clean && yarn server:build && yarn client:build",
     "test": "tsc && prettier --check . && eslint . && stylelint \"**/*.css\"",
     "start": "node dist/server.js"
   },
@@ -26,6 +26,7 @@
     "@types/node": "^18.11.3",
     "@types/react": "^18.2.62",
     "@types/react-dom": "^18.2.19",
+    "@types/react-refresh": "^0",
     "@types/react-router-dom": "^5.3.1",
     "@types/serve-favicon": "^2.5.7",
     "@types/systemjs": "^6.15.1",
@@ -62,6 +63,7 @@
   "dependencies": {
     "@devhub/1fe-server": "*",
     "@devhub/1fe-shell": "*",
+    "@emotion/react": "^11.14.0",
     "@emotion/styled": "11.10.6",
     "core-js": "^3.40.0",
     "dotenv": "^16.0.3",
@@ -71,6 +73,7 @@
     "lodash": "^4.17.21",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-refresh": "^0.16.0",
     "react-router-dom": "6.9.0",
     "serve-favicon": "^2.5.0",
     "systemjs": "^6.15.1"

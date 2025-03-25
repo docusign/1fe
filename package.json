@@ -20,7 +20,6 @@
   "engines": {
     "node": ">=22"
   },
-  "packageManager": "npm@10.5.1",
   "overrides": {
     "typescript": "5.8.2",
     "@types/node": "22.9.0"
@@ -29,5 +28,6 @@
     "packages/*",
     "widgets/*",
     "apps/*"
-  ]
+  ],
+  "packageManager": "yarn@4.7.0"
 }

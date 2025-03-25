@@ -9,7 +9,7 @@
     "check-format": "prettier --check ."
   },
   "devDependencies": {
-    "@devhub/cli": "*",
+    "@devhub/cli": "workspace:*",
     "@repo/widget-base-config": "*",
     "@types/react": "^18.2.62",
     "@types/react-dom": "^18.2.19",
@@ -24,7 +24,7 @@
     "pretty-quick": "^3.1.1",
     "ts-config-single-spa": "^3.0.0",
     "typescript": "^4.3.5",
-    "vite-plugin-single-spa": "^0.1.0"
+    "vite-plugin-single-spa": "^1.0.0"
   },
   "dependencies": {
     "@devhub/1fe-shell": "*",
@@ -33,11 +33,14 @@
     "@reduxjs/toolkit": "1.9.1",
     "@types/systemjs": "^6.1.1",
     "antd": "^5.22.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-redux": "^8.1.3",
     "react-router-dom": "6.26.1",
     "reselect": "^4.1.7",
     "single-spa": "^5.9.3",
-    "single-spa-react": "^6.0.2"
+    "single-spa-react": "^6.0.2",
+    "vite": "^6.2.3"
   },
   "types": "dist/app1.d.ts"
 }

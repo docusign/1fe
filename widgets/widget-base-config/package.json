@@ -7,7 +7,7 @@
     "build": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@devhub/cli": "*",
+    "@devhub/cli": "workspace:*",
     "ky": "^1.7.5"
   }
 }
