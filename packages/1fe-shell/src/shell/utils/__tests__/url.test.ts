@@ -137,7 +137,6 @@ describe('generateCDNUrl', () => {
   it('should return the templatized URL', () => {
     const result = generateCDNUrl({
       widgetId: 'test/widgetId',
-      activePhasedDeployment: false,
       version: '0.0.0',
       plugin: {
         enabled: false,
