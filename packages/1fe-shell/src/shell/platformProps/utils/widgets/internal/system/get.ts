@@ -12,6 +12,7 @@ import { isWidgetTypePinned } from '../../../../../utils/widget-type';
 import { getWidgetBundleCdnUrl } from '../../../../../utils/url';
 import { getShellLogger } from '../../../../../utils/telemetry';
 import { isOverrideElementActive } from '../../../../../init/import-map-ui';
+import { WidgetConfigs } from '../../../../../../../../1fe-server/src/server/types';
 
 /**
  *
@@ -77,7 +78,7 @@ export const get =
         getRequestedWidgetConfigWithoutRuntimeConfig({
           hostWidgetId,
           requestedWidgetId,
-          widgetConfigs: WIDGET_CONFIGS,
+          widgetConfigs: WIDGET_CONFIGS as WidgetConfigs,
         });
 
       const isPinnedWidget = isWidgetTypePinned(type);

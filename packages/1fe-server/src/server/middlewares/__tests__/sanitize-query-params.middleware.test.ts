@@ -7,6 +7,7 @@ import sanitizeQueryParamsMiddleware, {
 import * as Configs from '../../configs';
 import { WIDGET_URL_OVERRIDES } from '../../constants';
 import { readOneFEConfigs } from '../../utils/one-fe-configs';
+import { OneFEProcessedConfigs } from '../../types/one-fe-server';
 
 jest.mock('../../utils/one-fe-configs', () => ({
   readOneFEConfigs: jest
@@ -59,7 +60,7 @@ describe('sanitizeQueryParamsMiddleware', () => {
   it('should return an error if runtime_config_overrides is not a valid JSON object', async () => {
     jest
       .mocked(readOneFEConfigs)
-      .mockImplementationOnce(() => ({ mode: 'preproduction' }));
+      .mockImplementationOnce(() => ({ mode: 'preproduction' } as OneFEProcessedConfigs));
     jest.spyOn(res, 'status');
     jest.spyOn(res, 'send');
     const url = '/test?runtime_config_overrides={invalid: "json"}';

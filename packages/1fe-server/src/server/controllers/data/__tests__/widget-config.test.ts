@@ -18,6 +18,7 @@ import {
   generateWidgetConfigMap,
 } from '../../../utils';
 import { readOneFEConfigs } from '../../../utils/one-fe-configs';
+import { OneFEProcessedConfigs } from '../../../types/one-fe-server';
 
 const cachedWidgetConfig = generateWidgetConfigMap([
   { widgetId: 'widget1', runtime: { key: 'cached-value' } },
@@ -80,7 +81,7 @@ describe('getWidgetConfigsForIndexHtml', () => {
   });
 
   it('should return overridden configs if runtime_config_overrides query param is present and environment is preprod', async () => {
-    jest.mocked(readOneFEConfigs).mockReturnValue({ mode: 'preproduction' });
+    jest.mocked(readOneFEConfigs).mockReturnValue({ mode: 'preproduction' } as OneFEProcessedConfigs);
 
     const expectedRuntime = { key: 'new-value' };
     runtimeConfigOverrides = JSON.stringify({
@@ -112,7 +113,7 @@ describe('getWidgetConfigsForIndexHtml', () => {
 
       jest
         .mocked(readOneFEConfigs)
-        .mockReturnValue({ mode: isProd ? 'production' : 'preproduction' });
+        .mockReturnValue({ mode: isProd ? 'production' : 'preproduction' } as OneFEProcessedConfigs);
       jest
         .mocked(fetchRuntimeConfigsForWidgetUrlOverrides)
         .mockReturnValue(

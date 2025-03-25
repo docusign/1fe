@@ -1,14 +1,14 @@
-import React, { ReactElement, ReactNode, useCallback, useRef } from 'react';
+import React, { ErrorInfo, ReactElement, ReactNode, useCallback, useRef } from 'react';
 
 import { getShellLogger } from '../../../../../utils/telemetry';
 import {
-  AdditionalErrorInfo,
   OneDsErrorBoundary,
 } from '../../../../../components/OneDsErrorBoundary';
 import { WidgetConfig } from '../../../../../types/widget-config';
 import { isOverrideElementActive } from '../../../../../init/import-map-ui';
 import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../../../1fe-server/src/server/utils/widget-config-helpers';
 import { WIDGET_CONFIGS } from '../../../../../configs/config-helpers';
+import { WidgetConfigs } from '../../../../../../../../1fe-server/src/server/types';
 
 interface WidgetErrorBoundaryProps {
   /**
@@ -59,7 +59,7 @@ export function WidgetErrorBoundary({
     : getRequestedWidgetConfigWithoutRuntimeConfig({
         hostWidgetId,
         requestedWidgetId: requestedWidgetConfigOrUrl.widgetId,
-        widgetConfigs: WIDGET_CONFIGS,
+        widgetConfigs: WIDGET_CONFIGS as WidgetConfigs,
       });
 
   // TODO: This is kinda pointless as it tells that the WidgetErrorBoundary has rendered
@@ -100,7 +100,7 @@ export function WidgetErrorBoundary({
   }, []);
 
   const handleError = useCallback(
-    (error: Error, info: AdditionalErrorInfo): void => {
+    (error: Error, info: ErrorInfo): void => {
       // const environment = getEnvironmentConfigs().ENVIRONMENT;
       // const serverBuildNumber = getEnvironmentConfigs().SERVER_BUILD_NUMBER;
       const isWidgetOverriden = isOverrideElementActive();

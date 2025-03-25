@@ -11,7 +11,7 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.mts",
   "scripts": {
-    "build": "tsup",
+    "build": "tsc --noEmit && tsup",
     "clean": "rm -rf dist",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",

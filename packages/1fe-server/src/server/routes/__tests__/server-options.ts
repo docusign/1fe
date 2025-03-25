@@ -1,4 +1,6 @@
-export const serverOptions = {
+import { OneFEServerOptions } from "../../types/one-fe-server";
+
+export const serverOptions: OneFEServerOptions = {
   // points to common flat file
   mode: 'production',
   environment: 'production',
@@ -11,21 +13,7 @@ export const serverOptions = {
   server: {
     // for Integration-env only
     bathtub: true, // automatically on when mode: development
-    importMapOverrides: {
-      cdnURL: '',
-    },
-    devtools: true, // automatically on when mode: development
     // known routes are routes that 1fe will NOT 404 on if the current route does not match a plugin
     knownRoutes: ['/test', '/version', '/'],
-  },
-  dynamicConfigs: {
-    cdn: {
-      libraries: {
-        basePrefix: 'https://docutest-a.akamaihd.net/production/1fe/libraries/',
-      },
-      widgets: {
-        basePrefix: 'https://docutest-a.akamaihd.net/production/1fe/widgets/',
-      },
-    },
-  },
+  }
 };

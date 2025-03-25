@@ -89,7 +89,7 @@ export const dataForRenderingTemplate = async (req: Request) => {
     widgetConfigs: slimWidgetConfigsForShell,
     pluginConfigs: getPluginConfigs(),
     dynamicConfigs: convertServerDynamicConfigToShellDynamicConfig(
-      readOneFEConfigs()?.dynamicConfigs,
+      readOneFEConfigs()?.dynamicConfigs!,
     ),
     envConfigs: {
       environment: readOneFEConfigs()?.environment,
