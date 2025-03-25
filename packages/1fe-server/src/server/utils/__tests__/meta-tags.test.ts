@@ -1,5 +1,9 @@
-import { getMetaTagsFromWidgetRuntimeConfig, getMetaTagStringsFromWidgetRuntimeConfig, isOgTagged } from "../meta-tags";
-import { generateWidgetConfigMap } from "../widget-config-helpers";
+import {
+  getMetaTagsFromWidgetRuntimeConfig,
+  getMetaTagStringsFromWidgetRuntimeConfig,
+  isOgTagged,
+} from '../meta-tags';
+import { generateWidgetConfigMap } from '../widget-config-helpers';
 
 const defineWidgetConfigs = (
   widgetId = 'widgetId',
@@ -26,7 +30,7 @@ describe('getMetaTagsFromWidgetRuntimeConfig', () => {
 
     const plugin = { widgetId: 'widgetId', enabled: true, route: '/route' };
     expect(getMetaTagsFromWidgetRuntimeConfig(widgetConfigs, plugin)).toEqual(
-      []
+      [],
     );
   });
 
@@ -109,7 +113,7 @@ describe('getMetaTagStringsFromWidgetRuntimeConfig', () => {
     expect(
       getMetaTagStringsFromWidgetRuntimeConfig(widgetConfigs, plugin),
     ).toEqual([
-      'nameggsd="description757575" contentdasda="widget description"'
+      'nameggsd="description757575" contentdasda="widget description"',
     ]);
   });
 });

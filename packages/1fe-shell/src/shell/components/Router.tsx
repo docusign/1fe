@@ -52,7 +52,8 @@ const determineBaseRoute = (): RouteObject[] => {
 };
 
 const getPluginRoutes = () => {
-  const getError = readOneFEShellConfigs()?.components?.getError || getGenericError;
+  const getError =
+    readOneFEShellConfigs()?.components?.getError || getGenericError;
 
   return getWidgetConfigValues(PLUGIN_CONFIGS).map((plugin): RouteObject => {
     return {
@@ -74,7 +75,8 @@ export const getRouter = () => {
     return router;
   }
 
-  const getError = readOneFEShellConfigs()?.components?.getError || getGenericError;
+  const getError =
+    readOneFEShellConfigs()?.components?.getError || getGenericError;
 
   const routerConfig: RouteObject[] = [
     ...determineBaseRoute(),

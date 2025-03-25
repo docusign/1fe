@@ -22,7 +22,7 @@ export const initSessionStorage = (widgetId: string) => {
     logger.error({
       message: `${errorMessage}`,
       category: 'utils.storage.sessionStorage',
-      widgetId
+      widgetId,
     });
     throw new Error(errorMessage);
   }
@@ -37,7 +37,7 @@ export const initSessionStorage = (widgetId: string) => {
         logger.error({
           message: errMessage,
           category: 'utils.storage.sessionStorage',
-          widgetId
+          widgetId,
         });
         throw new Error(errMessage);
       }
@@ -47,7 +47,7 @@ export const initSessionStorage = (widgetId: string) => {
       logger.error({
         message: errMessage,
         category: 'utils.storage.sessionStorage',
-        widgetId
+        widgetId,
       });
       throw new Error(errMessage);
     }
@@ -61,7 +61,7 @@ export const initSessionStorage = (widgetId: string) => {
       logger.error({
         message: errMessage,
         category: 'utils.storage.sessionStorage',
-        widgetId
+        widgetId,
       });
       throw new Error(errMessage);
     }
@@ -75,7 +75,7 @@ export const initSessionStorage = (widgetId: string) => {
       logger.error({
         message: errMessage,
         category: 'utils.storage.sessionStorage',
-        widgetId
+        widgetId,
       });
       throw new Error(errMessage);
     }
@@ -89,7 +89,7 @@ export const initSessionStorage = (widgetId: string) => {
       logger.error({
         message: errMessage,
         category: 'utils.storage.sessionStorage',
-        widgetId
+        widgetId,
       });
       throw new Error(errMessage);
     }
@@ -103,7 +103,7 @@ export const initSessionStorage = (widgetId: string) => {
       logger.error({
         message: errMessage,
         category: 'utils.storage.sessionStorage',
-        widgetId
+        widgetId,
       });
       throw new Error(errMessage);
     }
@@ -117,7 +117,7 @@ export const initSessionStorage = (widgetId: string) => {
       logger.error({
         message: errMessage,
         category: 'utils.storage.sessionStorage',
-        widgetId
+        widgetId,
       });
       throw new Error(errMessage);
     }

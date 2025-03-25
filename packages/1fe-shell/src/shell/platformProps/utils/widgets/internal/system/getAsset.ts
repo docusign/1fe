@@ -6,7 +6,6 @@ import { logPlatformUtilUsage } from '../../../logPlatformUtilUsage';
 
 export const getAsset =
   (_System: typeof System, hostWidgetId: string) =>
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async (widgetId: string, path: string): Promise<any> => {
     const logger = getShellLogger();
 

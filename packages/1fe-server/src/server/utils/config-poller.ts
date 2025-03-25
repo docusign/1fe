@@ -24,7 +24,11 @@ import {
   setCachedWidgetConfigs,
 } from './widget-config';
 import { setOneFEConfigs } from './one-fe-configs';
-import { OneFEDynamicConfigs, OneFEProcessedConfigs, OneFEServerOptions } from '../types/one-fe-server';
+import {
+  OneFEDynamicConfigs,
+  OneFEProcessedConfigs,
+  OneFEServerOptions,
+} from '../types/one-fe-server';
 
 interface WidgetBundleRequestResponse {
   widgetId: string;
@@ -48,7 +52,9 @@ const performWidgetBundleRequest = async (
   }
 };
 
-const fetchConfig = async (options: OneFEServerOptions): Promise<OneFEProcessedConfigs | null>=> {
+const fetchConfig = async (
+  options: OneFEServerOptions,
+): Promise<OneFEProcessedConfigs | null> => {
   try {
     const getDynamicConfigs = async (): Promise<OneFEDynamicConfigs> => {
       if (options.configManagement.getDynamicConfigs) {
@@ -139,81 +145,72 @@ const verifyWidgetCDNUrls = async (widgetConfigsToVerify: WidgetConfigs) => {
     });
 };
 
-export const processDynamicLibraryConfig = (config: OneFEDynamicConfigs): void => {
-  try {
-    const libraryConfigsPayload: (ExternalLibConfig | InstalledLibConfig)[] =
-      config?.cdn?.libraries?.managed || [];
+export const processDynamicLibraryConfig = (
+  config: OneFEDynamicConfigs,
+): void => {
+  const libraryConfigsPayload: (ExternalLibConfig | InstalledLibConfig)[] =
+    config?.cdn?.libraries?.managed || [];
 
-    //   const previousConfigs = getLibraryConfigs();
+  //   const previousConfigs = getLibraryConfigs();
 
-    // Check if new config is different than current config, if so, log
-    //   if (!_isEqual(previousConfigs, libraryConfigsPayload)) {
-    //   }
+  // Check if new config is different than current config, if so, log
+  //   if (!_isEqual(previousConfigs, libraryConfigsPayload)) {
+  //   }
 
-    if (!isEmpty(libraryConfigsPayload)) {
-      setLibraryConfigs(cloneDeep(libraryConfigsPayload));
-    } else {
-      if (isEmpty(getLibraryConfigs())) {
-        throw new Error(
-          '[DYNAMIC_CONFIG][LIBRARY][CRITICAL] Library config empty and initial libraryConfig is empty as well!',
-        );
-      }
-
-      return;
+  if (!isEmpty(libraryConfigsPayload)) {
+    setLibraryConfigs(cloneDeep(libraryConfigsPayload));
+  } else {
+    if (isEmpty(getLibraryConfigs())) {
+      throw new Error(
+        '[DYNAMIC_CONFIG][LIBRARY][CRITICAL] Library config empty and initial libraryConfig is empty as well!',
+      );
     }
-  } catch (error) {
-    // re-throw error, (doing this to keep error handling parity now that a new try/catch block is added with the span)
-    throw error;
+
+    return;
   }
 };
 
-const processDynamicWidgetConfig = async (config: OneFEDynamicConfigs): Promise<void> => {
-  try {
-    const widgetConfigsPayload = config?.cdn?.widgets?.releaseConfig || [];
-    const cachedWidgetConfigsEmptyMessage =
-      '[DYNAMIC_CONFIG][WIDGETS][CRITICAL] Widget config empty and initial widgetConfig is empty as well!';
+const processDynamicWidgetConfig = async (
+  config: OneFEDynamicConfigs,
+): Promise<void> => {
+  const widgetConfigsPayload = config?.cdn?.widgets?.releaseConfig || [];
+  const cachedWidgetConfigsEmptyMessage =
+    '[DYNAMIC_CONFIG][WIDGETS][CRITICAL] Widget config empty and initial widgetConfig is empty as well!';
 
-    if (isEmpty(widgetConfigsPayload)) {
+  if (isEmpty(widgetConfigsPayload)) {
+    if (isEmpty(getCachedWidgetConfigs())) {
+      throw new Error(cachedWidgetConfigsEmptyMessage);
+    }
+    return;
+  }
+
+  const previousConfigs = getCachedWidgetConfigs();
+
+  const widgetConfigMap = generateWidgetConfigMap(widgetConfigsPayload);
+
+  // Check if new config is different than current config, if so, log
+  if (didWidgetVersionsUpdate(previousConfigs, widgetConfigMap)) {
+    const newWidgetConfigs =
+      await fetchAllWidgetRuntimeConfigs(widgetConfigMap);
+
+    // Construct widget cdn urls and ensure they return 200
+    const widgetCdnUrlsNotVerified =
+      await verifyWidgetCDNUrls(newWidgetConfigs);
+
+    // Consume if widget urls are verified
+    if (widgetCdnUrlsNotVerified.length === 0) {
+      setCachedWidgetConfigs(newWidgetConfigs);
+    } else {
+      // Log critical error if failed to verify widget bundles from cdn
       if (isEmpty(getCachedWidgetConfigs())) {
         throw new Error(cachedWidgetConfigsEmptyMessage);
       }
-      return;
     }
-
-    const previousConfigs = getCachedWidgetConfigs();
-
-    let widgetConfigMap = generateWidgetConfigMap(widgetConfigsPayload);
-
-    // Check if new config is different than current config, if so, log
-    if (didWidgetVersionsUpdate(previousConfigs, widgetConfigMap)) {
-      const newWidgetConfigs =
-        await fetchAllWidgetRuntimeConfigs(widgetConfigMap);
-
-      // Construct widget cdn urls and ensure they return 200
-      const widgetCdnUrlsNotVerified =
-        await verifyWidgetCDNUrls(newWidgetConfigs);
-
-      // Consume if widget urls are verified
-      if (widgetCdnUrlsNotVerified.length === 0) {
-        setCachedWidgetConfigs(newWidgetConfigs);
-      } else {
-        // Log critical error if failed to verify widget bundles from cdn
-        if (isEmpty(getCachedWidgetConfigs())) {
-          throw new Error(cachedWidgetConfigsEmptyMessage);
-        }
-      }
-    } else {
-      // If widget version did not change, update cached widget configs with old runtime configs
-      setCachedWidgetConfigs(
-        mapAndGenerateWidgetConfigMap(
-          widgetConfigMap,
-          getFallbackRuntimeConfigs,
-        ),
-      );
-    }
-  } catch (error) {
-    // re-throw error, (doing this to keep error handling parity now that a new try/catch block is added with the span)
-    throw error;
+  } else {
+    // If widget version did not change, update cached widget configs with old runtime configs
+    setCachedWidgetConfigs(
+      mapAndGenerateWidgetConfigMap(widgetConfigMap, getFallbackRuntimeConfigs),
+    );
   }
 };
 

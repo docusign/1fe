@@ -28,7 +28,9 @@ const initializeRoutes = (app: express.Application) => {
   app.use('/', new IndexRoute().router);
 };
 
-export const oneFEServer = (options: OneFEServerOptions): ReturnType<typeof express> => {
+export const oneFEServer = (
+  options: OneFEServerOptions,
+): ReturnType<typeof express> => {
   const app = express();
   app.use(cookieParser());
   app.use(combinedMiddleware);

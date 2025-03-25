@@ -1,6 +1,6 @@
-import { getWidgetPath } from "..";
-import { ONE_FE_SHELL_ID } from "../../../../constants/event-bus";
-import { widgetDependencyTree } from "../../../../utils/tree";
+import { getWidgetPath } from '..';
+import { ONE_FE_SHELL_ID } from '../../../../constants/event-bus';
+import { widgetDependencyTree } from '../../../../utils/tree';
 
 describe('getWidgetPath', () => {
   it('should return the correct widget path with only a root node', () => {

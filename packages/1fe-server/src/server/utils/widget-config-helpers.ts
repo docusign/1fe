@@ -152,7 +152,7 @@ export const getRequestedWidgetConfigWithoutRuntimeConfig = ({
     (pinnedWidget) => pinnedWidget.widgetId === requestedWidgetId,
   );
 
-  if (!!requestedWidgetPinnedConfig) {
+  if (requestedWidgetPinnedConfig) {
     if (!isWidgetTypePinned(requestedWidgetConfig.type)) {
       console.warn(
         '[platformProps.utils.widgets.get][PINNED_WIDGETS] Requested pinned widget is not a pinned widget. The 1fe shell will request the current version instead.',

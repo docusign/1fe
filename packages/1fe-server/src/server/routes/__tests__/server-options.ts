@@ -1,4 +1,4 @@
-import { OneFEServerOptions } from "../../types/one-fe-server";
+import { OneFEServerOptions } from '../../types/one-fe-server';
 
 export const serverOptions: OneFEServerOptions = {
   // points to common flat file
@@ -15,5 +15,5 @@ export const serverOptions: OneFEServerOptions = {
     bathtub: true, // automatically on when mode: development
     // known routes are routes that 1fe will NOT 404 on if the current route does not match a plugin
     knownRoutes: ['/test', '/version', '/'],
-  }
+  },
 };

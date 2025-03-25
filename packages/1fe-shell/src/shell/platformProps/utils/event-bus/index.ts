@@ -4,7 +4,6 @@ import { initSubscribeToEventBus } from './subscribe';
 import { initUseSubscribe } from './use-subscribe';
 import { getShellLogger } from '../../../utils/telemetry';
 
-
 export const registeredWidgets: Set<string> = new Set();
 
 export const initEventBus = (widgetId: string): EventBusPlatformUtils => {

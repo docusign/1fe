@@ -77,7 +77,8 @@ export const ENVIRONMENT_CONFIG =
 /**
  * Map of all widget configs that we have loaded from the global config, keyed by widgetId
  */
-export const DYNAMIC_CONFIGS = getConfigArrFromGlobal<Partial<OneFEDynamicConfigs>>('dynamic-config');
+export const DYNAMIC_CONFIGS =
+  getConfigArrFromGlobal<Partial<OneFEDynamicConfigs>>('dynamic-config');
 
 export const LAZY_LOADED_LIB_CONFIGS = getConfigObjFromGlobal<
   Record<string, string>

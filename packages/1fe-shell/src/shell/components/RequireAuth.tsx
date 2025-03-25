@@ -17,9 +17,10 @@ const RequireAuth = ({ pluginConfig, children }: AuthenticateInterface) => {
     }
 
     if (pluginConfig.auth?.authenticationType === 'required') {
-      const shouldShowChildren = readOneFEShellConfigs()?.auth?.isAuthedCallback(
-        pluginConfig.widgetId,
-      ) || false;
+      const shouldShowChildren =
+        readOneFEShellConfigs()?.auth?.isAuthedCallback(
+          pluginConfig.widgetId,
+        ) || false;
 
       if (!shouldShowChildren) {
         readOneFEShellConfigs()?.auth?.unauthedCallback(pluginConfig.widgetId);

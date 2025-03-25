@@ -18,7 +18,7 @@ import { isUrl } from '../is-url';
 
 jest.mock('../is-url', () => ({
   isUrl: jest.fn(),
-}))
+}));
 
 jest.mock('../../../../../../init/import-map-ui');
 // jest.mock('../../utils/validateHostPropsContract');
@@ -49,7 +49,7 @@ jest.mock('../../../../../../utils/url', () => ({
 
 jest.mock('../../../../../../utils/widget-type', () => ({
   ...jest.requireActual('../../../../../../utils/widget-type'),
-  isShellWidget: jest.fn()
+  isShellWidget: jest.fn(),
 }));
 
 // jest.mock<typeof import('../../../../../../utils/env-helpers')>(

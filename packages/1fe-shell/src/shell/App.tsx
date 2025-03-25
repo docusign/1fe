@@ -1,16 +1,15 @@
 import { ErrorInfo } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { getRouter } from './components/Router';
-import {
-  OneDsErrorBoundary,
-} from './components/OneDsErrorBoundary';
+import { OneDsErrorBoundary } from './components/OneDsErrorBoundary';
 import { readOneFEShellConfigs } from './configs/shell-configs';
 import { getShellLogger } from './utils/telemetry';
 import { getGenericError } from './components/GenericError';
 
 function App(): JSX.Element {
   const logger = getShellLogger();
-  const getError = readOneFEShellConfigs()?.components?.getError || getGenericError;
+  const getError =
+    readOneFEShellConfigs()?.components?.getError || getGenericError;
 
   const handleError = (error: Error, info: ErrorInfo): void => {
     const pathname = window?.location?.pathname;

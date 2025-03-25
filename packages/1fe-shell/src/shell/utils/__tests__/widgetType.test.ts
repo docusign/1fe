@@ -1,5 +1,9 @@
-import { getShellWidgetId } from "../../constants/shell";
-import { isShellWidget, isWidgetTypePinned, isWidgetTypeSystem } from "../widget-type";
+import { getShellWidgetId } from '../../constants/shell';
+import {
+  isShellWidget,
+  isWidgetTypePinned,
+  isWidgetTypeSystem,
+} from '../widget-type';
 
 describe('isWidgetTypeSystem', () => {
   it('should return true for system type widget', () => {

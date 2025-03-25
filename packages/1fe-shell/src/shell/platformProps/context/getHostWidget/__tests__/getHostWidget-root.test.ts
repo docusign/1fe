@@ -1,5 +1,5 @@
-import { getHostWidget } from "..";
-import { WidgetConfig } from "../../../../types/widget-config";
+import { getHostWidget } from '..';
+import { WidgetConfig } from '../../../../types/widget-config';
 
 jest.mock('../../../utils', () => ({
   widgetDependencyTree: {

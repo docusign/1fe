@@ -89,7 +89,6 @@ function WidgetFrameInner<TWidgetProps>({
       : `${widgetFrameId}@${widgetVersion}`;
 
     const consoleLogMountEvent = (event: 'mounted' | 'unmounted') => {
-      // eslint-disable-next-line no-console
       console.log(
         `[1FE] %c${hostWidgetId} %c${event} %c${requestedWidgetStr}`,
         'font-weight:bold',

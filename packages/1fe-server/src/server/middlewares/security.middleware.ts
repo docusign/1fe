@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from 'express';
 import { readOneFEConfigs } from '../utils/one-fe-configs';
 
 const securityMiddleware = (
-  // @ts-ignore
   req: Request,
   res: Response,
   next: NextFunction,

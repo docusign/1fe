@@ -4,7 +4,7 @@ export {};
 
 declare global {
   const BROWSERS_LIST_CONFIG: string[];
-  System: System;
+  System;
 
   interface Window {
     importMapOverrides: {
