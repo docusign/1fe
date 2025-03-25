@@ -10,11 +10,11 @@ import { WIDGET_CONFIGS } from '../../../configs/config-helpers';
 import { WidgetConfig } from '../../../types/widget-config';
 import { isInUseMemo } from './internal/utils/isInUseMemo';
 import {
-    VariantProps,
-    WidgetNavigation,
-    WidgetOptions,
-    WidgetProps,
-  } from '../../../types/platform-utils';
+  VariantProps,
+  WidgetNavigation,
+  WidgetOptions,
+  WidgetProps,
+} from '../../../types/platform-utils';
 import { getShellLogger } from '../../../utils/telemetry';
 
 const EMPTY_WIDGET = () => null;
@@ -54,7 +54,6 @@ export const initWidgetsHelper = (
     const isGetCalledInsideAUseMemo = isInUseMemo();
 
     if (!isGetCalledInsideAUseMemo) {
-      // eslint-disable-next-line react-hooks/rules-of-hooks -- We presume that widgets.get is being called unconditionally from a function component, and that `isGetCalledInsideAUseMemo` is stable during render
       return useMemo(() => {
         const { requestedWidgetConfig } =
           getRequestedWidgetConfigWithoutRuntimeConfig({
@@ -71,8 +70,8 @@ export const initWidgetsHelper = (
         // memo is used to ensure that the widget is not re-rendered if the props are the same via shallow comparision.
         // useMemo is used to ensure that the widget's factory function is stable and doesn't change on every render.
         return memo(function WidgetGetWrapper(props: TWidgetProps) {
-            // Queue preloads for API Calls and dependent child widgets if found in the requested widget's runtime config.
-            queueWidgetPreloadsIfFound(hostWidget, requestedWidgetConfig);
+          // Queue preloads for API Calls and dependent child widgets if found in the requested widget's runtime config.
+          queueWidgetPreloadsIfFound(hostWidget, requestedWidgetConfig);
 
           const widgetNode = widgetDependencyTree.add(
             requestedWidgetId,
@@ -106,8 +105,8 @@ export const initWidgetsHelper = (
         });
 
       return memo(function WidgetGetWrapper(props: TWidgetProps) {
-          // Queue preloads for API Calls and dependent child widgets if found in the requested widget's runtime config.
-          queueWidgetPreloadsIfFound(hostWidget, requestedWidgetConfig);
+        // Queue preloads for API Calls and dependent child widgets if found in the requested widget's runtime config.
+        queueWidgetPreloadsIfFound(hostWidget, requestedWidgetConfig);
 
         const widgetNode = widgetDependencyTree.add(
           requestedWidgetId,
@@ -134,7 +133,7 @@ export const initWidgetsHelper = (
         message: '[WIDGETS][GET] error',
         tag: '[WIDGETS][GET]',
         error: err,
-        widgetId: hostWidget.widgetId
+        widgetId: hostWidget.widgetId,
       });
     }
 
@@ -196,6 +195,5 @@ export const initWidgetsHelper = (
         }) as React.FC<TWidgetProps>;
       }
     : // noop for non system widgets
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
       (): void => {},
 });

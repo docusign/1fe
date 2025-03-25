@@ -15,7 +15,8 @@
     "clean": "rm -rf dist",
     "dev": "npx tsup --watch",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint src/",
+    "lint": "eslint src/ --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint src/ --ext ts,tsx --report-unused-disable-directives --fix",
     "test": "jest",
     "publish:packages": "npm publish --access public"
   },

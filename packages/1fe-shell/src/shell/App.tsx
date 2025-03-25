@@ -10,7 +10,8 @@ import { getGenericError } from './components/GenericError';
 
 function App(): JSX.Element {
   const logger = getShellLogger();
-  const getError = readOneFEShellConfigs()?.components?.getError || getGenericError;
+  const getError =
+    readOneFEShellConfigs()?.components?.getError || getGenericError;
 
   const handleError = (error: Error, info: AdditionalErrorInfo): void => {
     const pathname = window?.location?.pathname;

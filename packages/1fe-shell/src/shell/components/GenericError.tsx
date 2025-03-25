@@ -14,7 +14,7 @@ type ErrorPageData = {
 
 type ErrorProps = {
   type?: ErrorPageType;
-  plugin?: OneFEErrorComponentProps["plugin"];
+  plugin?: OneFEErrorComponentProps['plugin'];
   message?: string | undefined;
 };
 
@@ -23,7 +23,7 @@ export const GenericError = (errorProps?: ErrorProps) => {
 
   useEffect(() => {
     const shellLogger = getShellLogger();
-    
+
     shellLogger.log({
       message: '[1FE-Shell] error page rendered',
       errorComponent: {
@@ -44,7 +44,7 @@ export const GenericError = (errorProps?: ErrorProps) => {
       titleText: 'Looks like this page is not here',
       subText: 'Check your URL, or go back',
       buttonText: 'Go Back',
-    }
+    },
   };
 
   const mainText = message ?? ErrorPageData[type].titleText;

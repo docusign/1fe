@@ -1,4 +1,3 @@
-
 import * as mockableEnvHelpersObject from '../env.helpers';
 
 describe('getBrowserEnvironment', () => {

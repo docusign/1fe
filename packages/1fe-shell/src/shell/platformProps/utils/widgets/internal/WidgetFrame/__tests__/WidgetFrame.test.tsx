@@ -3,7 +3,6 @@ import { WidgetConfig } from '../../../../../../types/widget-config';
 import { getDefaultWidgetOptions } from '../../utils/constants';
 import { WidgetFrame, WidgetNotFoundError } from '../WidgetFrame';
 
-
 const widgetFromPlugin: WidgetConfig = {
   widgetId: '@x/tester',
   version: '5.6.7',

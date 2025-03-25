@@ -1,4 +1,4 @@
-import { filterImportMap } from "../import-map";
+import { filterImportMap } from '../import-map';
 
 describe('filterAllowedSource', () => {
   const importMap = {

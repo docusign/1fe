@@ -111,24 +111,18 @@ export const createDynamicImportMap = (): {
   const allowedSources = DYNAMIC_CONFIGS?.importMapOverrides?.allowedSources;
   const widgetConfigs = getWidgetConfigValues(WIDGET_CONFIGS);
 
-  const widgets = widgetConfigs.reduce(
-    // eslint-disable-next-line no-underscore-dangle
-    (itr, e: WidgetConfig) => {
-      // eslint-disable-next-line no-underscore-dangle
-      if (e?._url) {
-        // eslint-disable-next-line no-underscore-dangle
-        return { ...itr, [e.widgetId]: e._url };
-      }
+  const widgets = widgetConfigs.reduce((itr, e: WidgetConfig) => {
+    if (e?._url) {
+      return { ...itr, [e.widgetId]: e._url };
+    }
 
-      return {
-        ...itr,
-        [e.widgetId]: generateCDNUrl(e).toString(),
-      };
-    },
-    {},
-  );
+    return {
+      ...itr,
+      [e.widgetId]: generateCDNUrl(e).toString(),
+    };
+  }, {});
 
-  const importUrlOverrides = !!allowedSources
+  const importUrlOverrides = allowedSources
     ? filterImportMap(getUrlWidgetOverrides(), allowedSources)
     : getUrlWidgetOverrides();
 

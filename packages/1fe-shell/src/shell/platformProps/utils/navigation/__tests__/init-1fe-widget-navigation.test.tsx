@@ -53,7 +53,7 @@ const TestWidget = (props: ReturnType<typeof generateProps>) => {
   const navigate = useNavigate();
 
   // TODO: What is the purpose of this line?
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   // props?.platform?.utils?.navigation?.init1FEWidgetNavigation(
   //   props,
   //   navigate,

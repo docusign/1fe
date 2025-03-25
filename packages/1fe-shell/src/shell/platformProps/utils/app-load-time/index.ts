@@ -15,7 +15,6 @@ export const _customMark = (
   window.performance?.mark(markName, measureOptions);
 
   if (readOneFEShellConfigs().mode !== 'production') {
-    // eslint-disable-next-line no-console
     console.log('[1fe][util][appLoadTime] mark: ' + markName);
   }
 };

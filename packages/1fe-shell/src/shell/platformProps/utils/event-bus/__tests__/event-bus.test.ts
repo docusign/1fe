@@ -61,7 +61,6 @@ describe('EventBus', () => {
     const subscribeMock = jest.spyOn(widget2EventBus, 'subscribe');
 
     const listener = () => {
-      // eslint-disable-next-line no-console
       console.log('listening..');
     };
 

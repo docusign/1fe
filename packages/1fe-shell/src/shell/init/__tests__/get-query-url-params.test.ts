@@ -1,4 +1,4 @@
-import { getQueryURLParams } from "../import-map";
+import { getQueryURLParams } from '../import-map';
 
 describe('getQueryURLParams', () => {
   it('should return url parameters', () => {
