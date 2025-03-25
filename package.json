@@ -22,7 +22,8 @@
   },
   "packageManager": "npm@10.5.1",
   "overrides": {
-    "typescript": "5.8.2"
+    "typescript": "5.8.2",
+    "@types/node": "22.9.0"
   },
   "workspaces": [
     "packages/*",

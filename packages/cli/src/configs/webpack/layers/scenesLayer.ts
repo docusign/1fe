@@ -1,9 +1,9 @@
 import { existsSync } from 'fs';
 import { memoize } from 'lodash';
 import { Configuration as WebpackConfig } from 'webpack';
-import { getKnownPaths } from '../../../../lib/paths/getKnownPaths';
-import { WEBPACK_BUNDLES } from '../../webpack.constants';
-import { getLogger } from '../../../../lib/getLogger';
+import { getKnownPaths } from '../../../lib/paths/getKnownPaths';
+import { WEBPACK_BUNDLES } from '../webpack.constants';
+import { getLogger } from '../../../lib/getLogger';
 
 /**
  * Returns a webpack config object with an entry for `1fer-scenes` pointing to `scenes/index.ts`

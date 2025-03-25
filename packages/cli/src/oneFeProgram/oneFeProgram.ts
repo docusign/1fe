@@ -1,6 +1,7 @@
 import { Command, Option } from '@commander-js/extra-typings';
 import packageJson from '../../package.json';
 import { preActionHook } from './preAction';
+import { parseEnv } from '../lib/config/parseEnv';
 
 export const oneFeProgram = new Command()
   .name(packageJson.name)
@@ -14,12 +15,21 @@ export const oneFeProgram = new Command()
     new Option(
       '--environment <environment>',
       'Environment to build for. This should match one of the environments defined in your .1fe.config.ts',
-    ).makeOptionMandatory(),
+    )
+      .argParser(parseEnv)
+      .makeOptionMandatory(),
   )
-  .option(
-    '--trace',
-    'log arguments and options to the terminal for debugging',
-    false as boolean,
+  .addOption(
+    new Option(
+      '--trace',
+      'log extra information to the terminal for beter insight into what the CLI is doing.',
+    ).default(false as boolean),
+  )
+  .addOption(
+    new Option(
+      '--debug',
+      'Enables --trace by default and logs options and parameters in various processes to the terminal for debugging',
+    ).default(false as boolean),
   )
   .option(
     '--ci',

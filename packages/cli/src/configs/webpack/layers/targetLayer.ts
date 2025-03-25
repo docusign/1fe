@@ -1,6 +1,6 @@
 import { Configuration as WebpackConfig } from 'webpack';
-import { getCommonConfigs } from '../../../../lib/config/getCommonConfigs';
-import { getLogger } from '../../../../lib/getLogger';
+import { getCommonConfigs } from '../../../lib/config/getCommonConfigs';
+import { getLogger } from '../../../lib/getLogger';
 import chalk from 'chalk';
 
 export async function getTargetLayer(
