@@ -13,7 +13,6 @@ module.exports = {
       sourceType: 'module',            // Enable ECMAScript modules
     },
     plugins: [
-      'react',                        // React plugin (if using React)
       '@typescript-eslint',           // TypeScript plugin (if using TypeScript)
       'prettier',                     // Prettier plugin
     ],
@@ -27,6 +26,12 @@ module.exports = {
       'react/react-in-jsx-scope': 'off', // If using React 17+ with JSX transform
       '@typescript-eslint/explicit-module-boundary-types': 'off', // Optional: Disables enforcing explicit return types on function signatures
       '@typescript-eslint/no-explicit-any': 'off', // Optional: Disables restrictions on `any` type (useful for some use cases)
+      '@typescript-eslint/no-empty-function': 'off',
+      '@typescript-eslint/no-empty-interface': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+      'no-control-regex': 'off',
+      'no-global-assign': 'off',
+      'no-empty': 'off',
     },
     settings: {
       react: {
