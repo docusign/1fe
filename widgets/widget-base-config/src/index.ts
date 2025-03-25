@@ -13,7 +13,10 @@ export const getBaseConfig: OneFeBaseConfiguration = async () => {
     environments: {
       integration: {
         commonConfig,
+        shellBaseUrl: 'https://example.com', // Add the appropriate URL here
+        serverBaseUrl: 'https://example.com', // Add the appropriate URL here
       },
     },
+    baththubUrl: '',
   };
 };

@@ -31,11 +31,6 @@ export type {
 
 export type { OneFeCommonConfig } from './lib/config/commonConfig.types';
 
-// TODO - CLI sub commands have options. How do we pass them to the main function if we expose this CLI function?
-// export const CLI = (options: CliConfigOptions) => {
-//   return main(options);
-// };
-
 // Kick off CLI execution, only when this file is executed
 if (require.main === module) {
   main();

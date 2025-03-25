@@ -17,13 +17,13 @@ export function getLogger(prefix: `[${string}]`) {
     /** General purpose log. Shows up always */
     log: (...args: any[]) => console.log(`${coloredPrefix}`, ...args),
 
-    /** Debug log. Shows up only when trace is enabled */
+    /** Debug log. Shows up only when --debug is used */
     debug: (...args: any[]) => console.debug(`${coloredPrefix}`, ...args),
 
-    /** Info log. Shows up only when trace is enabled */
+    /** Info log. Shows up only when --trace is used */
     info: (...args: any[]) => console.log(`${coloredPrefix}`, ...args),
 
-    /** Warning log. Shows up only when trace is enabled */
+    /** Warning log. Shows up only when --trace is used */
     warn: (...args: any[]) => console.warn(`${coloredPrefix}`, ...args),
 
     /** Error log. Shows up always */
@@ -37,10 +37,10 @@ export function getLogger(prefix: `[${string}]`) {
   if (!trace) {
     logger.info = () => {};
     logger.warn = () => {};
+  }
 
-    if (!debug) {
-      logger.debug = () => {};
-    }
+  if (!debug) {
+    logger.debug = () => {};
   }
 
   return logger;

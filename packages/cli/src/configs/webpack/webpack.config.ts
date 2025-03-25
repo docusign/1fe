@@ -42,9 +42,7 @@ export async function getWebpackConfig({
   const {
     devServer: devServerOverrides,
     entry,
-    resolve,
     output,
-    externals,
     ...allowedOverrides
   } = overrides;
 
@@ -76,7 +74,7 @@ export async function getWebpackConfig({
       devtool: isProduction ? false : 'source-map',
       resolve: {
         alias: {
-          // TODO - add shell package alias here
+          '@devhub/1fe-shell': '1feContext',
         },
         extensions: EXTENSIONS,
         plugins: [
