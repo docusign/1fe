@@ -41,11 +41,11 @@ async function buildWebpack(buildOptions: BuildCommandOptions) {
 
         reject();
       } else {
-        logger.info(
-          'stats: ',
+        logger.log(
+          'Webpack build successful!',
           stats?.toString({
             colors: true,
-            logging: 'log', // TODO - this was 'summary' before. investigate this.
+            logging: 'none',
           }),
         );
 
