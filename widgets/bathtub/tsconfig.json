@@ -1,14 +1,14 @@
 {
-    "extends": "ts-config-single-spa",
-    "compilerOptions": {
-        "declarationDir": "dist",
-        "skipLibCheck": true,
-        "target": "esnext",
-        "jsxImportSource": "@emotion/react",
-        "jsx": "react-jsx",
-        "emitDeclarationOnly": false // to get type:check to work
-    },
-    "types": ["node", "jest", "@testing-library/jest-dom"],
-    "include": ["src/**/*"],
-  }
-  
+  "extends": "ts-config-single-spa",
+  "compilerOptions": {
+    "declarationDir": "dist",
+    "declaration": true,
+    "skipLibCheck": true,
+    "target": "esnext",
+    "jsxImportSource": "@emotion/react",
+    "jsx": "react-jsx",
+    "emitDeclarationOnly": false // to get type:check to work
+  },
+  "types": ["node", "jest", "@testing-library/jest-dom"],
+  "include": ["src/**/*"]
+}
