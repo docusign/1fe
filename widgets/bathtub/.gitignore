@@ -33,3 +33,6 @@ src/locales/locale.d.ts
 src/locales/helpers.ts
 # for now we are hardcoding translations
 # src/locales/index.ts
+
+# generateds files
+reports

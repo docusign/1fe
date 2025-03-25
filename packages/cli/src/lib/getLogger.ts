@@ -8,25 +8,23 @@ import chalk from 'chalk';
  However, calling this inside an action for a command is ok because commander would have parsed the cli params by then
  */
 export function getLogger(prefix: `[${string}]`) {
-  const trace = oneFeProgram.opts().trace;
+  const debug = oneFeProgram.getOptionValue('debug');
+  const trace = oneFeProgram.getOptionValue('trace');
 
   const coloredPrefix = chalk.gray(prefix);
 
-  return {
+  const logger = {
     /** General purpose log. Shows up always */
     log: (...args: any[]) => console.log(`${coloredPrefix}`, ...args),
 
-    /** Debug log. Shows up only when trace is enabled */
-    debug: (...args: any[]) =>
-      trace ? console.debug(`${coloredPrefix}`, ...args) : undefined,
+    /** Debug log. Shows up only when --debug is used */
+    debug: (...args: any[]) => console.debug(`${coloredPrefix}`, ...args),
 
-    /** Info log. Shows up only when trace is enabled */
-    info: (...args: any[]) =>
-      trace ? console.log(`${coloredPrefix}`, ...args) : undefined,
+    /** Info log. Shows up only when --trace is used */
+    info: (...args: any[]) => console.log(`${coloredPrefix}`, ...args),
 
-    /** Warning log. Shows up only when trace is enabled */
-    warn: (...args: any[]) =>
-      trace ? console.warn(`${coloredPrefix}`, ...args) : undefined,
+    /** Warning log. Shows up only when --trace is used */
+    warn: (...args: any[]) => console.warn(`${coloredPrefix}`, ...args),
 
     /** Error log. Shows up always */
     error: (...args: any[]) =>
@@ -35,4 +33,15 @@ export function getLogger(prefix: `[${string}]`) {
         ...args.map((arg) => (typeof arg === 'string' ? chalk.red(arg) : arg)),
       ),
   };
+
+  if (!trace) {
+    logger.info = () => {};
+    logger.warn = () => {};
+  }
+
+  if (!debug) {
+    logger.debug = () => {};
+  }
+
+  return logger;
 }
