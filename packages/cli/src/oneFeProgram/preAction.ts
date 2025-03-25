@@ -17,5 +17,16 @@ export const preActionHook = async (
     process.exit(1);
   }
 
-  logger.log('Starting the CLI with options:', oneFeProgram.opts());
+  const options = await getPlainOptions();
+
+  logger.log('Starting the CLI with options:', options);
 };
+
+async function getPlainOptions() {
+  const options: Record<string, any> = {};
+
+  for (const key in oneFeProgram.opts()) {
+    options[key] = await oneFeProgram.getOptionValue(key);
+  }
+  return options;
+}

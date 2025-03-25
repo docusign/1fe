@@ -24,6 +24,10 @@ export const getKnownPaths = memoize(function getPathsRaw(
     tsconfig: resolve(projectDir, 'tsconfig.json'),
     widgetPackageJson: resolve(projectDir, 'package.json'),
 
+    getWidgetRuntimeConfigJsonPath(outDir: string) {
+      return resolve(outDir, 'widget-runtime-config.json');
+    },
+
     /**
      * Some of the paths we need to use point to files that
      * do not exist in the file system. Put all such paths here.
