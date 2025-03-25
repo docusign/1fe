@@ -1,5 +1,5 @@
 import { oneFeProgram } from '../oneFeProgram/oneFeProgram';
-import chalk from 'chalk';
+import chalk, { ChalkInstance } from 'chalk';
 
 /**
  * TODO - consolidate use of loggers here.
@@ -18,20 +18,20 @@ export function getLogger(prefix: `[${string}]`) {
     log: (...args: any[]) => console.log(`${coloredPrefix}`, ...args),
 
     /** Debug log. Shows up only when --debug is used */
-    debug: (...args: any[]) => console.debug(`${coloredPrefix}`, ...args),
+    debug: (...args: any[]) =>
+      console.debug(`${coloredPrefix}`, ...colorStrings('cyan')(...args)),
 
     /** Info log. Shows up only when --trace is used */
-    info: (...args: any[]) => console.log(`${coloredPrefix}`, ...args),
+    info: (...args: any[]) =>
+      console.log(`${coloredPrefix}`, ...colorStrings('gray')(...args)),
 
     /** Warning log. Shows up only when --trace is used */
-    warn: (...args: any[]) => console.warn(`${coloredPrefix}`, ...args),
+    warn: (...args: any[]) =>
+      console.warn(`${coloredPrefix}`, ...colorStrings('yellow')(...args)),
 
     /** Error log. Shows up always */
     error: (...args: any[]) =>
-      console.error(
-        `${coloredPrefix}`,
-        ...args.map((arg) => (typeof arg === 'string' ? chalk.red(arg) : arg)),
-      ),
+      console.error(`${coloredPrefix}`, ...colorStrings('red')(...args)),
   };
 
   if (!trace) {
@@ -44,4 +44,14 @@ export function getLogger(prefix: `[${string}]`) {
   }
 
   return logger;
+}
+
+type ChalkColors = keyof Omit<
+  ChalkInstance,
+  'hex' | 'level' | 'rgb' | 'ansi256' | 'bgRgb' | 'bgHex' | 'bgAnsi256'
+>;
+
+function colorStrings(color: ChalkColors) {
+  return (...args: any[]) =>
+    args.map((arg) => (typeof arg === 'string' ? chalk[color](arg) : arg));
 }
