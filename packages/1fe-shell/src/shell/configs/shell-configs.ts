@@ -1,5 +1,5 @@
-import { isEmpty } from "lodash";
-import { OneFEShellOptions } from "../types/one-fe-shell-options";
+import { isEmpty } from 'lodash';
+import { OneFEShellOptions } from '../types/one-fe-shell-options';
 
 type OneFeShellConfigs = OneFEShellOptions | null;
 

@@ -3,7 +3,7 @@ import { getHostedOrSimulatedEnvironment } from '../../configs';
 import IndexController, {
   allowUnsafeEvalForSystemPluginsOnPreprod,
   ifSystemPluginRequestedOnProd,
-  getSystemWidgetConfigs
+  getSystemWidgetConfigs,
 } from '../index.controller';
 import * as indexControllerModule from '../index.controller';
 // import { ACTIVE_AUTOMATED_TEST_FRAMEWORK } from '../../constants';
@@ -23,10 +23,12 @@ describe('allowUnsafeEvalForSystemPluginsOnPreprod', () => {
     jest
       .mocked(getHostedOrSimulatedEnvironment)
       .mockReturnValueOnce('integration');
-    jest.spyOn(indexControllerModule, 'getSystemWidgetConfigs').mockReturnValue([
-      { type: 'system', version: '5.5.5', widgetId: '@ds/foo' },
-      { type: 'system', version: '5.5.5', widgetId: '@ds/bar' },
-    ]);
+    jest
+      .spyOn(indexControllerModule, 'getSystemWidgetConfigs')
+      .mockReturnValue([
+        { type: 'system', version: '5.5.5', widgetId: '@ds/foo' },
+        { type: 'system', version: '5.5.5', widgetId: '@ds/bar' },
+      ]);
 
     const result = allowUnsafeEvalForSystemPluginsOnPreprod({
       route: '/foo',
@@ -41,10 +43,12 @@ describe('allowUnsafeEvalForSystemPluginsOnPreprod', () => {
     jest
       .mocked(getHostedOrSimulatedEnvironment)
       .mockReturnValueOnce('integration');
-    jest.spyOn(indexControllerModule, 'getSystemWidgetConfigs').mockReturnValue([
-      { type: 'system', version: '5.5.5', widgetId: '@ds/baz' },
-      { type: 'system', version: '5.5.5', widgetId: '@ds/bar' },
-    ]);
+    jest
+      .spyOn(indexControllerModule, 'getSystemWidgetConfigs')
+      .mockReturnValue([
+        { type: 'system', version: '5.5.5', widgetId: '@ds/baz' },
+        { type: 'system', version: '5.5.5', widgetId: '@ds/bar' },
+      ]);
 
     const result = allowUnsafeEvalForSystemPluginsOnPreprod({
       route: '/foo',
@@ -61,10 +65,12 @@ describe('ifSystemPluginRequestedOnProd', () => {
     jest
       .mocked(getHostedOrSimulatedEnvironment)
       .mockReturnValueOnce('integration');
-    jest.spyOn(indexControllerModule, 'getSystemWidgetConfigs').mockReturnValue([
-      { type: 'system', version: '5.5.5', widgetId: '@ds/baz' },
-      { type: 'system', version: '5.5.5', widgetId: '@ds/bar' },
-    ]);
+    jest
+      .spyOn(indexControllerModule, 'getSystemWidgetConfigs')
+      .mockReturnValue([
+        { type: 'system', version: '5.5.5', widgetId: '@ds/baz' },
+        { type: 'system', version: '5.5.5', widgetId: '@ds/bar' },
+      ]);
 
     const result = ifSystemPluginRequestedOnProd({
       route: '/foo',
@@ -79,10 +85,12 @@ describe('ifSystemPluginRequestedOnProd', () => {
     jest
       .mocked(getHostedOrSimulatedEnvironment)
       .mockReturnValueOnce('integration');
-    jest.spyOn(indexControllerModule, 'getSystemWidgetConfigs').mockReturnValue([
-      { type: 'system', version: '5.5.5', widgetId: '@ds/foo' },
-      { type: 'system', version: '5.5.5', widgetId: '@ds/bar' },
-    ]);
+    jest
+      .spyOn(indexControllerModule, 'getSystemWidgetConfigs')
+      .mockReturnValue([
+        { type: 'system', version: '5.5.5', widgetId: '@ds/foo' },
+        { type: 'system', version: '5.5.5', widgetId: '@ds/bar' },
+      ]);
 
     const result = ifSystemPluginRequestedOnProd({
       route: '/foo',

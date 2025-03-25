@@ -1,7 +1,7 @@
-import { PluginConfig } from "../../types";
-import { getPlugin, getPluginById } from "../plugin-helpers";
-import { getCachedWidgetConfigs } from "../widget-config";
-import { generateWidgetConfigMap } from "../widget-config-helpers";
+import { PluginConfig } from '../../types';
+import { getPlugin, getPluginById } from '../plugin-helpers';
+import { getCachedWidgetConfigs } from '../widget-config';
+import { generateWidgetConfigMap } from '../widget-config-helpers';
 
 const pluginConfig = {
   widgetId: '@ds/test',

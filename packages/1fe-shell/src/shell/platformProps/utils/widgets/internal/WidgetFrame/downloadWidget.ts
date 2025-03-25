@@ -89,9 +89,7 @@ export async function downloadWidget<TWidgetProps>(
       ? () => widgetsInstance.getByUrl(widgetId, widgetOptions)
       : () => widgetsInstance.get(widgetId, widgetOptions);
 
-    let module: System.Module;
-
-    module = await getModule();
+    const module: System.Module = await getModule();
 
     widgetLoadTime.markEnd(`${widgetId}-download`, {
       detail: {

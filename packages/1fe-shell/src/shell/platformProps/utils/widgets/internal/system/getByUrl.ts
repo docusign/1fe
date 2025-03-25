@@ -41,7 +41,7 @@ export const getByUrl =
               message,
               url: urlAsAString,
               category: 'utils.widgets.getByUrl',
-              widgetId: hostWidgetId
+              widgetId: hostWidgetId,
             });
           },
         });
@@ -54,7 +54,7 @@ export const getByUrl =
           message,
           url: urlAsAString,
           category: 'utils.widgets.getByUrl',
-          widgetId: hostWidgetId
+          widgetId: hostWidgetId,
         });
 
         throw new Error(message);

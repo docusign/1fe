@@ -29,7 +29,8 @@ const PluginLoader = ({
 
   const parsedWidget = WIDGET_CONFIGS.get(plugin.widgetId);
   if (!parsedWidget?.widgetId) {
-    const getError = readOneFEShellConfigs()?.components?.getError || getGenericError;
+    const getError =
+      readOneFEShellConfigs()?.components?.getError || getGenericError;
     return getError({
       plugin,
       message: 'No such experience found',

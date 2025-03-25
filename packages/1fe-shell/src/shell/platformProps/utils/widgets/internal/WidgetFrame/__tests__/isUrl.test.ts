@@ -1,4 +1,4 @@
-import { isUrl } from "../is-url";
+import { isUrl } from '../is-url';
 
 describe('isUrl', () => {
   it('should return true when the input is a URL object', () => {

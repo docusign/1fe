@@ -15,11 +15,13 @@
     "clean": "rm -rf dist",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint src/",
+    "lint": "eslint src/ --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint src/ --ext ts,tsx --report-unused-disable-directives --fix",
     "test": "jest",
     "publish:packages": "npm publish --access public"
   },
   "devDependencies": {
+    "@devhub/eslint-config": "*",
     "@jest/globals": "^29.7.0",
     "@repo/typescript-config": "*",
     "@types/cookie-parser": "^1.4.8",

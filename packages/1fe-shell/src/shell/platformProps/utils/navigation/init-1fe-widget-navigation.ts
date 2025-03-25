@@ -126,7 +126,6 @@ export type UseNavigate = (
 ) => Navigate1FEFunction;
 
 export type Init1FEWidgetNavigation = <HostT>(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   props: any, // desperately needing platform props types package https://jira.corp.docusign.com/browse/ONEDS-57
   navigateWidget: NavigateFunction,
   useNavigateWidget: typeof useNavigate,
@@ -156,7 +155,6 @@ export const init1FEWidgetNavigation = <
       ) => {
         // __REACT SCOPE__
         // anything executed here is inside the consuming widget's react context
-        // eslint-disable-next-line react-hooks/rules-of-hooks -- This is unsafe -- init1FEWidgetNavigation should be removed
         use1FENavigationHandler({
           widgetId,
           useNavigateWidget,

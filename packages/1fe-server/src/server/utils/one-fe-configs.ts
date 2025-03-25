@@ -1,4 +1,4 @@
-import { OneFEProcessedConfigs } from "../types/one-fe-server";
+import { OneFEProcessedConfigs } from '../types/one-fe-server';
 
 let oneFEConfigs: OneFEProcessedConfigs | null = null;
 

@@ -1,6 +1,6 @@
 import { logPlatformUtilUsage } from '../logPlatformUtilUsage';
 
-import { getShellLogger } from "../../../utils/telemetry";
+import { getShellLogger } from '../../../utils/telemetry';
 
 const onedsTitleId = 'oneds-title';
 

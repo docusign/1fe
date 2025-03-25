@@ -1,7 +1,5 @@
 import { RUNTIME_CONFIG_OVERRIDES } from '../../constants/search-params';
-import {
-  clearRuntimeConfigOverrides,
-} from '../runtime-configs';
+import { clearRuntimeConfigOverrides } from '../runtime-configs';
 
 describe('clearRuntimeConfigOverrides', () => {
   let originalLocation: Location;

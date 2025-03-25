@@ -1,1 +1,1 @@
-export const getGenericLoader = () => <p>Loading...</p>
+export const getGenericLoader = () => <p>Loading...</p>;

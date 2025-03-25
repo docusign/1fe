@@ -61,12 +61,11 @@ describe('<RouteWrapper />', () => {
   beforeAll(() => {
     // stop errors from showing in the console since we are triggering it on purpose
     jest.spyOn(console, 'error');
-    // eslint-disable-next-line no-console
+
     jest.mocked(console.error).mockImplementation(() => null);
   });
 
   afterAll(() => {
-    // eslint-disable-next-line no-console
     jest.mocked(console.error).mockRestore();
   });
 

@@ -1,0 +1,11 @@
+{
+  "name": "@devhub/eslint-config",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "main": ".eslintrc.js",
+  "devDependencies": {
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-prettier": "^5.2.4"
+  }
+}

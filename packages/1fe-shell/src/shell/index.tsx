@@ -85,14 +85,15 @@ const renderOneFEShell = (options: OneFEShellOptions) => {
 
   initShellPlatformUtils();
 
-  init().then(() =>
+  init().then(() => {
+    // eslint-disable-next-line react/no-deprecated
     ReactDOM.render(
       <React.StrictMode>
         <App />
       </React.StrictMode>,
       document.querySelector('#root'),
-    ),
-  );
+    );
+  });
 };
 
 export default renderOneFEShell;
