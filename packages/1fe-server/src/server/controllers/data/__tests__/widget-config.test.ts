@@ -81,7 +81,9 @@ describe('getWidgetConfigsForIndexHtml', () => {
   });
 
   it('should return overridden configs if runtime_config_overrides query param is present and environment is preprod', async () => {
-    jest.mocked(readOneFEConfigs).mockReturnValue({ mode: 'preproduction' } as OneFEProcessedConfigs);
+    jest
+      .mocked(readOneFEConfigs)
+      .mockReturnValue({ mode: 'preproduction' } as OneFEProcessedConfigs);
 
     const expectedRuntime = { key: 'new-value' };
     runtimeConfigOverrides = JSON.stringify({
@@ -111,9 +113,9 @@ describe('getWidgetConfigsForIndexHtml', () => {
         widget3: { key: 'new-widgetUrlOverride-value' },
       } as Record<string, RuntimeConfig>;
 
-      jest
-        .mocked(readOneFEConfigs)
-        .mockReturnValue({ mode: isProd ? 'production' : 'preproduction' } as OneFEProcessedConfigs);
+      jest.mocked(readOneFEConfigs).mockReturnValue({
+        mode: isProd ? 'production' : 'preproduction',
+      } as OneFEProcessedConfigs);
       jest
         .mocked(fetchRuntimeConfigsForWidgetUrlOverrides)
         .mockReturnValue(
@@ -150,7 +152,7 @@ describe('validateWidgetConfig', () => {
     const invalidConfigs = [null, undefined, {}, { runtime: 'not-an-object' }];
 
     // this is intentionally wrong
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     invalidConfigs.forEach((config: any) => {
       expect(validateWidgetConfig(config)).toBe(false);
     });

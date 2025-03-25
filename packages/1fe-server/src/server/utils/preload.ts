@@ -92,11 +92,7 @@ export const getPluginPreloadAssetUrls = ({
         return '';
       }) || [];
 
-  return [
-    // eslint-disable-next-line no-underscore-dangle
-    generateCDNUrl(pluginConfig),
-    ...preloadUrls,
-  ]
+  return [generateCDNUrl(pluginConfig), ...preloadUrls]
     .filter((e) => e)
     .map((e) => e?.toString());
 };

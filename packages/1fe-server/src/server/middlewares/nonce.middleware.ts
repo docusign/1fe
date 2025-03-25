@@ -39,10 +39,10 @@ const nonceMiddleware = (
 
     res.setHeader('content-security-policy', noncedCspHeader);
     req.cspNonceGuid = cspNonceGuid;
+
+    return next();
   } catch (error) {
     next(error);
-  } finally {
-    return next();
   }
 };
 

@@ -1,9 +1,7 @@
 import { ErrorInfo } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { getRouter } from './components/Router';
-import {
-  OneDsErrorBoundary,
-} from './components/OneDsErrorBoundary';
+import { OneDsErrorBoundary } from './components/OneDsErrorBoundary';
 import { readOneFEShellConfigs } from './configs/shell-configs';
 import { getShellLogger } from './utils/telemetry';
 import { getGenericError } from './components/GenericError';

@@ -1,17 +1,17 @@
-import { WidgetConfigRaw } from "../../types";
+import { WidgetConfigRaw } from '../../types';
 
 export const widgetConfigPayload: WidgetConfigRaw[] = [
   {
     widgetId: 'testwidget',
-    version: '1.2.0'
+    version: '1.2.0',
   },
   {
     widgetId: 'testwidget-active-phased-deployment',
-    version: '2.4.5'
+    version: '2.4.5',
   },
   {
     widgetId: 'testwidget-with-url',
-    version: '2.4.5'
+    version: '2.4.5',
   },
   {
     widgetId: 'testplugin-finished-phased-deployment',
@@ -26,6 +26,6 @@ export const widgetConfigPayload: WidgetConfigRaw[] = [
         authenticationType: 'required',
       },
     },
-    version: '2.0.0'
+    version: '2.0.0',
   },
 ];

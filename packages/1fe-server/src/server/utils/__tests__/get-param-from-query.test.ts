@@ -4,7 +4,7 @@ import { STATE } from '../../constants';
 
 describe('getParamFromQueryOrRedirectUri', () => {
   const mockReq = (query: Record<string, string>): Request =>
-    ({ query } as Request);
+    ({ query }) as Request;
 
   const stateParamKey = 'someParam';
   const expectedStateValue = 'someValue';

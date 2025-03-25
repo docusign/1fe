@@ -1,7 +1,7 @@
-import { PluginConfig } from "../../types";
-import { getPluginBaselineUrl, getPluginById } from "../plugin-helpers";
-import { generateWidgetConfigMap } from "../widget-config-helpers";
-import * as widgetConfig from "../widget-config";
+import { PluginConfig } from '../../types';
+import { getPluginBaselineUrl, getPluginById } from '../plugin-helpers';
+import { generateWidgetConfigMap } from '../widget-config-helpers';
+import * as widgetConfig from '../widget-config';
 
 const WIDGET_ID_WITH_RUNTIME_BASELINE_URL =
   'widget-id-with-runtime-baseline-url';
