@@ -11,7 +11,7 @@
     "type:check": "tsc --noEmit --skipLibcheck"
   },
   "dependencies": {
-    "@devhub/cli": "workspace:*"
+    "@devhub/cli": "0.0.1"
   },
   "devDependencies": {
     "find-cache-dir": "^5.0.0"
