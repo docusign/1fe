@@ -10,7 +10,7 @@ import {
 } from './config.types';
 
 export async function getConfig(): Promise<OneFeConfigurationObject> {
-  const logger = getLogger('[get-config]');
+  const logger = getLogger('[config][get]');
   try {
     const config: OneFeConfiguration = await loadTsDefault(
       getKnownPaths().oneFeConfig,
