@@ -56,7 +56,6 @@ export const OneDsErrorBoundary = ({
     // to the parent Widget so that it can decide what to do with the error.
     //
     // We have to find a better approach for this.
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     <ErrorBoundary onError={handleError} fallback={fallbackComponent!}>
       {children}
     </ErrorBoundary>
