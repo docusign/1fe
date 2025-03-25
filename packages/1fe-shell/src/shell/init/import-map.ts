@@ -112,9 +112,9 @@ export const createDynamicImportMap = (): {
   const widgetConfigs = getWidgetConfigValues(WIDGET_CONFIGS);
 
   const widgets = widgetConfigs.reduce((itr, e: WidgetConfig) => {
-    if (e?._url) {
-      return { ...itr, [e.widgetId]: e._url };
-    }
+    // if (e?._url) {
+    //   return { ...itr, [e.widgetId]: e._url };
+    // }
 
     return {
       ...itr,

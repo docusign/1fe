@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, ErrorInfo } from 'react';
 import { useLocation } from 'react-router-dom';
 
 // import { isIntegrationEnvironment } from '@1fe/helpers/isomorphic';
@@ -13,7 +13,7 @@ import { PluginConfig } from '../types/widget-config';
 import { SHELL_NAVIGATED_EVENT } from '../constants/event-names';
 import { getShellLogger } from '../utils/telemetry';
 import { readOneFEShellConfigs } from '../configs/shell-configs';
-import { AdditionalErrorInfo, OneDsErrorBoundary } from './OneDsErrorBoundary';
+import { OneDsErrorBoundary } from './OneDsErrorBoundary';
 import { getGenericError } from './GenericError';
 
 export type RouteWrapperProps = {
@@ -47,7 +47,7 @@ export const RouteWrapper: React.FC<RouteWrapperProps> = ({
     previousPathRef.current = location?.pathname;
   }, [location]);
 
-  const handleError = (error: Error, info: AdditionalErrorInfo) => {
+  const handleError = (error: Error, info: ErrorInfo) => {
     logger.error({
       message: `[1FE-Shell] Unhandled Route Failure`,
       error,

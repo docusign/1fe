@@ -16,6 +16,7 @@ import {
   WidgetProps,
 } from '../../../types/platform-utils';
 import { getShellLogger } from '../../../utils/telemetry';
+import { WidgetConfigs } from '../../../../../../1fe-server/src/server/types';
 
 const EMPTY_WIDGET = () => null;
 
@@ -59,7 +60,7 @@ export const initWidgetsHelper = (
           getRequestedWidgetConfigWithoutRuntimeConfig({
             hostWidgetId: hostWidget.widgetId,
             requestedWidgetId,
-            widgetConfigs: WIDGET_CONFIGS,
+            widgetConfigs: WIDGET_CONFIGS as WidgetConfigs,
           });
 
         if (!requestedWidgetConfig) {
@@ -101,7 +102,7 @@ export const initWidgetsHelper = (
         getRequestedWidgetConfigWithoutRuntimeConfig({
           hostWidgetId: hostWidget.widgetId,
           requestedWidgetId,
-          widgetConfigs: WIDGET_CONFIGS,
+          widgetConfigs: WIDGET_CONFIGS as WidgetConfigs,
         });
 
       return memo(function WidgetGetWrapper(props: TWidgetProps) {

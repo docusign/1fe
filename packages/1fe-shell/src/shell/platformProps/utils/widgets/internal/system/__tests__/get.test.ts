@@ -7,8 +7,9 @@
 import { get } from '../get';
 import { isSystemEnv } from '../../utils/isSystem';
 import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../../../../1fe-server/src/server/utils/widget-config-helpers';
-import { WidgetConfig } from '../../../../../../types/widget-config';
+// import { WidgetConfig } from '../../../../../../types/widget-config';
 import { getWidgetBundleCdnUrl } from '../../../../../../utils/url';
+import { WidgetConfig } from '../../../../../../../../../1fe-server/src/server/types';
 // import { getEnvironmentConfigs } from '../../../../../../utils/env-helpers';
 // import { EnvConfig } from '../../../../../../../types';
 // import { getRequestedWidgetConfigWithoutRuntimeConfig } from '../../../../../../../isomorphic/widgetConfigs/getWidgetConfigs';
