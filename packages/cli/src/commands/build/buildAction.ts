@@ -16,7 +16,7 @@ async function buildWebpack(buildOptions: BuildCommandOptions) {
   return new Promise<void>(async (resolve, reject) => {
     const logger = getLogger('[build]');
 
-    const environment = oneFeProgram.getOptionValue('environment');
+    const environment = await oneFeProgram.getOptionValue('environment');
 
     const { webpackConfigs } = await getConfig();
 
@@ -26,6 +26,7 @@ async function buildWebpack(buildOptions: BuildCommandOptions) {
         isCI: oneFeProgram.getOptionValue('ci'),
         environment: buildOptions.liveVersionEnv || environment,
         overrides: webpackConfigs?.[environment],
+        enableAnalyzer: buildOptions.analyze,
       }),
     );
 
@@ -40,11 +41,11 @@ async function buildWebpack(buildOptions: BuildCommandOptions) {
 
         reject();
       } else {
-        logger.info(
-          'stats: ',
+        logger.log(
+          'Webpack build successful!',
           stats?.toString({
             colors: true,
-            logging: 'log', // TODO - this was 'summary' before. investigate this.
+            logging: 'none',
           }),
         );
 

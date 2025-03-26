@@ -44,8 +44,11 @@ export const baseConfigObjectSchema = z.object({
     z.string(),
     z.object({
       commonConfig: commonConfigSchema,
+      shellBaseUrl: z.string().url().optional(),
+      serverBaseUrl: z.string().url().optional(),
     }),
   ),
+  bathtubUrl: z.string().url().optional(),
 });
 
 export const baseConfigSchema = z.union([

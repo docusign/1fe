@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
-import { oneFeProgram } from './oneFeProgram/oneFeProgram';
 import { buildCommand } from './commands/build/buildCommand';
 import { contractsCommand } from './commands/contracts/contracts-command';
+import { devCommand } from './commands/dev/devCommand';
+import { generateCommand } from './commands/generate/generateCommand';
 import { getLogger } from './lib/getLogger';
 import { checkNodeVersion } from './lib/nodeCheck';
+import { oneFeProgram } from './oneFeProgram/oneFeProgram';
 
 const main = async () => {
   const logger = getLogger('[1fe]');
@@ -13,7 +15,9 @@ const main = async () => {
     await checkNodeVersion();
 
     oneFeProgram.addCommand(buildCommand);
+    oneFeProgram.addCommand(devCommand);
     oneFeProgram.addCommand(contractsCommand);
+    oneFeProgram.addCommand(generateCommand);
 
     await oneFeProgram.parseAsync(process.argv);
   } catch (error) {
@@ -23,16 +27,11 @@ const main = async () => {
 };
 
 export type {
-  OneFeConfiguration,
   OneFeBaseConfiguration,
+  OneFeConfiguration,
 } from './lib/config/config.types';
 
 export type { OneFeCommonConfig } from './lib/config/commonConfig.types';
-
-// TODO - CLI sub commands have options. How do we pass them to the main function if we expose this CLI function?
-// export const CLI = (options: CliConfigOptions) => {
-//   return main(options);
-// };
 
 // Kick off CLI execution, only when this file is executed
 if (require.main === module) {

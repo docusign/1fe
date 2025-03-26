@@ -6,9 +6,9 @@ import { OneFeConfigurationObject } from './config.types';
 export async function validateConfig(
   config: OneFeConfigurationObject,
 ): Promise<OneFeConfigurationObject> {
-  const logger = getLogger('[validate-config]');
+  const logger = getLogger('[config][validate]');
 
-  logger.info(
+  logger.debug(
     'Validating configuration\n\n',
     JSON.stringify(config, null, 2),
     '\n',

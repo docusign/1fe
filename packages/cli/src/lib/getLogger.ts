@@ -1,5 +1,5 @@
 import { oneFeProgram } from '../oneFeProgram/oneFeProgram';
-import chalk from 'chalk';
+import chalk, { ChalkInstance } from 'chalk';
 
 /**
  * TODO - consolidate use of loggers here.
@@ -8,31 +8,50 @@ import chalk from 'chalk';
  However, calling this inside an action for a command is ok because commander would have parsed the cli params by then
  */
 export function getLogger(prefix: `[${string}]`) {
-  const trace = oneFeProgram.opts().trace;
+  const debug = oneFeProgram.getOptionValue('debug');
+  const trace = oneFeProgram.getOptionValue('trace');
 
   const coloredPrefix = chalk.gray(prefix);
 
-  return {
+  const logger = {
     /** General purpose log. Shows up always */
     log: (...args: any[]) => console.log(`${coloredPrefix}`, ...args),
 
-    /** Debug log. Shows up only when trace is enabled */
+    /** Debug log. Shows up only when --debug is used */
     debug: (...args: any[]) =>
-      trace ? console.debug(`${coloredPrefix}`, ...args) : undefined,
+      console.debug(`${coloredPrefix}`, ...colorStrings('cyan')(...args)),
 
-    /** Info log. Shows up only when trace is enabled */
+    /** Info log. Shows up only when --trace is used */
     info: (...args: any[]) =>
-      trace ? console.log(`${coloredPrefix}`, ...args) : undefined,
+      console.log(`${coloredPrefix}`, ...colorStrings('gray')(...args)),
 
-    /** Warning log. Shows up only when trace is enabled */
+    /** Warning log. Shows up only when --trace is used */
     warn: (...args: any[]) =>
-      trace ? console.warn(`${coloredPrefix}`, ...args) : undefined,
+      console.warn(`${coloredPrefix}`, ...colorStrings('yellow')(...args)),
 
     /** Error log. Shows up always */
     error: (...args: any[]) =>
-      console.error(
-        `${coloredPrefix}`,
-        ...args.map((arg) => (typeof arg === 'string' ? chalk.red(arg) : arg)),
-      ),
+      console.error(`${coloredPrefix}`, ...colorStrings('red')(...args)),
   };
+
+  if (!trace) {
+    logger.info = () => {};
+    logger.warn = () => {};
+  }
+
+  if (!debug) {
+    logger.debug = () => {};
+  }
+
+  return logger;
+}
+
+type ChalkColors = keyof Omit<
+  ChalkInstance,
+  'hex' | 'level' | 'rgb' | 'ansi256' | 'bgRgb' | 'bgHex' | 'bgAnsi256'
+>;
+
+function colorStrings(color: ChalkColors) {
+  return (...args: any[]) =>
+    args.map((arg) => (typeof arg === 'string' ? chalk[color](arg) : arg));
 }
