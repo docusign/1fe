@@ -1,6 +1,5 @@
 import { test, expect } from '@playwright/test';
 
-// TODO[1fe]: Test again
 test('Should navigate forwards, backwards, and reload', async ({ page }) => {
     await page.goto('http://localhost:3001/app1/utils');
     await page.goto('http://localhost:3001/app1');

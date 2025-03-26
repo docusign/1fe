@@ -12,7 +12,7 @@ test('Context functions in @internal/generic-child-widget', async ({ page }) => 
 
   await expect(await resultElement).toHaveText('');
 
-  await page.click('button[data-qa="context.self.btn"]');
+  await page.click('button[data-qa="utils.context.self.btn"]');
   await page.waitForTimeout(100);
 
   const selfContent = JSON.parse(
