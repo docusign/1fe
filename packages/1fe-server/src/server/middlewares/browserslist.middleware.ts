@@ -36,6 +36,7 @@ const browsersListMiddleware = (
       // UserAgent does not have SAW or Playwright signature
       !userAgent.includes('ClientTransactionId') && // exclude SAW and/or Playwright automated tests
       !userAgent.includes('sawmill.docusignhq') && // exclude SAW and/or Playwright automated tests
+      !userAgent.includes('1fe-automation') &&
       !ignoredRoutes.includes(path) &&
       // Ignore redirecting for static assets (Only applicable to local dev mode - Usually served by CDN)
       !path.startsWith(STATIC_ASSETS.IMAGES) &&

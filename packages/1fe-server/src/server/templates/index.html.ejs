@@ -62,6 +62,7 @@
         window.location.href = `/error?cause=initialization&widgetPath=${window.location.pathname}`
       }
 
+      // TODO[1fe][post-mvp]: Add retry of critical imports
       function onSystemReady() {
         System.import("<%= criticalLibraryConfigUrls.SystemAMD %>").then(() => {
           System.import('<%= shellBundleUrl %>').catch(onError);

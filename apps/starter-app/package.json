@@ -15,6 +15,7 @@
     "server:build": "tsc --project tsconfig.server.json",
     "build": "npm run clean && npm run server:build && npm run client:build",
     "test": "tsc && prettier --check . && eslint . && stylelint \"**/*.css\"",
+    "test:playwright": "playwright test",
     "start": "node dist/server.js"
   },
   "devDependencies": {
@@ -43,6 +44,7 @@
     "http-proxy-middleware": "^2.0.1",
     "lint-staged": "^11.2.4",
     "npm-run-all": "^4.1.5",
+    "playwright": "^1.51.1",
     "prettier": "2.4.1",
     "progress-bar-webpack-plugin": "^2.1.0",
     "style-loader": "^4.0.0",
