@@ -17,12 +17,20 @@ export const setLibraryConfigs = (
   libraryConfigs = newLibraryConfigs;
 };
 
-const getDynamicExternalLibraryConfigs = (): ExternalLibConfig[] => {
+export const getDynamicExternalLibraryConfigs = (): ExternalLibConfig[] => {
   const libIsExternal = (
     lib: ExternalLibConfig | InstalledLibConfig,
   ): lib is ExternalLibConfig => lib.type === 'external';
 
   return getLibraryConfigs().filter(libIsExternal);
+};
+
+export const getDynamicInstalledLibraryConfigs = (): InstalledLibConfig[] => {
+  const libIsInstalled = (
+    lib: ExternalLibConfig | InstalledLibConfig,
+  ): lib is InstalledLibConfig => lib.type === 'installed';
+
+  return getLibraryConfigs().filter(libIsInstalled);
 };
 
 const getCDNLibraryUrl = (

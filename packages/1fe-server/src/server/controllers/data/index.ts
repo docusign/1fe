@@ -19,6 +19,7 @@ import { readOneFEConfigs } from '../../utils/one-fe-configs';
 import { getRequestHost } from '../../utils/request-helpers';
 import { getWidgetConfigsForIndexHtml } from './widget-config';
 import { STATIC_ASSETS } from '../../constants';
+import { getLivePackageVersions } from './get-live-package-versions';
 
 export const dataForRenderingTemplate = async (req: Request) => {
   // TODO:[1FE consumption] Will enableRuntimeConfigOverrides flag be promoted to production? May need to update this
@@ -97,7 +98,7 @@ export const dataForRenderingTemplate = async (req: Request) => {
     },
     criticalLibraryConfigUrls: criticalLibs,
     lazyLoadedLibsConfig: lazyLoadedLibs,
-    packages: {},
+    packages: getLivePackageVersions(),
     preloadableFetchAPIURLs,
     preloadableStaticAssetURLs,
     metaTags: getMetaTagStringsFromWidgetRuntimeConfig(
