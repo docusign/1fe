@@ -1,1 +1,3 @@
-export * from './app1';
+import Widget from './app1';
+
+export default Widget;

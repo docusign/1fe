@@ -30,6 +30,7 @@ export const Go = (props) => {
       </div>
       <ButtonContainer>
         <Button
+          data-qa="utils.navigation.go.btn"
           onClick={() => {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore This new util will does not exist yet

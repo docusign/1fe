@@ -12,6 +12,7 @@
     <link rel="icon" type="image/x-icon" href=<%- favicon %>>
 
     <title id="oneds-title"><%- pageTitle %></title>
+    <link rel="preload" as="script" href="<%= shellBundleUrl %>" crossorigin="anonymous"></link>
     <script type="systemjs-importmap" crossorigin="anonymous">
       <%- JSON.stringify(systemJsImportMapConfig) %>
     </script>
@@ -62,6 +63,7 @@
         window.location.href = `/error?cause=initialization&widgetPath=${window.location.pathname}`
       }
 
+      // TODO[1fe][post-mvp]: Add retry of critical imports
       function onSystemReady() {
         System.import("<%= criticalLibraryConfigUrls.SystemAMD %>").then(() => {
           System.import('<%= shellBundleUrl %>').catch(onError);

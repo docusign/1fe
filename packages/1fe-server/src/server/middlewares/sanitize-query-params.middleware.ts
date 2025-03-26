@@ -4,7 +4,7 @@ import { query } from 'express-validator';
 import { RUNTIME_CONFIG_OVERRIDES, WIDGET_URL_OVERRIDES } from '../constants';
 import { readOneFEConfigs } from '../utils/one-fe-configs';
 
-export const ALLOWED_USER_AGENTS_FOR_WIDGET_OVERRIDE = ['test.userAgent'];
+export const ALLOWED_USER_AGENTS_FOR_WIDGET_OVERRIDE = ['1fe.developer'];
 
 const forbiddenQueryParams = [
   'imo', // Used by import-map-overrides library to allow users to request import map overrides

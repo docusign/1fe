@@ -33,7 +33,7 @@ export const UseNavigate = (props) => {
 
       <Button
         size="large"
-        data-qa="utils.context.get.btn"
+        data-qa="utils.navigation.useNavigate.normal.btn"
         onClick={() => navigate1fe(widgetUrl)}
       >
         {'navigate within widget and update url'}

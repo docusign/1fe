@@ -28,7 +28,7 @@ export const Context = (props) => {
         </Button>
         <Button
           size="large"
-          data-qa="utils.context.get.btn"
+          data-qa="utils.context.self.btn"
           onClick={() => {
             setContextResult(JSON.stringify(props.platform.context.self));
             // setContextResult(JSON.stringify(platformProps.context.self));
@@ -39,7 +39,7 @@ export const Context = (props) => {
         </Button>
         <Button
           size="large"
-          data-qa="utils.context.get.btn"
+          data-qa="utils.context.host.btn"
           onClick={() => {
             setContextResult(JSON.stringify(props.platform.context.getHost()));
             // setContextResult(JSON.stringify(platformProps.context.getHost()));
