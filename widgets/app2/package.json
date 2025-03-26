@@ -9,6 +9,7 @@
     "check-format": "prettier --check ."
   },
   "devDependencies": {
+    "@devhub/cli": "workspace:*",
     "@repo/widget-base-config": "0.0.1",
     "@vitejs/plugin-react": "^4.3.4",
     "cross-env": "^7.0.3",
