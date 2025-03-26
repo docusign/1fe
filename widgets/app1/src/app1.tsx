@@ -12,8 +12,9 @@ import withProvider from './withProvider';
 const RootWrapper: any = (props) => {
   useEffect(() => {
     props.platform.utils.appLoadTime.end();
+    console.log({platformProps});
   }, []);
-  
+
   return <Widget {...props} />;
 };
 
