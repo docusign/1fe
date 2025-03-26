@@ -12,6 +12,7 @@
     <link rel="icon" type="image/x-icon" href=<%- favicon %>>
 
     <title id="oneds-title"><%- pageTitle %></title>
+    <link rel="preload" as="script" href="<%= shellBundleUrl %>" crossorigin="anonymous"></link>
     <script type="systemjs-importmap" crossorigin="anonymous">
       <%- JSON.stringify(systemJsImportMapConfig) %>
     </script>
