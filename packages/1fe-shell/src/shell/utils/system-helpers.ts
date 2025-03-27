@@ -7,12 +7,11 @@ import { getShellLogger } from './telemetry';
 import { TreeNode, widgetContextDependencyTree } from './tree';
 import { isAllowedSource } from './widget-url-overrides';
 
-const logger = getShellLogger();
 // TODO: BK to come back and merge the two trees
 // 1. system-helpers.ts
 // 2. getPlatformUtils.ts
-const CONTEXT_IMPORT_NAME = '1dsContext';
-const INTERNAL_CONTEXT_REF = Symbol('1dsContext');
+const CONTEXT_IMPORT_NAME = '1feContext';
+const INTERNAL_CONTEXT_REF = Symbol('1feContext');
 
 /**
  * For cases when we use System.import to load a widget directly from a url
@@ -128,6 +127,8 @@ export const tryGetParentTreeNode = (
   // Get the parent widget that is requesting the context
   const requestedBy = widgetContextDependencyTree.getByKey(url);
   if (!requestedBy) {
+    const logger = getShellLogger();
+
     // This only happens if somehow we are being asked to resolve a context for a widget
     // that is not in our platform or not even loaded yet.
     logger.error({
