@@ -45,7 +45,7 @@ export const jsonReplacer = () => {
 //         data-qa={`import.platformProps.comparison.btn`}
 //         onClick={() => {
 //           const instance = isEqual(
-//             JSON.stringify(props.platform, jsonReplacer()),
+//             JSON.stringify(platformProps, jsonReplacer()),
 //             JSON.stringify(platformProps, jsonReplacer()),
 //           );
 

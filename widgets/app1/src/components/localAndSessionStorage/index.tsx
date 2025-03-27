@@ -7,11 +7,11 @@ import { utilSectionStyles } from '../routes/styles/utilsDemo.styles';
 
 import { LocalAndSessionStorage1FE } from './localAndSessionStorage1FE';
 
-export const LocalAndSessionStorage: React.FC = (props) => {
+export const LocalAndSessionStorage: React.FC = () => {
   return (
     <div css={utilSectionStyles} data-qa="utils.experiments.container">
       <h1>{'utils.localStorage / utils.sessionStorage'}</h1>
-      <LocalAndSessionStorage1FE {...props} />
+      <LocalAndSessionStorage1FE />
     </div>
   );
 };

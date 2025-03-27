@@ -7,13 +7,13 @@ import { utilSectionStyles } from '../routes/styles/utilsDemo.styles';
 
 import { Get } from './get';
 
-export const Widgets: React.FC = (props) => {
+export const Widgets: React.FC = () => {
   // const t = useTranslate();
   return (
     <div css={utilSectionStyles} data-qa='utils.widgets.container'>
       <h1>utils.widgets</h1>
       {/* <h1>{t('Components.Widgets.Index')}</h1> */}
-      <Get {...props} />
+      <Get />
     </div>
   );
 };
