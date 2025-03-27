@@ -23,16 +23,16 @@ test(
     const {
       configs: { widgetConfig },
     } = versionData;
-    const widgetId = '@1fe/starter-kit';
+    // const widgetId = '@1fe/starter-kit';
     console.log(widgetConfig);
-    const version = widgetConfig.find(
-      (plugin: any) => plugin.widgetId === widgetId,
-    )?.version;
+    // const version = widgetConfig.find(
+    //   (plugin: any) => plugin.widgetId === widgetId,
+    // )?.version;
     // const hostedEnv = process.env.NODE_ENV?.toLowerCase();
 
     // sanity check since NODE_ENV could be undefined
     // if (hostedEnv) {
-      const cdnBaseUrl = 'https://docutest-a.akamaihd.net';
+      // const cdnBaseUrl = 'https://docutest-a.akamaihd.net';
       const expectedRequestUrl = 'https://docutest-a.akamaihd.net/development/1fe/widgets/@1fe/starter-kit/1.0.0/widget-runtime-config.json';
       const requestPromise = page.waitForRequest(expectedRequestUrl);
       await page.reload();
