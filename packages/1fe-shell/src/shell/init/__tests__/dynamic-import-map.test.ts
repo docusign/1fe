@@ -1,3 +1,4 @@
+import { DYNAMIC_CONFIGS } from '../../configs/config-helpers';
 import { WIDGET_URL_OVERRIDES } from '../../constants/search-params';
 import { getShellPlatformUtils } from '../../utils/shell-platform-utils';
 import * as utils from '../../utils/url';
@@ -33,6 +34,16 @@ jest.mock('../../components/Router', () => ({
 jest.mock('../../configs/config-helpers', () => ({
   LAZY_LOADED_LIB_CONFIGS: { lazy: 'lazy_config' },
   WIDGET_CONFIGS: jest.fn(),
+  DYNAMIC_CONFIGS: {
+    importMapOverrides: {
+      allowedSources: [
+        "localhost",
+        "127.0.0.1",
+        "docucdn-a.akamaihd.net",
+        "docutest-a.akamaihd.net",
+      ]
+    },
+  },
   getWidgetConfigValues: jest
     .fn()
     .mockReturnValue([
@@ -123,7 +134,7 @@ describe('createDynamicImportMap', () => {
         imports: {
           lazy: 'lazy_config',
           mock_widget_id: 'http://mock_cdn_url.com/',
-          system_widget_id: 'mock_url',
+          system_widget_id: 'http://mock_cdn_url.com/',
         },
         scopes: {},
       },

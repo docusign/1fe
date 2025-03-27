@@ -29,6 +29,10 @@ jest.mock('../../../..', () => ({
   }),
 }));
 
+jest.mock('../../../../../../configs/shell-configs', () => ({
+  readOneFEShellConfigs: jest.fn().mockReturnValue({}),
+}));
+
 describe('<WidgetFrame />', () => {
   it('should successfully render', () => {
     renderWithBrowserRouterWrapper(

@@ -24,6 +24,10 @@ jest.mock('../../platformProps/utils', () => ({
   }),
 }));
 
+jest.mock('../../configs/shell-configs', () => ({
+  readOneFEShellConfigs: jest.fn().mockReturnValue({}),
+}));
+
 jest.mock('lottie-react', () => 'lottie');
 
 // jest.mock('../../utils/env-helpers', () => ({

@@ -1,6 +1,10 @@
 // import { shellConsoleLogger } from '@1fe/helpers/client';
 import { preloadUrl } from '../preload-url';
 
+jest.mock('../../../../configs/shell-configs', () => ({
+  readOneFEShellConfigs: jest.fn().mockReturnValue({}),
+}));
+
 // jest.mock('../../logPlatformUtilUsage', () => ({
 //   logPlatformUtilUsage: jest.fn(),
 // }));

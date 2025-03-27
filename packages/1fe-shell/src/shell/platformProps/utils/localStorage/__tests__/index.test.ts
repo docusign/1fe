@@ -2,6 +2,15 @@ import store from 'store2';
 
 import { initLocalStorage } from '..';
 
+jest.mock('../../../../configs/shell-configs', () => ({
+  readOneFEShellConfigs: jest.fn().mockReturnValue({
+    shellLogger: {
+      log: jest.fn(),
+      error: jest.fn()
+    }
+  }),
+}));
+
 describe('localStorage', () => {
   const widgetId = 'myWidget';
   const key = 'testKey';

@@ -12,6 +12,10 @@ import { getAsset as _getAsset } from '../getAsset';
 //   }),
 // }));
 
+jest.mock('../../../../../../configs/shell-configs', () => ({
+  readOneFEShellConfigs: jest.fn().mockReturnValue({}),
+}));
+
 jest.mock('../../utils/isSystem');
 
 const mockModule = { default: { foo: 'bar' } };

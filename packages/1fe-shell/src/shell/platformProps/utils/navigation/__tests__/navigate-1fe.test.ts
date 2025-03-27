@@ -23,6 +23,10 @@ import { type EventBusPlatformUtils } from '../../event-bus/types';
 //   },
 // }));
 
+jest.mock('../../../../configs/shell-configs', () => ({
+  readOneFEShellConfigs: jest.fn().mockReturnValue({}),
+}));
+
 jest.mock('../../../../utils/url', () => ({
   ...jest.requireActual('../../../../utils/url'),
   getBaseHrefUrl: () => 'https://apps.docusign.com/',
