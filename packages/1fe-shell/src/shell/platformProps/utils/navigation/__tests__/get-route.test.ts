@@ -11,6 +11,10 @@ import { getRoute as _getRoute } from '../get-route';
 //   }),
 // }));
 
+jest.mock('../../../../configs/shell-configs', () => ({
+  readOneFEShellConfigs: jest.fn().mockReturnValue({}),
+}));
+
 jest.mock('../../../../utils/url', () => ({
   getBaseHrefUrl: () => 'https://apps.dev.docusign.net/',
   // getEnvironmentConfigs: jest.fn(() =>

@@ -52,6 +52,10 @@ jest.mock('../../../../../../utils/widget-type', () => ({
   isShellWidget: jest.fn(),
 }));
 
+jest.mock('../../../../../../configs/shell-configs', () => ({
+  readOneFEShellConfigs: jest.fn().mockImplementation(() => ({}))
+}));
+
 // jest.mock<typeof import('../../../../../../utils/env-helpers')>(
 //   '../../../../../../utils/env-helpers',
 //   () => ({
