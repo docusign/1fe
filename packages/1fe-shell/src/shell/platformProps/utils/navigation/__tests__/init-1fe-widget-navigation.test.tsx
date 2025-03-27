@@ -7,9 +7,14 @@ import { getRoute } from '../get-route';
 import { getPlatformProps } from '../../..';
 import { useSubscribeWidgetDeepLinking } from '../init-1fe-widget-navigation';
 import { WidgetConfig } from '../../../../types/widget-config';
+
 jest.mock('../../../../utils/url', () => ({
   getBaseHrefUrl: jest.fn(() => 'https://apps.docusign.com/'),
   basePathname: jest.fn(() => '/'),
+}));
+
+jest.mock('../../../../configs/shell-configs', () => ({
+  readOneFEShellConfigs: jest.fn().mockReturnValue({}),
 }));
 
 // jest.mock<typeof import('../../../../utils/env-helpers')>(

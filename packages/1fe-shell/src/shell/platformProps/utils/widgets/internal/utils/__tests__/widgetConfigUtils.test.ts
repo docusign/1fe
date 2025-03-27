@@ -34,6 +34,13 @@ jest.mock('../../../../../../configs/config-helpers', () => ({
     get: jest.fn(),
     values: jest.fn(),
   },
+  DYNAMIC_CONFIGS: {
+    cdn: {
+      widgets: {
+        basePrefix: 'https://someurl.com',
+      },
+    },
+  },
 }));
 
 jest.mock('../../../../../../configs/shell-configs', () => ({
@@ -109,7 +116,7 @@ describe('queueWidgetPreloadsIfFound', () => {
     expect(injectPreloadTags).toHaveBeenNthCalledWith(
       1,
       [
-        `https://docucdn-a.akamaihd.net/production/1fe/widgets/${widgetPreloadedByRequestedWidget.widgetId}/${widgetPreloadedByRequestedWidget.version}/js/1fe-bundle.js`,
+        `https://someurl.com/${widgetPreloadedByRequestedWidget.widgetId}/${widgetPreloadedByRequestedWidget.version}/js/1fe-bundle.js`,
       ],
       'script',
     );

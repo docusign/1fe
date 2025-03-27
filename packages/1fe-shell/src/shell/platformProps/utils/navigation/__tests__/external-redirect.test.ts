@@ -5,6 +5,10 @@ import { externalRedirect } from '../external-redirect';
 //   logPlatformUtilUsage: jest.fn(),
 // }));
 
+jest.mock('../../../../configs/shell-configs', () => ({
+  readOneFEShellConfigs: jest.fn().mockReturnValue({}),
+}));
+
 describe('externalRedirect', () => {
   it('should redirect using the window.location object', () => {
     // Mock window.location.href

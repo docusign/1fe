@@ -12,6 +12,10 @@ import { getByUrl as _getByUrl } from '../getByUrl';
 //   logPlatformUtilUsage: jest.fn(),
 // }));
 
+jest.mock('../../../../../../configs/shell-configs', () => ({
+  readOneFEShellConfigs: jest.fn().mockReturnValue({}),
+}));
+
 jest.mock('../../utils/isSystem');
 
 const mockModule = { default: { foo: 'bar' } };
