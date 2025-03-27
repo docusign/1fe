@@ -5,6 +5,10 @@ import { initGo } from '../go';
 //   logPlatformUtilUsage: jest.fn(),
 // }));
 
+jest.mock('../../../../configs/shell-configs', () => ({
+  readOneFEShellConfigs: jest.fn().mockReturnValue({}),
+}));
+
 describe('go', () => {
   // Mock window.history.go
   window = jest.fn() as any;

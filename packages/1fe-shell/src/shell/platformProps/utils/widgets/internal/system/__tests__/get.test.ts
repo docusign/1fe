@@ -26,6 +26,10 @@ import { WidgetConfig } from '../../../../../../../../../1fe-server/src/server/t
 //   }),
 // );
 
+jest.mock('../../../../../../configs/shell-configs', () => ({
+  readOneFEShellConfigs: jest.fn().mockReturnValue({}),
+}));
+
 jest.mock<
   typeof import('../../../../../../../../../1fe-server/src/server/utils/widget-config-helpers')
 >(
