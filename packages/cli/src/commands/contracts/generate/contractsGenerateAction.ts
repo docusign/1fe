@@ -3,7 +3,6 @@ import { getLogger } from '../../../lib/getLogger';
 import { apiExtractorConfig } from '../../../configs/apiExtractor/apiExtractor.config';
 import { getKnownPaths } from '../../../lib/paths/getKnownPaths';
 
-// TODO - support creating variant contracts
 export async function contractsGenerateAction() {
   const logger = getLogger('[contracts][generate]');
   const paths = getKnownPaths();
