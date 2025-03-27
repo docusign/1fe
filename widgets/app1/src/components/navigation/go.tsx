@@ -1,10 +1,10 @@
-// import { platformProps } from '@1fe/shell';
+import { platformProps } from '@devhub/1fe-shell';
 import styled from '@emotion/styled';
 import { Input, Button } from 'antd';
 import { useState } from 'react';
 
 // import { useTranslate } from 'src/locales';
-export const Go = (props) => {
+export const Go = () => {
   // const t = useTranslate();
   const [delta, setDelta] = useState<string>('-1');
 
@@ -30,11 +30,11 @@ export const Go = (props) => {
       </div>
       <ButtonContainer>
         <Button
-          data-qa="utils.navigation.go.btn"
+          data-qa='utils.navigation.go.btn'
           onClick={() => {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore This new util will does not exist yet
-            props.platform.utils.navigation.go(Number(delta));
+            platformProps.utils.navigation.go(Number(delta));
           }}
         >
           {'utils.navigation.go'}

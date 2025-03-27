@@ -1,16 +1,16 @@
-// import { platformProps } from '@1fe/shell';
+import { platformProps } from '@devhub/1fe-shell';
 import { Button } from 'antd';
 
 // import { useTranslate } from 'src/locales';
-export const GetAbsoluteWidgetPath = (props) => {
+export const GetAbsoluteWidgetPath = () => {
   // const t = useTranslate();
   return (
-    <div data-qa="utils.navigation.getAbsoluteWidgetPath.container">
+    <div data-qa='utils.navigation.getAbsoluteWidgetPath.container'>
       <Button
-        data-qa="utils.navigation.getAbsoluteWidgetPath.btn"
+        data-qa='utils.navigation.getAbsoluteWidgetPath.btn'
         onClick={() => {
           const absoluteWidgetPath =
-            props.platform.utils.navigation.getAbsoluteWidgetPath();
+            platformProps.utils.navigation.getAbsoluteWidgetPath();
           window.alert(absoluteWidgetPath);
         }}
       >

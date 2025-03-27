@@ -9,7 +9,7 @@ import {
 import { WidgetContainer } from '../misc/widgetContainer';
 // import { useTranslate } from 'src/locales';
 
-export const Get = (props) => {
+export const Get = () => {
   // const t = useTranslate();
   const [isWidgetVisible, showWidget] = useReducer(() => true, false);
   const [isWidgetWithCustomLoaderVisible, showWidgetWithCustomLoader] =
@@ -23,7 +23,7 @@ export const Get = (props) => {
       </Button>
       {isWidgetVisible && (
         <WidgetContainer data-qa={'utils.widgets.get.result.container'}>
-          <GetChildWidget isVisible={isWidgetVisible} props={props} />
+          <GetChildWidget isVisible={isWidgetVisible} />
         </WidgetContainer>
       )}
       <Button
@@ -37,7 +37,6 @@ export const Get = (props) => {
         <WidgetContainer data-qa={'utils.widgets.get.result.container'}>
           <GetChildWidgetWithCustomLoader
             isVisible={isWidgetWithCustomLoaderVisible}
-            props={props}
           />
         </WidgetContainer>
       )}

@@ -1,17 +1,15 @@
-// import { platformProps } from '@1fe/shell';
+import { platformProps } from '@devhub/1fe-shell';
 import { Button } from 'antd';
 
 // import { useTranslate } from 'src/locales';
-export const ExternalRedirect = (props) => {
+export const ExternalRedirect = () => {
   // const t = useTranslate();
   return (
-    <div data-qa="utils.navigation.externalRedirect.container">
+    <div data-qa='utils.navigation.externalRedirect.container'>
       <Button
-        data-qa="utils.navigation.externalRedirect.btn"
+        data-qa='utils.navigation.externalRedirect.btn'
         onClick={() => {
-          props.platform.utils.navigation.externalRedirect(
-            'https://google.com',
-          );
+          platformProps.utils.navigation.externalRedirect('https://google.com');
         }}
       >
         {'utils.navigation.externalRedirect'}

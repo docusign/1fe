@@ -1,36 +1,36 @@
-// import { platformProps } from '@1fe/shell';
+import { platformProps } from '@devhub/1fe-shell';
 import { Button } from 'antd';
 import { useState } from 'react';
 
 import ResultElementBoundary from '../misc/resultElementBoundary';
 // import { useTranslate } from 'src/locales';
 
-export const LocalAndSessionStorage1FE = (props) => {
+export const LocalAndSessionStorage1FE = () => {
   type allowedTypes = string | boolean | number;
   // const t = useTranslate();
 
   const [result, setResult] = useState<allowedTypes>('');
   const [sessionResult, setSessionResult] = useState<allowedTypes>();
   const getResult = (key: string, value: allowedTypes) => {
-    props.platform.utils.localStorage.set(key, value);
-    setResult(props.platform.utils.localStorage.get(key).toString());
+    platformProps.utils.localStorage.set(key, value);
+    setResult(platformProps.utils.localStorage.get(key).toString());
   };
   const getSessionResult = (key: string, value: allowedTypes) => {
-    props.platform.utils.sessionStorage.set(key, value);
-    setSessionResult(props.platform.utils.sessionStorage.get(key).toString());
+    platformProps.utils.sessionStorage.set(key, value);
+    setSessionResult(platformProps.utils.sessionStorage.get(key).toString());
   };
 
   return (
-    <div data-qa="utils.localAndSessionStorage1FE.container">
+    <div data-qa='utils.localAndSessionStorage1FE.container'>
       <Button
-        data-qa="utils.localAndSessionStorage1FE.localStorage.getBoolean.btn"
+        data-qa='utils.localAndSessionStorage1FE.localStorage.getBoolean.btn'
         onClick={() => getResult('key2', true)}
       >
         localStorageSetAndGetBoolean
         {/* {t('Components.LocalAndSessionStorage.LocalStorage1FE-GetBoolean')} */}
       </Button>
       <Button
-        data-qa="utils.localAndSessionStorage1FE.localStorage.get.btn"
+        data-qa='utils.localAndSessionStorage1FE.localStorage.get.btn'
         onClick={() => getResult('key1', 'value1')}
       >
         localStorageSetAndGetString
@@ -38,14 +38,14 @@ export const LocalAndSessionStorage1FE = (props) => {
       </Button>
 
       <ResultElementBoundary
-        role="status"
+        role='status'
         data-qa={'utils.localStorage.get.result'}
       >
         {result}
       </ResultElementBoundary>
 
       <Button
-        data-qa="utils.localAndSessionStorage1FE.sessionStorage.getSessionString.btn"
+        data-qa='utils.localAndSessionStorage1FE.sessionStorage.getSessionString.btn'
         onClick={() => getSessionResult('key1', 'sessionStringValue')}
       >
         sessionStorageSetAndGetString
@@ -53,7 +53,7 @@ export const LocalAndSessionStorage1FE = (props) => {
       </Button>
 
       <Button
-        data-qa="utils.localAndSessionStorage1FE.sessionStorage.getSessionBoolean.btn"
+        data-qa='utils.localAndSessionStorage1FE.sessionStorage.getSessionBoolean.btn'
         onClick={() => getSessionResult('key3', true)}
       >
         sessionStorageSetAndGetBoolean
@@ -61,7 +61,7 @@ export const LocalAndSessionStorage1FE = (props) => {
       </Button>
 
       <ResultElementBoundary
-        role="status"
+        role='status'
         data-qa={'utils.sessionStorage.getSession.result'}
       >
         {sessionResult}

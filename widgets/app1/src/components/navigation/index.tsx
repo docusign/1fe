@@ -13,19 +13,19 @@ import { PreLoadUrl } from './preLoadUrl';
 import { UseNavigate } from './useNavigate';
 
 // TODO: strongly type
-export const Navigation: React.FC<any> = (props) => {
+export const Navigation = () => {
   // const t = useTranslate();
   return (
     <div css={utilSectionStyles} data-qa='utils.experiments.container'>
       <h1>utils.navigation</h1>
       {/* <h1>{t('Components.Navigation.Index')}</h1> */}
-      <UseNavigate {...props} />
-      <GetRoute {...props} />
-      <GetPluginRoute {...props} />
-      <GetAbsoluteWidgetPath {...props} />
-      <ExternalRedirect {...props} />
-      <PreLoadUrl {...props} />
-      <Go {...props} />
+      <UseNavigate />
+      <GetRoute />
+      <GetPluginRoute />
+      <GetAbsoluteWidgetPath />
+      <ExternalRedirect />
+      <PreLoadUrl />
+      <Go />
     </div>
   );
 };

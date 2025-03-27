@@ -8,7 +8,7 @@ import { utilSectionStyles } from '../routes/styles/utilsDemo.styles';
 /**
  * Experience Utility examples
  */
-export const Experience: React.FC = (props) => {
+export const Experience: React.FC = () => {
   // const t = useTranslate();
 
   return (
@@ -16,8 +16,8 @@ export const Experience: React.FC = (props) => {
 
       {/* <h1>{t('Components.Experience.Index')}</h1> */}
       <h1>utils.experience</h1>
-      <SetTitle {...props} />
-      <GetTitle {...props} />
+      <SetTitle />
+      <GetTitle />
     </div>
   );
 };

@@ -1,15 +1,15 @@
-// import { platformProps } from '@1fe/shell';
+import { platformProps } from '@devhub/1fe-shell';
 import { Button } from 'antd';
 
 // import { useTranslate } from 'src/locales';
-export const GetRoute = (props) => {
+export const GetRoute = () => {
   // const t = useTranslate();
   return (
-    <div data-qa="utils.navigation.getRoute.container">
+    <div data-qa='utils.navigation.getRoute.container'>
       <Button
-        data-qa="utils.navigation.getRoute.btn"
+        data-qa='utils.navigation.getRoute.btn'
         onClick={() => {
-          const route = props.platform.utils.navigation.getRoute();
+          const route = platformProps.utils.navigation.getRoute();
           window.alert(route);
         }}
       >
@@ -17,9 +17,9 @@ export const GetRoute = (props) => {
         {/* {t('Components.Navigation.GetRouteText')} */}
       </Button>
       <Button
-        data-qa="utils.navigation.getRoute.excludeParams.btn"
+        data-qa='utils.navigation.getRoute.excludeParams.btn'
         onClick={() => {
-          const route = props.platform.utils.navigation.getRoute(true);
+          const route = platformProps.utils.navigation.getRoute(true);
           window.alert(route);
         }}
       >
