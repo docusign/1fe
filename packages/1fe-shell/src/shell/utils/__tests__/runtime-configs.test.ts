@@ -10,12 +10,12 @@ describe('clearRuntimeConfigOverrides', () => {
     window.location = {
       href: 'https://example.com',
       toString: () => window.location.href,
-    } as Location;
+    } as any;
   });
 
   afterAll(() => {
     // Restore the original window.location object
-    window.location = originalLocation;
+    window.location = originalLocation as any;
   });
 
   it('should remove RUNTIME_CONFIG_OVERRIDES from the URL search parameters', () => {

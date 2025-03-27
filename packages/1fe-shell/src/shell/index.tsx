@@ -25,6 +25,7 @@ import {
 } from './init/runtime-config-overrides';
 import { getShellPlatformUtils as initShellPlatformUtils } from './utils/shell-platform-utils';
 import { OneFEShellOptions } from './types/one-fe-shell-options';
+import { patchSystemJSResolve } from './utils/system-helpers';
 
 export const init = (): Promise<void> => {
   // Initialize import map Promise resolver
@@ -83,6 +84,7 @@ export const init = (): Promise<void> => {
 const renderOneFEShell = (options: OneFEShellOptions) => {
   setOneFEShellConfigs(options);
 
+  patchSystemJSResolve();
   initShellPlatformUtils();
 
   init().then(() => {

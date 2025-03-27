@@ -1,5 +1,5 @@
 /* eslint-disable docusign-i18n/no-hard-coded-text */
-// import { platformProps } from '@1fe/shell';
+import { platformProps } from '@devhub/1fe-shell';
 import React from 'react';
 
 import { SkeletonLoader } from './skeletonLoader';
@@ -9,25 +9,23 @@ const INTERNAL_GENERIC_VARIANTS = '@internal/generic-variants-widget';
 
 export const GetChildWidget: React.FC<{
   isVisible: boolean;
-  props: any;
   widgetId?: string;
-}> = ({ isVisible, props, widgetId = INTERNAL_GENERIC_CHILD }) => {
-  const Widget = props.platform.utils.widgets.get(widgetId);
+}> = ({ isVisible, widgetId = INTERNAL_GENERIC_CHILD }) => {
+  const Widget = platformProps.utils.widgets.get(widgetId);
   // const Widget = platformProps?.utils.widgets.get(widgetId);
 
-  return isVisible ? <Widget {...props} /> : null;
+  return isVisible ? <Widget /> : null;
 };
 
 export const GetChildWidgetWithCustomLoader: React.FC<{
   isVisible: boolean;
-  props: any;
   widgetId?: string;
-}> = ({ isVisible, props, widgetId = INTERNAL_GENERIC_CHILD }) => {
-  const Widget = props.platform.utils.widgets.get(widgetId, {
+}> = ({ isVisible, widgetId = INTERNAL_GENERIC_CHILD }) => {
+  const Widget = platformProps.utils.widgets.get(widgetId, {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore - Remove when the Loader option is available in widgets.get() from @1fe/shell
     Loader: (
-      <div data-qa="skeleton-loader">
+      <div data-qa='skeleton-loader'>
         <SkeletonLoader />
       </div>
     ),
@@ -43,7 +41,7 @@ export const GetChildWidgetWithCustomLoader: React.FC<{
   //   ),
   // });
 
-  return isVisible ? <Widget {...props} /> : null;
+  return isVisible ? <Widget /> : null;
 };
 
 // export const GetVariant: React.FC<{

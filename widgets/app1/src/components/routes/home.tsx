@@ -1,4 +1,4 @@
-// import { platformProps } from '@devhub/1fe-shell';
+import { platformProps } from '@devhub/1fe-shell';
 // import { Interpolate } from '@ds/react-utils';
 import styled from '@emotion/styled';
 import { Flex } from 'antd';
@@ -16,7 +16,7 @@ const Container = styled.div({
 });
 
 // TODO: strongly type
-const Home: React.FC = (props: any) => {
+const Home: React.FC = (props) => {
   // const t = useTranslate();
   const greeting = useSelector((state: RootState) => state.hello.greeting);
 
@@ -24,13 +24,11 @@ const Home: React.FC = (props: any) => {
     <Container>
       <h1>{greeting}</h1>
       <Flex vertical>
-        <p data-qa='wsk.page.welcome'>
-          Welcome to 1FE Starter Kit
-        </p>
+        <p data-qa='wsk.page.welcome'>Welcome to 1FE Starter Kit</p>
         <ResultElementBoundary data-qa='wsk.props.data'>
           {JSON.stringify(
             {
-              platform: props.platform,
+              platform: platformProps,
               ...props,
             },
             jsonReplacer(),

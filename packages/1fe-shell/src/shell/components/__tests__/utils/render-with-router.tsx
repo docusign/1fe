@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { BrowserRouter, MemoryRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
 
 /**
@@ -8,7 +8,7 @@ import { render } from '@testing-library/react';
  * This prevents the common error "useLocation() may be used only in the context of a <Router> component" when you try...
  * to render a component with @testing-library/react that uses a react-router-dom hook but without a Router around it.
  */
-export const renderWithBrowserRouterWrapper = (component: ReactNode) => {
+export const renderWithBrowserRouterWrapper = (component: ReactNode): ReturnType<typeof render> => {
   return render(<BrowserRouter>{component}</BrowserRouter>);
 };
 

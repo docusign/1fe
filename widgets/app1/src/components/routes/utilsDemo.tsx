@@ -25,8 +25,7 @@ import {
 } from './styles/utilsDemo.styles';
 import { AppLoadTime } from '../appLoadTime/appLoadTime';
 
-// TODO: strongly type
-const UtilsDemo: React.FC<any> = (props) => {
+const UtilsDemo = (props) => {
   // const t = useTranslate();
 
   return (
@@ -35,16 +34,16 @@ const UtilsDemo: React.FC<any> = (props) => {
       {/* <h1 data-qa='wsk.page.utils'>{t('Components.Routes.UtilsDemoHeader')}</h1> */}
 
       <Flex vertical>
-        <Context {...props} />
-        <Navigation {...props} />
+        <Context />
+        <Navigation />
         {/* <Experiments /> */}
-        <Widgets {...props} />
+        <Widgets />
         {/* <Network /> */}
-        <LocalAndSessionStorage {...props} />
-        <Experience {...props} />
+        <LocalAndSessionStorage />
+        <Experience />
         {/* <Logger /> */}
-        <EventBus {...props} />
-        <AppLoadTime {...props} />
+        <EventBus />
+        <AppLoadTime />
         {/*
         <Analytics />
         <I18n />

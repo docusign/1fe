@@ -1,3 +1,4 @@
+import { platformProps } from '@devhub/1fe-shell';
 import { useState, useCallback, useEffect } from 'react';
 import { Button } from 'antd';
 
@@ -5,9 +6,9 @@ type WidgetEvents = {
   event1: { param1: string };
 };
 
-export default function Root(props) {
+export default function Root() {
   useEffect(() => {
-    props.platform.utils.appLoadTime.end();
+    platformProps.utils.appLoadTime.end();
   }, []);
 
   const [eventBusResult, setEventBusResult] = useState('unchanged');
@@ -27,7 +28,7 @@ export default function Root(props) {
         data-qa="eventBus.subscribe.btn"
         onClick={() => {
           // @ts-ignore
-          const unsubFn = props.platform.utils.eventBus.subscribe<
+          const unsubFn = platformProps.utils.eventBus.subscribe<
             WidgetEvents,
             'event1'
           >({

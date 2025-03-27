@@ -1,4 +1,4 @@
-// import { platformProps } from '@1fe/shell';
+import { platformProps } from '@devhub/1fe-shell';
 import styled from '@emotion/styled';
 import { Button, Input } from 'antd';
 import { useState } from 'react';
@@ -10,7 +10,7 @@ const NavigateWithTextboxContainer = styled.div({
   marginTop: '10px',
 });
 
-export const SetTitle = (props) => {
+export const SetTitle = () => {
   // const t = useTranslate();
   const [title, setTitle] = useState<string>('hello world');
 
@@ -18,13 +18,13 @@ export const SetTitle = (props) => {
     <NavigateWithTextboxContainer>
       <Input
         // placeholder={t('Components.Experience.SetTitle-PlaceholderText')}
-        data-qa="utils.experience.set-title.normal.input"
+        data-qa='utils.experience.set-title.normal.input'
         onChange={(e) => setTitle(e.target.value)}
         value={title}
       />
       <Button
-        data-qa="utils.experience.title.set"
-        onClick={() => props.platform.utils.experience.title.set(title)}
+        data-qa='utils.experience.title.set'
+        onClick={() => platformProps.utils.experience.title.set(title)}
       >
         utils.experience.title.set
         {/* {t('Components.Experience.SetTitle')} */}
