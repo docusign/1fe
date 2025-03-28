@@ -8,9 +8,8 @@ import { createStore } from './store';
 /**
  * Wrap the application code in the various app level providers
  */
-// TODO: strongly type
 const withProvider = (Component) =>
-  function WidgetProvider() {
+  function WidgetProvider(props) {
     // Create a new store for each instance of the widget
     // Automatically is destroyed when the widget is unmounted
     const [store] = useState(createStore);
@@ -22,7 +21,7 @@ const withProvider = (Component) =>
           <MemoryRouter
             initialEntries={[platformProps.utils.navigation.getRoute()]}
           >
-            <Component />
+            <Component {...props} />
           </MemoryRouter>
         </UNSAFE_LocationContext.Provider>
       </Provider>

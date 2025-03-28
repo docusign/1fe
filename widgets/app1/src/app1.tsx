@@ -6,9 +6,10 @@ import withProvider from './withProvider';
 // export default function Root() {
 //   return <p>My component from app1 is mounted! Hello world</p>;
 // }
-const RootWrapper = () => {
+const RootWrapper = (props) => {
   useEffect(() => {
     platformProps.utils.appLoadTime.end();
+    console.log('props', props);
   }, []);
 
   return <Widget />;

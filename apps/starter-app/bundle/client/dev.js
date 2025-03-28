@@ -1,6 +1,6 @@
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-const { EnvironmentPlugin } = require('webpack');
+const { EnvironmentPlugin, HotModuleReplacementPlugin } = require('webpack');
 
 const { isUndefined } = require('lodash');
 const getProdConfig = require('./prod');
@@ -40,6 +40,7 @@ const config = getProdConfig({
   },
   plugins: [
     ...commonPlugins,
+    new HotModuleReplacementPlugin(),
     new ReactRefreshWebpackPlugin({
       overlay: false,
     }),
