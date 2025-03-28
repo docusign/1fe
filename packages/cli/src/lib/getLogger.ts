@@ -2,10 +2,9 @@ import { oneFeProgram } from '../oneFeProgram/oneFeProgram';
 import chalk, { ChalkInstance } from 'chalk';
 
 /**
- * TODO - consolidate use of loggers here.
- NOTE: Do not use it outside of the context of commander program.
- example: we must not import it and call it at the top level execution context of any file.
- However, calling this inside an action for a command is ok because commander would have parsed the cli params by then
+ * NOTE: Do not use it outside of the context of commander program.
+ * example: we must not import it and call it at the top level execution context of any file.
+ * However, calling this inside an action for a command is ok because commander would have parsed the cli params by then
  */
 export function getLogger(prefix: `[${string}]`) {
   const debug = oneFeProgram.getOptionValue('debug');

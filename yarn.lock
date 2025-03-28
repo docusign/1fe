@@ -4557,6 +4557,7 @@ __metadata:
   dependencies:
     "@devhub/cli": "npm:0.0.1"
     ky: "npm:^1.7.5"
+    typescript: "npm:5.8.2"
   languageName: unknown
   linkType: soft
 

@@ -2,7 +2,8 @@ import { memo } from 'react';
 import { Button } from 'antd';
 
 import { useAppDispatch } from '../../store';
-import { appActions } from '../..//store/app';
+import { appActions } from '../../store/app';
+import { platformProps } from '@devhub/1fe-shell';
 
 type QuickLinksProps = {
   port: string;
@@ -10,6 +11,7 @@ type QuickLinksProps = {
 
 export const QuickLinks = memo(({ port }: QuickLinksProps) => {
   const dispatch = useAppDispatch();
+  const Sk = platformProps.utils.widgets.get('@1fe/starter-kit');
   return (
     <Button
       onClick={() =>

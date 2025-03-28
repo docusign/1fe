@@ -7,8 +7,16 @@
     "target": "esnext",
     "jsxImportSource": "@emotion/react",
     "jsx": "react-jsx",
+    "typeRoots": [
+      "../../node_modules/@types",
+      "../../node_modules/",
+      "./src/types/"
+    ],
+    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "paths": {
+      "src/*": ["./src/*"]
+    },
     "emitDeclarationOnly": false // to get type:check to work
   },
-  "types": ["node", "jest", "@testing-library/jest-dom"],
   "include": ["src/**/*"]
 }
