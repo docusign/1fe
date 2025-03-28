@@ -6,17 +6,17 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { jsonReplacer } from '../platformPropsImport/comparePlatformProps';
-import ResultElementBoundary from '../misc/resultElementBoundary';
+import { ResultElementBoundary } from '../misc/resultElementBoundary';
 // TODO: how does useTranslate work
 // import { useTranslate } from 'src/locales';
 import { RootState } from '../../store';
+import { WidgetProps } from '../../contract';
 
 const Container = styled.div({
   padding: '40px',
 });
 
-// TODO: strongly type
-const Home: React.FC = (props) => {
+export const Home: React.FC<WidgetProps> = (props) => {
   // const t = useTranslate();
   const greeting = useSelector((state: RootState) => state.hello.greeting);
 
@@ -39,5 +39,3 @@ const Home: React.FC = (props) => {
     </Container>
   );
 };
-
-export default Home;
