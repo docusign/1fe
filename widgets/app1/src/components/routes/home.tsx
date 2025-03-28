@@ -1,4 +1,3 @@
-import { platformProps } from '@devhub/1fe-shell';
 // import { Interpolate } from '@ds/react-utils';
 import styled from '@emotion/styled';
 import { Flex } from 'antd';
@@ -28,7 +27,6 @@ export const Home: React.FC<WidgetProps> = (props) => {
         <ResultElementBoundary data-qa='wsk.props.data'>
           {JSON.stringify(
             {
-              platform: platformProps,
               ...props,
             },
             jsonReplacer(),
