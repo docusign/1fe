@@ -2,7 +2,7 @@
   "name": "app1",
   "type": "module",
   "scripts": {
-    "dev": "vite preview --port 8001",
+    "dev": "1fe-cli --trace --environment integration dev",
     "build": "1fe-cli --trace --environment integration build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write .",
@@ -13,7 +13,6 @@
     "@repo/widget-base-config": "0.0.1",
     "@types/react": "^18.2.62",
     "@types/react-dom": "^18.2.19",
-    "@vitejs/plugin-react": "^4.3.4",
     "cross-env": "^7.0.3",
     "eslint": "9.23.0",
     "eslint-config-prettier": "^10.1.1",
@@ -23,8 +22,7 @@
     "prettier": "^3.5.3",
     "pretty-quick": "^3.1.1",
     "ts-config-single-spa": "^3.0.0",
-    "typescript": "5.8.2",
-    "vite-plugin-single-spa": "^1.0.0"
+    "typescript": "5.8.2"
   },
   "dependencies": {
     "@devhub/1fe-shell": "1.0.10",
@@ -39,8 +37,7 @@
     "react-router-dom": "6.28.1",
     "reselect": "^4.1.7",
     "single-spa": "^5.9.3",
-    "single-spa-react": "^6.0.2",
-    "vite": "^6.2.3"
+    "single-spa-react": "^6.0.2"
   },
   "types": "dist/app1.d.ts"
 }
