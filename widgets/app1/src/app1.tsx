@@ -4,7 +4,7 @@ import { Router as Widget } from './components/router';
 import { withProvider } from './withProvider';
 import { WidgetProps } from './contract';
 
-const RootWrapper: React.FC<WidgetProps> = (props) => {
+const RootWrapper: React.FC<RootProps> = (props) => {
   useEffect(() => {
     platformProps.utils.appLoadTime.end();
   }, []);

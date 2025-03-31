@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { overrideWidgetUrlWithUi, selectImportMapOverrideButton } from '../../../test-utils/importMapOverridesUi';
+import { /* overrideWidgetUrlWithUi, */ selectImportMapOverrideButton } from '../../../test-utils/importMapOverridesUi';
 // import { getWidgetConfigFromPage } from '../../../test-utils/envs';
 // import { getLocalStorage } from '../../../test-utils/localStorage';
 

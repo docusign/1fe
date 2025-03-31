@@ -73,3 +73,6 @@ dist
 *.sln
 *.sw?
 .DS_Store
+
+# transient types
+src/types/widgets

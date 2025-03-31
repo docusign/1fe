@@ -27,6 +27,12 @@ const main = async () => {
 };
 
 export type {
+  OneFeBaseConfigurationObject,
+  OneFeEnvironmentObject,
+  OneFeRuntimeConfigObject,
+  TypedOneFeBaseConfig,
+  TypedOneFeConfiguration,
+  TypedOneFeBaseConfigurationObject,
   OneFeBaseConfiguration,
   OneFeConfiguration,
 } from './lib/config/config.types';

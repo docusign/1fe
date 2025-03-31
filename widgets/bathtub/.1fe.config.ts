@@ -1,8 +1,23 @@
-import { OneFeConfiguration } from '@devhub/cli';
-import { getBaseConfig } from '@repo/widget-base-config'; // this is the redistributed package for the organization
+import { OneFeRuntimeConfigObject, TypedOneFeConfiguration } from '@devhub/cli';
+import { Environments, getBaseConfig } from '@repo/widget-base-config'; // this is the redistributed package for the organization
 
-const confiugration: OneFeConfiguration = {
-  baseConfig: getBaseConfig,
+const commonRuntimeConfig: OneFeRuntimeConfigObject = {
+  dependsOn: {
+    widgets: [
+      {
+        widgetId: '@1fe/starter-kit',
+      },
+    ],
+  },
 };
 
-export default confiugration;
+const configuration: TypedOneFeConfiguration<Environments> = {
+  baseConfig: getBaseConfig,
+  runtimeConfig: {
+    development: commonRuntimeConfig,
+    integration: commonRuntimeConfig,
+    production: commonRuntimeConfig,
+  },
+};
+
+export default configuration;
