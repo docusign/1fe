@@ -13,5 +13,3 @@ export const ResultElementBoundary = styled.pre({
   whiteSpace: 'pre-wrap',
   overflowWrap: 'break-word',
 });
-
-export default ResultElementBoundary;
