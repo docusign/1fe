@@ -1,9 +1,9 @@
 import { PlatformPropsType } from '@devhub/1fe-shell';
 
-/* eslint-disable @typescript-eslint/no-empty-interface */
-export interface HostPropsContract {}
+export type HostPropsContract = {};
 
-export type WidgetProps = {
+/* eslint-disable @typescript-eslint/no-empty-interface */
+export interface WidgetProps {
+  host: HostPropsContract;
   platform: PlatformPropsType;
-  host?: HostPropsContract;
-};
+}

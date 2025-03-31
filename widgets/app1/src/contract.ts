@@ -2,9 +2,9 @@
 
 import { PlatformPropsType } from '@devhub/1fe-shell';
 
-export interface HostPropsContract {}
+export type HostPropsContract = {};
 
-export type WidgetProps = {
+export type RootProps = {
+  host: HostPropsContract;
   platform: PlatformPropsType;
-  host?: HostPropsContract;
 };
