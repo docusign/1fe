@@ -4,7 +4,7 @@
 // import { useState } from 'react';
 
 // import { WidgetProps } from 'src/contract';
-// import ResultElementBoundary from '../misc/resultElementBoundary';
+// import { ResultElementBoundary } from '../misc/resultElementBoundary';
 // import { useTranslate } from 'src/locales';
 
 /**

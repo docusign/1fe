@@ -25,7 +25,7 @@ import {
 } from './styles/utilsDemo.styles';
 import { AppLoadTime } from '../appLoadTime/appLoadTime';
 
-const UtilsDemo = (props) => {
+export const UtilsDemo = () => {
   // const t = useTranslate();
 
   return (
@@ -54,5 +54,3 @@ const UtilsDemo = (props) => {
     </div>
   );
 };
-
-export default UtilsDemo;
