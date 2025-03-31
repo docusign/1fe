@@ -11,7 +11,7 @@ const commonRuntimeConfig: OneFeRuntimeConfigObject = {
   },
 };
 
-const confiugration: TypedOneFeConfiguration<Environments> = {
+const configuration: TypedOneFeConfiguration<Environments> = {
   baseConfig: getBaseConfig,
   runtimeConfig: {
     development: commonRuntimeConfig,
@@ -20,4 +20,4 @@ const confiugration: TypedOneFeConfiguration<Environments> = {
   },
 };
 
-export default confiugration;
+export default configuration;
