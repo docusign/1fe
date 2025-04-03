@@ -12,11 +12,13 @@ export const getKnownPaths = memoize(function getPathsRaw(
 ) {
   const reportsDir = join(projectDir, 'reports');
   const srcDir = join(projectDir, 'src');
+  const cacheDir = join(projectDir, '.cache', '1fe');
 
   return {
     projectDir,
     reportsDir,
     srcDir,
+    cacheDir,
 
     distDir: join(projectDir, 'dist'),
 
@@ -26,6 +28,10 @@ export const getKnownPaths = memoize(function getPathsRaw(
 
     getWidgetRuntimeConfigJsonPath(outDir: string) {
       return resolve(outDir, 'widget-runtime-config.json');
+    },
+
+    getLiveVersionCacheJsonPath(environment: string) {
+      return resolve(cacheDir, `live-versions-cache-${environment}.json`);
     },
 
     /**
@@ -55,8 +61,8 @@ export const getKnownPaths = memoize(function getPathsRaw(
     },
 
     contracts: {
-      installDir: resolve(srcDir, 'types'),
-      widgetsDir: resolve(srcDir, join('types', 'widgets')),
+      typesDir: resolve(srcDir, 'types'),
+      widgetTypesDir: resolve(srcDir, join('types', 'widgets')),
       indexDTs: resolve(srcDir, join('types', 'index.d.ts')),
     },
   };

@@ -10,44 +10,39 @@ const preloadSchema = z
   ])
   .array();
 
-const dependsOnPinnedWidgets = z
-  .object({
-    widgetId: z.string(),
-    version: z.string(),
-  })
-  .array();
-
-const dependsOnWidgets = z
-  .object({
-    widgetId: z.string(),
-    version: z.string(),
-  })
-  .array();
-
-const dependsOnSchema = z.object({
-  pinnedWidgets: dependsOnPinnedWidgets.optional(),
-  widgets: dependsOnWidgets.optional(),
+export const pinnedWidgetSchema = z.object({
+  widgetId: z.string(),
+  version: z.string(),
 });
 
-const runtimeConfigSchema = z.object({
+export const widgetSchema = z.object({
+  widgetId: z.string(),
+});
+
+const environmentNameSchema = z.string();
+
+const dependsOnSchema = z.object({
+  pinnedWidgets: pinnedWidgetSchema.array().optional(),
+  widgets: widgetSchema.array().optional(),
+});
+
+export const runtimeConfigSchema = z.object({
   dependsOn: dependsOnSchema.optional(), // TODO - add a validation here to ensure that a widget of a version exists over here.
   preload: preloadSchema.optional(), // TODO - add a validation here to ensure that a widget of a version exists over here.
 });
 
-const runtimeConfigRecordSchema = z.record(
-  z.string(),
-  z.record(z.string(), runtimeConfigSchema).optional(),
-);
+const runtimeConfigRecordSchema = z
+  .record(environmentNameSchema, runtimeConfigSchema)
+  .optional();
+
+export const environmentSchema = z.object({
+  commonConfig: commonConfigSchema,
+  shellBaseUrl: z.string().url(),
+  serverBaseUrl: z.string().url(),
+});
 
 export const baseConfigObjectSchema = z.object({
-  environments: z.record(
-    z.string(),
-    z.object({
-      commonConfig: commonConfigSchema,
-      shellBaseUrl: z.string().url().optional(),
-      serverBaseUrl: z.string().url().optional(),
-    }),
-  ),
+  environments: z.record(environmentNameSchema, environmentSchema),
   bathtubUrl: z.string().url().optional(),
 });
 
@@ -71,5 +66,7 @@ export const onefeConfigurationSchema = z.object({
   /**
    * Webpack configs overrides per environment.
    */
-  webpackConfigs: z.record(z.string(), z.custom<WebpackConfig>()).optional(),
+  webpackConfigs: z
+    .record(environmentNameSchema, z.custom<WebpackConfig>())
+    .optional(),
 });

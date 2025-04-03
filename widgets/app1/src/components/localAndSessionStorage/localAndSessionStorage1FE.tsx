@@ -2,7 +2,7 @@ import { platformProps } from '@devhub/1fe-shell';
 import { Button } from 'antd';
 import { useState } from 'react';
 
-import ResultElementBoundary from '../misc/resultElementBoundary';
+import { ResultElementBoundary } from '../misc/resultElementBoundary';
 // import { useTranslate } from 'src/locales';
 
 export const LocalAndSessionStorage1FE = () => {

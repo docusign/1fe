@@ -10,9 +10,21 @@ export const preActionHook = async (
 ) => {
   const logger = getLogger('[pre-action]');
 
-  if (!existsSync(getKnownPaths().oneFeConfig)) {
+  const {
+    oneFeConfig,
+    webpack: { widgetEntry },
+  } = getKnownPaths();
+
+  if (!existsSync(oneFeConfig)) {
     logger.error(
       'No 1fe config file found. Please ensure that you are running the CLI from the root of a 1fe project.',
+    );
+    process.exit(1);
+  }
+
+  if (!existsSync(widgetEntry)) {
+    logger.error(
+      `No widget entry file found at ${widgetEntry}. Please ensure that you are running the CLI from the root of a 1fe project.`,
     );
     process.exit(1);
   }
