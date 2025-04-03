@@ -126,7 +126,7 @@ export type UseNavigate = (
 ) => Navigate1FEFunction;
 
 export type Init1FEWidgetNavigation = <HostT>(
-  props: any, // desperately needing platform props types package https://jira.corp.docusign.com/browse/ONEDS-57
+  props: { platform: PlatformPropsType; host: HostT },
   navigateWidget: NavigateFunction,
   useNavigateWidget: typeof useNavigate,
   useLocationWidget: typeof useLocation,

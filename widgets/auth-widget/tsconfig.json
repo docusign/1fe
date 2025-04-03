@@ -4,11 +4,9 @@
     "jsx": "react-jsx",
     "declarationDir": "dist",
     "skipLibCheck": true,
-    "target": "esnext"
+    "target": "esnext",
+    "emitDeclarationOnly": false
   },
-  "files": [
-    "src/widget.tsx"
-  ],
   "include": ["src/**/*"],
   "exclude": ["src/**/*.test*"]
 }

@@ -20,9 +20,8 @@
     ]
   },
   "scripts": {
-    "dev": "vite build --watch",
+    "dev": "1fe-cli --trace --environment integration dev",
     "format": "prettier --write './src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ../../.prettierrc.json",
-    "host": "vite --port 8004",
     "build": "1fe-cli --trace --environment integration build",
     "test": "jest",
     "type:check": "npx tsc --noEmit --skipLibcheck --pretty"
@@ -30,6 +29,7 @@
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.2",
     "@codemirror/view": "6.36.4",
+    "@devhub/1fe-shell": "workspace:*",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "11.14.0",
     "@reduxjs/toolkit": "1.9.1",

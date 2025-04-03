@@ -36,3 +36,6 @@ src/locales/helpers.ts
 
 # generateds files
 reports
+
+# transient types
+src/types/widgets

@@ -1,17 +1,15 @@
 import { platformProps } from '@devhub/1fe-shell';
 import React, { useEffect } from 'react';
-import { default as Widget } from './components/router';
-import withProvider from './withProvider';
+import { Router as Widget } from './components/router';
+import { withProvider } from './withProvider';
+import { WidgetProps } from './contract';
 
-// export default function Root() {
-//   return <p>My component from app1 is mounted! Hello world</p>;
-// }
-const RootWrapper = () => {
+const RootWrapper: React.FC<RootProps> = (props) => {
   useEffect(() => {
     platformProps.utils.appLoadTime.end();
   }, []);
 
-  return <Widget />;
+  return <Widget {...props} />;
 };
 
 export default withProvider(RootWrapper);
