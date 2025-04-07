@@ -1,9 +1,9 @@
 import { platformProps } from '@devhub/1fe-shell';
 import { useState, useCallback, useEffect } from 'react';
 import { Button } from 'antd';
-import { RootProps, WidgetEvents } from './contract';
+import { WidgetProps, WidgetEvents } from './contract';
 
-export default function Root(props: RootProps) {
+export default function Root(props: WidgetProps) {
   useEffect(() => {
     platformProps.utils.appLoadTime.end();
   }, []);

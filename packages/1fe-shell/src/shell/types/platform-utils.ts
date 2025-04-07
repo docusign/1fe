@@ -134,6 +134,7 @@ export type PlatformUtils = {
    * @link https://github.docusignhq.com/pages/Core/1fe-docs/widgets/utils/user/
    */
   // user: UserUtils;
+  [key: string]: any;
 };
 
 /**
