@@ -95,6 +95,13 @@ export const getPlatformUtils = (widget: WidgetConfig): PlatformUtils => {
 
   const shellUtilOverrides = readOneFEShellConfigs().utils;
 
+  const processedUtilOverrides = shellUtilOverrides ? Object.values(shellUtilOverrides).reduce((acc, currUtil) => {
+      return {
+        ...acc,
+        ...currUtil(widgetId),
+      }
+    }, {}) : {};
+
   const initializedPlatformUtils = merge(
     {},
     {
@@ -114,7 +121,7 @@ export const getPlatformUtils = (widget: WidgetConfig): PlatformUtils => {
       // analytics,
       // UNSAFE_otel,
     },
-    shellUtilOverrides,
+    processedUtilOverrides,
   );
 
   return deepFreeze(initializedPlatformUtils);
