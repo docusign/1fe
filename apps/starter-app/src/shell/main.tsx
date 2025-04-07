@@ -19,19 +19,21 @@ const setup = () => {
     mode: envModeMap[ENVIRONMENT],
     environment: ENVIRONMENT,
     utils: {
-      logger: (widgetId: string) => ({
-        log: (message: string) => {
-          console.log(widgetId, message);
-        },
-        error: (message: string) => {
-          console.error(widgetId, message);
+      initializeLogger: (widgetId: string) => ({
+        logger: {
+          log: (message: string) => {
+            console.log(widgetId, message);
+          },
+          error: (message: string) => {
+            console.error(widgetId, message);
+          }
         }
       })
     },
     auth: {
       isAuthedCallback: (widgetId: string): boolean => {
         console.log(widgetId, ' is authenticated.');
-        return true;
+        return false;
       },
       unauthedCallback: (widgetId: string) => {
         console.log(widgetId, ' is not authenticated.');
