@@ -1,12 +1,9 @@
 import { platformProps } from '@devhub/1fe-shell';
 import { useState, useCallback, useEffect } from 'react';
 import { Button } from 'antd';
+import { WidgetProps, WidgetEvents } from './contract';
 
-type WidgetEvents = {
-  event1: { param1: string };
-};
-
-export default function Root() {
+export default function Root(props: WidgetProps) {
   useEffect(() => {
     platformProps.utils.appLoadTime.end();
   }, []);
@@ -25,7 +22,7 @@ export default function Root() {
     <>
       <p>My component from app2 is mounted!</p>
       <Button
-        data-qa="eventBus.subscribe.btn"
+        data-qa='eventBus.subscribe.btn'
         onClick={() => {
           // @ts-ignore
           const unsubFn = platformProps.utils.eventBus.subscribe<
@@ -42,7 +39,7 @@ export default function Root() {
         utils.eventBus.subscribe
       </Button>
       <Button
-        data-qa="eventBus.unsubscribe.btn"
+        data-qa='eventBus.unsubscribe.btn'
         onClick={() => {
           setEventBusResult('unsubscribed');
           unsubscribeFn();
@@ -50,7 +47,7 @@ export default function Root() {
       >
         utils.eventBus.unsubscribe
       </Button>
-      <div data-qa="eventBus.result.container">{eventBusResult}</div>
+      <div data-qa='eventBus.result.container'>{eventBusResult}</div>
     </>
   );
 }

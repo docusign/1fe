@@ -13,5 +13,3 @@ export const VisuallyHidden = styled.p({
   whiteSpace: 'nowrap',
   width: '1px',
 });
-
-export default VisuallyHidden;

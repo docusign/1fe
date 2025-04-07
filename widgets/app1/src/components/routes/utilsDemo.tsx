@@ -26,7 +26,7 @@ import {
 import { AppLoadTime } from '../appLoadTime/appLoadTime';
 import { CustomLoader } from '../customLogger';
 
-const UtilsDemo = () => {
+export const UtilsDemo = () => {
   // const t = useTranslate();
 
   return (
@@ -56,5 +56,3 @@ const UtilsDemo = () => {
     </div>
   );
 };
-
-export default UtilsDemo;
