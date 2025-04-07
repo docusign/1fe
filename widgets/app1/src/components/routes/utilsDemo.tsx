@@ -24,6 +24,7 @@ import {
   utilSectionHeaderStyles,
 } from './styles/utilsDemo.styles';
 import { AppLoadTime } from '../appLoadTime/appLoadTime';
+import { CustomLoader } from '../customLogger';
 
 export const UtilsDemo = () => {
   // const t = useTranslate();
@@ -44,6 +45,7 @@ export const UtilsDemo = () => {
         {/* <Logger /> */}
         <EventBus />
         <AppLoadTime />
+        <CustomLoader />
         {/*
         <Analytics />
         <I18n />
