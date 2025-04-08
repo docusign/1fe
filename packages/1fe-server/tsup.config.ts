@@ -11,5 +11,6 @@ export default defineConfig((options: Options) => ({
   banner: {
     js: `/* ${name} */`,
   },
+  publicDir: 'src/public',
   ...options,
 }));
