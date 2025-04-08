@@ -15,7 +15,8 @@ const commonEsbuild = {
   minify: false,
   sourcemap: 'inline',
   target: ['ESNext'],
-  packages: 'external',
+  // packages: 'external',
+  // mainFields: ['module', 'main'],
   outfile: path.resolve(__dirname, '../../dist/server.js'),
   // define: {
   //   BROWSERS_LIST_CONFIG: JSON.stringify(BROWSERS_LIST),
