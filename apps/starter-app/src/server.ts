@@ -88,7 +88,7 @@ app.use(errorMiddleware);
 app.set('view engine', 'ejs');
 
 // Set the directory for views (optional)
-app.set('views', path.join(__dirname, 'server/views'));
+// app.set('views', path.join(__dirname, 'server/views'));
 
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`);
