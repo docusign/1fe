@@ -23,12 +23,9 @@ jobs:
         with:
           node-version: '22.x'
 
-      - name: change directory to isomorphic app
-        run: |
-          cd apps/starter-app
-
       - name: npm install, build, and test
         run: |
+          cd apps/starter-app
           yarn
           yarn run build
 
