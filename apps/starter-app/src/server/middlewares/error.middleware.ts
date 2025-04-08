@@ -1,8 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
+import ejs from 'ejs';
 
 import { HttpException } from '../exceptions/HttpException';
 import { APIException } from '../exceptions/APIException';
 import { APIErrorResponse } from '../types/APIErrorResponse';
+import { errorTemplate } from './error-template';
 
 type RequestWithCspNonceGuid = Request & { cspNonceGuid?: string };
 
@@ -43,10 +45,12 @@ const errorMiddleware = (
       favicon: '/favicon.ico',
     };
 
-    return res.render(
-      'error.html.ejs',
-      dataForRenderingTemplatePayload,
-    );
+    const html = ejs.render(errorTemplate, dataForRenderingTemplatePayload);
+    res.send(html);
+    // return res.render(
+    //   errorTemplate,
+    //   dataForRenderingTemplatePayload,
+    // );
   } catch (err) {
     next(err);
   }

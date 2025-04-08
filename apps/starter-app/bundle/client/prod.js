@@ -55,7 +55,7 @@ const getProdConfig = async (configOverrides) => {
       new CopyPlugin({
         patterns: [
           {
-            from: resolve(__dirname, '../../src/static'),
+            from: resolve(__dirname, '../../src/public'),
             to: resolve(__dirname, '../../dist/public'),
           },
         ],
