@@ -77,7 +77,7 @@ const app = oneFEServer(options);
 app.use(express.json());
 
 // @ts-ignore
-app.use(favicon(path.join(__dirname, 'static/favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public/favicon.ico')));
 
 // Serve API requests from the router
 app.use('/api', router);
@@ -88,7 +88,7 @@ app.use(errorMiddleware);
 app.set('view engine', 'ejs');
 
 // Set the directory for views (optional)
-app.set('views', path.join(__dirname, 'server/views'));
+// app.set('views', path.join(__dirname, 'server/views'));
 
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`);

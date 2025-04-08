@@ -1,3 +1,4 @@
+export const errorTemplate = `
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -109,3 +110,4 @@
     </script>
   </body>
 </html>
+`;
