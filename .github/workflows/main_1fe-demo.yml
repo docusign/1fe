@@ -70,5 +70,5 @@ jobs:
         with:
           app-name: '1fe-demo'
           slot-name: 'Production'
-          package: .
+          package: apps/starter-app/dist
           
