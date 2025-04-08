@@ -30,7 +30,7 @@ jobs:
           yarn workspace @devhub/starter-app install && yarn workspace @devhub/starter-app build
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./apps/starter-app/dist -r
+        run: zip release.zip ./apps/starter-app/ -r
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -70,5 +70,5 @@ jobs:
         with:
           app-name: '1fe-demo'
           slot-name: 'Production'
-          package: apps/starter-app/dist
+          package: .
           
