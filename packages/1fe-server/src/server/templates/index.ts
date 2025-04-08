@@ -2,11 +2,7 @@ import path from 'path';
 import fs from 'fs';
 
 const getTemplate = (templateName: string) => {
-  const templatePath = path.resolve(
-    process.cwd(),
-    '../../packages/1fe-server/src/server/templates',
-    templateName,
-  );
+  const templatePath = path.resolve(__dirname, templateName);
   return fs.readFileSync(templatePath, 'utf-8');
 };
 
