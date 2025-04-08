@@ -13,6 +13,8 @@ const { PORT = 3001 } = process.env;
 
 const ENVIRONMENT: string = process.env.NODE_ENV || 'development';
 
+const shellBundleUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3001/js/bundle.js' : 'https://1fe-demo-hbb2dxgbgxg2dac6.centralus-01.azurewebsites.net/js/bundle.js';
+
 const envModeMap: Record<string, OneFEServerOptions["mode"]> = {
   development: 'development',
   integration: 'preproduction',
@@ -56,7 +58,7 @@ const options = {
     url: `https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/common-configs/${ENVIRONMENT}.json`,
     refreshMs: 30 * 1000,
   },
-  shellBundleUrl: 'http://localhost:3001/js/bundle.js',
+  shellBundleUrl,
   server: {
     // for Integration-env only
     bathtub: true, // automatically on when mode: development

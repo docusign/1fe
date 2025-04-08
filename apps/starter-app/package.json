@@ -11,12 +11,12 @@
     "client-types:dev": "tsc-watch --project ./tsconfig-shell.types.json --onSuccess 'npx yalc push'",
     "client-types:extract": "yarn client-types && npx api-extractor run --local",
     "client-types:check": "yarn client-types && npx api-extractor run",
-    "server:dev": "node bundle/server/dev.js",
+    "server:dev": "NODE_ENV=development node bundle/server/dev.js",
     "server:build": "tsc --project tsconfig.server.json --noEmit && node bundle/server/build.js",
     "build": "yarn clean && yarn server:build && yarn client:build",
     "test": "tsc && prettier --check . && eslint . && stylelint \"**/*.css\"",
     "test:playwright": "playwright test",
-    "start": "node dist/server.js"
+    "start": "NODE_ENV=integration node dist/server.js"
   },
   "devDependencies": {
     "@babel/core": "^7.26.10",

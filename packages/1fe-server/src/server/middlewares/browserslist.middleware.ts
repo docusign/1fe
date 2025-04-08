@@ -44,14 +44,17 @@ const browsersListMiddleware = (
       !isEmpty(browsersListConfig)
     ) {
       const matchesSupportedBrowser = matchesUA(userAgent, {
-        browsers: browsersListConfig,
+        browsers: [
+          "Chrome < 130",
+        ],
         ignoreMinor: true,
         ignorePatch: true,
       });
 
-      if (!matchesSupportedBrowser) {
-        throw new Error('Unsupported Browser');
-      }
+      // TODO: re-enable this when deployed
+      // if (!matchesSupportedBrowser) {
+      //   throw new Error('Unsupported Browser');
+      // }
     }
   } catch (err) {
     next(err);
