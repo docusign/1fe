@@ -81,7 +81,7 @@ class IndexController {
       const dataForRenderingTemplatePayload =
         await dataForRenderingTemplate(req);
 
-      const template = getTemplate('index.html.ejs');
+      const template = getTemplate();
       const html = ejs.render(template, dataForRenderingTemplatePayload);
       res.send(html);
     } catch (error) {
