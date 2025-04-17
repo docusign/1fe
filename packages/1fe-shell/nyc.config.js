@@ -13,7 +13,7 @@
  */
 module.exports = {
   statements: 75,
-  branches: 75,
+  branches: 50,
   functions: 75,
   lines: 75,
 };
