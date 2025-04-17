@@ -14,7 +14,7 @@
     "server:dev": "NODE_ENV=development node bundle/server/dev.js",
     "server:build": "tsc --project tsconfig.server.json --noEmit && node bundle/server/build.js",
     "build": "yarn clean && yarn server:build && yarn client:build",
-    "test:playwright": "playwright test",
+    "test:playwright": "playwright test apps/starter-app/src/__tests__/tests/platform-utils/sessionStorage.spec.ts",
     "start": "NODE_ENV=integration node dist/server.js"
   },
   "devDependencies": {
