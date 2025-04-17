@@ -13,7 +13,6 @@ export const Experience: React.FC = () => {
 
   return (
     <div css={utilSectionStyles} data-qa='utils.experience.container'>
-
       {/* <h1>{t('Components.Experience.Index')}</h1> */}
       <h1>utils.experience</h1>
       <SetTitle />

@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { /* overrideWidgetUrlWithUi, */ selectImportMapOverrideButton } from '../../../test-utils/importMapOverridesUi';
+import {
+  /* overrideWidgetUrlWithUi, */ selectImportMapOverrideButton,
+} from '../../../test-utils/importMapOverridesUi';
 // import { getWidgetConfigFromPage } from '../../../test-utils/envs';
 // import { getLocalStorage } from '../../../test-utils/localStorage';
 
@@ -8,13 +10,13 @@ import { /* overrideWidgetUrlWithUi, */ selectImportMapOverrideButton } from '..
 // const runtimeOverrideUrl =
 //   'https://docutest-a.akamaihd.net/integration/1fe/widgets/@internal/generic-child-widget/1.0.20/widget-runtime-config.json';
 
-[/*true*/, false].forEach((enable1dsDevtool) => {
+[, /*true*/ false].forEach((enable1dsDevtool) => {
   test(
     enable1dsDevtool
       ? 'If enable1dsDevtool is true, Import Map Overrides button visible on stage only @importMapOverrides @e2e'
       : 'If enable1dsDevtool is false, Import Map Overrides button visible on Int+Stage and not on Demo+Prod @importMapOverrides @e2e',
     async ({ page }) => {
-      const url = 'http://localhost:3001/app1'
+      const url = 'http://localhost:3001/app1';
       // const url = getWskUrlWithDevtoolVisible({ enable1dsDevtool });
       await page.goto(url);
 
@@ -26,16 +28,16 @@ import { /* overrideWidgetUrlWithUi, */ selectImportMapOverrideButton } from '..
       //   if (isProductionEnvironment(environment)) {
       //     await expect(importMapOverrideButton).toBeHidden();
       //   } else {
-          await expect(importMapOverrideButton).toBeVisible();
-        // }
+      await expect(importMapOverrideButton).toBeVisible();
+      // }
 
-        // return;
+      // return;
       // }
 
       // if (environment === HOSTED_ENVIRONMENTS.stage) {
       //   await expect(importMapOverrideButton).toBeVisible();
       // } else {
-        // await expect(importMapOverrideButton).toBeHidden();
+      // await expect(importMapOverrideButton).toBeHidden();
       // }
     },
   );

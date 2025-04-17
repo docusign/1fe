@@ -95,12 +95,14 @@ export const getPlatformUtils = (widget: WidgetConfig): PlatformUtils => {
 
   const shellUtilOverrides = readOneFEShellConfigs().utils;
 
-  const processedUtilOverrides = shellUtilOverrides ? Object.values(shellUtilOverrides).reduce((acc, currUtil) => {
-      return {
-        ...acc,
-        ...currUtil(widgetId),
-      }
-    }, {}) : {};
+  const processedUtilOverrides = shellUtilOverrides
+    ? Object.values(shellUtilOverrides).reduce((acc, currUtil) => {
+        return {
+          ...acc,
+          ...currUtil(widgetId),
+        };
+      }, {})
+    : {};
 
   const initializedPlatformUtils = merge(
     {},

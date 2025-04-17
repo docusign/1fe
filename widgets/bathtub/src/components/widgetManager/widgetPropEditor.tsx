@@ -55,25 +55,25 @@ const WidgetPropEditor = memo(({ trigger }: WidgetPropEditorProps) => {
         onCancel={() => dispatch(appActions.setIsPropsEditorOpen(false))}
         footer={[
           <Hotkeys
-            keyName="esc"
+            keyName='esc'
             onKeyDown={() => {
               dispatch(appActions.setIsPropsEditorOpen(false));
               dispatch(appActions.clearPropsError());
             }}
           >
             <Button
-              type="primary"
+              type='primary'
               onClick={() => {
                 if (draft.current && draft.current !== widgetProps) {
                   dispatch(appActions.setActiveWidgetProps(draft.current));
                 }
               }}
-              data-qa="props-editor-update"
+              data-qa='props-editor-update'
             >
               {t('Bathtub.PropEditor.Update')}
             </Button>
             <Button
-              type="primary"
+              type='primary'
               onClick={() => dispatch(appActions.setIsPropsEditorOpen(false))}
             >
               Close
@@ -83,10 +83,10 @@ const WidgetPropEditor = memo(({ trigger }: WidgetPropEditorProps) => {
       >
         <Typography.Title level={2}>Widget props</Typography.Title>
         <CodeMirror
-          theme="dark"
+          theme='dark'
           value={widgetProps}
-          width="100%"
-          height="50vh"
+          width='100%'
+          height='50vh'
           extensions={[javascript({ jsx: true })]}
           onChange={(newProps) => {
             draft.current = newProps;

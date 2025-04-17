@@ -100,7 +100,7 @@ export function WidgetBrowser() {
       <Table
         dataSource={widgets}
         columns={columns}
-        rowKey="widgetId"
+        rowKey='widgetId'
         locale={{ emptyText: 'No widget configuration found.' }}
       />
     </div>

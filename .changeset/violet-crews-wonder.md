@@ -1,5 +1,5 @@
 ---
-"@abetest/ui": patch
+'@abetest/ui': patch
 ---
 
 asdf

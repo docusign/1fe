@@ -41,24 +41,24 @@ const WidgetSwitcher = memo(({ trigger }: WidgetSwitcherProps) => {
         onCancel={() => dispatch(appActions.setIsWidgetSwitcherOpen(false))}
         footer={[
           <Hotkeys
-            keyName="esc"
+            keyName='esc'
             onKeyDown={() => {
               dispatch(appActions.setIsWidgetSwitcherOpen(false));
             }}
           >
             <Button
-              type="primary"
+              type='primary'
               disabled={!newUrl || newUrl === widgetUrl}
               onClick={() => {
                 if (newUrl) dispatch(appActions.setActiveWidgetUrl(newUrl));
               }}
-              data-qa="apply-widget-url"
+              data-qa='apply-widget-url'
             >
               Apply
             </Button>
           </Hotkeys>,
           <Button
-            type="primary"
+            type='primary'
             onClick={() => {
               dispatch(appActions.setIsWidgetSwitcherOpen(false));
             }}
@@ -87,23 +87,23 @@ const WidgetSwitcher = memo(({ trigger }: WidgetSwitcherProps) => {
             data-qa='widgetUrlInput'
           /> */}
 
-          <label htmlFor="widgetUrl">Enter a widget url</label>
+          <label htmlFor='widgetUrl'>Enter a widget url</label>
           <Input
-            id="widgetUrl"
-            name="widgetUrl"
-            type="url"
-            placeholder="http://127.0.0.1/js/1fe-bundle.js"
+            id='widgetUrl'
+            name='widgetUrl'
+            type='url'
+            placeholder='http://127.0.0.1/js/1fe-bundle.js'
             onChange={(e) => updateUrl(e.target.value)}
             value={newUrl ?? widgetUrl}
-            data-qa="widgetUrlInput"
+            data-qa='widgetUrlInput'
           />
 
           <div>
             <Text>Quick load: </Text>
-            <QuickLinks port="8080" />
-            <QuickLinks port="8081" />
-            <QuickLinks port="8082" />
-            <QuickLinks port="8083" />
+            <QuickLinks port='8080' />
+            <QuickLinks port='8081' />
+            <QuickLinks port='8082' />
+            <QuickLinks port='8083' />
           </div>
           <Box padding={`${spacingS} 0`}>
             <p>

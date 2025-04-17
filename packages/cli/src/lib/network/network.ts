@@ -16,7 +16,7 @@ const REQUEST_TIMEOUT = 5000;
 export const fetchWithTimeout = async (
   url: string,
   options?: RequestInit,
-  retries: number = 8,
+  retries = 8,
 ): Promise<globalThis.Response> => {
   const logger = getLogger('[cli][network]');
   logger.info(

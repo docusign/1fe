@@ -44,9 +44,7 @@ const browsersListMiddleware = (
       !isEmpty(browsersListConfig)
     ) {
       const matchesSupportedBrowser = matchesUA(userAgent, {
-        browsers: [
-          "Chrome < 130",
-        ],
+        browsers: ['Chrome < 130'],
         ignoreMinor: true,
         ignorePatch: true,
       });

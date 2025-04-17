@@ -48,7 +48,7 @@ type ErrorPageData = {
 
 type ErrorProps = {
   type?: ErrorPageType;
-  plugin?: OneFEErrorComponentProps["plugin"];
+  plugin?: OneFEErrorComponentProps['plugin'];
   message?: string | undefined;
 };
 
@@ -103,7 +103,7 @@ export const Error = ({ type = 'error', plugin, message }: ErrorProps = {}) => {
       titleText: 'Looks like this page is not here',
       subText: 'Check your URL, or go back',
       buttonText: 'Go Back',
-    }
+    },
   };
 
   const mainText = message ?? ErrorPageData[type].titleText;

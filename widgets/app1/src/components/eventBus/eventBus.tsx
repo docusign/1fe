@@ -26,7 +26,6 @@ export const EventBus = () => {
       <Button
         data-qa='utils.eventBus.publish1.btn'
         onClick={() => {
-          // @ts-ignore
           platformProps.utils.eventBus.publish<WidgetEvents, 'event1'>({
             targetWidgetId: '@1fe/starter-kit2',
             eventName: 'event1',
@@ -46,7 +45,6 @@ export const EventBus = () => {
       <Button
         data-qa='utils.eventBus.publish2.btn'
         onClick={() => {
-          // @ts-ignore
           platformProps.utils.eventBus.publish<WidgetEvents, 'event2'>({
             targetWidgetId: '@internal/generic-child-widget',
             eventName: 'event2',

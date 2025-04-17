@@ -1,6 +1,6 @@
 import { PlatformPropsType } from '@devhub/1fe-shell';
 
-export type HostPropsContract = {};
+export type HostPropsContract = Record<string, unknown>;
 
 export type WidgetEvents = {
   event1: { param1: string };

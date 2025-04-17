@@ -27,94 +27,92 @@ const mockRuntimeConfigOverride = {
 
 const wskRuntimeOverrideUrl = `http://localhost:3001/app1?runtime_config_overrides=${JSON.stringify(mockRuntimeConfigOverride)}`;
 
-test(
-  '"?runtime_config_overrides=" query param overrides the runtime config',
-  async ({ page }) => {
-    await page.goto(wskRuntimeOverrideUrl);
+test('"?runtime_config_overrides=" query param overrides the runtime config', async ({
+  page,
+}) => {
+  await page.goto(wskRuntimeOverrideUrl);
 
-    // check if meta tags are overridden and present in the response html
-    for (const tag of mockRuntimeConfigOverride[wskId].plugin.metaTags) {
-      const tagAttributes = Object.entries(tag).reduce(
-        (itr, e) => `${itr}[${e[0]}="${e[1]}"]`,
-        '',
+  // check if meta tags are overridden and present in the response html
+  for (const tag of mockRuntimeConfigOverride[wskId].plugin.metaTags) {
+    const tagAttributes = Object.entries(tag).reduce(
+      (itr, e) => `${itr}[${e[0]}="${e[1]}"]`,
+      '',
+    );
+
+    // expect <meta ${tagAttributes} > to exist in the DOM
+    // if (isIntegrationEnv) {
+    expect(await page.$(`meta${tagAttributes}`)).not.toBeUndefined();
+    // } else {
+    //   expect(await page.$(`meta${tagAttributes}`)).toBeNull();
+    // }
+  }
+
+  const wskRuntimeConfig = await page.evaluate(
+    ({ wskId }) => {
+      const head = document.querySelector('head');
+
+      const widgetConfigsEl = head?.querySelector(
+        'script[type="application/json"][data-1fe-config-id="widget-config"]',
+      )?.innerHTML;
+
+      const parsedWidgetConfigs = JSON.parse(widgetConfigsEl as string);
+
+      const wskConfig = parsedWidgetConfigs.find(
+        (config: { widgetId: string }) => config.widgetId === wskId,
       );
 
-      // expect <meta ${tagAttributes} > to exist in the DOM
-      // if (isIntegrationEnv) {
-        expect(await page.$(`meta${tagAttributes}`)).not.toBeUndefined();
-      // } else {
-      //   expect(await page.$(`meta${tagAttributes}`)).toBeNull();
-      // }
-    }
+      const runtimeConfig = wskConfig?.runtime;
 
-    const wskRuntimeConfig = await page.evaluate(
-      ({ wskId }) => {
-        const head = document.querySelector('head');
+      return runtimeConfig;
+    },
+    { wskId },
+  );
 
-        const widgetConfigsEl = head?.querySelector(
-          'script[type="application/json"][data-1fe-config-id="widget-config"]',
-        )?.innerHTML;
-
-        const parsedWidgetConfigs = JSON.parse(widgetConfigsEl as string);
-
-        const wskConfig = parsedWidgetConfigs.find(
-          (config: { widgetId: string }) => config.widgetId === wskId,
-        );
-
-        const runtimeConfig = wskConfig?.runtime;
-
-        return runtimeConfig;
-      },
-      { wskId },
-    );
-
-    const {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      plugin, // plugin is stripped out
-      ...restMockedRuntimeConfig
-    } = mockRuntimeConfigOverride[wskId];
-
+  const {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { plugin: _, ...restRuntimeConfig } = wskRuntimeConfig;
+    plugin, // plugin is stripped out
+    ...restMockedRuntimeConfig
+  } = mockRuntimeConfigOverride[wskId];
 
-    const isRuntimeConfigOverridden = isEqual(
-      restMockedRuntimeConfig,
-      restRuntimeConfig,
-    );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { plugin: _, ...restRuntimeConfig } = wskRuntimeConfig;
 
-    // if (isIntegrationEnv) {
-      expect(isRuntimeConfigOverridden).toBe(true);
-    // } else {
-    //   expect(isRuntimeConfigOverridden).toBe(false);
-    // }
-  },
-);
+  const isRuntimeConfigOverridden = isEqual(
+    restMockedRuntimeConfig,
+    restRuntimeConfig,
+  );
 
-test(
-  'runtime_config_overrides should take presidence over widget_url_overrides',
-  async ({ page }) => {
-    const bundleOverrideUrl =
-      'https://docutest-a.akamaihd.net/integration/1fe/widgets/@internal/generic-child-widget/1.0.20/js/1fe-bundle.js';
+  // if (isIntegrationEnv) {
+  expect(isRuntimeConfigOverridden).toBe(true);
+  // } else {
+  //   expect(isRuntimeConfigOverridden).toBe(false);
+  // }
+});
 
-    const mockRuntimeConfigOverride = {
-      preload: [
-        {
-          apiGet: '/i-am-the-mock-override',
-        },
-      ],
-    };
+test('runtime_config_overrides should take presidence over widget_url_overrides', async ({
+  page,
+}) => {
+  const bundleOverrideUrl =
+    'https://docutest-a.akamaihd.net/integration/1fe/widgets/@internal/generic-child-widget/1.0.20/js/1fe-bundle.js';
 
-    const wskRuntimeAndBundleOverrideUrl = `http://localhost:3001/app1?runtime_config_overrides=${JSON.stringify({['@1fe/starter-kit2']: mockRuntimeConfigOverride})}&widget_url_overrides=${JSON.stringify({['@1fe/starter-kit2']: bundleOverrideUrl})}`;
+  const mockRuntimeConfigOverride = {
+    preload: [
+      {
+        apiGet: '/i-am-the-mock-override',
+      },
+    ],
+  };
 
-    await page.goto(wskRuntimeAndBundleOverrideUrl);
+  const wskRuntimeAndBundleOverrideUrl = `http://localhost:3001/app1?runtime_config_overrides=${JSON.stringify({ ['@1fe/starter-kit2']: mockRuntimeConfigOverride })}&widget_url_overrides=${JSON.stringify({ ['@1fe/starter-kit2']: bundleOverrideUrl })}`;
 
-    const runtimeConfig = (
-      await getWidgetConfigFromPage(page, '@1fe/starter-kit2')
-    )?.runtime;
+  await page.goto(wskRuntimeAndBundleOverrideUrl);
 
-    expect(runtimeConfig).toEqual(mockRuntimeConfigOverride);
-  },
-);
+  const runtimeConfig = (
+    await getWidgetConfigFromPage(page, '@1fe/starter-kit2')
+  )?.runtime;
+
+  expect(runtimeConfig).toEqual(mockRuntimeConfigOverride);
+});
 
 // test(
 //   'runtime_config_overrides is disabled on demo and prod',

@@ -56,7 +56,7 @@ const AppHeader = memo(() => {
         }}
       >
         <Hotkeys
-          keyName="cmd+shift+c"
+          keyName='cmd+shift+c'
           onKeyDown={() => {
             if (widget) {
               navigator.clipboard.writeText(
@@ -68,7 +68,7 @@ const AppHeader = memo(() => {
           }}
         >
           <Hotkeys
-            keyName="cmd+/"
+            keyName='cmd+/'
             onKeyDown={() => {
               dispatch(appActions.setIsWidgetSwitcherOpen(true));
             }}
@@ -76,8 +76,8 @@ const AppHeader = memo(() => {
             <WidgetSwitcher
               trigger={
                 <Button
-                  type="primary"
-                  data-qa="widget-switcher-launch-button"
+                  type='primary'
+                  data-qa='widget-switcher-launch-button'
                   // startElement={
                   //   <span>
                   //     {widget
@@ -100,7 +100,7 @@ const AppHeader = memo(() => {
         </Hotkeys>
 
         <Hotkeys
-          keyName="cmd+p"
+          keyName='cmd+p'
           onKeyDown={(_, event) => {
             event.preventDefault();
             event.stopImmediatePropagation();
@@ -110,8 +110,8 @@ const AppHeader = memo(() => {
           <WidgetPropEditor
             trigger={
               <Button
-                type="primary"
-                data-qa="widget-prop-editor-button"
+                type='primary'
+                data-qa='widget-prop-editor-button'
                 onClick={() => {
                   dispatch(appActions.setIsPropsEditorOpen(true));
                 }}
@@ -137,7 +137,7 @@ const AppHeader = memo(() => {
               </Select>
             ) : null} */}
         <Button
-          type="primary"
+          type='primary'
           onClick={() => {
             dispatch(appActions.reset());
           }}
@@ -145,7 +145,7 @@ const AppHeader = memo(() => {
           {t('Bathtub.Header.Reset')}
         </Button>
         <Button
-          type="primary"
+          type='primary'
           onClick={() => {
             dispatch(appActions.renderWidget());
           }}
