@@ -35,7 +35,6 @@
 // ): string =>
 //   `http://localhost:3001/app1${path}?widget_url_overrides={"${widgetId}":${ overrideUrl ? overrideUrl : widgetUrl }}`;
 
-
 // const getUrlNoOverride = (path: string): string =>
 //   `http://localhost:3001/app1${path}`;
 

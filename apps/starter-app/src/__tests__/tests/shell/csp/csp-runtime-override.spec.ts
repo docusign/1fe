@@ -25,7 +25,8 @@ test('should override csp only on integration', async ({ page }) => {
 
   const pageResponse = page.waitForResponse(
     (response) =>
-      response.url().includes('http://localhost:3001/app1') && response.status() === 200,
+      response.url().includes('http://localhost:3001/app1') &&
+      response.status() === 200,
   );
 
   await page.goto(wskRuntimeOverrideUrl);

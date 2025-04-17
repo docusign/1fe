@@ -71,6 +71,6 @@ export const parseError = (error: unknown): ParsedError => {
     file: file,
     location: location,
     widget,
-    stack: error instanceof Error ? error.stack ?? '' : '',
+    stack: error instanceof Error ? (error.stack ?? '') : '',
   };
 };

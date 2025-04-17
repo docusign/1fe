@@ -27,7 +27,9 @@ const INTERNAL_CONTEXT_REF = Symbol('1feContext');
 export const hackyWidgetIdDetermination = (url: string) => {
   // If the url is not a docusign cdn url then skip.
   // This to prevent any security issues.
-  if (!isAllowedSource(url, DYNAMIC_CONFIGS.importMapOverrides.allowedSources)) {
+  if (
+    !isAllowedSource(url, DYNAMIC_CONFIGS.importMapOverrides.allowedSources)
+  ) {
     return;
   }
 

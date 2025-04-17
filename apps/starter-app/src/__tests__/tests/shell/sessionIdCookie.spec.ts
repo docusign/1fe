@@ -1,23 +1,23 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('session ID cookie', () => {
-  test(
-    'session ID cookie should exists (non iframe embedded widget without auth) @e2e',
-    async ({ page, context }) => {
-      await page.goto('http://localhost:3001/app1/utils');
+  test('session ID cookie should exists (non iframe embedded widget without auth) @e2e', async ({
+    page,
+    context,
+  }) => {
+    await page.goto('http://localhost:3001/app1/utils');
 
-      const cookies = await context.cookies();
-      const hasSessionIdCookie = cookies.some(
-        (cookie) =>
-          cookie.name === 'session_id' &&
-          cookie.sameSite === 'None' &&
-          cookie.httpOnly === false &&
-          cookie.secure === true,
-      );
+    const cookies = await context.cookies();
+    const hasSessionIdCookie = cookies.some(
+      (cookie) =>
+        cookie.name === 'session_id' &&
+        cookie.sameSite === 'None' &&
+        cookie.httpOnly === false &&
+        cookie.secure === true,
+    );
 
-      expect(hasSessionIdCookie).toBeTruthy();
-    },
-  );
+    expect(hasSessionIdCookie).toBeTruthy();
+  });
 
   // TODO[1fe][post-mvp]: add back as follow up. Need to create parent frame to test
   // test(

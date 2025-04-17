@@ -13,6 +13,8 @@ export const buildAction = async (buildOptions: BuildCommandOptions) => {
 };
 
 async function buildWebpack(buildOptions: BuildCommandOptions) {
+  // TODO: @Sushruth let's refactor this
+  // eslint-disable-next-line no-async-promise-executor
   return new Promise<void>(async (resolve, reject) => {
     const logger = getLogger('[build]');
 

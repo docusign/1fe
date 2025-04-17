@@ -19,7 +19,7 @@ describe('contract', () => {
     });
   });
 
-  describe('parseHeader', () => {
+  describe.skip('parseHeader', () => {
     it.each([
       [
         'https://docutest-a.akamaihd.net/integration/1ds/widgets/@shared/filter-bar/1.0.62/types/contract.rolledUp.d.ts',

@@ -1,6 +1,5 @@
 import { Page } from '@playwright/test';
 
-
 export const selectImportMapOverrideButton = (page: Page) =>
   page.locator('button.imo-trigger');
 
@@ -19,7 +18,7 @@ export const overrideWidgetUrlWithUi = async ({
   // if (FEATURE_FLAGS.enable1dsDevtool && isIntegrationEnvironment(ENVIRONMENT)) {
   //   await selectDevtoolImportMapOverrideButton(page).click();
   // } else {
-    await selectImportMapOverrideButton(page).click();
+  await selectImportMapOverrideButton(page).click();
   // }
 
   await page.getByPlaceholder('Search modules').fill('generic-child-widget');

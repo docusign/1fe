@@ -1,4 +1,3 @@
-/* eslint-disable docusign-i18n/no-hard-coded-text */
 import { platformProps } from '@devhub/1fe-shell';
 import React from 'react';
 

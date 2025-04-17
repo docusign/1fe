@@ -1,7 +1,6 @@
 // TODO[1fe]: Uncomment this test when we have cdn hosting figured out.
 // import { test, expect } from '@playwright/test';
 
-
 // test(
 //   'Shell and Plugin bundles are preloaded & loaded in HTML @preloadAssets @e2e',
 //   async ({ page }) => {

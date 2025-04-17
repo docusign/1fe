@@ -6,8 +6,8 @@ jest.mock('../../../../configs/shell-configs', () => ({
   readOneFEShellConfigs: jest.fn().mockReturnValue({
     shellLogger: {
       log: jest.fn(),
-      error: jest.fn()
-    }
+      error: jest.fn(),
+    },
   }),
 }));
 

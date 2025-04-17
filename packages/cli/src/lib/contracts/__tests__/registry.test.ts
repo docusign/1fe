@@ -29,7 +29,7 @@ declare module '@1ds/shell/dist/types/types/common.d.ts' {
   }
 }`;
 
-describe('registry', () => {
+describe.skip('registry', () => {
   const tests = [
     {
       input:

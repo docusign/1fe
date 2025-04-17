@@ -17,7 +17,6 @@ export const withProvider = (Component: React.FC<WidgetProps>) =>
 
     return (
       <Provider store={store}>
-        {/* @ts-ignore */}
         <UNSAFE_LocationContext.Provider value={null}>
           <MemoryRouter
             initialEntries={[platformProps.utils.navigation.getRoute()]}

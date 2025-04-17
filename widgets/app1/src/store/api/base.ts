@@ -9,7 +9,6 @@ import {
 
 const REDUCER_PATH = 'widgetStarterKitApi';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const determineEndpoint = (baseUrl?: string): string => {
   // eventually we will use the 1FE helper function for this
   // e.g. platform.network.getESignProxyUrlForESignEnvironment(baseUrl);
