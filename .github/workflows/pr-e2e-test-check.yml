@@ -17,7 +17,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -28,8 +28,14 @@ jobs:
       - name: Build shell package
         run: cd packages/1fe-shell && yarn build
 
-      - name: Install playwright
+      - name: Install Playwright
         run: npx playwright install
+
+        - name: Kill any process on port 3001 (or your port)
+          run: |
+            if lsof -i :3001; then
+              lsof -ti :3001 | xargs kill -9
+            fi
 
       - name: Run E2E tests
         run: yarn test:playwright
