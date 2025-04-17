@@ -28,5 +28,8 @@ jobs:
       - name: Build shell package
         run: cd packages/1fe-shell && yarn build
 
+      - name: Install playwright
+        run: yarn playwright install
+
       - name: Run E2E tests
         run: yarn test:playwright
