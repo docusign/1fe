@@ -16,6 +16,7 @@
       "outputs": ["coverage/**"],
       "dependsOn": []
     },
+    "test:playwright": {},
     "lint": {},
     "typecheck": {
       "dependsOn": ["^build"]
