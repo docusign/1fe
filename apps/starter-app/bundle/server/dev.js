@@ -32,6 +32,6 @@ const DEV_ENVIRONMENT_VARIABLES = {
   await ctx.watch();
   await ctx.serve({
     servedir: path.resolve(__dirname, '../../dist'),
-    port: 3002,
+    port: 3001,
   });
 })();

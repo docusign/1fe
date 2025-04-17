@@ -15,7 +15,7 @@ const ENVIRONMENT: string = process.env.NODE_ENV || 'development';
 
 const shellBundleUrl =
   process.env.NODE_ENV === 'development'
-    ? 'http://localhost:3002/public/js/bundle.js'
+    ? 'http://localhost:3001/public/js/bundle.js'
     : 'https://1fe-demo-hbb2dxgbgxg2dac6.centralus-01.azurewebsites.net/js/bundle.js';
 
 const envModeMap: Record<string, OneFEServerOptions['mode']> = {
