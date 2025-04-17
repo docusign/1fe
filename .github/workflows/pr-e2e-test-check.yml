@@ -31,11 +31,5 @@ jobs:
       - name: Install Playwright
         run: npx playwright install
 
-      - name: Kill any process on port 3001 (or your port)
-        run: |
-          if lsof -i :3001; then
-            lsof -ti :3001 | xargs kill -9
-          fi
-
       - name: Run E2E tests
         run: yarn test:playwright
