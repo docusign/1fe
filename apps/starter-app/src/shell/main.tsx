@@ -1,4 +1,7 @@
-import renderOneFEShell, { OneFEMode, OneFEErrorComponentProps } from '@devhub/1fe-shell';
+import renderOneFEShell, {
+  OneFEMode,
+  OneFEErrorComponentProps,
+} from '@devhub/1fe-shell';
 import React from 'react';
 
 import { Loader } from './components/Loader';
@@ -26,9 +29,9 @@ const setup = () => {
           },
           error: (message: string) => {
             console.error(widgetId, message);
-          }
-        }
-      })
+          },
+        },
+      }),
     },
     auth: {
       isAuthedCallback: (widgetId: string): boolean => {

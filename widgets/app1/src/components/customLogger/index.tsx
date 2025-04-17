@@ -10,7 +10,6 @@ import { utilSectionStyles } from '../routes/styles/utilsDemo.styles';
 export const CustomLoader: React.FC = () => {
   return (
     <div css={utilSectionStyles} data-qa='utils.experience.container'>
-
       <h1>utils.custom.logger</h1>
       <Button
         data-qa='utils.experience.title.set'
@@ -20,7 +19,9 @@ export const CustomLoader: React.FC = () => {
       </Button>
       <Button
         data-qa='utils.experience.title.set'
-        onClick={() => platformProps.utils.logger.error('Example error message')}
+        onClick={() =>
+          platformProps.utils.logger.error('Example error message')
+        }
       >
         utils.logger.error
       </Button>

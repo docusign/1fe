@@ -24,7 +24,6 @@ export default function Root(props: WidgetProps) {
       <Button
         data-qa='eventBus.subscribe.btn'
         onClick={() => {
-          // @ts-ignore
           const unsubFn = platformProps.utils.eventBus.subscribe<
             WidgetEvents,
             'event1'

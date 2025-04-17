@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 
-test('Context functions in @internal/generic-child-widget', async ({ page }) => {
+test('Context functions in @internal/generic-child-widget', async ({
+  page,
+}) => {
   // Navigate to the app
   await page.goto('http://localhost:3001/app1/utils');
 
@@ -15,8 +17,6 @@ test('Context functions in @internal/generic-child-widget', async ({ page }) => 
   await page.click('button[data-qa="utils.context.self.btn"]');
   await page.waitForTimeout(100);
 
-  const selfContent = JSON.parse(
-    (await resultElement.textContent()) || '{}',
-  );
+  const selfContent = JSON.parse((await resultElement.textContent()) || '{}');
   expect(selfContent.widgetId).toContain('@1fe/starter-kit');
 });

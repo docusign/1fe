@@ -1,5 +1,7 @@
-
-import { getDynamicExternalLibraryConfigs, getDynamicInstalledLibraryConfigs } from '../../utils/libs';
+import {
+  getDynamicExternalLibraryConfigs,
+  getDynamicInstalledLibraryConfigs,
+} from '../../utils/libs';
 import { Lib } from './types';
 // TODO[1fe][post-mvp]: What do we do about this? Does this need to be supported in 1FE?
 export const getInstalledLibVersions = (): Lib[] => {
@@ -48,6 +50,7 @@ export const getInstalledLibVersions = (): Lib[] => {
     }
 
     // We will roll out any change by environment, so still need to fallback to package.json
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const libPackageJson = require(`${lib.id}/package.json`);
     return { id: lib.id, version: libPackageJson.version };
   });

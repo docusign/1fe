@@ -4,8 +4,10 @@ import { getLogger } from '../lib/getLogger';
 import { existsSync } from 'fs';
 import { getKnownPaths } from '../lib/paths/getKnownPaths';
 
+type EmptyObject = Record<string, unknown>;
+
 export const preActionHook = async (
-  thisCommand: Command<[], {}, {}>,
+  thisCommand: Command<[], EmptyObject, EmptyObject>,
   actionCommand: CommandUnknownOpts,
 ) => {
   const logger = getLogger('[pre-action]');

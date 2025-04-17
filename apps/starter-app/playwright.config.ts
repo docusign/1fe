@@ -7,7 +7,7 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
     stdout: 'ignore',
     stderr: 'pipe',
-    timeout: 15 * 1000
+    timeout: 15 * 1000,
   },
   testDir: './src/__tests__/tests',
 });

@@ -12,7 +12,7 @@
     "@devhub/cli": "workspace:*",
     "@repo/widget-base-config": "0.0.1",
     "cross-env": "^7.0.3",
-    "eslint": "9.23.0",
+    "eslint": "8.57.1",
     "eslint-config-prettier": "^10.1.1",
     "eslint-config-ts-react-important-stuff": "^3.0.0",
     "eslint-plugin-prettier": "^5.2.4",
