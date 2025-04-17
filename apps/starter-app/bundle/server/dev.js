@@ -32,6 +32,6 @@ const DEV_ENVIRONMENT_VARIABLES = {
   await ctx.watch();
   await ctx.serve({
     servedir: path.resolve(__dirname, '../../dist'),
-    port: 3002, // need to host the shell bundle on a different port than we host the application
+    port: 3002, // need to host the server bundle on a different port than we host the application (GH actions complains)
   });
 })();
