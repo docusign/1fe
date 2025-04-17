@@ -9,7 +9,7 @@ import { enforcedDefaultCsp, reportOnlyDefaultCsp } from './csp-configs';
 import errorMiddleware from './server/middlewares/error.middleware';
 
 dotenv.config();
-const { PORT = 3002 } = process.env;
+const { PORT = 3001 } = process.env;
 
 const ENVIRONMENT: string = process.env.NODE_ENV || 'development';
 
