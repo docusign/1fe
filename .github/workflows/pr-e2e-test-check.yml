@@ -22,5 +22,11 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Build server package
+        run: cd packages/1fe-server && yarn build
+
+      - name: Build shell package
+        run: cd packages/1fe-shell && yarn build
+
       - name: Run E2E tests
         run: yarn test:playwright
