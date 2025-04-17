@@ -31,8 +31,8 @@ jobs:
       - name: Build starter-app
         run: cd apps/starter-app && yarn build
 
-      - name: Add dummy favicon
-        run: mkdir -p apps/starter-app/dist/public && touch apps/starter-app/dist/public/favicon.ico
+      # - name: Add dummy favicon
+      #   run: mkdir -p apps/starter-app/dist/public && touch apps/starter-app/dist/public/favicon.ico
 
       - name: Install Playwright
         run: npx playwright install
