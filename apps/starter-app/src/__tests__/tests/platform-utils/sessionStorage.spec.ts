@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('Displays a string value that is set in sessionStorage', async ({
   page,
 }) => {
-  await page.goto('http://localhost:3001/app1/utils');
+  await page.goto('http://localhost:3002/app1/utils');
 
   await page.click(
     'button[data-qa="utils.localAndSessionStorage1FE.sessionStorage.getSessionString.btn"]',
@@ -19,7 +19,7 @@ test('Displays a string value that is set in sessionStorage', async ({
 test('Displays a boolean value that is set in sessionStorage', async ({
   page,
 }) => {
-  await page.goto('http://localhost:3001/app1/utils');
+  await page.goto('http://localhost:3002/app1/utils');
   await page.click(
     'button[data-qa="utils.localAndSessionStorage1FE.sessionStorage.getSessionBoolean.btn"]',
   );
