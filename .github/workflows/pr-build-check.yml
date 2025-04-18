@@ -22,11 +22,5 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Build CLI first
-        run: cd packages/cli && yarn build
-
-      - name: Build widget-base-config next
-        run: cd widgets/widget-base-config && yarn build
-
       - name: Build the project
         run: yarn build
