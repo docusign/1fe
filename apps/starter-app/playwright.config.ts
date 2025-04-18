@@ -2,7 +2,7 @@ import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   webServer: {
-    command: 'npm run dev',
+    command: 'yarn dev',
     url: 'http://localhost:3001',
     reuseExistingServer: !process.env.CI,
     stdout: 'ignore',

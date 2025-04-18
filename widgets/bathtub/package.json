@@ -22,7 +22,7 @@
   "scripts": {
     "dev": "1fe-cli --trace --environment integration dev",
     "format": "prettier --write './src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ../../.prettierrc.json",
-    "build": "1fe-cli --trace --environment integration build",
+    "build:widget": "1fe-cli --trace --environment integration build",
     "test": "jest",
     "type:check": "npx tsc --noEmit --skipLibcheck --pretty"
   },

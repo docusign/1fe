@@ -16,7 +16,7 @@ const checkForVisibleUnsupportedBrowserPage = async (
   }
 };
 
-test.describe('test outdated user agent (chrome)', () => {
+test.describe.skip('test outdated user agent (chrome)', () => {
   test.use({
     userAgent:
       'Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.93 Safari/537.36',

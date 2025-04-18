@@ -1,9 +1,11 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
+    "build:first": {
+      "outputs": []
+    },
     "build": {
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "dependsOn": ["^build"],
       "outputs": [
         "build/**",
         ".vercel/**",
@@ -16,6 +18,7 @@
       "outputs": ["coverage/**"],
       "dependsOn": []
     },
+    "test:playwright": {},
     "lint": {},
     "typecheck": {
       "dependsOn": ["^build"]
