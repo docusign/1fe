@@ -1,0 +1,41 @@
+name: 🎭 E2E testing
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  e2e_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build server package
+        run: cd packages/1fe-server && yarn build
+
+      - name: Build shell package
+        run: cd packages/1fe-shell && yarn build
+
+      - name: Build starter-app
+        run: cd apps/starter-app && yarn build
+
+      # - name: Add dummy favicon
+      #   run: mkdir -p apps/starter-app/dist/public && touch apps/starter-app/dist/public/favicon.ico
+
+      - name: Install Playwright
+        run: npx playwright install
+
+      - name: Run E2E tests
+        run: yarn test:playwright

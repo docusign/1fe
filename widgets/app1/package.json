@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "dev": "1fe-cli --trace --environment integration dev",
-    "build": "1fe-cli --trace --environment integration build",
+    "build:widget": "1fe-cli --trace --environment integration build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write .",
     "check-format": "prettier --check ."
