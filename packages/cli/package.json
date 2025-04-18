@@ -33,6 +33,7 @@
   },
   "scripts": {
     "build": "tsup",
+    "build:first": "tsup",
     "dev": "yarn build --watch",
     "dev:yalc": "NODE_OPTIONS=--max-old-space-size=10194 yarn dev --onSuccess 'yalc push'",
     "lint": "eslint \"src/**/*.ts*\" --fix",

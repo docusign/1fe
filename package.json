@@ -2,6 +2,7 @@
   "name": "@devhub/1fe",
   "private": true,
   "scripts": {
+    "build:first": "turbo run build:first",
     "build": "turbo run build",
     "clean": "turbo run clean",
     "dev": "turbo run dev",

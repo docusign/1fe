@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import path from 'path';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import oneFEServer, { OneFEServerOptions } from '@devhub/1fe-server';
 import favicon from 'serve-favicon';
 

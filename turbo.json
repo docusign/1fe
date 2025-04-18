@@ -1,6 +1,9 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
+    "build:first": {
+      "outputs": []
+    },
     "build": {
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [
