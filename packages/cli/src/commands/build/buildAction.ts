@@ -32,10 +32,9 @@ async function buildWebpack(buildOptions: BuildCommandOptions) {
       }),
     );
 
-    // commenting this out until we have a dummy /version endpoint
-    // await contractsInstallAction({
-    //   outdated: false, // TODO - what should this value be? figure it out.
-    // });
+    await contractsInstallAction({
+      outdated: false, // TODO - what should this value be? figure it out.
+    });
 
     compiler.run((error, stats) => {
       if (error || stats?.hasErrors()) {
