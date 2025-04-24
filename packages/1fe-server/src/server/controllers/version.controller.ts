@@ -38,7 +38,6 @@ class VersionController {
     res: Response,
     next: NextFunction,
   ): Promise<void> => {
-    console.log('here ;)');
     try {
       const dataForRenderingTemplatePayload =
         await dataForRenderingTemplate(req);
