@@ -26,6 +26,7 @@ const envModeMap: Record<string, OneFEServerOptions['mode']> = {
   production: 'production',
 };
 
+// TODO[1fe]: Should we automatically recognize ONE_DS_BUNDLE, ROOT, FAVICON, etc. OUT OF THE BOX?
 const ROUTES = {
   WATCHDOG: '/watchdog',
   CSP_REPORT_ONLY: '/csp-report-only',

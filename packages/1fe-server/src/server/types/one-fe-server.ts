@@ -5,6 +5,7 @@ import {
   WidgetConfig,
 } from '.';
 
+// TODO[1fe]: known routes should be optional. Whole server should be optional
 export type OneFEServer = {
   bathtub?: boolean;
   knownRoutes: string[];
@@ -15,6 +16,7 @@ export type OneFECSP = {
   reportOnly?: CSPPerEnvironment;
 };
 
+// TODO[1fe]: refreshMs should be required
 export type OneFEConfigManagement = {
   getDynamicConfigs?: () => Promise<OneFEDynamicConfigs>;
   url?: string;

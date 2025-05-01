@@ -18,6 +18,7 @@ const setup = () => {
   };
 
   // TODO[1fe]: Just read from server configs put on DOM
+  // TODO[1fe]: Review the types here (components)
   renderOneFEShell({
     mode: envModeMap[ENVIRONMENT],
     environment: ENVIRONMENT,
