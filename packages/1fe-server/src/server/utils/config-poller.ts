@@ -202,6 +202,7 @@ const processDynamicWidgetConfig = async (
       setCachedWidgetConfigs(newWidgetConfigs);
     } else {
       // Log critical error if failed to verify widget bundles from cdn
+      // TODO[1fe]: Update error message here
       if (isEmpty(getCachedWidgetConfigs())) {
         throw new Error(cachedWidgetConfigsEmptyMessage);
       }
