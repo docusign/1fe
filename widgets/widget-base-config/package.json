@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build:widget": "tsc --build --clean && tsc --build"
+    "build": "tsc --build --clean && tsc --build"
   },
   "dependencies": {
     "@devhub/cli": "0.0.1",
