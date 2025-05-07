@@ -12,6 +12,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc --noEmit && tsup",
+    "prepack": "yarn build",
     "clean": "rm -rf dist",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
