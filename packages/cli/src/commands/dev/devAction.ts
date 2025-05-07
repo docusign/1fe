@@ -5,6 +5,10 @@ import { oneFeProgram } from 'src/oneFeProgram/oneFeProgram';
 import { webpack } from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import getPorts from 'webpack-dev-server/lib/getPort';
+import { getConfig } from 'src/lib/config/getConfig';
+import open from 'open';
+import { contractsInstallAction } from '../contracts/install/contractsInstallAction';
+import chalk from 'chalk';
 
 const DEV_START_PORT = 8080;
 const DEV_HOST = '127.0.0.1';
@@ -27,7 +31,7 @@ export async function devCommandAction(devCommandOptions: DevCommandOptions) {
 
   if (contractsInstall) {
     logger.info('Installing contracts...');
-    // TODO Call contracts installation function here
+    await contractsInstallAction({ outdated: false });
   }
 
   const port = await getPorts(DEV_START_PORT, DEV_HOST);
@@ -44,14 +48,27 @@ export async function devCommandAction(devCommandOptions: DevCommandOptions) {
   try {
     await server.start();
 
-    // TODO calculate bathtub URL here.
+    server.compiler.hooks.done.tap('done', async () => {
+      const {
+        baseConfig: { bathtubUrl },
+      } = await getConfig();
 
-    if (headless) {
-      // TODO do not open browser if headless is true
-    }
-
-    // TODO open browser.
-    logger.log('Opening the widget in the bathtub...');
+      if (bathtubUrl) {
+        if (!headless) {
+          const bathtubUrlObject = new URL(bathtubUrl);
+          bathtubUrlObject.searchParams.set(
+            'widgetUrl',
+            `http://${DEV_HOST}:${port}/js/1fe-bundle.js`,
+          );
+          logger.log(
+            `Opening the widget in the bathtub with the URL: \n\t${chalk.blue(bathtubUrlObject.href)}\n`,
+          );
+          open(bathtubUrlObject.href);
+        } else {
+          logger.log('💀 The browser has been beheaded as instructed.');
+        }
+      }
+    });
   } catch (e) {
     logger.error('Error starting development server:', e);
     process.exit(1);
