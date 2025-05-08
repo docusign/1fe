@@ -54,7 +54,6 @@ export const dataForRenderingTemplate = async (req: Request) => {
     'react-dom': 'ReactDOM', // rrd uses 'react-dom' bare specifier
 
     'react-router': 'ReactRouter',
-    // 'react-router-dom': 'ReactRouterDOM',
     '@remix-run/router': 'RemixRouter',
   } as const;
 
