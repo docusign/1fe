@@ -28,7 +28,7 @@
     "@types/react": "^18.2.62",
     "@types/react-dom": "^18.2.19",
     "@types/react-refresh": "^0",
-    "@types/react-router-dom": "^5.3.1",
+    "@types/react-router-dom": "^6.30.0",
     "@types/serve-favicon": "^2.5.7",
     "@types/systemjs": "^6.15.1",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
@@ -78,7 +78,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-refresh": "^0.16.0",
-    "react-router-dom": "6.28.1",
+    "react-router-dom": "6.30.0",
     "serve-favicon": "^2.5.0",
     "systemjs": "^6.15.1"
   },

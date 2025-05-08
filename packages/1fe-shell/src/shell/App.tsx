@@ -59,7 +59,10 @@ function App(): JSX.Element {
       onError={handleError}
       fallbackComponent={getError()}
     >
-      <RouterProvider router={getRouter()} />
+      <RouterProvider
+        router={getRouter()}
+        future={{ v7_relativeSplatPath: false } as any}
+      />
     </OneDsErrorBoundary>
   );
 }

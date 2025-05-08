@@ -91,6 +91,7 @@ export const getRouter = () => {
 
   router = createBrowserRouter(routerConfig, {
     basename: basePathname(),
+    future: {},
   });
 
   return router;

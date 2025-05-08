@@ -36,6 +36,9 @@ const config = getProdConfig({
   externals: {
     react: 'React',
     'react-dom': 'ReactDOM',
+    'react-router': 'ReactRouter',
+    'react-router-dom': 'ReactRouterDOM',
+    '@remix-run/router': 'RemixRouter',
     lodash: '_',
   },
   plugins: [

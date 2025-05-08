@@ -14,7 +14,6 @@ import { getRouter } from '../../components/Router';
 import { WidgetConfig } from '../../types/widget-config';
 import { PlatformUtils } from '../../types/platform-utils';
 import { initWidgetsHelper } from './widgets';
-import { initNavigation } from './navigation';
 // import { initLogger } from './logger';
 // import { initNetwork } from './network';
 // import { getAppLoadTimeUtils } from './app-load-time';
@@ -63,12 +62,6 @@ export const getPlatformUtils = (widget: WidgetConfig): PlatformUtils => {
 
   const eventBus = initEventBus(widget.widgetId);
 
-  const navigation = initNavigation({
-    widgetId,
-    navigateShell: getRouter().navigate,
-    eventBus,
-  });
-
   //   const auth = initAuth(widget);
 
   //   const network = initNetwork({
@@ -107,7 +100,6 @@ export const getPlatformUtils = (widget: WidgetConfig): PlatformUtils => {
   const initializedPlatformUtils = merge(
     {},
     {
-      navigation,
       // network,
       // logger,
       widgets,
