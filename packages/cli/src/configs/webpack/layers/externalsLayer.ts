@@ -18,13 +18,6 @@ export async function getExternalsLayer(
   // TODO - get 1fe-shell external defined within the commonConfig [fast-follow]
   externals['@devhub/1fe-shell'] = '1feContext';
 
-  delete externals['react-router-dom']; // test
-  console.log('=======================================================');
-  console.log('=======================================================');
-  console.log(externals);
-  console.log('=======================================================');
-  console.log('=======================================================');
-
   logger.debug('Using externals:', externals);
 
   return {

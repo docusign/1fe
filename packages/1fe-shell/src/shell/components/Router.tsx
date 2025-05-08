@@ -51,7 +51,7 @@ const determineBaseRoute = (): RouteObject[] => {
   ];
 };
 
-const getPluginRoutes = () => {
+const getPluginRoutes = (): RouteObject[] => {
   const getError =
     readOneFEShellConfigs()?.components?.getError || getGenericError;
 
@@ -91,7 +91,6 @@ export const getRouter = () => {
 
   router = createBrowserRouter(routerConfig, {
     basename: basePathname(),
-    future: {},
   });
 
   return router;

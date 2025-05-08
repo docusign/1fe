@@ -11,8 +11,6 @@ import { WidgetProps } from '../contract';
 export const Router: React.FC<WidgetProps> = (props) => {
   const navigate = useNavigate();
 
-  // const t = useTranslate();
-
   const { Header } = Layout;
 
   return (
@@ -35,14 +33,12 @@ export const Router: React.FC<WidgetProps> = (props) => {
             {
               key: 'HOME',
               label: 'Home',
-              onClick: () => navigate('/app1'),
-              // 'data-qa': 'wsk.header.button.home',
+              onClick: () => navigate(''), // using relative route (for bathtub compatability)
             },
             {
               key: 'UTILS',
               label: 'Utils',
-              onClick: () => navigate('/app1/utils'),
-              // 'data-qa': 'wsk.header.button.utils',
+              onClick: () => navigate('utils'), // using relative route (for bathtub compatability)
             },
           ]}
           style={{
@@ -54,7 +50,7 @@ export const Router: React.FC<WidgetProps> = (props) => {
       <Routes>
         <Route path='/' element={<Home {...props} />} />
         <Route path='/utils' element={<UtilsDemo />} />
-        <Route path='/*' element={<h1>{'404'}</h1>} />
+        <Route path='*' element={<h1>{'404'}</h1>} />
       </Routes>
     </>
   );
