@@ -3,11 +3,11 @@ import { test, expect } from '@playwright/test';
 test('Should successfully Mark Start and Mark End for generic-child-widget', async ({
   page,
 }) => {
-  page.on('console', (msg) => {
-    if (msg.type() === 'error') {
-      console.error(`Console error: ${msg.text()}`);
-    }
-  });
+  // page.on('console', (msg) => {
+  //   if (msg.type() === 'error') {
+  //     console.error(`Console error: ${msg.text()}`);
+  //   }
+  // });
 
   page.on('request', (request) => {
     const url = request.url();
@@ -18,8 +18,8 @@ test('Should successfully Mark Start and Mark End for generic-child-widget', asy
 
   await page.goto('http://localhost:3001/app1/utils');
 
-  const content = await page.content();
-  console.log('Page HTML:', content);
+  // const content = await page.content();
+  // console.log('Page HTML:', content);
 
   await page.click('button[data-qa="utils.appLoadTime.getEntries.btn"]');
 
@@ -41,6 +41,13 @@ test('Should successfully Mark Start and Mark End for generic-child-widget', asy
 });
 
 test('Should get all entries', async ({ page }) => {
+  page.on('request', (request) => {
+    const url = request.url();
+    if (url.includes('bundle.js')) {
+      console.log('🔍 Bundle URL:', url);
+    }
+  });
+
   await page.goto('http://localhost:3001/app1/utils');
 
   await page.click('button[data-qa="utils.appLoadTime.getEntries.btn"]');
@@ -53,6 +60,13 @@ test('Should get all entries', async ({ page }) => {
 });
 
 test('Should mark and measure custom events', async ({ page }) => {
+  page.on('request', (request) => {
+    const url = request.url();
+    if (url.includes('bundle.js')) {
+      console.log('🔍 Bundle URL:', url);
+    }
+  });
+
   await page.goto('http://localhost:3001/app1/utils');
 
   const resultElement = page.locator(

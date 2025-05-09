@@ -10,5 +10,6 @@ export default defineConfig({
     timeout: 15 * 1000,
   },
   maxFailures: 0,
+  quiet: false,
   testDir: './src/__tests__/tests',
 });
