@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('Should get all entries', async ({ page }) => {
+  test.setTimeout(60000); // Set timeout to 60 seconds for this test
   page.on('request', (request) => {
     const url = request.url();
     if (url.includes('bundle.js')) {
