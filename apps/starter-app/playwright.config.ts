@@ -9,5 +9,6 @@ export default defineConfig({
     stderr: 'pipe',
     timeout: 15 * 1000,
   },
+  maxFailures: 0,
   testDir: './src/__tests__/tests',
 });
