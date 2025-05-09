@@ -81,7 +81,7 @@ const WidgetSwitcher = memo(({ trigger }: WidgetSwitcherProps) => {
             id='widgetUrl'
             name='widgetUrl'
             type='url'
-            placeholder='http://127.0.0.1/js/1fe-bundle.js'
+            placeholder='http://localhost:8081/js/1fe-bundle.js'
             onChange={(e) => updateUrl(e.target.value)}
             value={newUrl ?? widgetUrl}
             data-qa='widgetUrlInput'
@@ -92,7 +92,7 @@ const WidgetSwitcher = memo(({ trigger }: WidgetSwitcherProps) => {
             id='widgetUrl'
             name='widgetUrl'
             type='url'
-            placeholder='http://127.0.0.1/js/1fe-bundle.js'
+            placeholder='http://127.0.0.1:8081/js/1fe-bundle.js'
             onChange={(e) => updateUrl(e.target.value)}
             value={newUrl ?? widgetUrl}
             data-qa='widgetUrlInput'

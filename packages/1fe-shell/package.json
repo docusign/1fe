@@ -60,7 +60,7 @@
     "lottie-web": "^5.12.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "6.28.1",
+    "react-router-dom": "6.30.0",
     "store2": "^2.14.4",
     "systemjs": "^6.15.1"
   }

@@ -12,7 +12,6 @@ import { Experience } from '../experience';
 // import { I18n } from 'src/deleteMe/components/i18n';
 import { LocalAndSessionStorage } from '../localAndSessionStorage';
 // import { Logger } from 'src/deleteMe/components/logger';
-import { Navigation } from '../navigation';
 // import { Network } from 'src/deleteMe/components/network';
 // import { PlatformPropsImport } from '../platformPropsImport';
 // import { User } from 'src/deleteMe/components/user';
@@ -36,7 +35,6 @@ export const UtilsDemo = () => {
 
       <Flex vertical>
         <Context />
-        <Navigation />
         {/* <Experiments /> */}
         <Widgets />
         {/* <Network /> */}

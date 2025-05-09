@@ -136,7 +136,7 @@
     "resolve-bin": "^1.0.1",
     "rollup": "^4.20.0",
     "sass": "^1.56.1",
-    "sass-loader": "^13.2.0",
+    "sass-loader": "^16.0.5",
     "semver": "^7.5.4",
     "simple-git": "^3.24.0",
     "sisteransi": "^1.0.5",
