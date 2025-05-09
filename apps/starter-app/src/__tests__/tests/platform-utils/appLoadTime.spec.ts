@@ -37,9 +37,9 @@ test('Should mark and measure custom events', async ({ page }) => {
 test('Should successfully Mark Start and Mark End for generic-child-widget', async ({
   page,
 }) => {
-  test.setTimeout(60000); // Set timeout to 60 seconds for this test
+  // test.setTimeout(60000); // Set timeout to 60 seconds for this test
 
-  await page.waitForTimeout(30000); // ???
+  // await page.waitForTimeout(30000); // ???
 
   await page.goto('http://localhost:3001/app1/utils');
 
