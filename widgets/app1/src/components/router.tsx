@@ -33,12 +33,12 @@ export const Router: React.FC<WidgetProps> = (props) => {
             {
               key: 'HOME',
               label: 'Home',
-              onClick: () => navigate(''), // using relative route (for bathtub compatability)
+              onClick: () => navigate(''), // favor navigating with relative route (for bathtub compatability)
             },
             {
               key: 'UTILS',
               label: 'Utils',
-              onClick: () => navigate('utils'), // using relative route (for bathtub compatability)
+              onClick: () => navigate('utils'), // favor navigating with relative route (for bathtub compatability)
             },
           ]}
           style={{
