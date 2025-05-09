@@ -3,16 +3,16 @@ import { test, expect } from '@playwright/test';
 test('Should successfully Mark Start and Mark End for generic-child-widget', async ({
   page,
 }) => {
-  await page.goto('http://localhost:3001/app1/utils');
-
-  const content = await page.content();
-  console.log('Page HTML:', content);
-
   page.on('console', (msg) => {
     if (msg.type() === 'error') {
       console.error(`Console error: ${msg.text()}`);
     }
   });
+
+  await page.goto('http://localhost:3001/app1/utils');
+
+  const content = await page.content();
+  console.log('Page HTML:', content);
 
   await page.click('button[data-qa="utils.appLoadTime.getEntries.btn"]');
 
