@@ -3,13 +3,11 @@ import { defineConfig } from '@playwright/test';
 export default defineConfig({
   webServer: {
     command: 'yarn dev',
-    url: 'http://localhost:3001/app1/utils',
+    url: 'http://localhost:3001',
     reuseExistingServer: !process.env.CI,
-    stdout: 'pipe',
+    stdout: 'ignore',
     stderr: 'pipe',
-    timeout: 120 * 1000,
+    timeout: 30 * 1000,
   },
-  maxFailures: 0,
-  quiet: false,
   testDir: './src/__tests__/tests',
 });
