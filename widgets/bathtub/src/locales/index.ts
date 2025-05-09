@@ -196,7 +196,7 @@ const translations = {
         instruction: 'Button to apply new url from the widget switcher',
       },
       SwitcherPlaceholder: {
-        translation: 'http://127.0.0.1/js/1fe-bundle.js',
+        translation: 'http://localhost:8081/js/1fe-bundle.js',
         instruction: 'Placeholder of the widget switcher',
       },
       OrLabel: {
