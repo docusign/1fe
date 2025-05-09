@@ -5,6 +5,9 @@ test('Should successfully Mark Start and Mark End for generic-child-widget', asy
 }) => {
   await page.goto('http://localhost:3001/app1/utils');
 
+  const content = await page.content();
+  console.log('Page HTML:', content);
+
   await page.click('button[data-qa="utils.appLoadTime.getEntries.btn"]');
 
   const resultElement = page.locator(
@@ -27,6 +30,9 @@ test('Should successfully Mark Start and Mark End for generic-child-widget', asy
 test('Should get all entries', async ({ page }) => {
   await page.goto('http://localhost:3001/app1/utils');
 
+  const content = await page.content();
+  console.log('Page HTML:', content);
+
   await page.click('button[data-qa="utils.appLoadTime.getEntries.btn"]');
 
   const resultElement = page.locator(
@@ -38,6 +44,9 @@ test('Should get all entries', async ({ page }) => {
 
 test('Should mark and measure custom events', async ({ page }) => {
   await page.goto('http://localhost:3001/app1/utils');
+
+  const content = await page.content();
+  console.log('Page HTML:', content);
 
   const resultElement = page.locator(
     'div[data-qa="utils.appLoadTime.measure.result"]',
