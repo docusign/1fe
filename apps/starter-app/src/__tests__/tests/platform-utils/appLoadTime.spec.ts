@@ -8,6 +8,8 @@ test('Should get all entries', async ({ page }) => {
     }
   });
 
+  await page.waitForTimeout(30000); // ???
+
   await page.goto('http://localhost:3001/app1/utils');
 
   await page.click('button[data-qa="utils.appLoadTime.getEntries.btn"]');
