@@ -50,7 +50,6 @@ test('Should mark and measure custom events', async ({ page }) => {
 
 test('Should successfully Mark Start and Mark End for generic-child-widget', async ({
   page,
-  context,
 }) => {
   // await context.route('**/bundle.js', async (route, request) => {
   //   const response = await route.fetch(); // continue and get real response
