@@ -3,7 +3,7 @@ import { defineConfig } from '@playwright/test';
 export default defineConfig({
   webServer: {
     command: 'yarn dev',
-    url: 'http://localhost:3001/health',
+    url: 'http://localhost:3001/app1/utils',
     reuseExistingServer: !process.env.CI,
     stdout: 'pipe',
     stderr: 'pipe',
