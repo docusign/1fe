@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.skip('Should successfully Mark Start and Mark End for generic-child-widget', async ({
+test('Should successfully Mark Start and Mark End for generic-child-widget', async ({
   page,
 }) => {
   page.on('console', (msg) => {
