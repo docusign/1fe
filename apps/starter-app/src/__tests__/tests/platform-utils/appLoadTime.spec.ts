@@ -1,16 +1,6 @@
 import { test, expect } from '@playwright/test';
 
 test('Should get all entries', async ({ page }) => {
-  test.setTimeout(60000); // Set timeout to 60 seconds for this test
-  page.on('request', (request) => {
-    const url = request.url();
-    if (url.includes('bundle.js')) {
-      console.log('🔍 Bundle URL:', url);
-    }
-  });
-
-  await page.waitForTimeout(30000); // ???
-
   await page.goto('http://localhost:3001/app1/utils');
 
   await page.click('button[data-qa="utils.appLoadTime.getEntries.btn"]');
@@ -23,13 +13,6 @@ test('Should get all entries', async ({ page }) => {
 });
 
 test('Should mark and measure custom events', async ({ page }) => {
-  page.on('request', (request) => {
-    const url = request.url();
-    if (url.includes('bundle.js')) {
-      console.log('🔍 Bundle URL:', url);
-    }
-  });
-
   await page.goto('http://localhost:3001/app1/utils');
 
   const resultElement = page.locator(
@@ -54,28 +37,11 @@ test('Should mark and measure custom events', async ({ page }) => {
 test('Should successfully Mark Start and Mark End for generic-child-widget', async ({
   page,
 }) => {
-  // await context.route('**/bundle.js', async (route, request) => {
-  //   const response = await route.fetch(); // continue and get real response
-  //   const body = await response.text();
-  //   const firstLines = body.split('\n').slice(0, 5).join('\n');
+  test.setTimeout(60000); // Set timeout to 60 seconds for this test
 
-  //   console.log('📦 First 5 lines of bundle.js:\n' + firstLines);
-
-  //   // Continue with the original response
-  //   await route.fulfill({ response });
-  // });
-
-  page.on('request', (request) => {
-    const url = request.url();
-    if (url.includes('bundle.js')) {
-      console.log('🔍 Bundle URL:', url);
-    }
-  });
+  await page.waitForTimeout(30000); // ???
 
   await page.goto('http://localhost:3001/app1/utils');
-
-  // const content = await page.content();
-  // console.log('Page HTML:', content);
 
   await page.click('button[data-qa="utils.appLoadTime.getEntries.btn"]');
 
