@@ -6,7 +6,7 @@ import { UtilsDemo } from './routes/utilsDemo';
 import { WidgetProps } from '../contract';
 
 /**
- * Suggestion: setup the top level routing for your application here
+ * Suggestion: setup the top level routing for your application here.
  */
 export const Router: React.FC<WidgetProps> = (props) => {
   const navigate = useNavigate();
