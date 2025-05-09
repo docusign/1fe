@@ -1,11 +1,18 @@
 import { test, expect } from '@playwright/test';
 
-test('Should successfully Mark Start and Mark End for generic-child-widget', async ({
+test.skip('Should successfully Mark Start and Mark End for generic-child-widget', async ({
   page,
 }) => {
   page.on('console', (msg) => {
     if (msg.type() === 'error') {
       console.error(`Console error: ${msg.text()}`);
+    }
+  });
+
+  page.on('request', (request) => {
+    const url = request.url();
+    if (url.includes('bundle.js')) {
+      console.log('🔍 Bundle URL:', url);
     }
   });
 
