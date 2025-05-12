@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { MemoryRouter, UNSAFE_LocationContext } from 'react-router-dom';
 
 import { Box } from '../components/layout';
 import { WidgetProps } from '../contract';
@@ -24,11 +23,7 @@ const withProvider = (Component: React.FC<WidgetProps>) =>
     return (
       <Wrapper data-qa='bathtub.provider'>
         <Provider store={store}>
-          <UNSAFE_LocationContext.Provider value={null}>
-            <MemoryRouter>
-              <Component {...props} />
-            </MemoryRouter>
-          </UNSAFE_LocationContext.Provider>
+          <Component {...props} />
         </Provider>
       </Wrapper>
     );

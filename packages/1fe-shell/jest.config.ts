@@ -97,9 +97,6 @@ const config: Config = {
     // constants
     '!src/**/constants.ts',
     '!src/**/constants/**/*',
-    // deprecated code
-    '!src/1fe-shell/platformProps/utils/navigation/react-router-dom-overrides.ts',
-    '!src/1fe-shell/platformProps/utils/navigation/use-search-params.ts',
     // overrides utils
     '!src/1fe-shell/init/widget-overrides/import-map-reskin.ts',
     '!src/1fe-shell/init/widget-overrides/isOverrideActive.ts',
