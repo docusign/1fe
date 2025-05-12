@@ -1,5 +1,4 @@
 import React, { PropsWithChildren, Suspense, useMemo } from 'react';
-import { MemoryRouter, UNSAFE_LocationContext } from 'react-router-dom';
 
 import { getDefaultWidgetOptions } from '../utils/constants';
 import { downloadWidget } from './downloadWidget';
@@ -86,14 +85,9 @@ export function WidgetLoader<TWidgetProps>({
   addScopedImportMapForPlatformProps(widgetId, platformProps);
 
   const widget = (
-    // @ts-expect-error temporary solution for nested routers until react-router-dom is externalized, track work here: https://docusign.atlassian.net/browse/ONEDS-708
-    <UNSAFE_LocationContext.Provider value={null}>
-      <MemoryRouter>
-        <LazyWidget platform={platformProps} host={hostProps}>
-          {children}
-        </LazyWidget>
-      </MemoryRouter>
-    </UNSAFE_LocationContext.Provider>
+    <LazyWidget platform={platformProps} host={hostProps}>
+      {children}
+    </LazyWidget>
   );
 
   return (

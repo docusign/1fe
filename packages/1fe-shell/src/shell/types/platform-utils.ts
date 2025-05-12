@@ -1,13 +1,11 @@
 import { DeepReadonly } from 'deep-freeze';
 import { WidgetTreeNode } from './tree';
 import { EventBusPlatformUtils } from '../platformProps/utils/event-bus/types';
-import { initNavigation } from '../platformProps/utils/navigation';
 import { SessionStoragePlatformUtils } from '../platformProps/utils/sessionStorage';
 import { LocalStoragePlatformUtils } from '../platformProps/utils/localStorage';
 import { initExperience } from '../platformProps/utils/experience';
 import { WidgetAppLoadTimeUtils } from './app-load-time';
 
-export type NavigationUtils = ReturnType<typeof initNavigation>;
 export type ExperienceUtils = ReturnType<typeof initExperience>;
 
 export interface KnownWidgets {}
@@ -68,11 +66,7 @@ export type PlatformUtils = {
    * @link https://github.docusignhq.com/pages/Core/1fe-docs/widgets/utils/eventbus/
    */
   eventBus: EventBusPlatformUtils;
-  /**
-   * Utilities for handling browser navigation including internal/external redirects
-   * @link https://github.docusignhq.com/pages/Core/1fe-docs/widgets/utils/navigation/
-   */
-  navigation: NavigationUtils;
+
   /**
    * Utilities for handling network requests and getting useful information about the network
    * @link https://github.docusignhq.com/pages/Core/1fe-docs/widgets/utils/network/

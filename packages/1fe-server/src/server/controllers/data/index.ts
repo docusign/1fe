@@ -51,11 +51,10 @@ export const dataForRenderingTemplate = async (req: Request) => {
     // @ds/prepare hardcoded requirements
     _react: 'React',
     _reactDom: 'ReactDOM',
+    'react-dom': 'ReactDOM', // rrd uses 'react-dom' bare specifier
 
-    // TODO: (@mason-chinkin) uncomment below when externalizing react router
-    // required for externalizing react-router-dom
-    // 'react-router': 'ReactRouter',
-    // '@remix-run/router': 'RemixRouter',
+    'react-router': 'ReactRouter',
+    '@remix-run/router': 'RemixRouter',
   } as const;
 
   const preloadedLibs = getPreloadedLibs();
