@@ -1,4 +1,4 @@
-import { platformProps } from '@devhub/1fe-shell';
+import { platformProps } from '@1fe/shell';
 import { Button, Flex } from 'antd';
 import { useReducer, useState } from 'react';
 

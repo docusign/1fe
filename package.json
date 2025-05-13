@@ -1,5 +1,5 @@
 {
-  "name": "@devhub/1fe",
+  "name": "1fe",
   "private": true,
   "scripts": {
     "build": "turbo run build",

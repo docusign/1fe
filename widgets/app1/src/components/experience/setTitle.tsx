@@ -1,4 +1,4 @@
-import { platformProps } from '@devhub/1fe-shell';
+import { platformProps } from '@1fe/shell';
 import styled from '@emotion/styled';
 import { Button, Input } from 'antd';
 import { useState } from 'react';

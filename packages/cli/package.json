@@ -1,5 +1,5 @@
 {
-  "name": "@devhub/cli",
+  "name": "@1fe/cli",
   "description": "CLI tools for 1FE development and build infrastructure.",
   "version": "0.0.1",
   "bin": {

@@ -74,7 +74,7 @@ export async function getWebpackConfig({
       devtool: isProduction ? false : 'source-map',
       resolve: {
         alias: {
-          '@devhub/1fe-shell': '1feContext',
+          '@1fe/shell': '1feContext',
         },
         extensions: EXTENSIONS,
         plugins: [

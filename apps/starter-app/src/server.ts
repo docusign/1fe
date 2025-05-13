@@ -3,7 +3,7 @@ import express from 'express';
 import path from 'path';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import oneFEServer, { OneFEServerOptions } from '@devhub/1fe-server';
+import oneFEServer, { OneFEServerOptions } from '@1fe/server';
 import favicon from 'serve-favicon';
 
 import router from './lib/router';

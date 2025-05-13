@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import { shellLogger } from '../logger';
-import { OneFEErrorComponentProps } from '@devhub/1fe-shell';
+import { OneFEErrorComponentProps } from '@1fe/shell';
 
 const PageContainer = styled.div({
   fontFamily: 'DSIndigo',

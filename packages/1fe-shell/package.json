@@ -1,5 +1,5 @@
 {
-  "name": "@devhub/1fe-shell",
+  "name": "@1fe/shell",
   "private": true,
   "version": "1.0.10",
   "license": "MIT",
@@ -21,8 +21,8 @@
     "publish:packages": "yarn publish --access public"
   },
   "devDependencies": {
+    "@1fe/eslint-config": "1.0.0",
     "@babel/preset-env": "^7.23.3",
-    "@devhub/eslint-config": "1.0.0",
     "@jest/globals": "^29.7.0",
     "@repo/typescript-config": "0.0.0",
     "@testing-library/jest-dom": "^6.4.2",
