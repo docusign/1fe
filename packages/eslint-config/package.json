@@ -1,5 +1,5 @@
 {
-  "name": "@devhub/eslint-config",
+  "name": "@1fe/eslint-config",
   "version": "1.0.0",
   "license": "MIT",
   "private": true,

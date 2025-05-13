@@ -16,7 +16,7 @@ export async function getExternalsLayer(
     .reduce((acc, curr) => ({ ...acc, ...curr }), {});
 
   // TODO - get 1fe-shell external defined within the commonConfig [fast-follow]
-  externals['@devhub/1fe-shell'] = '1feContext';
+  externals['@1fe/shell'] = '1feContext';
 
   logger.debug('Using externals:', externals);
 

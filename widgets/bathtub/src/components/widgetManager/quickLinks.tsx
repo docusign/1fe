@@ -3,7 +3,7 @@ import { Button } from 'antd';
 
 import { useAppDispatch } from '../../store';
 import { appActions } from '../../store/app';
-import { platformProps } from '@devhub/1fe-shell';
+import { platformProps } from '@1fe/shell';
 
 type QuickLinksProps = {
   port: string;
