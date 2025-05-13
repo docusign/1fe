@@ -9,19 +9,9 @@ import { Error } from './components/Error';
 import { shellLogger } from './logger';
 
 const setup = () => {
-  const ENVIRONMENT: string = process.env.NODE_ENV || 'integration';
-
-  const envModeMap: Record<string, OneFEMode> = {
-    development: 'development',
-    integration: 'preproduction',
-    production: 'production',
-  };
-
   // TODO[1fe]: Just read from server configs put on DOM
   // TODO[1fe]: Review the types here (components)
   renderOneFEShell({
-    mode: envModeMap[ENVIRONMENT],
-    environment: ENVIRONMENT,
     utils: {
       initializeLogger: (widgetId: string) => ({
         logger: {

@@ -14,10 +14,7 @@ import {
   insertNonPersistentWidgetOverrides,
   insertPersistentWidgetOverrides,
 } from './init/import-map';
-import {
-  readOneFEShellConfigs,
-  setOneFEShellConfigs,
-} from './configs/shell-configs';
+import { setOneFEShellConfigs } from './configs/shell-configs';
 import { getShellLogger } from './utils/telemetry';
 import {
   applyRuntimeConfigOverrideForImportMapUi,
@@ -26,6 +23,7 @@ import {
 import { getShellPlatformUtils as initShellPlatformUtils } from './utils/shell-platform-utils';
 import { OneFEShellOptions } from './types/one-fe-shell-options';
 import { patchSystemJSResolve } from './utils/system-helpers';
+import { ENVIRONMENT_CONFIG } from './configs/config-helpers';
 
 export const init = (): Promise<void> => {
   // Initialize import map Promise resolver
@@ -42,7 +40,7 @@ export const init = (): Promise<void> => {
 
         applyRuntimeConfigOverridesForWidgetUrlOverrides();
 
-        if (readOneFEShellConfigs().mode !== 'production') {
+        if (ENVIRONMENT_CONFIG.mode !== 'production') {
           // import-map-overrides:change fires when the import map is updated via the ui
           window.addEventListener(
             'import-map-overrides:change',

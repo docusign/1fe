@@ -6,9 +6,9 @@ import { WidgetLoader, WidgetURLLoader } from './WidgetLoader';
 import { WidgetRenderStatusType } from './types';
 import { WidgetConfig } from '../../../../../types/widget-config';
 import { WidgetOptions } from '../../../../../types/platform-utils';
-import { readOneFEShellConfigs } from '../../../../../configs/shell-configs';
 import { getShellLogger } from '../../../../../utils/telemetry';
 import { WidgetErrorBoundary } from './WidgetErrorBoundary';
+import { ENVIRONMENT_CONFIG } from '../../../../../configs/config-helpers';
 
 interface WidgetFrameProps<TWidgetProps> {
   /**
@@ -75,7 +75,7 @@ function WidgetFrameInner<TWidgetProps>({
     React.useState<WidgetRenderStatusType>('loading');
 
   useEffect(() => {
-    if (readOneFEShellConfigs().mode === 'production') {
+    if (ENVIRONMENT_CONFIG.mode === 'production') {
       return;
     }
 

@@ -5,12 +5,12 @@ import { WidgetConfig } from '../types/widget-config';
 import { generateCDNUrl } from '../utils/url';
 import {
   DYNAMIC_CONFIGS,
+  ENVIRONMENT_CONFIG,
   getWidgetConfigValues,
   LAZY_LOADED_LIB_CONFIGS,
   WIDGET_CONFIGS,
 } from '../configs/config-helpers';
 import { STATE, WIDGET_URL_OVERRIDES } from '../constants/search-params';
-import { readOneFEShellConfigs } from '../configs/shell-configs';
 import { initializeImportMapOverridesReskin } from './import-map-ui';
 import { getShellLogger } from '../utils/telemetry';
 
@@ -108,7 +108,8 @@ export const createDynamicImportMap = (): {
   importMap: SystemImportMap;
   overrides?: Record<string, string>;
 } => {
-  const allowedSources = DYNAMIC_CONFIGS?.importMapOverrides?.allowedSources;
+  const allowedSources =
+    DYNAMIC_CONFIGS?.devtools?.importMapOverrides?.allowedSources;
   const widgetConfigs = getWidgetConfigValues(WIDGET_CONFIGS);
 
   const widgets = widgetConfigs.reduce((itr, e: WidgetConfig) => {
@@ -181,7 +182,7 @@ export const insertPersistentWidgetOverrides = (
 
   // const { IS_PROD, FEATURE_FLAGS, ENVIRONMENT } = getEnvironmentConfigs();
 
-  const IS_PROD = readOneFEShellConfigs().mode === 'production';
+  const IS_PROD = ENVIRONMENT_CONFIG.mode === 'production';
   if (!IS_PROD) {
     initializeImportMapOverridesReskin();
 

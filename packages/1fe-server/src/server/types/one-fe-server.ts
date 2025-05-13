@@ -39,9 +39,13 @@ export type OneFEImportMapOverrides = {
   allowedSource?: string[];
 };
 
+export type Devtools = {
+  importMapOverrides?: OneFEImportMapOverrides;
+};
+
 export type OneFEDynamicConfigs = {
   cdn: OneFEDynamicCDNConfig;
-  importMapOverrides?: OneFEImportMapOverrides;
+  devtools?: Devtools;
   browserslistConfig?: string[];
 };
 

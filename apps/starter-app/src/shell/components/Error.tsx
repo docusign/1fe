@@ -61,19 +61,7 @@ const SideLine = () => {
       viewBox='0 0 1500 200'
       preserveAspectRatio='none'
       aria-hidden='true'
-    >
-      <g>
-        <line
-          // Uses inline style for color to prevent Dark Mode issues
-          style={{ stroke: '#6F56FF' }}
-          strokeWidth='10'
-          x1='0'
-          y1='100'
-          x2='1500'
-          y2='100'
-        />
-      </g>
-    </svg>
+    />
   );
 };
 

@@ -21,8 +21,12 @@ const authSchema = z.object({
 });
 
 const importMapOverridesSchema = z.object({
-  enableUI: z.boolean(),
-  allowedSources: z.array(z.string()),
+  enableUI: z.boolean().optional(),
+  allowedSources: z.array(z.string()).optional(),
+});
+
+const devtoolsSchema = z.object({
+  importMapOverrides: importMapOverridesSchema.optional(),
 });
 
 const librariesSchema = z.object({
@@ -55,6 +59,6 @@ const cdnSchema = z.object({
 
 export const commonConfigSchema = z.object({
   cdn: cdnSchema,
-  importMapOverrides: importMapOverridesSchema,
+  devtools: devtoolsSchema.optional(),
   browserslistConfig: z.array(z.string()),
 });
