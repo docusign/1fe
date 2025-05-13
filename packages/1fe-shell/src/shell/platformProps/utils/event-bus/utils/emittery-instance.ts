@@ -2,7 +2,7 @@ import Emittery from 'emittery';
 
 import { ONE_FE_SHELL_ID } from '../../../../constants/event-bus';
 import { getShellLogger } from '../../../../utils/telemetry';
-import { readOneFEShellConfigs } from '../../../../configs/shell-configs';
+import { ENVIRONMENT_CONFIG } from '../../../../configs/config-helpers';
 
 let emitteryInstance: Emittery;
 
@@ -14,7 +14,7 @@ export const getEmitteryInstance = (): Emittery => {
   emitteryInstance = new Emittery({
     debug: {
       name: `${ONE_FE_SHELL_ID}_EVENT_BUS:EMITTERY`,
-      enabled: readOneFEShellConfigs().mode === 'production',
+      enabled: ENVIRONMENT_CONFIG.mode === 'production',
       logger: (type, debugName, eventName, eventData) => {
         const logger = getShellLogger();
 

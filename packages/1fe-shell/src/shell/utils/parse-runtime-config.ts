@@ -1,6 +1,6 @@
 import { template } from 'lodash';
 import { RuntimeConfig, WidgetConfig } from '../types/widget-config';
-import { readOneFEShellConfigs } from '../configs/shell-configs';
+import { ENVIRONMENT_CONFIG } from '../configs/config-helpers';
 
 type ParseRuntimeConfigArgs = {
   runtimeConfig: RuntimeConfig;
@@ -26,7 +26,7 @@ export const parseRuntimeConfig = ({
             // If 1fe-app is running locally, the environment is development.
             // There is no cdn for development, so we use integration instead.
             // TODO[post-mvp][1fe]: How do we consume this back in 1fe if development has it's own cdn?
-            ENVIRONMENT: readOneFEShellConfigs().environment,
+            ENVIRONMENT: ENVIRONMENT_CONFIG.environment,
           }),
         };
       }

@@ -7,6 +7,7 @@ import {
 
 import { readOneFEShellConfigs } from '../configs/shell-configs';
 import {
+  ENVIRONMENT_CONFIG,
   getWidgetConfigValues,
   PLUGIN_CONFIGS,
 } from '../configs/config-helpers';
@@ -27,7 +28,7 @@ const RedirectComponent = ({ to }: { to: string }) => {
 };
 
 const determineBaseRoute = (): RouteObject[] => {
-  const isProd = readOneFEShellConfigs().mode === 'production';
+  const isProd = ENVIRONMENT_CONFIG.mode === 'production';
   const defaultRoute =
     readOneFEShellConfigs()?.routes?.defaultRoute || '/bathtub';
   if (isProd) {

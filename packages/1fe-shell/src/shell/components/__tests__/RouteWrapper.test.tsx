@@ -48,11 +48,18 @@ jest.mock('../../platformProps/utils', () => ({
 
 jest.mock('../../configs/shell-configs', () => ({
   readOneFEShellConfigs: jest.fn().mockImplementation(() => ({
-    mode: 'production',
     components: {
       getError: () => <p>An error has occurred</p>,
     },
   })),
+}));
+
+jest.mock('../../configs/config-helpers', () => ({
+  ...jest.requireActual('../../configs/config-helpers'),
+  ENVIRONMENT_CONFIG: {
+    mode: 'production',
+    environment: 'production',
+  },
 }));
 
 jest.mock('lottie-react', () => 'lottie');

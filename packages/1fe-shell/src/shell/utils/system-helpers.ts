@@ -28,7 +28,10 @@ export const hackyWidgetIdDetermination = (url: string) => {
   // If the url is not a docusign cdn url then skip.
   // This to prevent any security issues.
   if (
-    !isAllowedSource(url, DYNAMIC_CONFIGS.importMapOverrides.allowedSources)
+    !isAllowedSource(
+      url,
+      DYNAMIC_CONFIGS?.devtools?.importMapOverrides.allowedSources,
+    )
   ) {
     return;
   }

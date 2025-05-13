@@ -21,14 +21,6 @@ const getVariantContractPath = (variantId: string) =>
  * @param version The version of the widget
  * @returns The URL for your widget's bundle on the CDN, as well as the URL for each variant
  *
- * @example
- * const baseUrl = getWidgetBaseCdnUrl({
- *  environment: 'integration',
- *  widgetId: '@ds/send',
- *  version: '1.1.31',
- * });
- *
- * // Returns: 'https://docutest-a.akamaihd.net/integration/1ds/widgets/@ds/send/1.1.31/types/contract.rolledUp.d.ts'
  */
 export const getWidgetContractCdnUrl = async (baseUrlArgs: {
   environment: string;

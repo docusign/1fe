@@ -51,10 +51,6 @@ export function buildContractFileHeader(cdnUrl: string): string {
 
 const sourceMatcher = /source: (https:\/\/.*)\s*/;
 // Match groups: environment, widgetId, version,variantId
-// Example matches:
-// https://docutest-a.akamaihd.net/integration/1ds/widgets/@1ds/test/1.0.62/types/contract.rolledUp.d.ts
-// https://docutest-a.akamaihd.net/integration/1ds/widgets/@1ds/test/1.0.62/types/variant1Contract.rolledUp.d.ts
-// https://docucdn-a.akamaihd.net/demo/1ds/widgets/@ds/send/2.2.32/types/contract.rolledUp.d.ts
 const cdnUrlMatcher =
   /https:\/\/(.*)\/widgets\/(.+)\/([\d.-]+)\/types\/(?:contracts\/)?([a-zA-Z0-9-]+)\.rolledUp\.d\.ts/;
 
