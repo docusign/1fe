@@ -7,10 +7,10 @@ import {
   WidgetOptions,
 } from '../../../../../types/platform-utils';
 import { WidgetConfig } from '../../../../../types/widget-config';
-import { readOneFEShellConfigs } from '../../../../../configs/shell-configs';
 import { isOverrideElementActive } from '../../../../../init/import-map-ui';
 import { isUrl } from './is-url';
 import { getShellLogger } from '../../../../../utils/telemetry';
+import { ENVIRONMENT_CONFIG } from '../../../../../configs/config-helpers';
 
 interface InjectedWidgetFrameProps<TWidgetProps> {
   /**
@@ -60,7 +60,7 @@ export async function downloadWidget<TWidgetProps>(
   const logger = getShellLogger();
 
   const isWidgetOverriden = isOverrideElementActive();
-  const IS_PROD = readOneFEShellConfigs().mode === 'production';
+  const IS_PROD = ENVIRONMENT_CONFIG.mode === 'production';
   // const widgetLoadingStartTime = Date.now();
   const widgetLoadTime = getShellPlatformUtils().appLoadTime;
 
