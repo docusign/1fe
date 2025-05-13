@@ -37,7 +37,7 @@ jest.mock('../../configs/config-helpers', () => ({
   DYNAMIC_CONFIGS: {
     devtools: {
       importMapOverrides: {
-        allowedSources: ['localhost', '127.0.0.1'],
+        allowedSources: ['localhost', '127.0.0.1', 'allow-listed.net'],
       },
     },
   },
@@ -142,14 +142,14 @@ describe('createDynamicImportMap', () => {
     jest.spyOn(importMap, 'getQueryURLParams').mockReturnValueOnce(
       new URLSearchParams(
         `${WIDGET_URL_OVERRIDES}=${JSON.stringify({
-          widgetId: 'https://docucdn-a.akamaihd.net/widget_id',
+          widgetId: 'https://allow-listed.net/widget_id',
         })}`,
       ),
     );
     const retValue = createDynamicImportMap();
 
     expect(retValue.overrides).toStrictEqual({
-      widgetId: 'https://docucdn-a.akamaihd.net/widget_id',
+      widgetId: 'https://allow-listed.net/widget_id',
     });
   });
 
@@ -199,8 +199,7 @@ describe('createDynamicImportMap', () => {
 
   it.each([
     'https://127.0.0.1:8000/good/path',
-    'https://docucdn-a.akamaihd.net/good/path',
-    'https://docutest-a.akamaihd.net/good/path',
+    'https://allow-listed.net/good/path',
     'https://localhost:8080/good/path',
   ])(
     'should not restrict overrides if source is in allowedWidgetOverrideUrlHostnames whitelist',
