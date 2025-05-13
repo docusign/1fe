@@ -5,12 +5,12 @@ import { WidgetConfig } from '../types/widget-config';
 import { generateCDNUrl } from '../utils/url';
 import {
   DYNAMIC_CONFIGS,
+  ENVIRONMENT_CONFIG,
   getWidgetConfigValues,
   LAZY_LOADED_LIB_CONFIGS,
   WIDGET_CONFIGS,
 } from '../configs/config-helpers';
 import { STATE, WIDGET_URL_OVERRIDES } from '../constants/search-params';
-import { readOneFEShellConfigs } from '../configs/shell-configs';
 import { initializeImportMapOverridesReskin } from './import-map-ui';
 import { getShellLogger } from '../utils/telemetry';
 
@@ -182,7 +182,7 @@ export const insertPersistentWidgetOverrides = (
 
   // const { IS_PROD, FEATURE_FLAGS, ENVIRONMENT } = getEnvironmentConfigs();
 
-  const IS_PROD = readOneFEShellConfigs().mode === 'production';
+  const IS_PROD = ENVIRONMENT_CONFIG.mode === 'production';
   if (!IS_PROD) {
     initializeImportMapOverridesReskin();
 

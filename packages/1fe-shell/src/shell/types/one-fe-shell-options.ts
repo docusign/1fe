@@ -36,11 +36,7 @@ export type OneFEComponents = {
   getError?: (props: OneFEErrorComponentProps | undefined) => JSX.Element;
 };
 
-export type OneFEMode = 'development' | 'preproduction' | 'production';
-
 export type OneFEShellOptions = {
-  mode: OneFEMode;
-  environment: string;
   utils?: OneFEUtils;
   auth?: OneFEAuth;
   shellLogger?: OneFEShellLogger;

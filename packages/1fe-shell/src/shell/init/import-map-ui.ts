@@ -1,11 +1,10 @@
 import { isEmpty } from 'lodash';
-import { readOneFEShellConfigs } from '../configs/shell-configs';
 import {
   clearRuntimeConfigOverrides,
   getParsedRuntimeConfigOverrides,
 } from '../utils/runtime-configs';
 import { WIDGET_URL_OVERRIDES } from '../constants/search-params';
-import { DYNAMIC_CONFIGS } from '../configs/config-helpers';
+import { DYNAMIC_CONFIGS, ENVIRONMENT_CONFIG } from '../configs/config-helpers';
 
 const isOverrideActive = (element: HTMLElement) => {
   const isActiveImportMapOverride = element.classList?.value.includes(
@@ -183,7 +182,7 @@ export const initializeImportMapOverridesReskin = () => {
    *
    * As a result, `hideImportMapOverrideElement` in the index.html.ejs does not hide the import map overrides button on refresh
    */
-  const IS_PROD = readOneFEShellConfigs().mode === 'production';
+  const IS_PROD = ENVIRONMENT_CONFIG.mode === 'production';
   const enableUI =
     DYNAMIC_CONFIGS?.devtools?.importMapOverrides?.enableUI || true;
   // const getIsActiveAutomatedTestFramework = false;

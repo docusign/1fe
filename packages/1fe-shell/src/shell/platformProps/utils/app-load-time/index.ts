@@ -6,7 +6,7 @@ import { logPlatformUtilUsage } from '../logPlatformUtilUsage';
 import { ShellAppLoadTimeUtils, WidgetAppLoadTimeUtils } from './types';
 import { isShellWidget } from '../../../utils/widget-type';
 import { getSessionIdFromCookie } from '../../../utils/cookie-helpers';
-import { readOneFEShellConfigs } from '../../../configs/shell-configs';
+import { ENVIRONMENT_CONFIG } from '../../../configs/config-helpers';
 
 export const _customMark = (
   markName: string,
@@ -14,7 +14,7 @@ export const _customMark = (
 ): void => {
   window.performance?.mark(markName, measureOptions);
 
-  if (readOneFEShellConfigs().mode !== 'production') {
+  if (ENVIRONMENT_CONFIG.mode !== 'production') {
     console.log('[1fe][util][appLoadTime] mark: ' + markName);
   }
 };
