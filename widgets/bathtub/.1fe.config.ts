@@ -1,4 +1,4 @@
-import { OneFeRuntimeConfigObject, TypedOneFeConfiguration } from '@devhub/cli';
+import { OneFeRuntimeConfigObject, TypedOneFeConfiguration } from '@1fe/cli';
 import { Environments, getBaseConfig } from '@repo/widget-base-config'; // this is the redistributed package for the organization
 
 const commonRuntimeConfig: OneFeRuntimeConfigObject = {

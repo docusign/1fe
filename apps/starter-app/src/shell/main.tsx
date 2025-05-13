@@ -1,7 +1,7 @@
 import renderOneFEShell, {
   OneFEMode,
   OneFEErrorComponentProps,
-} from '@devhub/1fe-shell';
+} from '@1fe/shell';
 import React from 'react';
 
 import { Loader } from './components/Loader';

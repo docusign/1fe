@@ -1,4 +1,4 @@
-import { PlatformPropsType } from '@devhub/1fe-shell';
+import { PlatformPropsType } from '@1fe/shell';
 
 export type HostPropsContract = {};
 

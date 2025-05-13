@@ -9,7 +9,7 @@
     "check-format": "prettier --check ."
   },
   "devDependencies": {
-    "@devhub/cli": "workspace:*",
+    "@1fe/cli": "workspace:*",
     "@repo/widget-base-config": "0.0.1",
     "cross-env": "^7.0.3",
     "eslint": "8.57.1",
@@ -23,7 +23,7 @@
     "typescript": "5.8.2"
   },
   "dependencies": {
-    "@devhub/1fe-shell": "workspace:*",
+    "@1fe/shell": "workspace:*",
     "@types/systemjs": "^6.15.1",
     "antd": "^5.22.4",
     "react": "^18.3.1",

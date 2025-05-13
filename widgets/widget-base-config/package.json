@@ -7,7 +7,7 @@
     "build": "tsc --build --clean && tsc --build"
   },
   "dependencies": {
-    "@devhub/cli": "0.0.1",
+    "@1fe/cli": "0.0.1",
     "ky": "^1.7.5",
     "typescript": "5.8.2"
   }

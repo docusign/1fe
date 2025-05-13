@@ -1,4 +1,4 @@
-import { OneFeCommonConfig, OneFeBaseConfigurationObject } from '@devhub/cli';
+import { OneFeCommonConfig, OneFeBaseConfigurationObject } from '@1fe/cli';
 
 import ky from 'ky';
 

@@ -1,4 +1,4 @@
-import { platformProps } from '@devhub/1fe-shell';
+import { platformProps } from '@1fe/shell';
 import React, { useState } from 'react';
 import { Provider } from 'react-redux';
 import { createStore } from './store';

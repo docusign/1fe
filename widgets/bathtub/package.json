@@ -27,9 +27,9 @@
     "type:check": "npx tsc --noEmit --skipLibcheck --pretty"
   },
   "dependencies": {
+    "@1fe/shell": "workspace:*",
     "@codemirror/lang-javascript": "^6.2.2",
     "@codemirror/view": "6.36.4",
-    "@devhub/1fe-shell": "workspace:*",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "11.14.0",
     "@reduxjs/toolkit": "1.9.1",
@@ -44,10 +44,10 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@1fe/cli": "0.0.1",
     "@babel/runtime": "7.27.0",
     "@commitlint/cli": "^17.8.1",
     "@commitlint/config-conventional": "^17.8.1",
-    "@devhub/cli": "0.0.1",
     "@emotion/jest": "^11.13.0",
     "@eslint-community/eslint-plugin-eslint-comments": "^4.4.1",
     "@repo/widget-base-config": "0.0.1",

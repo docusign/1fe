@@ -25,9 +25,9 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          yarn workspace @devhub/1fe-server install && yarn workspace @devhub/1fe-server build
-          yarn workspace @devhub/1fe-shell install && yarn workspace @devhub/1fe-shell build
-          yarn workspace @devhub/starter-app install && yarn workspace @devhub/starter-app build
+          yarn workspace @1fe/server install && yarn workspace @1fe/server build
+          yarn workspace @1fe/shell install && yarn workspace @1fe/shell build
+          yarn workspace @1fe/starter-app install && yarn workspace @1fe/starter-app build
 
       - name: Zip artifact for deployment
         run: zip release.zip ./apps/starter-app/ -r

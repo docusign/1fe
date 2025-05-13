@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { Button } from 'antd';
-import { platformProps } from '@devhub/1fe-shell';
+import { platformProps } from '@1fe/shell';
 import { utilSectionStyles } from '../routes/styles/utilsDemo.styles';
 
 /**

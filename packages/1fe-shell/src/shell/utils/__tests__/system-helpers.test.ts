@@ -10,7 +10,7 @@ describe('addScopedImportMapForPlatformProps', () => {
 
     (System as any) = mockSystem;
     addScopedImportMapForPlatformProps('@ds/foo', {} as PlatformPropsType);
-    expect(System.set).toHaveBeenCalledWith('app:@devhub/1fe-shell::@ds/foo', {
+    expect(System.set).toHaveBeenCalledWith('app:@1fe/shell::@ds/foo', {
       __esModule: true,
       platformProps: {},
     });

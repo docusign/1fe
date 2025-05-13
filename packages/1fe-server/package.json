@@ -1,5 +1,5 @@
 {
-  "name": "@devhub/1fe-server",
+  "name": "@1fe/server",
   "private": true,
   "version": "1.0.10",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "publish:packages": "yarn publish --access public"
   },
   "devDependencies": {
-    "@devhub/eslint-config": "1.0.0",
+    "@1fe/eslint-config": "1.0.0",
     "@jest/globals": "^29.7.0",
     "@repo/typescript-config": "0.0.0",
     "@types/cookie-parser": "^1.4.8",

@@ -107,7 +107,7 @@ function generateContractIndexFileContent(contracts: ContractFile[]): string {
    */
   const createKnownDeclaration = (contracts: ContractFile[]) =>
     contracts.length > 0
-      ? `declare module '@devhub/1fe-shell' {
+      ? `declare module '@1fe/shell' {
   interface KnownWidgets {
 ${contracts.map(createKnownWidgetsMapping).join('')}  }
   interface KnownVariants {
