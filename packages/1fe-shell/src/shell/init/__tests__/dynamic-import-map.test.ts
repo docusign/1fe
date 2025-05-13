@@ -37,12 +37,7 @@ jest.mock('../../configs/config-helpers', () => ({
   DYNAMIC_CONFIGS: {
     devtools: {
       importMapOverrides: {
-        allowedSources: [
-          'localhost',
-          '127.0.0.1',
-          'docucdn-a.akamaihd.net',
-          'docutest-a.akamaihd.net',
-        ],
+        allowedSources: ['localhost', '127.0.0.1'],
       },
     },
   },
