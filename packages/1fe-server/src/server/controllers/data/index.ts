@@ -84,8 +84,8 @@ export const dataForRenderingTemplate = async (req: Request) => {
   return {
     isProduction: readOneFEConfigs()?.mode === 'production',
     hideImportMapOverrideElement:
-      readOneFEConfigs()?.dynamicConfigs?.importMapOverrides?.enableUI ===
-      false,
+      readOneFEConfigs()?.dynamicConfigs?.devtools?.importMapOverrides
+        ?.enableUI === false,
     widgetConfigs: slimWidgetConfigsForShell,
     pluginConfigs: getPluginConfigs(),
     dynamicConfigs: convertServerDynamicConfigToShellDynamicConfig(

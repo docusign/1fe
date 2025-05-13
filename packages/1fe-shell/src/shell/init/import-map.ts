@@ -108,7 +108,8 @@ export const createDynamicImportMap = (): {
   importMap: SystemImportMap;
   overrides?: Record<string, string>;
 } => {
-  const allowedSources = DYNAMIC_CONFIGS?.importMapOverrides?.allowedSources;
+  const allowedSources =
+    DYNAMIC_CONFIGS?.devtools?.importMapOverrides?.allowedSources;
   const widgetConfigs = getWidgetConfigValues(WIDGET_CONFIGS);
 
   const widgets = widgetConfigs.reduce((itr, e: WidgetConfig) => {

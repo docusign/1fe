@@ -35,13 +35,15 @@ jest.mock('../../configs/config-helpers', () => ({
   LAZY_LOADED_LIB_CONFIGS: { lazy: 'lazy_config' },
   WIDGET_CONFIGS: jest.fn(),
   DYNAMIC_CONFIGS: {
-    importMapOverrides: {
-      allowedSources: [
-        'localhost',
-        '127.0.0.1',
-        'docucdn-a.akamaihd.net',
-        'docutest-a.akamaihd.net',
-      ],
+    devtools: {
+      importMapOverrides: {
+        allowedSources: [
+          'localhost',
+          '127.0.0.1',
+          'docucdn-a.akamaihd.net',
+          'docutest-a.akamaihd.net',
+        ],
+      },
     },
   },
   getWidgetConfigValues: jest

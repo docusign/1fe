@@ -31,11 +31,11 @@ export const applyRuntimeConfigOverridesForWidgetUrlOverrides = () => {
 
   Object.entries(importMapOverrides)
     .filter(([widgetId, url]) => {
-      const isSourceAllowed = DYNAMIC_CONFIGS?.importMapOverrides
+      const isSourceAllowed = DYNAMIC_CONFIGS?.devtools?.importMapOverrides
         ?.allowedSources
         ? isAllowedSource(
             url,
-            DYNAMIC_CONFIGS.importMapOverrides.allowedSources,
+            DYNAMIC_CONFIGS.devtools.importMapOverrides.allowedSources,
           )
         : true;
 
@@ -139,14 +139,16 @@ export const applyRuntimeConfigOverrideForImportMapUi = async () => {
   const runtimeConfigFetches = widgetUrlOverridesMissingFromLocalStorage.map(
     async (widgetId) => {
       const widgetUrlOverride = (importMapOverrides.imports || {})[widgetId];
-      if (
-        !isAllowedSource(
-          widgetUrlOverride,
-          DYNAMIC_CONFIGS.importMapOverrides.allowedSources,
-        ) ||
-        !widgetUrlOverride?.endsWith('/js/1fe-bundle.js')
-      ) {
-        return;
+      if (DYNAMIC_CONFIGS?.devtools?.importMapOverrides?.allowedSources) {
+        if (
+          !isAllowedSource(
+            widgetUrlOverride,
+            DYNAMIC_CONFIGS.devtools.importMapOverrides.allowedSources,
+          ) ||
+          !widgetUrlOverride?.endsWith('/js/1fe-bundle.js')
+        ) {
+          return;
+        }
       }
 
       // get the runtime config that was published for this version of the widget
