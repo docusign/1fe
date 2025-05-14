@@ -4,7 +4,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc --build --clean && tsc --build"
+    "build": "tsc --build --clean && tsc --build",
+    "prepack": "yarn build"
   },
   "dependencies": {
     "@1fe/cli": "0.0.1",
