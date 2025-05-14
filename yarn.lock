@@ -202,7 +202,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@1fe/eslint-config@npm:1.0.0, @1fe/eslint-config@workspace:packages/eslint-config":
+"@1fe/eslint-config@workspace:*, @1fe/eslint-config@workspace:packages/eslint-config":
   version: 0.0.0-use.local
   resolution: "@1fe/eslint-config@workspace:packages/eslint-config"
   dependencies:
@@ -213,11 +213,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@1fe/server@npm:1.0.10, @1fe/server@workspace:packages/1fe-server":
+"@1fe/server@workspace:*, @1fe/server@workspace:packages/1fe-server":
   version: 0.0.0-use.local
   resolution: "@1fe/server@workspace:packages/1fe-server"
   dependencies:
-    "@1fe/eslint-config": "npm:1.0.0"
+    "@1fe/eslint-config": "workspace:*"
     "@jest/globals": "npm:^29.7.0"
     "@repo/typescript-config": "npm:0.0.0"
     "@types/cookie-parser": "npm:^1.4.8"
@@ -258,7 +258,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@1fe/shell@workspace:packages/1fe-shell"
   dependencies:
-    "@1fe/eslint-config": "npm:1.0.0"
+    "@1fe/eslint-config": "workspace:*"
     "@babel/core": "npm:^7.26.10"
     "@babel/preset-env": "npm:^7.23.3"
     "@emotion/react": "npm:^11.14.0"
@@ -305,8 +305,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@1fe/starter-app@workspace:apps/starter-app"
   dependencies:
-    "@1fe/server": "npm:1.0.10"
-    "@1fe/shell": "npm:1.0.10"
+    "@1fe/server": "workspace:*"
+    "@1fe/shell": "workspace:*"
     "@babel/core": "npm:^7.26.10"
     "@emotion/react": "npm:^11.14.0"
     "@emotion/styled": "npm:11.14.0"
