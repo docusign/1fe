@@ -1,8 +1,6 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import path from 'path';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import oneFEServer, { OneFEServerOptions } from '@1fe/server';
 import favicon from 'serve-favicon';
 
@@ -84,6 +82,7 @@ const app = oneFEServer(options);
 // Middleware that parses json and looks at requests where the Content-Type header matches the type option.
 app.use(express.json());
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 app.use(favicon(path.join(__dirname, 'public/favicon.ico')));
 

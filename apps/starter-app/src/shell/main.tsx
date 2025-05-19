@@ -1,7 +1,4 @@
-import renderOneFEShell, {
-  OneFEMode,
-  OneFEErrorComponentProps,
-} from '@1fe/shell';
+import renderOneFEShell, { OneFEErrorComponentProps } from '@1fe/shell';
 import React from 'react';
 
 import { Loader } from './components/Loader';

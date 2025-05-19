@@ -1,6 +1,5 @@
 {
   "name": "@1fe/shell",
-  "private": true,
   "version": "1.0.10",
   "license": "MIT",
   "sideEffects": false,
@@ -22,7 +21,7 @@
     "publish:packages": "yarn publish --access public"
   },
   "devDependencies": {
-    "@1fe/eslint-config": "1.0.0",
+    "@1fe/eslint-config": "workspace:*",
     "@babel/preset-env": "^7.23.3",
     "@jest/globals": "^29.7.0",
     "@repo/typescript-config": "0.0.0",

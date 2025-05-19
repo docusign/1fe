@@ -64,8 +64,8 @@
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
-    "@1fe/server": "1.0.10",
-    "@1fe/shell": "1.0.10",
+    "@1fe/server": "workspace:*",
+    "@1fe/shell": "workspace:*",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "11.14.0",
     "core-js": "^3.40.0",
