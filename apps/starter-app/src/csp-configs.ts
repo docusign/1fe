@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import { CSPPerEnvironment } from '@1fe/server';
 
 const commonCsp = {
