@@ -15,7 +15,7 @@
     "server:build": "tsc --project tsconfig.server.json --noEmit && node bundle/server/build.js",
     "build": "yarn clean && yarn server:build && yarn client:build",
     "test:playwright": "playwright test",
-    "start": "NODE_ENV=integration node dist/server.js"
+    "start": "NODE_ENV=production node dist/server.js"
   },
   "devDependencies": {
     "@babel/core": "^7.26.10",
