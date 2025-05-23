@@ -14,6 +14,10 @@ runs:
       with:
         ssh-private-key: ${{ inputs.submodule-ssh-private-key }}
 
+    - name: configure git to use SSH always
+      shell: bash
+      run: git config --global url."git@github.com:".insteadOf "https://github.com/"
+
     - name: Initialize submodules
       shell: bash
       run: git submodule update --init --recursive
