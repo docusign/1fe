@@ -6,6 +6,8 @@
 
 import { getPlugin } from '..';
 
+import * as getTreModule from '../../getTree';
+
 jest.mock('../../getTree', () => ({
   getTree: jest.fn(() => [
     {
@@ -28,11 +30,19 @@ describe('getPlugin', () => {
   });
 
   it('should return null if there is no plugin mounted', () => {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    jest.spyOn(require('../../getTree'), 'getTree').mockReturnValueOnce([
+    jest.spyOn(getTreModule, 'getTree').mockReturnValueOnce([
       {
         id: '1FE_SHELL',
-        data: {},
+        data: {
+          widgetId: '',
+          version: '',
+          runtime: {
+            dependsOn: undefined,
+            preload: undefined,
+            plugin: undefined,
+            headers: undefined,
+          },
+        },
         children: [],
       },
     ]);

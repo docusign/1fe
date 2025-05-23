@@ -4,6 +4,7 @@ export {};
 
 declare global {
   const BROWSERS_LIST_CONFIG: string[];
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   System;
 
   interface Window {

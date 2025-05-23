@@ -8,7 +8,9 @@ import { WidgetAppLoadTimeUtils } from './app-load-time';
 
 export type ExperienceUtils = ReturnType<typeof initExperience>;
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface KnownWidgets {}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface KnownVariants {}
 export type UnknownWidgetContract = Record<string, unknown>;
 
