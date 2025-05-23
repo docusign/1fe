@@ -74,6 +74,7 @@
     "@types/update-notifier": "^6.0.1",
     "@types/webpack": "latest",
     "@types/webpack-bundle-analyzer": "^4.6.0",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
     "esbuild-plugin-copy": "^2.1.1",
     "esbuild-raw-plugin": "^0.2.0",
     "eslint": "8.57.1",
