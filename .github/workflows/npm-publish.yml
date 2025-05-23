@@ -15,7 +15,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4 # no need to checkout submodules because they are not publishable.
+      - name: Checkout Repository
+        uses: ./.github/workflows/reusable/checkout-with-submodules.yml
       - uses: actions/setup-node@v4
         with:
           node-version: 20
