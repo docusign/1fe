@@ -14,7 +14,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - uses: ./.github/workflows/reusable/submodule-init
+      - name: Set up Git submodules
+        uses: ./.github/workflows/reusable/submodule-init
         with:
           submodule-ssh-private-key: ${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}
 
