@@ -1,13 +1,19 @@
 name: Checkout with Submodules
 description: Checkout a repository with submodules
 
+inputs:
+  submodule-ssh-private-key:
+    description: 'SSH private key for accessing submodules'
+    required: true
+    default: ${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}
+
 runs:
   using: 'composite'
   steps:
     - name: Set up SSH for submodules
       uses: webfactory/ssh-agent@v1
       with:
-        ssh-private-key: ${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}
+        ssh-private-key: ${{ inputs.submodule-ssh-private-key }}
 
     - name: Initialize submodules
       shell: bash
