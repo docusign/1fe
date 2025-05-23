@@ -45,7 +45,7 @@ jest.mock('../../../../../../configs/config-helpers', () => ({
 
 jest.mock('../../../../../../configs/shell-configs', () => ({
   readOneFEShellConfigs: jest.fn().mockImplementation(() => ({
-    mode: 'production',
+    isProduction: true,
     cdn: {
       widgets: {
         basePrefix: 'https://docucdn-a.akamaihd.net/production/1fe/widgets',

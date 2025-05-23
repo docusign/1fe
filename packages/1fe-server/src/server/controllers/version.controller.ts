@@ -54,7 +54,7 @@ class VersionController {
         environment: readOneFEConfigs()?.environment,
         version: SERVER_VERSION,
         nodeVersion: process.version,
-        ...(!(readOneFEConfigs()?.mode === 'production')
+        ...(!readOneFEConfigs()?.isProduction
           ? {
               buildNumber: SERVER_BUILD_NUMBER,
               branch: SERVER_GIT_BRANCH,

@@ -30,7 +30,7 @@ export const getSystemWidgetConfigs = (
 export const allowUnsafeEvalForSystemPluginsOnPreprod = (
   plugin: PluginConfig,
 ): boolean => {
-  if (readOneFEConfigs()?.mode === 'production') {
+  if (readOneFEConfigs()?.isProduction) {
     return false;
   }
 
@@ -50,7 +50,7 @@ export const ifSystemPluginRequestedOnProd = (
   const widgetConfigs = getCachedWidgetConfigs();
 
   return (
-    readOneFEConfigs()?.mode === 'production' &&
+    !!readOneFEConfigs()?.isProduction &&
     getSystemWidgetConfigs(widgetConfigs).some(
       (widget) => widget.widgetId === plugin?.widgetId,
     )

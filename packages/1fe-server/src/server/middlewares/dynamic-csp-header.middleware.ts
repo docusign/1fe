@@ -7,16 +7,12 @@ import { getRuntimeCSPConfigs } from '../utils';
 import { readOneFEConfigs } from '../utils/one-fe-configs';
 
 type MergeCSPOptions = {
-  environment?: string | undefined;
   reportOnly?: boolean;
   pluginId?: string;
   req: Request;
 };
 
 type GenerateCSPOptions = {
-  // will grab CSP for this environment
-  environment: string | undefined;
-
   // Grab report only CSP
   reportOnly?: boolean;
 
@@ -86,16 +82,10 @@ export const getMergedDirectives = (cspOptions: MergeCSPOptions) => {
 };
 
 export const generateCSPPolicy = (generateOptions: GenerateCSPOptions) => {
-  const {
-    environment = 'development',
-    reportOnly = false,
-    pluginId,
-    req,
-  } = generateOptions;
+  const { reportOnly = false, pluginId, req } = generateOptions;
 
   // Merge default CSP with plugin CSP. Tack on report-uri
   const mergedDirectives = getMergedDirectives({
-    environment,
     reportOnly,
     pluginId,
     req,
@@ -122,7 +112,6 @@ const dynamicCspHeaderMiddleware = async (
     // Generate plugin csp with helmet
     const helmetCspMiddleware = helmet.contentSecurityPolicy(
       generateCSPPolicy({
-        environment: readOneFEConfigs()?.environment,
         pluginId,
         req,
       }),
@@ -135,7 +124,6 @@ const dynamicCspHeaderMiddleware = async (
       // Generate plugin report only csp with helmet
       const helmetReportOnlyCspMiddleware = helmet.contentSecurityPolicy(
         generateCSPPolicy({
-          environment: readOneFEConfigs()?.environment,
           pluginId,
           reportOnly: true,
           req,

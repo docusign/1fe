@@ -7,7 +7,7 @@ import { EventBusPlatformUtils } from '../types';
 jest.mock('../../../../configs/shell-configs', () => ({
   readOneFEShellConfigs: jest
     .fn()
-    .mockImplementation(() => ({ mode: 'production' })),
+    .mockImplementation(() => ({ isProduction: true })),
 }));
 
 jest.mock('../../../../utils/url', () => ({

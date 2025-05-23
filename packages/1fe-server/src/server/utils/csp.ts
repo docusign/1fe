@@ -23,7 +23,7 @@ export const getRuntimeCSPConfigs = ({
   req: Request;
 }) => {
   // Only want to override in local or integration. Not in higher environments.
-  if (readOneFEConfigs()?.mode !== 'production') {
+  if (readOneFEConfigs()?.isProduction) {
     // get stringified runtime configs
     const runtimeConfigOverridesParam = getParamFromQueryOrRedirectUri(
       req,

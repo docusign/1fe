@@ -41,7 +41,7 @@ jest.mock('../../../utils/request-helpers', () => ({
 jest.mock('../../../utils/one-fe-configs', () => ({
   readOneFEConfigs: jest
     .fn()
-    .mockImplementation(() => ({ mode: 'preproduction' })),
+    .mockImplementation(() => ({ isProduction: false })),
 }));
 
 jest.mock('../../../utils/widget-config', () => ({
@@ -83,7 +83,7 @@ describe('getWidgetConfigsForIndexHtml', () => {
   it('should return overridden configs if runtime_config_overrides query param is present and environment is preprod', async () => {
     jest
       .mocked(readOneFEConfigs)
-      .mockReturnValue({ mode: 'preproduction' } as OneFEProcessedConfigs);
+      .mockReturnValue({ isProduction: false } as OneFEProcessedConfigs);
 
     const expectedRuntime = { key: 'new-value' };
     runtimeConfigOverrides = JSON.stringify({
@@ -114,7 +114,7 @@ describe('getWidgetConfigsForIndexHtml', () => {
       } as Record<string, RuntimeConfig>;
 
       jest.mocked(readOneFEConfigs).mockReturnValue({
-        mode: isProd ? 'production' : 'preproduction',
+        isProduction: isProd,
       } as OneFEProcessedConfigs);
       jest
         .mocked(fetchRuntimeConfigsForWidgetUrlOverrides)

@@ -108,7 +108,7 @@ export type WidgetConfig = {
 
 export type EnvConfig = {
   environment: string;
-  mode: 'development' | 'preproduction' | 'production';
+  isProduction: boolean;
 };
 
 export type SystemWidgetConfig = {

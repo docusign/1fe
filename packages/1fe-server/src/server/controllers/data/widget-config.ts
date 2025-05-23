@@ -88,15 +88,14 @@ export const getWidgetConfigsForIndexHtml = async (
       : {};
 
     // We do not support the runtime_config_overrides query param higher envs for security reasons
-    const runtimeConfigOverridesToApply =
-      readOneFEConfigs()?.mode !== 'production'
-        ? {
-            ...widgetUrlOverrideRuntimeConfigOverrides,
-            // parsedRuntimeConfigOverrides intentionally comes second.
-            // explicit overrides from req.query[RUNTIME_CONFIG_OVERRIDES] should override implciit overrides from req.query[WIDGET_URL_OVERRIDES].
-            ...parsedRuntimeConfigOverrides,
-          }
-        : widgetUrlOverrideRuntimeConfigOverrides;
+    const runtimeConfigOverridesToApply = readOneFEConfigs()?.isProduction
+      ? {
+          ...widgetUrlOverrideRuntimeConfigOverrides,
+          // parsedRuntimeConfigOverrides intentionally comes second.
+          // explicit overrides from req.query[RUNTIME_CONFIG_OVERRIDES] should override implciit overrides from req.query[WIDGET_URL_OVERRIDES].
+          ...parsedRuntimeConfigOverrides,
+        }
+      : widgetUrlOverrideRuntimeConfigOverrides;
 
     if (!isEmpty(runtimeConfigOverridesToApply)) {
       return _overrideRuntimeConfigs(

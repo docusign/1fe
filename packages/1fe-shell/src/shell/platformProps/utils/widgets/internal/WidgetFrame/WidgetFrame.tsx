@@ -75,7 +75,7 @@ function WidgetFrameInner<TWidgetProps>({
     React.useState<WidgetRenderStatusType>('loading');
 
   useEffect(() => {
-    if (ENVIRONMENT_CONFIG.mode === 'production') {
+    if (ENVIRONMENT_CONFIG.isProduction) {
       return;
     }
 

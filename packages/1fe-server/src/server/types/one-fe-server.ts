@@ -50,8 +50,8 @@ export type OneFEDynamicConfigs = {
 };
 
 export type OneFEServerOptions = {
-  mode: 'development' | 'preproduction' | 'production';
   environment: string;
+  isProduction: boolean;
   orgName: string;
   configManagement: OneFEConfigManagement;
   shellBundleUrl: string;

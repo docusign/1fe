@@ -14,7 +14,7 @@ export const _customMark = (
 ): void => {
   window.performance?.mark(markName, measureOptions);
 
-  if (ENVIRONMENT_CONFIG.mode !== 'production') {
+  if (ENVIRONMENT_CONFIG.isProduction) {
     console.log('[1fe][util][appLoadTime] mark: ' + markName);
   }
 };

@@ -57,7 +57,7 @@ export const RouteWrapper: React.FC<RouteWrapperProps> = ({
     });
   };
 
-  const IS_PROD = ENVIRONMENT_CONFIG.mode === 'production';
+  const IS_PROD = ENVIRONMENT_CONFIG.isProduction;
   const getError =
     readOneFEShellConfigs()?.components?.getError || getGenericError;
 
