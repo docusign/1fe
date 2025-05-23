@@ -14,6 +14,9 @@ runs:
       with:
         ssh-private-key: ${{ inputs.submodule-ssh-private-key }}
 
+    - name: Configure Git for private dependencies
+      run: git config --global url."https://x-access-token:${{ secrets.GH_PAT_FOR_DEPS }}@github.com/".insteadOf "https://github.com/"
+
     - name: Initialize submodules
       shell: bash
       run: git submodule update --init --recursive
