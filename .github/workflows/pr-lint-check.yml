@@ -12,9 +12,11 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: ./.github/workflows/reusable/checkout-with-submodules.yml
+        uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: recursive
+
+      - uses: ./.github/workflows/reusable/submodule-init.yml
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
