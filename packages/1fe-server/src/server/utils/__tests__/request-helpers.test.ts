@@ -36,8 +36,11 @@ jest.mock('../one-fe-configs', () => ({
 describe('getRequestHost', () => {
   it('should return localhost for local development', () => {
     const req = {
-      hostname: 'http://localhost:3001',
-    } as Request;
+      hostname: 'localhost',
+      socket: {
+        localPort: '3001',
+      },
+    } as any;
 
     const result = getRequestHost(req);
 
