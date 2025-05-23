@@ -13,6 +13,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          submodules: true
+          persist-credentials: false
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -24,3 +27,9 @@ jobs:
 
       - name: Run unit tests
         run: yarn test
+
+      - name: '[starter] Install dependencies'
+        run: cd apps/starter-app && yarn install --frozen-lockfile
+
+      - name: '[starter] Run unit tests'
+        run: cd apps/starter-app && yarn test

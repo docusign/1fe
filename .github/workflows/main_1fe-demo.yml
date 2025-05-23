@@ -17,6 +17,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
+          persist-credentials: false
 
       - name: Set up Node.js version
         uses: actions/setup-node@v3
@@ -27,7 +30,7 @@ jobs:
         run: |
           yarn workspace @1fe/server install && yarn workspace @1fe/server build
           yarn workspace @1fe/shell install && yarn workspace @1fe/shell build
-          yarn workspace @1fe/starter-app install && yarn workspace @1fe/starter-app build
+          cd apps/starter-app && yarn install && yarn build
 
       - name: Zip artifact for deployment
         run: zip release.zip ./apps/starter-app/ -r
@@ -56,7 +59,7 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-      
+
       - name: Login to Azure
         uses: azure/login@v2
         with:

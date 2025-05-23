@@ -11,8 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repository and submodules
         uses: actions/checkout@v4
+        with:
+          submodules: true
+          persist-credentials: false
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -24,3 +27,9 @@ jobs:
 
       - name: Build the project
         run: yarn build
+
+      - name: '[starter] Install dependencies'
+        run: cd apps/starter-app && yarn install --frozen-lockfile
+
+      - name: '[starter] Run build'
+        run: cd apps/starter-app && yarn build
