@@ -1,14 +1,14 @@
 name: Checkout with Submodules
+description: Checkout a repository with submodules
 
 runs:
   using: 'composite'
   steps:
     - name: Set up SSH for submodules
-      if: ${{ inputs.submodules }}
       uses: webfactory/ssh-agent@v1
       with:
         ssh-private-key: ${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}
 
     - name: Initialize submodules
-      if: ${{ inputs.submodules }}
+      shell: bash
       run: git submodule update --init --recursive
