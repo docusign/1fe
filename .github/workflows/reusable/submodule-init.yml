@@ -1,15 +1,14 @@
 name: Checkout with Submodules
 
-on:
-  workflow_call:
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up SSH for submodules
+      if: ${{ inputs.submodules }}
+      uses: webfactory/ssh-agent@v1
+      with:
+        ssh-private-key: ${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}
 
-steps:
-  - name: Set up SSH for submodules
-    if: ${{ inputs.submodules }}
-    uses: webfactory/ssh-agent@v1
-    with:
-      ssh-private-key: ${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}
-
-  - name: Initialize submodules
-    if: ${{ inputs.submodules }}
-    run: git submodule update --init --recursive
+    - name: Initialize submodules
+      if: ${{ inputs.submodules }}
+      run: git submodule update --init --recursive
