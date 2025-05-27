@@ -29,7 +29,8 @@ export type OneFEServerOptions = {
   shellBundleUrl: string;
   server?: OneFEServer;
   csp?: {
-    defaultCSP: OneFECSP;
+    defaultCSP?: OneFECSP;
+    injectNonce?: boolean;
   };
 };
 

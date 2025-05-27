@@ -1,8 +1,7 @@
 import { CSPPerEnvironment } from '@1fe/server';
 
 const commonCsp = {
-  scriptSrc: ['*', 'addCspNonceGuidHere'],
-  styleSrc: ["'unsafe-inline'"],
+  scriptSrc: ['*'],
 };
 
 export const enforcedDefaultCsp: Record<string, CSPPerEnvironment> = {

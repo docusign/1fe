@@ -1,4 +1,5 @@
 import { Request } from 'express';
+
 import { RUNTIME_CONFIG_OVERRIDES } from '../constants';
 import { RuntimeConfig } from '../types';
 import { getParamFromQueryOrRedirectUri } from './url';
@@ -44,4 +45,39 @@ export const getRuntimeCSPConfigs = ({
   return reportOnly
     ? pluginConfig?.runtime?.headers?.csp?.reportOnly
     : pluginConfig?.runtime?.headers?.csp?.enforced;
+};
+
+export const injectNonceIntoCSP = (cspString: string, nonce: string) => {
+  if (!cspString || typeof cspString !== 'string') return cspString;
+
+  const directives = cspString
+    .split(';')
+    .map((d) => d.trim())
+    .filter(Boolean);
+  const updatedDirectives = new Map();
+
+  // Parse directives into a map
+  directives.forEach((directive) => {
+    const [name, ...values] = directive.split(/\s+/);
+    updatedDirectives.set(name, new Set(values));
+  });
+
+  // Add the value to script-src
+  const addValue = (dir: string) => {
+    if (!updatedDirectives.has(dir)) {
+      updatedDirectives.set(dir, new Set([nonce]));
+    } else {
+      updatedDirectives.get(dir).add(nonce);
+    }
+  };
+
+  addValue('script-src');
+  addValue('style-src');
+
+  // Rebuild CSP string
+  const rebuiltCSP = Array.from(updatedDirectives.entries())
+    .map(([name, values]) => `${name} ${Array.from(values).join(' ')}`)
+    .join('; ');
+
+  return rebuiltCSP;
 };

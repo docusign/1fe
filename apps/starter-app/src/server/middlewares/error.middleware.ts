@@ -47,10 +47,6 @@ const errorMiddleware = (
 
     const html = ejs.render(errorTemplate, dataForRenderingTemplatePayload);
     res.send(html);
-    // return res.render(
-    //   errorTemplate,
-    //   dataForRenderingTemplatePayload,
-    // );
   } catch (err) {
     next(err);
   }

@@ -65,6 +65,7 @@ const options = {
       enforced: enforcedDefaultCsp[ENVIRONMENT],
       reportOnly: reportOnlyDefaultCsp[ENVIRONMENT],
     },
+    injectNonce: true
   },
 };
 
@@ -84,9 +85,6 @@ app.use(errorMiddleware);
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
-
-// Set the directory for views (optional)
-// app.set('views', path.join(__dirname, 'server/views'));
 
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`);
