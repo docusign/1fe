@@ -28,7 +28,7 @@ const RedirectComponent = ({ to }: { to: string }) => {
 };
 
 const determineBaseRoute = (): RouteObject[] => {
-  const isProd = ENVIRONMENT_CONFIG.mode === 'production';
+  const isProd = ENVIRONMENT_CONFIG.isProduction;
   const defaultRoute =
     readOneFEShellConfigs()?.routes?.defaultRoute || '/bathtub';
   if (isProd) {

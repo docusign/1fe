@@ -1,7 +1,7 @@
 export const serverOptions: any = {
   // points to common flat file
-  mode: 'production',
   environment: 'production',
+  isProduction: true,
   orgName: 'OneFE Starter App',
   configManagement: {
     url: `https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/common-configs/production.json`,
@@ -10,11 +10,11 @@ export const serverOptions: any = {
   shellBundleUrl: 'http://localhost:3000/bundle.js',
   server: {
     // for Integration-env only
-    bathtub: true, // automatically on when mode: development
+    bathtub: true,
     importMapOverrides: {
       cdnURL: '',
     },
-    devtools: true, // automatically on when mode: development
+    devtools: true,
     // known routes are routes that 1fe will NOT 404 on if the current route does not match a plugin
     knownRoutes: ['/test', '/version', '/'],
   },

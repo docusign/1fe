@@ -6,8 +6,8 @@
     "clean": "npx rimraf dist",
     "dev": "run-s client:dev server:dev",
     "client:dev": "npx webpack --config ./bundle/client/dev.js",
-    "server:dev": "NODE_ENV=development node bundle/server/dev.js",
-    "client:build": "cross-env NODE_ENV=production npx webpack --config ./bundle/client/build.js",
+    "server:dev": "node bundle/server/dev.js",
+    "client:build": "cross-env npx webpack --config ./bundle/client/build.js",
     "client-types": "npx tsc --project ./tsconfig-shell.types.json",
     "client-types:dev": "tsc-watch --project ./tsconfig-shell.types.json --onSuccess 'npx yalc push'",
     "client-types:extract": "yarn client-types && npx api-extractor run --local",
@@ -15,7 +15,7 @@
     "server:build": "tsc --project tsconfig.server.json --noEmit && node bundle/server/build.js",
     "build": "yarn clean && yarn server:build && yarn client:build",
     "test:playwright": "playwright test",
-    "start": "NODE_ENV=production node dist/server.js"
+    "start": "node dist/server.js"
   },
   "devDependencies": {
     "@babel/core": "^7.26.10",

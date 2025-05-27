@@ -14,7 +14,7 @@ export const getEmitteryInstance = (): Emittery => {
   emitteryInstance = new Emittery({
     debug: {
       name: `${ONE_FE_SHELL_ID}_EVENT_BUS:EMITTERY`,
-      enabled: ENVIRONMENT_CONFIG.mode === 'production',
+      enabled: ENVIRONMENT_CONFIG.isProduction,
       logger: (type, debugName, eventName, eventData) => {
         const logger = getShellLogger();
 

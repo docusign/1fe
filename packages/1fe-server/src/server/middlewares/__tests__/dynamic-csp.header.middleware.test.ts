@@ -35,7 +35,6 @@ describe('dynamicCspHeaderMiddleware', () => {
     );
 
     expect(mockGenerateCSPPolicy).toHaveBeenCalledWith({
-      environment: 'development',
       pluginId: '@1fe/widget-starter-kit',
       req: mockRequest,
     });

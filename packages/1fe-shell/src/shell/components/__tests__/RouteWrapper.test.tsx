@@ -57,7 +57,7 @@ jest.mock('../../configs/shell-configs', () => ({
 jest.mock('../../configs/config-helpers', () => ({
   ...jest.requireActual('../../configs/config-helpers'),
   ENVIRONMENT_CONFIG: {
-    mode: 'production',
+    isProduction: true,
     environment: 'production',
   },
 }));

@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import path from 'path';
-import oneFEServer, { OneFEServerOptions } from '@1fe/server';
+import oneFEServer from '@1fe/server';
 import favicon from 'serve-favicon';
 
 import router from './lib/router';
@@ -13,16 +13,11 @@ const { PORT = 3001 } = process.env;
 
 const ENVIRONMENT: string = process.env.NODE_ENV || 'development';
 
-const shellBundleUrl =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:3001/js/bundle.js'
-    : `https://1fe-a.akamaihd.net/${ENVIRONMENT}/shell/bundle.js`;
+const isLocal = ENVIRONMENT === 'development';
+const productionEnvironments = ['production'];
 
-const envModeMap: Record<string, OneFEServerOptions['mode']> = {
-  development: 'development',
-  integration: 'preproduction',
-  production: 'production',
-};
+const shellBundleUrl =
+  isLocal ? 'http://localhost:3001/js/bundle.js' : `https://1fe-a.akamaihd.net/${ENVIRONMENT}/shell/bundle.js`;
 
 // TODO[1fe]: Should we automatically recognize ONE_DS_BUNDLE, ROOT, FAVICON, etc. OUT OF THE BOX?
 const ROUTES = {
@@ -43,9 +38,8 @@ const ROUTES = {
 };
 
 const options = {
-  // points to common flat file
-  mode: envModeMap[ENVIRONMENT],
-  environment: ENVIRONMENT,
+  environment: isLocal ? 'integration' : ENVIRONMENT,
+  isProduction: productionEnvironments.includes(ENVIRONMENT),
   orgName: '1FE Starter App',
   configManagement: {
     getDynamicConfigs: async () => {
@@ -64,8 +58,8 @@ const options = {
   },
   shellBundleUrl,
   server: {
-    // for Integration-env only
-    bathtub: true, // automatically on when mode: development
+    // TODO[1fe]: can probably be removed
+    bathtub: true,
     // known routes are routes that 1fe will NOT 404 on if the current route does not match a plugin
     knownRoutes: Object.values(ROUTES),
   },

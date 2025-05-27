@@ -16,7 +16,7 @@ jest.mock('../../../../utils/widget-type', () => ({
 
 jest.mock('../../../../configs/shell-configs', () => ({
   readOneFEShellConfigs: jest.fn().mockImplementation(() => ({
-    mode: 'preproduction',
+    isProduction: false,
     shellLogger: {
       logPlatformUtilUsage: false,
       log: jest.fn(),

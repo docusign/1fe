@@ -60,7 +60,7 @@ jest.mock('react', () => ({
 
 jest.mock('../../../../configs/shell-configs', () => ({
   readOneFEShellConfigs: jest.fn().mockImplementation(() => ({
-    mode: 'production',
+    isProduction: true,
     components: {
       getLoader: () => <p>Loading...</p>,
     },
