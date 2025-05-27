@@ -6,7 +6,6 @@ import { generateWidgetConfigMap } from '../widget-config-helpers';
 import {
   fetchRuntimeConfigsForWidgetUrlOverrides,
   getRequestHost,
-  LOCAL_HOST_URL,
 } from '../request-helpers';
 import { getCachedWidgetConfigs } from '../widget-config';
 import { readOneFEConfigs } from '../one-fe-configs';
@@ -30,29 +29,28 @@ jest.mock('ky', () => ({
 
 jest.mock('../one-fe-configs', () => ({
   readOneFEConfigs: jest.fn().mockImplementation(() => ({
-    mode: 'production',
+    isProduction: true,
   })),
 }));
 
 describe('getRequestHost', () => {
   it('should return localhost for local development', () => {
-    jest
-      .mocked(readOneFEConfigs)
-      .mockReturnValue({ mode: 'development' } as OneFEProcessedConfigs);
-
     const req = {
-      hostname: LOCAL_HOST_URL,
-    } as Request;
+      hostname: 'localhost',
+      socket: {
+        localPort: '3001',
+      },
+    } as any;
 
     const result = getRequestHost(req);
 
-    expect(result.toString()).toEqual(LOCAL_HOST_URL);
+    expect(result.toString()).toEqual('http://localhost:3001');
   });
 
   it('should return host value if not in production, regardless of whitelist ', () => {
     jest
       .mocked(readOneFEConfigs)
-      .mockReturnValue({ mode: 'preproduction' } as OneFEProcessedConfigs);
+      .mockReturnValue({ isProduction: false } as OneFEProcessedConfigs);
 
     const protocol = 'https';
     const hostname = 'one-ds-app.com';
@@ -70,7 +68,7 @@ describe('getRequestHost', () => {
   it('should return host value if in production and value is in whitelist ', () => {
     jest
       .mocked(readOneFEConfigs)
-      .mockReturnValue({ mode: 'production' } as OneFEProcessedConfigs);
+      .mockReturnValue({ isProduction: true } as OneFEProcessedConfigs);
 
     const protocol = 'https';
     const hostname = 'apps.dev.docusign.com';

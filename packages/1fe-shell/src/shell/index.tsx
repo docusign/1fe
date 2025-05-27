@@ -40,7 +40,7 @@ export const init = (): Promise<void> => {
 
         applyRuntimeConfigOverridesForWidgetUrlOverrides();
 
-        if (ENVIRONMENT_CONFIG.mode !== 'production') {
+        if (!ENVIRONMENT_CONFIG.isProduction) {
           // import-map-overrides:change fires when the import map is updated via the ui
           window.addEventListener(
             'import-map-overrides:change',

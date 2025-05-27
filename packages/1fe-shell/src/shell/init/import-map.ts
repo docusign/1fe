@@ -182,7 +182,7 @@ export const insertPersistentWidgetOverrides = (
 
   // const { IS_PROD, FEATURE_FLAGS, ENVIRONMENT } = getEnvironmentConfigs();
 
-  const IS_PROD = ENVIRONMENT_CONFIG.mode === 'production';
+  const IS_PROD = ENVIRONMENT_CONFIG.isProduction;
   if (!IS_PROD) {
     initializeImportMapOverridesReskin();
 

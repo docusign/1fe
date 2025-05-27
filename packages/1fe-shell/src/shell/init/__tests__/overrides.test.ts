@@ -9,7 +9,7 @@ jest.mock('../import-map-ui');
 jest.mock('../../configs/shell-configs', () => ({
   readOneFEShellConfigs: jest
     .fn()
-    .mockImplementation(() => ({ mode: 'preproduction' })),
+    .mockImplementation(() => ({ isProduction: false })),
 }));
 
 describe('insertNewImportMap', () => {

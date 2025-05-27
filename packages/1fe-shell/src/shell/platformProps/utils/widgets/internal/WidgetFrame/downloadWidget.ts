@@ -60,7 +60,7 @@ export async function downloadWidget<TWidgetProps>(
   const logger = getShellLogger();
 
   const isWidgetOverriden = isOverrideElementActive();
-  const IS_PROD = ENVIRONMENT_CONFIG.mode === 'production';
+  const IS_PROD = ENVIRONMENT_CONFIG.isProduction;
   // const widgetLoadingStartTime = Date.now();
   const widgetLoadTime = getShellPlatformUtils().appLoadTime;
 

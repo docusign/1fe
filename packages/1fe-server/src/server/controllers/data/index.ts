@@ -82,7 +82,7 @@ export const dataForRenderingTemplate = async (req: Request) => {
   const shellBundleUrl = readOneFEConfigs()?.shellBundleUrl;
 
   return {
-    isProduction: readOneFEConfigs()?.mode === 'production',
+    isProduction: readOneFEConfigs()?.isProduction,
     hideImportMapOverrideElement:
       readOneFEConfigs()?.dynamicConfigs?.devtools?.importMapOverrides
         ?.enableUI === false,
@@ -93,7 +93,7 @@ export const dataForRenderingTemplate = async (req: Request) => {
     ),
     envConfigs: {
       environment: readOneFEConfigs()?.environment,
-      mode: readOneFEConfigs()?.mode,
+      isProduction: readOneFEConfigs()?.isProduction,
     },
     criticalLibraryConfigUrls: criticalLibs,
     lazyLoadedLibsConfig: lazyLoadedLibs,

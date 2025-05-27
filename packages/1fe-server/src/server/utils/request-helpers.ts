@@ -4,15 +4,13 @@ import ky from 'ky';
 import { getCachedWidgetConfigs } from './widget-config';
 import { RuntimeConfig } from '../types';
 import { widgetRuntimeConfigUrlFilename } from '../constants';
-import { readOneFEConfigs } from './one-fe-configs';
-
-// import { readOneFEConfigs } from "./one-fe-configs";
-
-export const LOCAL_HOST_URL = 'http://localhost:3001';
 
 export const getRequestHost = (req: Request) => {
-  if (readOneFEConfigs()?.mode === 'development') {
-    return LOCAL_HOST_URL;
+  const isLocalhost =
+    req.hostname === 'localhost' || req.hostname === '127.0.0.1';
+
+  if (isLocalhost) {
+    return `http://${req.hostname}:${req.socket.localPort}`;
   } else {
     return `https://${req.hostname}`;
   }

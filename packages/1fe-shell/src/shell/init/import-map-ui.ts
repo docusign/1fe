@@ -182,7 +182,7 @@ export const initializeImportMapOverridesReskin = () => {
    *
    * As a result, `hideImportMapOverrideElement` in the index.html.ejs does not hide the import map overrides button on refresh
    */
-  const IS_PROD = ENVIRONMENT_CONFIG.mode === 'production';
+  const IS_PROD = ENVIRONMENT_CONFIG.isProduction;
   const enableUI =
     DYNAMIC_CONFIGS?.devtools?.importMapOverrides?.enableUI || true;
   // const getIsActiveAutomatedTestFramework = false;

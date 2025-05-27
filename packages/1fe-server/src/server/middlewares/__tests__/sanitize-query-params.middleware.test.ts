@@ -12,7 +12,7 @@ import { OneFEProcessedConfigs } from '../../types/one-fe-server';
 jest.mock('../../utils/one-fe-configs', () => ({
   readOneFEConfigs: jest
     .fn()
-    .mockImplementation(() => ({ mode: 'production' })),
+    .mockImplementation(() => ({ isProduction: true })),
 }));
 
 describe('sanitizeQueryParamsMiddleware', () => {
@@ -61,7 +61,7 @@ describe('sanitizeQueryParamsMiddleware', () => {
     jest
       .mocked(readOneFEConfigs)
       .mockImplementationOnce(
-        () => ({ mode: 'preproduction' }) as OneFEProcessedConfigs,
+        () => ({ isProduction: false }) as OneFEProcessedConfigs,
       );
     jest.spyOn(res, 'status');
     jest.spyOn(res, 'send');
