@@ -1,5 +1,5 @@
 import { Configuration as WebpackConfig } from 'webpack';
-import { getCommonConfigs } from '../../../lib/config/getCommonConfigs';
+import { getDynamicConfigs } from '../../../lib/config/getDynamicConfigs';
 import { getLogger } from '../../../lib/getLogger';
 import chalk from 'chalk';
 
@@ -9,8 +9,8 @@ export async function getTargetLayer(
   const logger = getLogger('[webpack][target]');
 
   const browsersListRules = (
-    await getCommonConfigs(environment)
-  ).browserslistConfig.join();
+    await getDynamicConfigs(environment)
+  ).platform.browserslistConfig.join();
 
   logger.info('Using browserslist config:', chalk.blue(browsersListRules));
 

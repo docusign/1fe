@@ -1,15 +1,18 @@
 import { memoize } from 'lodash';
 import { getBaseConfigForEnv } from '../config/getBaseConfigForEnv';
-import { getCommonConfigs } from '../config/getCommonConfigs';
+import { getDynamicConfigs } from '../config/getDynamicConfigs';
 
 export const getKnownUris = memoize(async (environment: string) => {
   const { serverBaseUrl } = await getBaseConfigForEnv(environment);
-  const commonConfig = await getCommonConfigs(environment);
+  const dynamicConfig = await getDynamicConfigs(environment);
 
+  // separate-config-cleanup
+  const tempUrl =
+    'https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/integration/widgets/';
   return {
     version: `${serverBaseUrl}/version`,
     getWidgetBaseCdnUrl(widgetId: string, widgetVersion: string) {
-      return `${commonConfig.cdn.widgets.basePrefix}${widgetId}/${widgetVersion}`;
+      return `${tempUrl}${widgetId}/${widgetVersion}`;
     },
   };
 });

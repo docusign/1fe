@@ -1,14 +1,10 @@
-import {
-  CSPPerEnvironment,
-  ExternalLibConfig,
-  InstalledLibConfig,
-  WidgetConfig,
-} from '.';
+import { CSPPerEnvironment, ExternalLibConfig, InstalledLibConfig } from '.';
+import { ProcessedOneFEDDynamicConfigs } from './processed-dynamic-configs';
+import { OneFEDynamicConfigs, WidgetVersion } from './raw-cdn-configs';
 
-// TODO[1fe]: known routes should be optional. Whole server should be optional
 export type OneFEServer = {
   bathtub?: boolean;
-  knownRoutes: string[];
+  knownRoutes?: string[];
 };
 
 export type OneFECSP = {
@@ -16,37 +12,13 @@ export type OneFECSP = {
   reportOnly?: CSPPerEnvironment;
 };
 
-// TODO[1fe]: refreshMs should be required
+type CriticalConfigs<T> = { url: string } | { get: () => Promise<T> };
+
 export type OneFEConfigManagement = {
-  getDynamicConfigs?: () => Promise<OneFEDynamicConfigs>;
-  url?: string;
-  refreshMs?: number;
-};
-
-export type OneFEDynamicCDNConfig = {
-  libraries: {
-    basePrefix: string;
-    managed: (ExternalLibConfig | InstalledLibConfig)[];
-  };
-  widgets: {
-    basePrefix: string;
-    releaseConfig: WidgetConfig[];
-  };
-};
-
-export type OneFEImportMapOverrides = {
-  enableUI?: boolean;
-  allowedSource?: string[];
-};
-
-export type Devtools = {
-  importMapOverrides?: OneFEImportMapOverrides;
-};
-
-export type OneFEDynamicConfigs = {
-  cdn: OneFEDynamicCDNConfig;
-  devtools?: Devtools;
-  browserslistConfig?: string[];
+  libraryVersions: CriticalConfigs<(ExternalLibConfig | InstalledLibConfig)[]>;
+  widgetVersions: CriticalConfigs<WidgetVersion[]>;
+  dynamicConfigs: CriticalConfigs<OneFEDynamicConfigs>;
+  refreshMs: number;
 };
 
 export type OneFEServerOptions = {
@@ -55,12 +27,12 @@ export type OneFEServerOptions = {
   orgName: string;
   configManagement: OneFEConfigManagement;
   shellBundleUrl: string;
-  server: OneFEServer;
+  server?: OneFEServer;
   csp?: {
     defaultCSP: OneFECSP;
   };
 };
 
 export type OneFEProcessedConfigs = OneFEServerOptions & {
-  dynamicConfigs: OneFEDynamicConfigs;
+  dynamicConfigs: ProcessedOneFEDDynamicConfigs;
 };

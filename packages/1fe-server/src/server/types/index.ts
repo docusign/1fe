@@ -41,23 +41,9 @@ export type HeadersConfig = {
 };
 
 type AuthConfig = {
-  clientAppId: string;
-  scopes?: string[];
-  /** required means the whole plugin is auth-restricted and handled by 1fe, whereas lazy means the user is responsible for gating parts of their plugin using 1FE utils . */
   authenticationType: AuthenticationType;
-  secretKeyName?: string;
-  callbackUri?: string;
-  callbackUriIncludeAppToken?: boolean;
-  callbackUriHeaders?: Record<string, string>;
-  state?: Record<string, any>;
-  cookieDomain?: string;
-  logoutUri?: string;
-  generateAuthTxnId?: boolean;
-  useNativeAuth?: boolean;
-  ramp1FEAuthPercent?: number;
-  authCookiesToClear?: string[];
-  skiplogoutUriForBaselineRedirect?: boolean;
 };
+
 type RuntimePluginConfig = {
   auth?: AuthConfig;
   metaTags?: MetaTags;
@@ -71,9 +57,9 @@ export type RuntimeConfig = {
   headers?: HeadersConfig;
 };
 
-type WidgetType = 'pinned' | 'system';
+export type WidgetType = 'pinned' | 'system';
 
-type PluginConfigRaw = {
+export type PluginConfigRaw = {
   route: string;
   enabled: boolean;
   auth?: AuthConfig;
@@ -97,13 +83,6 @@ export type SystemWidgetConfig = {
   version: string;
   _url?: string;
   type: 'system';
-};
-
-export type WidgetConfigRaw = {
-  widgetId: string;
-  type?: WidgetType;
-  version: string;
-  plugin?: PluginConfigRaw;
 };
 
 // corresponds to the installed library JSONs in 1fe-configs

@@ -11,13 +11,13 @@ import errorMiddleware from './server/middlewares/error.middleware';
 dotenv.config();
 const { PORT = 3001 } = process.env;
 
-const ENVIRONMENT: string = process.env.NODE_ENV || 'development';
+const ENVIRONMENT: string = process.env.NODE_ENV === 'development' ? 'integration' : (process.env.NODE_ENV || 'production');
 
 const isLocal = ENVIRONMENT === 'development';
 const productionEnvironments = ['production'];
 
 const shellBundleUrl =
-  isLocal ? 'http://localhost:3001/js/bundle.js' : `https://1fe-a.akamaihd.net/${ENVIRONMENT}/shell/bundle.js`;
+  isLocal ? 'http://localhost:3001/js/bundle.js' : `https://1fe-a.akamaihd.net/${ENVIRONMENT}/${ENVIRONMENT}/shell/bundle.js`;
 
 // TODO[1fe]: Should we automatically recognize ONE_DS_BUNDLE, ROOT, FAVICON, etc. OUT OF THE BOX?
 const ROUTES = {
@@ -42,18 +42,15 @@ const options = {
   isProduction: productionEnvironments.includes(ENVIRONMENT),
   orgName: '1FE Starter App',
   configManagement: {
-    getDynamicConfigs: async () => {
-      const response = await fetch(
-        `https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/common-configs/${ENVIRONMENT}.json`,
-      );
-
-      if (!response.ok) {
-        throw new Error('Get dynamic configurations failed');
-      }
-
-      return await response.json();
+    widgetVersions: {
+      url: `https://1fe-a.akamaihd.net/${ENVIRONMENT}/${ENVIRONMENT}/configs/widget-versions.json`,
     },
-    url: `https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/common-configs/${ENVIRONMENT}.json`,
+    libraryVersions: {
+      url: `https://1fe-a.akamaihd.net/${ENVIRONMENT}/${ENVIRONMENT}/configs/lib-versions.json`,
+    },
+    dynamicConfigs: {
+      url: `https://1fe-a.akamaihd.net/${ENVIRONMENT}/${ENVIRONMENT}/configs/live.json`
+    },
     refreshMs: 30 * 1000,
   },
   shellBundleUrl,

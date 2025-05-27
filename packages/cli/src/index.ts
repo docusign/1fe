@@ -37,7 +37,7 @@ export type {
   OneFeConfiguration,
 } from './lib/config/config.types';
 
-export type { OneFeCommonConfig } from './lib/config/commonConfig.types';
+export type { OneFeDynamicConfig } from './lib/config/dynamicConfig.types';
 
 // Kick off CLI execution, only when this file is executed
 if (require.main === module) {
