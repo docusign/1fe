@@ -18,6 +18,7 @@ jobs:
         uses: ./.github/workflows/reusable/submodule-init
         with:
           submodule-ssh-private-key: ${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}
+          self-ssh-private-key: ${{ secrets.SELF_SSH_PRIVATE_KEY }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v4

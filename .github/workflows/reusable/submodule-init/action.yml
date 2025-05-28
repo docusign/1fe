@@ -12,7 +12,9 @@ runs:
     - name: Set up SSH for submodules
       uses: webfactory/ssh-agent@v0.9.1
       with:
-        ssh-private-key: ${{ inputs.submodule-ssh-private-key }}
+        ssh-private-key: |
+          ${{ inputs.submodule-ssh-private-key }}
+          ${{ inputs.self-ssh-private-key }}
 
     - name: configure git to use SSH always
       shell: bash
