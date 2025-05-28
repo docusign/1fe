@@ -26,7 +26,10 @@ export type WidgetConfig = {
 
 export type OneFEPlatformConfigs = {
   devtools?: Devtools;
-  browserslistConfig: string[];
+  browserslistConfig: {
+    buildTarget: string[];
+    unsupportedBrowserScreen: string[];
+  };
 };
 
 export type WidgetVersion = {

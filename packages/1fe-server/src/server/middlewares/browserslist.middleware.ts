@@ -21,7 +21,8 @@ const browsersListMiddleware = (
 ): void => {
   try {
     const browsersListConfig =
-      readOneFEConfigs()?.dynamicConfigs?.platform?.browserslistConfig;
+      readOneFEConfigs()?.dynamicConfigs?.platform?.browserslistConfig
+        .unsupportedBrowserScreen;
 
     const { path } = req || {};
     const activeAutomatedTestFramework =
@@ -44,15 +45,14 @@ const browsersListMiddleware = (
       !isEmpty(browsersListConfig)
     ) {
       const matchesSupportedBrowser = matchesUA(userAgent, {
-        browsers: ['Chrome < 130'],
+        browsers: browsersListConfig,
         ignoreMinor: true,
         ignorePatch: true,
       });
 
-      // TODO: re-enable this when deployed
-      // if (!matchesSupportedBrowser) {
-      //   throw new Error('Unsupported Browser');
-      // }
+      if (!matchesSupportedBrowser) {
+        throw new Error('Unsupported Browser');
+      }
     }
   } catch (err) {
     next(err);
