@@ -18,6 +18,20 @@ runs:
       shell: bash
       run: git config --global url."git@github.com:".insteadOf "https://github.com/"
 
+    - name: Add known hosts for private repositories (if needed)
+      shell: bash
+      run: |
+        mkdir -p ~/.ssh
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        # Add other hosts if your dependencies are elsewhere (e.g., bitbucket.org)
+        # ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts
+
     - name: Initialize submodules
       shell: bash
       run: git submodule update --init --recursive
+
+    - name: Run Yarn Install Debug Script
+      shell: bash
+      run: ./.github/workflows/reusable/scripts/debug-yarn-ssh.sh
+      # If the script exits with an error, the workflow will fail here,
+      # allowing you to inspect the logs.
