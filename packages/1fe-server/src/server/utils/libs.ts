@@ -38,8 +38,7 @@ const getCDNLibraryUrl = (
   version: string,
   path: string,
 ): string => {
-  const libBaseUrl =
-    readOneFEConfigs()?.dynamicConfigs.cdn.libraries.basePrefix;
+  const libBaseUrl = readOneFEConfigs()?.dynamicConfigs?.libraries?.basePrefix;
   return `${libBaseUrl}${id}/${version}/${path}`;
 };
 

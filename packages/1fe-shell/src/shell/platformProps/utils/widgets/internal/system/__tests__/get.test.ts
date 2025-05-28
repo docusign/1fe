@@ -73,7 +73,7 @@ jest.mock('../../../../../context/getWidgetPath');
 //   getWidgetBundleCdnUrl: jest.fn(),
 // }));
 
-const cdnUrl = 'cdnUrl';
+const cdnUrl = new URL('https://cdnurl.com');
 const hostWidgetId = 'hostWidgetId';
 
 const normalRequestedWidgetConfig: WidgetConfig = {
@@ -156,7 +156,7 @@ it('should get a pinned widget from the CDN with the specified version', async (
     widgetId: normalRequestedWidgetConfig.widgetId,
     version,
   });
-  expect(_System.import).toHaveBeenCalledWith(cdnUrl);
+  expect(_System.import).toHaveBeenCalledWith(cdnUrl.toString());
 });
 
 it('should throw an error if getting the widget by ID fails', async () => {

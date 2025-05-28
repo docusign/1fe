@@ -13,7 +13,7 @@ const templatizeCDNUrl = ({
   templateFilePath = 'js/1fe-bundle.js',
 }: TemplatizeCDNUrlArgs): URL => {
   return new URL(
-    `${DYNAMIC_CONFIGS.cdn.widgets.basePrefix}${widgetId}/${widgetVersion}/${templateFilePath}`,
+    `${DYNAMIC_CONFIGS.widgets.basePrefix}${widgetId}/${widgetVersion}/${templateFilePath}`,
   );
 };
 
@@ -77,11 +77,11 @@ type GetWidgetBaseCdnUrlArgs = {
 export const getWidgetBundleCdnUrl = ({
   widgetId,
   version,
-}: GetWidgetBaseCdnUrlArgs): string => {
+}: GetWidgetBaseCdnUrlArgs): URL => {
   const widgetBundlePath = '/js/1fe-bundle.js';
-  const baseUrl = `${DYNAMIC_CONFIGS.cdn.widgets.basePrefix}/${widgetId}/${version}`;
+  const baseUrl = `${DYNAMIC_CONFIGS.widgets.basePrefix}/${widgetId}/${version}`;
 
-  return `${baseUrl}${widgetBundlePath}`;
+  return new URL(`${baseUrl}${widgetBundlePath}`);
 };
 
 /**

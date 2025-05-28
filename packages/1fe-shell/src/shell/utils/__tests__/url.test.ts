@@ -8,10 +8,8 @@ import {
 
 jest.mock('../../configs/config-helpers', () => ({
   DYNAMIC_CONFIGS: {
-    cdn: {
-      widgets: {
-        basePrefix: 'https://someurl.com/',
-      },
+    widgets: {
+      basePrefix: 'https://someurl.com/',
     },
   },
 }));

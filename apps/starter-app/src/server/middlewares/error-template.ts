@@ -7,11 +7,7 @@ export const errorTemplate = `
     <title><%- pageTitle %></title>
     <link rel="icon" type="image/x-icon" href="<%- favicon %>" />
 
-    <!-- Hardcoded ds-ui styles since page is .ejs and unable to use ds-ui components-->
     <style nonce="<%= cspNonceGuid %>">
-      body {
-        margin: 0;
-      }
       p {
         font-size: 1rem;
         line-height: 1.5;
@@ -20,53 +16,13 @@ export const errorTemplate = `
       h1 {
         margin: 0;
       }
-      #root {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-      #ds-logo {
-        padding: 1.5em 0 0 1.5em;
-        width: 150px;
-      }
-      #animation {
-        width: 100%;
-        height: 20%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      #lottie {
-        max-width: 480px;
-        flex-shrink: 0;
-      }
       #container {
         font-family: 'DSIndigo';
-        margin: 3.5vh auto;
-        width: 400px;
-        max-width: 80vw;
-        height: auto;
-        display: flex;
-        justify-content: center;
-      }
-      .st0 {
-        fill: none;
-        stroke: #6f56ff;
-        stroke-width: 10;
-        stroke-miterlimit: 10;
-      }
-      #btn {
-        font-size: 16px;
-        font-weight: lighter;
-        line-height: 1.5;
-        align-items: center;
-        padding: 7.5px 15px;
-        border-radius: 2px;
-        border-style: solid;
-        border-width: 1px;
-        cursor: pointer;
-        background-color: transparent;
+        margin: 0 auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
     </style>
   </head>

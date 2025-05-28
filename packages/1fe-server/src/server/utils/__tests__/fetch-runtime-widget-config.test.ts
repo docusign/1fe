@@ -40,7 +40,6 @@ const mockedBadWidgetConfigs = generateWidgetConfigMap<WidgetConfig>([
   // @ts-expect-error this is intentionally missing runtime config
   {
     widgetId: '@1fe/widget-starter-kit',
-    version: '0.0.0',
     plugin: {
       enabled: true,
       route: '/starter-kit',
@@ -49,7 +48,6 @@ const mockedBadWidgetConfigs = generateWidgetConfigMap<WidgetConfig>([
   // @ts-expect-error this is intentionally missing runtime config
   {
     widgetId: 'test/pluginId',
-    version: '0.0.0',
     plugin: {
       enabled: true,
       route: '/test',
@@ -58,7 +56,6 @@ const mockedBadWidgetConfigs = generateWidgetConfigMap<WidgetConfig>([
   // @ts-expect-error this is intentionally missing runtime config
   {
     widgetId: 'test/widgetId',
-    version: '0.0.0',
   },
 ]);
 

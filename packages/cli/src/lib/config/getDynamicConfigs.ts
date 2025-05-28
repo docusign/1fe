@@ -1,7 +1,7 @@
 import { memoize } from 'lodash';
 import { getConfig } from './getConfig';
 
-export const getCommonConfigs = memoize(async (environment: string) => {
+export const getDynamicConfigs = memoize(async (environment: string) => {
   const { baseConfig } = await getConfig();
   if (!baseConfig.environments[environment]) {
     throw new Error(
@@ -9,5 +9,5 @@ export const getCommonConfigs = memoize(async (environment: string) => {
     );
   }
 
-  return baseConfig.environments[environment].commonConfig;
+  return baseConfig.environments[environment].dynamicConfig;
 });

@@ -11,9 +11,9 @@ import errorMiddleware from './server/middlewares/error.middleware';
 dotenv.config();
 const { PORT = 3001 } = process.env;
 
-const ENVIRONMENT: string = process.env.NODE_ENV || 'development';
+const ENVIRONMENT: string = process.env.NODE_ENV === 'development' ? 'integration' : (process.env.NODE_ENV || 'production');
 
-const isLocal = ENVIRONMENT === 'development';
+const isLocal = process.env.NODE_ENV === 'development';
 const productionEnvironments = ['production'];
 
 const shellBundleUrl =
@@ -42,18 +42,15 @@ const options = {
   isProduction: productionEnvironments.includes(ENVIRONMENT),
   orgName: '1FE Starter App',
   configManagement: {
-    getDynamicConfigs: async () => {
-      const response = await fetch(
-        `https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/common-configs/${ENVIRONMENT}.json`,
-      );
-
-      if (!response.ok) {
-        throw new Error('Get dynamic configurations failed');
-      }
-
-      return await response.json();
+    widgetVersions: {
+      url: `https://1fe-a.akamaihd.net/${ENVIRONMENT}/configs/widget-versions.json`,
     },
-    url: `https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/common-configs/${ENVIRONMENT}.json`,
+    libraryVersions: {
+      url: `https://1fe-a.akamaihd.net/${ENVIRONMENT}/configs/lib-versions.json`,
+    },
+    dynamicConfigs: {
+      url: `https://1fe-a.akamaihd.net/${ENVIRONMENT}/configs/live.json`
+    },
     refreshMs: 30 * 1000,
   },
   shellBundleUrl,
@@ -67,7 +64,7 @@ const options = {
     defaultCSP: {
       enforced: enforcedDefaultCsp[ENVIRONMENT],
       reportOnly: reportOnlyDefaultCsp[ENVIRONMENT],
-    },
+    }
   },
 };
 
@@ -87,9 +84,6 @@ app.use(errorMiddleware);
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
-
-// Set the directory for views (optional)
-// app.set('views', path.join(__dirname, 'server/views'));
 
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`);

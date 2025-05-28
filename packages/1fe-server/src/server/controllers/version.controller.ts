@@ -28,7 +28,7 @@ export const templatizeCDNUrl = ({
   templateFilePath = 'js/1fe-bundle.js',
 }: TemplatizeCDNUrlArgs): URL => {
   return new URL(
-    `${readOneFEConfigs()?.dynamicConfigs.cdn.widgets.basePrefix}${widgetId}/${widgetVersion}/${templateFilePath}`,
+    `${readOneFEConfigs()?.dynamicConfigs.widgets.basePrefix}${widgetId}/${widgetVersion}/${templateFilePath}`,
   );
 };
 

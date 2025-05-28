@@ -2,6 +2,7 @@ import { randomUUID } from 'crypto';
 
 import { NextFunction, Request, Response } from 'express';
 import { readOneFEConfigs } from '../utils/one-fe-configs';
+import { injectNonceIntoCSP } from '../utils';
 
 const nonceMiddleware = (
   req: Request,
@@ -23,14 +24,22 @@ const nonceMiddleware = (
       throw error;
     }
 
-    const noncedCspHeader = cspHeader
-      .toString()
-      .replace(/addCspNonceGuidHere/g, `'nonce-${cspNonceGuid}'`);
+    const stringifiedCSPHeader = cspHeader.toString();
 
+    // Inject nonce into enforced CSP if configured
+    const noncedCspHeader = injectNonceIntoCSP(
+      stringifiedCSPHeader,
+      `'nonce-${cspNonceGuid}'`,
+    );
+
+    // Inject nonce into report only CSP if configured and report only CSP exists
     if (cspReportOnlyHeader) {
-      const noncedCspReportOnlyHeader = cspReportOnlyHeader
-        .toString()
-        .replace(/addCspNonceGuidHere/g, `'nonce-${cspNonceGuid}'`);
+      const stringifiedReportOnlyCSPHeader = cspReportOnlyHeader.toString();
+
+      const noncedCspReportOnlyHeader = injectNonceIntoCSP(
+        stringifiedReportOnlyCSPHeader,
+        `'nonce-${cspNonceGuid}'`,
+      );
       res.setHeader(
         'content-security-policy-report-only',
         noncedCspReportOnlyHeader,
