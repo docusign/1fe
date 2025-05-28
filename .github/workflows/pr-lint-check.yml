@@ -24,9 +24,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: 'yarn'
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+
+      - name: Yarn install on submodules/workspaces
+        run: yarn workspaces foreach --all install
 
       - name: Lint the project
         run: yarn lint

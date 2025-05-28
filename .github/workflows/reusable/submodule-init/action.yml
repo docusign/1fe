@@ -1,5 +1,12 @@
-name: Checkout with Submodules
-description: Checkout a repository with submodules
+# We have a special case in this repo where this repo
+# depends on submodules, which depend on itself for its
+# yarn workspace packages - added using git ssh URIs.
+# To work witht that we need to initialize ssh keys
+# for the submodules and the main repository. This
+# reusable workflow action sets all that up.
+
+name: Submodule Initialization
+description: Initializes Git submodules with SSH access.
 
 inputs:
   submodule-ssh-private-key:

@@ -27,7 +27,13 @@
     "@types/node": "22.9.0"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "apps/*"
   ],
+  "resolutions": {
+    "@1fe/server": "workspace:*",
+    "@1fe/shell": "workspace:*",
+    "@1fe/cli": "workspace:*"
+  },
   "packageManager": "yarn@4.7.0"
 }

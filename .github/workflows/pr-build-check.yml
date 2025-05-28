@@ -24,15 +24,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: 'yarn'
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Yarn install on submodules/workspaces
+        run: yarn workspaces foreach --all install
+
       - name: Build the project
         run: yarn build
-
-      - name: '[starter] Install dependencies'
-        run: cd apps/starter-app && yarn install --frozen-lockfile
-
-      - name: '[starter] Run build'
-        run: cd apps/starter-app && yarn build

@@ -26,15 +26,16 @@ jobs:
           self-ssh-private-key: ${{ secrets.SELF_SSH_PRIVATE_KEY }}
 
       - name: Set up Node.js version
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '22.x'
+          node-version: 22
+          cache: 'yarn'
 
-      - name: npm install, build, and test
-        run: |
-          yarn workspace @1fe/server install && yarn workspace @1fe/server build
-          yarn workspace @1fe/shell install && yarn workspace @1fe/shell build
-          cd apps/starter-app && yarn install && yarn build
+      - name: Yarn install
+        run: yarn install --frozen-lockfile
+
+      - name: Yarn install on submodules/workspaces
+        run: yarn workspaces foreach --all install
 
       - name: Zip artifact for deployment
         run: zip release.zip ./apps/starter-app/ -r
