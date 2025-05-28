@@ -19,13 +19,17 @@ export const serverOptions: any = {
     knownRoutes: ['/test', '/version', '/'],
   },
   dynamicConfigs: {
-    cdn: {
-      libraries: {
-        basePrefix: 'https://docutest-a.akamaihd.net/production/1fe/libraries/',
-      },
-      widgets: {
-        basePrefix: 'https://docutest-a.akamaihd.net/production/1fe/widgets/',
-      },
+    libraries: {
+      basePrefix: 'https://docutest-a.akamaihd.net/production/1fe/libraries/',
+    },
+    widgets: {
+      basePrefix: 'https://docutest-a.akamaihd.net/production/1fe/widgets/',
+      configs: [
+        {
+          widgetId: '@test/widget',
+          widgetVersion: '1.0.0',
+        },
+      ],
     },
   },
 };
