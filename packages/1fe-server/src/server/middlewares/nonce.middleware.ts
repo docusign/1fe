@@ -24,26 +24,22 @@ const nonceMiddleware = (
       throw error;
     }
 
-    // Check if we should inject nonce. Default to false;
-    const injectNonce = readOneFEConfigs()?.csp?.injectNonce || false;
-
     const stringifiedCSPHeader = cspHeader.toString();
 
     // Inject nonce into enforced CSP if configured
-    const noncedCspHeader = injectNonce
-      ? injectNonceIntoCSP(stringifiedCSPHeader, `'nonce-${cspNonceGuid}'`)
-      : stringifiedCSPHeader;
+    const noncedCspHeader = injectNonceIntoCSP(
+      stringifiedCSPHeader,
+      `'nonce-${cspNonceGuid}'`,
+    );
 
     // Inject nonce into report only CSP if configured and report only CSP exists
     if (cspReportOnlyHeader) {
       const stringifiedReportOnlyCSPHeader = cspReportOnlyHeader.toString();
 
-      const noncedCspReportOnlyHeader = injectNonce
-        ? injectNonceIntoCSP(
-            stringifiedReportOnlyCSPHeader,
-            `'nonce-${cspNonceGuid}'`,
-          )
-        : stringifiedReportOnlyCSPHeader;
+      const noncedCspReportOnlyHeader = injectNonceIntoCSP(
+        stringifiedReportOnlyCSPHeader,
+        `'nonce-${cspNonceGuid}'`,
+      );
       res.setHeader(
         'content-security-policy-report-only',
         noncedCspReportOnlyHeader,

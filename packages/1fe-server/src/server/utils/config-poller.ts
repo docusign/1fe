@@ -185,8 +185,6 @@ const processDynamicWidgetConfig = async (
   const cachedWidgetConfigsEmptyMessage =
     '[DYNAMIC_CONFIG][WIDGETS][CRITICAL] Widget config empty and initial widgetConfig is empty as well!';
 
-  console.log({ config });
-
   if (isEmpty(widgetConfigsPayload)) {
     if (isEmpty(getCachedWidgetConfigs())) {
       throw new Error(cachedWidgetConfigsEmptyMessage);

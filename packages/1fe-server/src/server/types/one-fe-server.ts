@@ -12,6 +12,11 @@ export type OneFECSP = {
   reportOnly?: CSPPerEnvironment;
 };
 
+type InjectNonce = {
+  scriptSrc?: boolean;
+  styleSrc?: boolean;
+};
+
 type CriticalConfigs<T> = { url: string } | { get: () => Promise<T> };
 
 export type OneFEConfigManagement = {
@@ -30,7 +35,7 @@ export type OneFEServerOptions = {
   server?: OneFEServer;
   csp?: {
     defaultCSP?: OneFECSP;
-    injectNonce?: boolean;
+    injectNonce?: InjectNonce;
   };
 };
 

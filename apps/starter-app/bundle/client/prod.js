@@ -43,7 +43,9 @@ const getProdConfig = async (configOverrides) => {
     externals: {
       react: 'React',
       'react-dom': 'ReactDOM',
-      lodash: '_',
+      'react-router': 'ReactRouter',
+      'react-router-dom': 'ReactRouterDOM',
+      '@remix-run/router': 'RemixRouter',
     },
     plugins: [
       ...commonPlugins,

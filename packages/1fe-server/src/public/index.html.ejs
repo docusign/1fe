@@ -13,6 +13,13 @@
 
     <title id="oneds-title"><%- pageTitle %></title>
     <link rel="preload" as="script" href="<%= shellBundleUrl %>" crossorigin="anonymous"></link>
+    <script type="importmap">
+    {
+      "imports": {
+        "dayjs": "https://cdn.jsdelivr.net/npm/dayjs@1.11.10/+esm"
+      }
+    }
+    </script>
     <script type="systemjs-importmap" crossorigin="anonymous">
       <%- JSON.stringify(systemJsImportMapConfig) %>
     </script>

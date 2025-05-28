@@ -13,11 +13,11 @@ const { PORT = 3001 } = process.env;
 
 const ENVIRONMENT: string = process.env.NODE_ENV === 'development' ? 'integration' : (process.env.NODE_ENV || 'production');
 
-const isLocal = ENVIRONMENT === 'development';
+const isLocal = process.env.NODE_ENV === 'development';
 const productionEnvironments = ['production'];
 
 const shellBundleUrl =
-  isLocal ? 'http://localhost:3001/js/bundle.js' : `https://1fe-a.akamaihd.net/${ENVIRONMENT}/${ENVIRONMENT}/shell/bundle.js`;
+  isLocal ? 'http://localhost:3001/js/bundle.js' : `https://1fe-a.akamaihd.net/${ENVIRONMENT}/shell/bundle.js`;
 
 // TODO[1fe]: Should we automatically recognize ONE_DS_BUNDLE, ROOT, FAVICON, etc. OUT OF THE BOX?
 const ROUTES = {
@@ -43,13 +43,13 @@ const options = {
   orgName: '1FE Starter App',
   configManagement: {
     widgetVersions: {
-      url: `https://1fe-a.akamaihd.net/${ENVIRONMENT}/${ENVIRONMENT}/configs/widget-versions.json`,
+      url: `https://1fe-a.akamaihd.net/${ENVIRONMENT}/configs/widget-versions.json`,
     },
     libraryVersions: {
-      url: `https://1fe-a.akamaihd.net/${ENVIRONMENT}/${ENVIRONMENT}/configs/lib-versions.json`,
+      url: `https://1fe-a.akamaihd.net/${ENVIRONMENT}/configs/lib-versions.json`,
     },
     dynamicConfigs: {
-      url: `https://1fe-a.akamaihd.net/${ENVIRONMENT}/${ENVIRONMENT}/configs/live.json`
+      url: `https://1fe-a.akamaihd.net/${ENVIRONMENT}/configs/live.json`
     },
     refreshMs: 30 * 1000,
   },
@@ -64,8 +64,7 @@ const options = {
     defaultCSP: {
       enforced: enforcedDefaultCsp[ENVIRONMENT],
       reportOnly: reportOnlyDefaultCsp[ENVIRONMENT],
-    },
-    injectNonce: true
+    }
   },
 };
 

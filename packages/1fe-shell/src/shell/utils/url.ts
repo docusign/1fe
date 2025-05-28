@@ -12,11 +12,8 @@ const templatizeCDNUrl = ({
   widgetVersion,
   templateFilePath = 'js/1fe-bundle.js',
 }: TemplatizeCDNUrlArgs): URL => {
-  // separate-config-cleanup
-  const widgetBasePrefix =
-    'https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/integration/widgets/';
   return new URL(
-    `${widgetBasePrefix}${widgetId}/${widgetVersion}/${templateFilePath}`,
+    `${DYNAMIC_CONFIGS.widgets.basePrefix}${widgetId}/${widgetVersion}/${templateFilePath}`,
   );
 };
 
@@ -82,10 +79,7 @@ export const getWidgetBundleCdnUrl = ({
   version,
 }: GetWidgetBaseCdnUrlArgs): string => {
   const widgetBundlePath = '/js/1fe-bundle.js';
-  // separate-config-cleanup
-  const tempUrl =
-    'https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/integration/widgets/';
-  const baseUrl = `${tempUrl}/${widgetId}/${version}`;
+  const baseUrl = `${DYNAMIC_CONFIGS.widgets.basePrefix}/${widgetId}/${version}`;
 
   return `${baseUrl}${widgetBundlePath}`;
 };

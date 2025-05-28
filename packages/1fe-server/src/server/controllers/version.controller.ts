@@ -27,13 +27,9 @@ export const templatizeCDNUrl = ({
   widgetVersion,
   templateFilePath = 'js/1fe-bundle.js',
 }: TemplatizeCDNUrlArgs): URL => {
-  const tempURL =
-    'https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/integration/widgets/';
-  return new URL(`${tempURL}${widgetId}/${widgetVersion}/${templateFilePath}`);
-  // separate-config-cleanup
-  // return new URL(
-  //   `${readOneFEConfigs()?.dynamicConfigs.widgets.basePrefix}${widgetId}/${widgetVersion}/${templateFilePath}`,
-  // );
+  return new URL(
+    `${readOneFEConfigs()?.dynamicConfigs.widgets.basePrefix}${widgetId}/${widgetVersion}/${templateFilePath}`,
+  );
 };
 
 class VersionController {

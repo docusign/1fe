@@ -38,10 +38,7 @@ const getCDNLibraryUrl = (
   version: string,
   path: string,
 ): string => {
-  // separate-config-cleanup
-  const libBaseUrl =
-    'https://cdn.jsdelivr.net/gh/docusign/mock-cdn-assets/integration/libs/';
-  // const libBaseUrl = readOneFEConfigs()?.dynamicConfigs?.libraries?.basePrefix;
+  const libBaseUrl = readOneFEConfigs()?.dynamicConfigs?.libraries?.basePrefix;
   return `${libBaseUrl}${id}/${version}/${path}`;
 };
 

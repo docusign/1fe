@@ -48,7 +48,8 @@ export const getRuntimeCSPConfigs = ({
 };
 
 export const injectNonceIntoCSP = (cspString: string, nonce: string) => {
-  if (!cspString || typeof cspString !== 'string') return cspString;
+  const isCspInvalid = !cspString || typeof cspString !== 'string';
+  if (isCspInvalid) return cspString;
 
   const directives = cspString
     .split(';')
@@ -71,8 +72,14 @@ export const injectNonceIntoCSP = (cspString: string, nonce: string) => {
     }
   };
 
-  addValue('script-src');
-  addValue('style-src');
+  // Default to adding nonce to script-src. This is needed for 1FE critical libraries.
+  if (readOneFEConfigs()?.csp?.injectNonce?.scriptSrc !== false) {
+    addValue('script-src');
+  }
+
+  if (readOneFEConfigs()?.csp?.injectNonce?.styleSrc) {
+    addValue('style-src');
+  }
 
   // Rebuild CSP string
   const rebuiltCSP = Array.from(updatedDirectives.entries())
