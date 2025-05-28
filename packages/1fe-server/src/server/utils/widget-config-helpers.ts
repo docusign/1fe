@@ -95,7 +95,7 @@ export const convertServerWidgetConfigToShellWidgetConfig = (
 export const convertServerDynamicConfigToShellDynamicConfig = (
   dynamicConfigs: ProcessedOneFEDDynamicConfigs,
 ): Partial<ProcessedOneFEDDynamicConfigs> => {
-  return omit(dynamicConfigs, ['libraries.managed', 'widgets.configs', 'csp']);
+  return omit(dynamicConfigs, ['libraries.configs', 'widgets.configs', 'csp']);
 };
 
 /**
