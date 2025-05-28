@@ -77,11 +77,11 @@ type GetWidgetBaseCdnUrlArgs = {
 export const getWidgetBundleCdnUrl = ({
   widgetId,
   version,
-}: GetWidgetBaseCdnUrlArgs): string => {
+}: GetWidgetBaseCdnUrlArgs): URL => {
   const widgetBundlePath = '/js/1fe-bundle.js';
   const baseUrl = `${DYNAMIC_CONFIGS.widgets.basePrefix}/${widgetId}/${version}`;
 
-  return `${baseUrl}${widgetBundlePath}`;
+  return new URL(`${baseUrl}${widgetBundlePath}`);
 };
 
 /**

@@ -1,5 +1,5 @@
 import { CSPPerEnvironment, ExternalLibConfig, InstalledLibConfig } from '.';
-import { ProcessedOneFEDDynamicConfigs } from './processed-dynamic-configs';
+import { ProcessedOneFEDynamicConfigs } from './processed-dynamic-configs';
 import { OneFEDynamicConfigs, WidgetVersion } from './raw-cdn-configs';
 
 export type OneFEServer = {
@@ -40,5 +40,5 @@ export type OneFEServerOptions = {
 };
 
 export type OneFEProcessedConfigs = OneFEServerOptions & {
-  dynamicConfigs: ProcessedOneFEDDynamicConfigs;
+  dynamicConfigs: ProcessedOneFEDynamicConfigs;
 };

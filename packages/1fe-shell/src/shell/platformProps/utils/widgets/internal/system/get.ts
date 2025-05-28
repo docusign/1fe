@@ -107,7 +107,9 @@ export const get =
           version: requestedWidgetConfig.version,
         });
 
-        return getComponentFromModule(requestedPinnedWidgetConfigBundleCdnUrl);
+        return getComponentFromModule(
+          requestedPinnedWidgetConfigBundleCdnUrl.toString(),
+        );
       }
 
       return getComponentFromModule(requestedWidgetId);

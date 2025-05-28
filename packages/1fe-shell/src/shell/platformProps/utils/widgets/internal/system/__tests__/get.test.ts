@@ -98,7 +98,7 @@ beforeEach(() => {
   jest.resetAllMocks();
 
   jest.mocked(isSystemEnv).mockReturnValue(true);
-  jest.mocked(getWidgetBundleCdnUrl).mockReturnValue(cdnUrl);
+  jest.mocked(getWidgetBundleCdnUrl).mockReturnValue(new URL(cdnUrl));
   // jest.mocked(getEnvironmentConfigs).mockReturnValue({
   //   ENVIRONMENT: 'integration',
   // } as EnvConfig);

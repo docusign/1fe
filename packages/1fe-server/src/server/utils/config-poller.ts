@@ -29,7 +29,7 @@ import {
   OneFEServerOptions,
 } from '../types/one-fe-server';
 import { getEcosystemConfig } from './configs/get-ecosystem-config';
-import { ProcessedOneFEDDynamicConfigs } from '../types/processed-dynamic-configs';
+import { ProcessedOneFEDynamicConfigs } from '../types/processed-dynamic-configs';
 import { WidgetVersion, OneFEDynamicConfigs } from '../types/raw-cdn-configs';
 import { generateWidgetConfigs } from './configs/generate-widget-configs';
 
@@ -74,7 +74,7 @@ const fetchConfig = async (
       ],
     );
 
-    const processedConfigs: ProcessedOneFEDDynamicConfigs = {
+    const processedConfigs: ProcessedOneFEDynamicConfigs = {
       ...dynamicConfigs,
       libraries: {
         ...dynamicConfigs.libraries,
@@ -154,7 +154,7 @@ const verifyWidgetCDNUrls = async (widgetConfigsToVerify: WidgetConfigs) => {
 };
 
 export const processDynamicLibraryConfig = (
-  config: ProcessedOneFEDDynamicConfigs,
+  config: ProcessedOneFEDynamicConfigs,
 ): void => {
   const libraryConfigsPayload: (ExternalLibConfig | InstalledLibConfig)[] =
     config?.libraries?.configs || [];
@@ -179,7 +179,7 @@ export const processDynamicLibraryConfig = (
 };
 
 const processDynamicWidgetConfig = async (
-  config: ProcessedOneFEDDynamicConfigs,
+  config: ProcessedOneFEDynamicConfigs,
 ): Promise<void> => {
   const widgetConfigsPayload = config?.widgets?.configs || [];
   const cachedWidgetConfigsEmptyMessage =

@@ -1,4 +1,4 @@
-import { ProcessedOneFEDDynamicConfigs } from '../../../../1fe-server/src/server/types/processed-dynamic-configs';
+import { ProcessedOneFEDynamicConfigs } from '../../../../1fe-server/src/server/types/processed-dynamic-configs';
 import {
   EnvConfig,
   PluginConfig,
@@ -78,7 +78,7 @@ export const ENVIRONMENT_CONFIG =
  * Map of all widget configs that we have loaded from the global config, keyed by widgetId
  */
 export const DYNAMIC_CONFIGS =
-  getConfigArrFromGlobal<Partial<ProcessedOneFEDDynamicConfigs>>(
+  getConfigArrFromGlobal<Partial<ProcessedOneFEDynamicConfigs>>(
     'dynamic-config',
   );
 

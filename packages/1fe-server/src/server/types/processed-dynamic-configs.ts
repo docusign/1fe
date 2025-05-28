@@ -15,7 +15,7 @@ type ProcessedOneFELibraryConfigs = {
   configs: (ExternalLibConfig | InstalledLibConfig)[];
 };
 
-export type ProcessedOneFEDDynamicConfigs = {
+export type ProcessedOneFEDynamicConfigs = {
   libraries: ProcessedOneFELibraryConfigs;
   widgets: ProcessedOneFEWidgetConfigs;
   platform: OneFEPlatformConfigs;

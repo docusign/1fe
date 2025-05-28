@@ -3,7 +3,7 @@ import { omit } from 'lodash';
 import { PluginConfig, WidgetConfig, WidgetConfigs } from '../types';
 import { PINNED_WIDGET_TYPE } from '../constants';
 import { getCachedWidgetConfigs } from './widget-config';
-import { ProcessedOneFEDDynamicConfigs } from '../types/processed-dynamic-configs';
+import { ProcessedOneFEDynamicConfigs } from '../types/processed-dynamic-configs';
 
 type GetRequestedWidgetConfigArg = {
   hostWidgetId: string;
@@ -93,8 +93,8 @@ export const convertServerWidgetConfigToShellWidgetConfig = (
  * @returns widget config map
  */
 export const convertServerDynamicConfigToShellDynamicConfig = (
-  dynamicConfigs: ProcessedOneFEDDynamicConfigs,
-): Partial<ProcessedOneFEDDynamicConfigs> => {
+  dynamicConfigs: ProcessedOneFEDynamicConfigs,
+): Partial<ProcessedOneFEDynamicConfigs> => {
   return omit(dynamicConfigs, ['libraries.configs', 'widgets.configs', 'csp']);
 };
 

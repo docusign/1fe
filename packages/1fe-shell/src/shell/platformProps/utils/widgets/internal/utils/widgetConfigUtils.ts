@@ -66,7 +66,7 @@ export const queueWidgetPreloadsIfFound = (
         version: widgetConfigPreloadedByRequestedWidget.version,
       });
 
-      return [...itr, new URL(requestedWidgetConfigBundleCdnUrl)];
+      return [...itr, requestedWidgetConfigBundleCdnUrl];
     },
     [] as URL[],
   );
