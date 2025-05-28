@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const managedSchema = z.union([
+export const managedSchema = z.union([
   z.object({
     id: z.string(),
     version: z.string(),
@@ -31,7 +31,6 @@ const devtoolsSchema = z.object({
 
 const librariesSchema = z.object({
   basePrefix: z.string(),
-  managed: z.array(managedSchema),
 });
 
 const pluginSchema = z.object({
@@ -40,25 +39,24 @@ const pluginSchema = z.object({
   auth: authSchema.optional(),
 });
 
-const releaseConfigSchema = z.object({
+const widgetConfigSchema = z.object({
   widgetId: z.string(),
   type: z.string().optional(),
   plugin: pluginSchema,
-  version: z.string(),
 });
 
 const widgetsSchema = z.object({
   basePrefix: z.string(),
-  releaseConfig: z.array(releaseConfigSchema),
+  configs: z.array(widgetConfigSchema),
 });
 
-const cdnSchema = z.object({
-  libraries: librariesSchema,
-  widgets: widgetsSchema,
-});
-
-export const commonConfigSchema = z.object({
-  cdn: cdnSchema,
+const platformConfigSchema = z.object({
   devtools: devtoolsSchema.optional(),
   browserslistConfig: z.array(z.string()),
+});
+
+export const dynamicConfigSchema = z.object({
+  libraries: librariesSchema,
+  widgets: widgetsSchema,
+  platform: platformConfigSchema,
 });

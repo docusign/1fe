@@ -49,13 +49,11 @@ jest.mock('ky', () => ({
 jest.mock('../one-fe-configs', () => ({
   readOneFEConfigs: jest.fn().mockImplementation(() => ({
     dynamicConfigs: {
-      cdn: {
-        widgets: {
-          basePrefix: 'https://example.com/cdn/widgets/',
-        },
-        libraries: {
-          basePrefix: 'https://example.com/cdn/libraries/',
-        },
+      widgets: {
+        basePrefix: 'https://example.com/cdn/widgets/',
+      },
+      libraries: {
+        basePrefix: 'https://example.com/cdn/libraries/',
       },
     },
   })),

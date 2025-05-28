@@ -1,6 +1,6 @@
 import { Configuration as WebpackConfig } from 'webpack';
 import { z } from 'zod';
-import { commonConfigSchema } from './commonConfigSchema';
+import { dynamicConfigSchema, managedSchema } from './dynamicConfigSchema';
 
 const preloadSchema = z
   .union([
@@ -36,7 +36,8 @@ const runtimeConfigRecordSchema = z
   .optional();
 
 export const environmentSchema = z.object({
-  commonConfig: commonConfigSchema,
+  dynamicConfig: dynamicConfigSchema,
+  libraryVersions: z.array(managedSchema),
   shellBaseUrl: z.string().url(),
   serverBaseUrl: z.string().url(),
 });

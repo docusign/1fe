@@ -227,10 +227,6 @@ const serverWidgetConfigPayload = generateWidgetConfigMap<WidgetConfig>([
       plugin: {
         auth: {
           authenticationType: 'required',
-          scopes: ['signature', 'me_profile', 'webforms_manage'],
-          useNativeAuth: true,
-          clientAppId: 'asdf',
-          callbackUri: 'asdf',
         },
         metaTags: [
           { name: 'title', content: 'Docusign App Center' },
@@ -274,10 +270,6 @@ const serverWidgetConfigPayload = generateWidgetConfigMap<WidgetConfig>([
       plugin: {
         auth: {
           authenticationType: 'required',
-          scopes: ['signature', 'me_profile', 'webforms_manage'],
-          useNativeAuth: true,
-          clientAppId: 'asdf',
-          callbackUri: 'asdf',
         },
         metaTags: [
           { name: 'title', content: 'Docusign App Center' },
@@ -322,10 +314,6 @@ describe('convertServerWidgetConfigToShellWidgetConfig', () => {
           plugin: {
             auth: {
               authenticationType: 'required',
-              scopes: ['signature', 'me_profile', 'webforms_manage'],
-              useNativeAuth: true,
-              clientAppId: 'asdf',
-              callbackUri: 'asdf',
             },
           },
         },
@@ -341,10 +329,6 @@ describe('convertServerWidgetConfigToShellWidgetConfig', () => {
           plugin: {
             auth: {
               authenticationType: 'required',
-              scopes: ['signature', 'me_profile', 'webforms_manage'],
-              useNativeAuth: true,
-              clientAppId: 'asdf',
-              callbackUri: 'asdf',
             },
           },
           preload: [

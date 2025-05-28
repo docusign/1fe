@@ -14,7 +14,6 @@ jest.mock('ky', () => ({
 
 const pinnedWidgetConfig = {
   widgetId: 'pinnedWidget',
-  version: '1.1.0',
   type: PINNED_WIDGET_TYPE,
 } as WidgetConfig;
 
@@ -24,12 +23,10 @@ const nonExistentWidgetId = 'i-dont-exist';
 
 const widgetConfig = {
   widgetId: 'testWidget',
-  version: '1.0.0',
 } as WidgetConfig;
 
 const notPinnedWidget = {
   widgetId: 'notPinnedWidget',
-  version: '1.0.0',
 } as WidgetConfig;
 
 const pluginConfig = {
@@ -56,7 +53,6 @@ const pluginConfig = {
 
 const systemWidgetConfig = {
   type: 'system',
-  version: '1.0.0',
   widgetId: 'testSystem',
 } as WidgetConfig;
 
@@ -178,7 +174,6 @@ describe('getPinnedWidgets', () => {
   it('should return dependsOn array for pinned widgets if it exists', () => {
     const mockWidgetConfig: WidgetConfig = {
       widgetId: '@foo/bar',
-      version: '5.5.5',
       type: 'pinned',
       activePhasedDeployment: false,
     } as any;

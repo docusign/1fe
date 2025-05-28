@@ -21,7 +21,7 @@ const browsersListMiddleware = (
 ): void => {
   try {
     const browsersListConfig =
-      readOneFEConfigs()?.dynamicConfigs.browserslistConfig;
+      readOneFEConfigs()?.dynamicConfigs?.platform?.browserslistConfig;
 
     const { path } = req || {};
     const activeAutomatedTestFramework =

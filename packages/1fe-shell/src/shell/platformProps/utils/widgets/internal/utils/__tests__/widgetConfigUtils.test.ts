@@ -35,10 +35,8 @@ jest.mock('../../../../../../configs/config-helpers', () => ({
     values: jest.fn(),
   },
   DYNAMIC_CONFIGS: {
-    cdn: {
-      widgets: {
-        basePrefix: 'https://someurl.com',
-      },
+    widgets: {
+      basePrefix: 'https://someurl.com',
     },
   },
 }));

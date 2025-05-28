@@ -25,10 +25,13 @@ import {
 } from './widget-config';
 import { setOneFEConfigs } from './one-fe-configs';
 import {
-  OneFEDynamicConfigs,
   OneFEProcessedConfigs,
   OneFEServerOptions,
 } from '../types/one-fe-server';
+import { getEcosystemConfig } from './configs/get-ecosystem-config';
+import { ProcessedOneFEDynamicConfigs } from '../types/processed-dynamic-configs';
+import { WidgetVersion, OneFEDynamicConfigs } from '../types/raw-cdn-configs';
+import { generateWidgetConfigs } from './configs/generate-widget-configs';
 
 interface WidgetBundleRequestResponse {
   widgetId: string;
@@ -56,31 +59,36 @@ const fetchConfig = async (
   options: OneFEServerOptions,
 ): Promise<OneFEProcessedConfigs | null> => {
   try {
-    const getDynamicConfigs = async (): Promise<OneFEDynamicConfigs> => {
-      if (options.configManagement.getDynamicConfigs) {
-        return await options.configManagement.getDynamicConfigs();
-      } else if (options.configManagement.url) {
-        const url = options.configManagement.url;
-        const response = await ky.get(url, {
-          retry: 5,
-          timeout: 30 * 1000,
-        });
+    const [dynamicConfigs, libraryVersions, widgetVersions] = await Promise.all(
+      [
+        getEcosystemConfig(
+          options,
+          'dynamicConfigs',
+        ) as Promise<OneFEDynamicConfigs>,
+        getEcosystemConfig(options, 'libraryVersions') as Promise<
+          (ExternalLibConfig | InstalledLibConfig)[]
+        >,
+        getEcosystemConfig(options, 'widgetVersions') as Promise<
+          WidgetVersion[]
+        >,
+      ],
+    );
 
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        return response.json();
-      } else {
-        throw new Error('No configManagement method provided');
-      }
+    const processedConfigs: ProcessedOneFEDynamicConfigs = {
+      ...dynamicConfigs,
+      libraries: {
+        ...dynamicConfigs.libraries,
+        configs: libraryVersions,
+      },
+      widgets: {
+        ...dynamicConfigs.widgets,
+        configs: generateWidgetConfigs(dynamicConfigs, widgetVersions),
+      },
     };
-
-    const configJson = await getDynamicConfigs();
 
     const oneFEConfigs = {
       ...options,
-      dynamicConfigs: configJson,
+      dynamicConfigs: processedConfigs,
     };
     setOneFEConfigs(oneFEConfigs);
 
@@ -146,10 +154,10 @@ const verifyWidgetCDNUrls = async (widgetConfigsToVerify: WidgetConfigs) => {
 };
 
 export const processDynamicLibraryConfig = (
-  config: OneFEDynamicConfigs,
+  config: ProcessedOneFEDynamicConfigs,
 ): void => {
   const libraryConfigsPayload: (ExternalLibConfig | InstalledLibConfig)[] =
-    config?.cdn?.libraries?.managed || [];
+    config?.libraries?.configs || [];
 
   //   const previousConfigs = getLibraryConfigs();
 
@@ -171,9 +179,9 @@ export const processDynamicLibraryConfig = (
 };
 
 const processDynamicWidgetConfig = async (
-  config: OneFEDynamicConfigs,
+  config: ProcessedOneFEDynamicConfigs,
 ): Promise<void> => {
-  const widgetConfigsPayload = config?.cdn?.widgets?.releaseConfig || [];
+  const widgetConfigsPayload = config?.widgets?.configs || [];
   const cachedWidgetConfigsEmptyMessage =
     '[DYNAMIC_CONFIG][WIDGETS][CRITICAL] Widget config empty and initial widgetConfig is empty as well!';
 
@@ -186,7 +194,9 @@ const processDynamicWidgetConfig = async (
 
   const previousConfigs = getCachedWidgetConfigs();
 
-  const widgetConfigMap = generateWidgetConfigMap(widgetConfigsPayload);
+  const widgetConfigMap = generateWidgetConfigMap(
+    widgetConfigsPayload as WidgetConfig[],
+  );
 
   // Check if new config is different than current config, if so, log
   if (didWidgetVersionsUpdate(previousConfigs, widgetConfigMap)) {
