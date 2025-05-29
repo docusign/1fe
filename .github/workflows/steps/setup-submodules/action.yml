@@ -24,14 +24,18 @@ runs:
           ${{ inputs.submodule-ssh-private-key }}
           ${{ inputs.self-ssh-private-key }}
 
-    - name: Force HTTPS for submodules (GitHub)
+    - name: Add ssh host keys to the agent
       shell: bash
-      if: steps.checkout.outputs.submodules != 'true' # Only run if checkout didn't handle submodules
-      run: git config --global url."https://github.com/".insteadOf "git@github.com:"
+      run: |
+        # Add GitHub's SSH host keys to the known hosts to avoid prompts during submodule updates.
+        mkdir -p ~/.ssh
+        ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+        ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
+        ssh-keyscan -t ecdsa github.com >> ~/.ssh/known_hosts
 
     - name: Initialize submodules
       shell: bash
-      run: git submodule update --init --recursive --remote
+      run: git submodule update --init --recursive --remote # always make sure to work on latest submodule commits
 
     # TODO #61 - this action goes away when our repos become public.
     - name: configure git to use SSH always

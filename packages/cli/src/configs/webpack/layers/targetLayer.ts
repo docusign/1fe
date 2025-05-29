@@ -10,7 +10,7 @@ export async function getTargetLayer(
 
   const browsersListRules = (
     await getDynamicConfigs(environment)
-  ).platform.browserslistConfig.join();
+  ).platform.browserslistConfig.buildTarget.join();
 
   logger.info('Using browserslist config:', chalk.blue(browsersListRules));
 

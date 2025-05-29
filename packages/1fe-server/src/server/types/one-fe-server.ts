@@ -17,12 +17,12 @@ type InjectNonce = {
   styleSrc?: boolean;
 };
 
-type CriticalConfigs<T> = { url: string } | { get: () => Promise<T> };
+type EcosystemConfigs<T> = { url: string } | { get: () => Promise<T> };
 
 export type OneFEConfigManagement = {
-  libraryVersions: CriticalConfigs<(ExternalLibConfig | InstalledLibConfig)[]>;
-  widgetVersions: CriticalConfigs<WidgetVersion[]>;
-  dynamicConfigs: CriticalConfigs<OneFEDynamicConfigs>;
+  libraryVersions: EcosystemConfigs<(ExternalLibConfig | InstalledLibConfig)[]>;
+  widgetVersions: EcosystemConfigs<WidgetVersion[]>;
+  dynamicConfigs: EcosystemConfigs<OneFEDynamicConfigs>;
   refreshMs: number;
 };
 

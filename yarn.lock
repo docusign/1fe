@@ -157,6 +157,8 @@ __metadata:
     "@types/react-dom": "npm:^18.2.19"
     "@types/supertest": "npm:^2.0.12"
     badge-maker: "npm:^3.3.1"
+    browserslist: "npm:^4.24.5"
+    browserslist-useragent: "npm:^4.0.0"
     cookie-parser: "npm:^1.4.7"
     ejs: "npm:^3.1.10"
     eslint: "npm:8.57.1"
@@ -206,7 +208,6 @@ __metadata:
     "@types/systemjs": "npm:^6.15.1"
     bowser: "npm:^2.11.0"
     browserslist: "npm:^4.24.4"
-    browserslist-useragent: "npm:^4.0.0"
     deep-freeze: "npm:^0.0.1"
     emittery: "npm:^1.0.1"
     eslint: "npm:8.57.1"
@@ -292,6 +293,7 @@ __metadata:
     webpack-cli: "npm:^6.0.1"
     webpack-dev-server: "npm:^5.2.0"
     webpack-merge: "npm:^6.0.1"
+    zod: "npm:^3.25.36"
   languageName: unknown
   linkType: soft
 
@@ -6829,7 +6831,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:^4.12.0, browserslist@npm:^4.24.0, browserslist@npm:^4.24.4":
+"browserslist@npm:^4.12.0, browserslist@npm:^4.24.0, browserslist@npm:^4.24.4, browserslist@npm:^4.24.5":
   version: 4.25.0
   resolution: "browserslist@npm:4.25.0"
   dependencies:
@@ -8687,12 +8689,12 @@ __metadata:
   linkType: hard
 
 "effect@npm:^3.13.7":
-  version: 3.16.1
-  resolution: "effect@npm:3.16.1"
+  version: 3.16.2
+  resolution: "effect@npm:3.16.2"
   dependencies:
     "@standard-schema/spec": "npm:^1.0.0"
     fast-check: "npm:^3.23.1"
-  checksum: 10c0/a70d4390a4c627eeb98544966ce9cd6f66a9b65296653122fc3730b80cc06f37c6d58ed0533ce7fd0ef33eb6a979698d605922e9a9908fedb925f4c1cb28b3ca
+  checksum: 10c0/9f6aa6410a63cdd13755a9972f0f9cce42d084d6e6d2ecf8c0850fa55a09078610f80d48f0dc94e1faf4fb2c56000a14e98252019ca25d1b466a8fc62dc43f70
   languageName: node
   linkType: hard
 
@@ -20118,7 +20120,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.23.8, zod@npm:^3.24.1":
+"zod@npm:^3.23.8, zod@npm:^3.24.1, zod@npm:^3.25.36":
   version: 3.25.36
   resolution: "zod@npm:3.25.36"
   checksum: 10c0/9ad8ca759d1a5d19c86d6e49a1bda817b3c0566ea0a8726d45994b9fcaac8d569db45a65218a7b4067ca18b07c5fc636a587a94cd05f76793174ace8b81742e3
