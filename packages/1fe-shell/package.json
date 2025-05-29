@@ -51,7 +51,6 @@
     "@emotion/styled": "11.14.0",
     "bowser": "^2.11.0",
     "browserslist": "^4.24.4",
-    "browserslist-useragent": "^4.0.0",
     "deep-freeze": "^0.0.1",
     "emittery": "^1.0.1",
     "js-cookie": "^3.0.1",
