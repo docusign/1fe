@@ -14,13 +14,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
+      - uses: ./.github/workflows/steps/setup-node
 
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
+      - uses: ./.github/workflows/steps/setup-submodules
+        with:
+          submodule-ssh-private-key: ${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}
+          self-ssh-private-key: ${{ secrets.SELF_SSH_PRIVATE_KEY }}
 
       - name: Run unit tests
         run: yarn test

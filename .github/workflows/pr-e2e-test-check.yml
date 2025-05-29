@@ -10,29 +10,23 @@ jobs:
   e2e_tests:
     runs-on: ubuntu-latest
 
+    container:
+      image: mcr.microsoft.com/playwright:v1.52.0-noble
+      options: --user 1001
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: ./.github/workflows/steps/setup-node
+
+      - uses: ./.github/workflows/steps/setup-submodules
         with:
-          node-version: 22
+          submodule-ssh-private-key: ${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}
+          self-ssh-private-key: ${{ secrets.SELF_SSH_PRIVATE_KEY }}
 
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Build server package
-        run: cd packages/1fe-server && yarn build
-
-      - name: Build shell package
-        run: cd packages/1fe-shell && yarn build
-
-      - name: Build starter-app
-        run: cd apps/starter-app && yarn build
-
-      - name: Install Playwright
-        run: npx playwright install
+      - name: Build dependencies
+        run: yarn turbo build --filter=@1fe/shell... --filter=@1fe/server... --filter=@1fe/starter-app...
 
       - name: Run E2E tests
-        run: yarn test:playwright
+        run: yarn test:playwright --reporter=github
