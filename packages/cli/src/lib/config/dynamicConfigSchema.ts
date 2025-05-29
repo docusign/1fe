@@ -50,9 +50,14 @@ const widgetsSchema = z.object({
   configs: z.array(widgetConfigSchema),
 });
 
+const browserslistConfigSchema = z.object({
+  buildTarget: z.array(z.string()),
+  unsupportedBrowserScreen: z.array(z.string()),
+});
+
 const platformConfigSchema = z.object({
   devtools: devtoolsSchema.optional(),
-  browserslistConfig: z.array(z.string()),
+  browserslistConfig: browserslistConfigSchema,
 });
 
 export const dynamicConfigSchema = z.object({
