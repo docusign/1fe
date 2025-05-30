@@ -42,7 +42,8 @@ export type WidgetNavigation = {
   // Widgets shouldn't know about the existence of this function.
 };
 
-export type PlatformUtils = {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type PlatformUtils<CustomUtils = {}> = CustomUtils & {
   /**
    * Utilities for loading other widgets
    * Use the bathtub widget browser to find the widgetId you want to load
@@ -57,29 +58,10 @@ export type PlatformUtils = {
    */
   appLoadTime: WidgetAppLoadTimeUtils;
   /**
-   * Utilities for handling authentication
-   * @link https://github.docusignhq.com/pages/Core/1fe-docs/widgets/utils/auth/
-   */
-  // auth: Auth;
-  /**
    * Utilities for handling events and publishing/subscribing to the eventBus on the Shell
    * @link https://github.docusignhq.com/pages/Core/1fe-docs/widgets/utils/eventbus/
    */
   eventBus: EventBusPlatformUtils;
-
-  /**
-   * Utilities for handling network requests and getting useful information about the network
-   * @link https://github.docusignhq.com/pages/Core/1fe-docs/widgets/utils/network/
-   */
-  // network: NetworkPlatformUtils;
-  /**
-   * Utilities for logging messages to KazMon
-   * No KazMon application or instrumentation key is required, a 1FE-wide application + key is used
-   *
-   * @dashboard https://dataexplorer.azure.com/dashboards/e34d5b0d-00b8-4a5a-87ea-1da4cee8a485?p-_startTime=1hours&p-_endTime=now&p-_environment=v-prod&p-Data+Source=Production&p-_widgetId=all
-   * @link https://github.docusignhq.com/pages/Core/1fe-docs/widgets/utils/logger/
-   */
-  // logger: LoggerPlatformUtils;
   /**
    * Utilities for handling session storage
    * Provides an interface to the browser's session storage via set, get, getAll, remove, size, and clear
@@ -93,42 +75,11 @@ export type PlatformUtils = {
    */
   localStorage: LocalStoragePlatformUtils;
   /**
-   * Utilities for handling experiments
-   * Provides an interface to the @optimizely/optimizely-sdk npmjs package
-   *
-   * @version https://github.docusignhq.com/pages/Core/1fe-docs/ecosystem/libraries/common-libs/#externalized-libraries-1
-   * @link https://github.docusignhq.com/pages/Core/1fe-docs/widgets/utils/experiments/
-   */
-  // experiments: ExperimentsUtils;
-  /**
-   * Utilities for handling i18n
-   *
-   * @link https://github.docusignhq.com/pages/Core/1fe-docs/widgets/utils/i18n/
-   */
-  // i18n: ReturnType<typeof i18n>;
-  /**
    * Utilities for handling the 1FE shell experience
    *
    * @link https://github.docusignhq.com/pages/Core/1fe-docs/widgets/utils/experience/
    */
   experience: ExperienceUtils;
-  /**
-   * Utilities for handling analytics via mixpanel
-   *
-   * @link https://github.docusignhq.com/pages/Core/1fe-docs/widgets/utils/analytics/
-   */
-  // analytics: AnalyticsUtils;
-  /**
-   * Utilities for logging traces and metrics using OTEL
-   */
-  // UNSAFE_otel: OTELPlatformUtils;
-  /**
-   * Utilities for handling User/Account related data
-   *
-   * @link https://github.docusignhq.com/pages/Core/1fe-docs/widgets/utils/user/
-   */
-  // user: UserUtils;
-  [key: string]: any;
 };
 
 /**
@@ -191,7 +142,8 @@ export type PlatformContextType = {
 //   unregisterProvider: (providerType: ProviderType) => void;
 // };
 
-export type PlatformPropsType = DeepReadonly<{
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type PlatformPropsType<CustomUtils = {}> = DeepReadonly<{
   /**
    * The environment the 1FE SHELL is running in.
    *
@@ -210,7 +162,7 @@ export type PlatformPropsType = DeepReadonly<{
    * For a list of available utilities, see:
    * @link https://github.docusignhq.com/pages/Core/1fe-docs/widgets/utils/
    */
-  utils: PlatformUtils;
+  utils: PlatformUtils<CustomUtils>;
   /**
    * A providers registration object containing functions to register and unregister util implementation
    * overrides by plugins. Widgets mounted within plugins using overriden util implementations

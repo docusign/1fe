@@ -21,8 +21,8 @@ export type OneFEAuth = {
   unauthedCallback: (widgetId: string) => void;
 };
 
-export type OneFEUtils = {
-  [key: string]: (widgetId: string) => any;
+export type OneFEUtilsFactories = {
+  [key: string]: (widgetId: string) => unknown;
 };
 
 export type OneFEErrorComponentProps = {
@@ -37,7 +37,7 @@ export type OneFEComponents = {
 };
 
 export type OneFEShellOptions = {
-  utils?: OneFEUtils;
+  utils?: OneFEUtilsFactories;
   auth?: OneFEAuth;
   shellLogger?: OneFEShellLogger;
   routes?: OneFERoutes;
