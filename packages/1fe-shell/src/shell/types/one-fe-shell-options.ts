@@ -22,7 +22,7 @@ export type OneFEAuth = {
 };
 
 export type OneFEUtilsFactories = {
-  [key: string]: (widgetId: string) => unknown;
+  [key: string]: (widgetId: string) => Record<string, object>;
 };
 
 export type OneFEErrorComponentProps = {
