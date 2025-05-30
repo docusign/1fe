@@ -1,0 +1,49 @@
+name: Setup Submodules
+description: Set up Git submodules for the project
+
+inputs:
+  submodule-ssh-private-key:
+    description: SSH private key for accessing submodules
+    required: true
+  self-ssh-private-key:
+    description: SSH private key for accessing the repository itself
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Mark workspace as safe
+      shell: bash
+      run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+    # TODO #61 - this action goes away when our repos become public.
+    - name: Set up SSH for submodules and yarn
+      uses: webfactory/ssh-agent@v0.9.1
+      with:
+        ssh-private-key: |
+          ${{ inputs.submodule-ssh-private-key }}
+          ${{ inputs.self-ssh-private-key }}
+
+    - name: Add ssh host keys to the agent
+      shell: bash
+      run: |
+        # Add GitHub's SSH host keys to the known hosts to avoid prompts during submodule updates.
+        mkdir -p ~/.ssh
+        ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+        ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
+        ssh-keyscan -t ecdsa github.com >> ~/.ssh/known_hosts
+
+    - name: Initialize submodules
+      shell: bash
+      run: git submodule update --init --recursive --remote # always make sure to work on latest submodule commits
+
+    # TODO #61 - this action goes away when our repos become public.
+    - name: configure git to use SSH always
+      shell: bash
+      run: git config --global url."git@github.com:".insteadOf "https://github.com/" # Force SSH for all GitHub URLs after submodule init
+
+    - name: Install submodule dependencies
+      shell: bash
+      run: |
+        # All submodules are using Yarn workspaces, so we can install all dependencies at once.
+        yarn workspaces foreach --all install --no-immutable

@@ -14,25 +14,33 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: ./.github/workflows/steps/setup-node
+
+      - uses: ./.github/workflows/steps/setup-submodules
         with:
-          node-version: 22
+          submodule-ssh-private-key: ${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}
+          self-ssh-private-key: ${{ secrets.SELF_SSH_PRIVATE_KEY }}
 
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
+      - name: Build dependencies
+        run: yarn turbo build --filter=@1fe/shell... --filter=@1fe/server... --filter=@1fe/starter-app...
 
-      - name: Build server package
-        run: cd packages/1fe-server && yarn build
+      - name: Get installed Playwright version
+        id: playwright-version
+        run: echo "PLAYWRIGHT_VERSION=$(yarn info @playwright/test -A --json | jq -r '.children.Version' | head -n 1)" >> $GITHUB_ENV
 
-      - name: Build shell package
-        run: cd packages/1fe-shell && yarn build
+      - name: Cache playwright binaries
+        uses: actions/cache@v3
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
 
-      - name: Build starter-app
-        run: cd apps/starter-app && yarn build
+      - run: yarn dlx playwright install chromium --with-deps
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
 
-      - name: Install Playwright
-        run: npx playwright install
+      - run: yarn dlx playwright install-deps chromium
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
 
       - name: Run E2E tests
         run: yarn test:playwright
