@@ -6,7 +6,8 @@
       "declarationMap": true,
       "emitDeclarationOnly": true,
       "allowJs": false,
-      "outDir": "dist/types"
+      "outDir": "dist/types",
+      "typeRoots": ["node_modules/@types", "src/types"]
     },
     "include": ["src/index.ts"]
   }
