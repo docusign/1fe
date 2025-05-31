@@ -6,7 +6,7 @@
     "sourceMap": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "types": ["jest", "node"],
+    "types": ["jest", "node", "deep-freeze"],
     "module": "ESNext",
     "jsx": "react-jsx"
   },
