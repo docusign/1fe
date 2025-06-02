@@ -25,12 +25,19 @@ export type OneFEConfigManagement = {
   refreshMs: number;
 };
 
+export type OneFeCriticalLibUrls = {
+  importMapOverride: string;
+  systemJS: string;
+  systemJSAmd: string;
+  shellBundleUrl: string;
+}
+
 export type OneFEServerOptions = {
   environment: string;
   isProduction: boolean;
   orgName: string;
   configManagement: OneFEConfigManagement;
-  shellBundleUrl: string;
+  criticalLibUrls: OneFeCriticalLibUrls;
   server?: OneFEServer;
   csp?: {
     defaultCSP?: OneFECSP;
