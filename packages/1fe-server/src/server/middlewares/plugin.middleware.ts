@@ -18,6 +18,7 @@ TODO:
 
 const getKnownPaths = (): Set<string> => {
   const knownRoutes = readOneFEConfigs()?.server?.knownRoutes || [];
+  // return new Set(knownRoutes);
   const baseKnownRoutes = Object.values(BASE_KNOWN_ROUTES);
   return new Set([...knownRoutes, ...baseKnownRoutes]);
 };
@@ -37,12 +38,6 @@ const pluginMiddleware = async (
     // TODO: [1FE Consumption]. Going to comment this out for now. Could cause unwanted side effects
     // const topTwoLevelsPath = `/${path.split('/').slice(1, 3).join('/')}`;
     const knownPaths = getKnownPaths();
-    const shouldIgnorePath =
-      knownPaths.has(topLevelPath) || knownPaths.has(topTwoLevelsPath);
-
-    if (shouldIgnorePath) {
-      return next();
-    }
 
     let plugin: PluginConfig | undefined;
     let should404 = false;

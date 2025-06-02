@@ -1,3 +1,4 @@
+import express from 'express';
 import ky from 'ky';
 import request from 'supertest';
 
@@ -36,7 +37,7 @@ jest.mock('../../utils/config-poller', () => ({
 
 describe('Given Version Endpoint to test', () => {
   // to avoid redeclaring app and version route inside all tests in this block.
-  let app: ReturnType<typeof oneFEServer>;
+  let app: ReturnType<typeof express>;
 
   // before this describe block runs
   beforeAll(async () => {
@@ -56,7 +57,7 @@ describe('Given Version Endpoint to test', () => {
       ] as unknown as WidgetConfig[]),
     );
 
-    app = oneFEServer(serverOptions);
+    app = await oneFEServer(serverOptions);
   });
 
   // after describe block ends.
