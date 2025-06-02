@@ -37,23 +37,16 @@ import { WidgetAppLoadTimeUtils } from './app-load-time/types';
 // } from './otel/setup';
 // import { initUserUtils } from './user';
 
-export const getPlatformUtils = (widget: WidgetConfig): PlatformUtils => {
+type ExtendedPlatformUtils = PlatformUtils<{
+  [key: string]: Record<string, object>;
+}>;
+
+export const getPlatformUtils = (
+  widget: WidgetConfig,
+): ExtendedPlatformUtils => {
   const { widgetId, type, version } = widget;
-  // const { ENVIRONMENT, FEATURE_FLAGS } = getEnvironmentConfigs();
-  // const sessionId = getSessionIdFromCookie() ?? SESSION_ID_UNAVAILABLE;
 
-  // if (FEATURE_FLAGS.enableClientSideOtelAutomatedInstrumentation) {
-  //   initializeOpenTelemetryWebTracer('', version, ENVIRONMENT, sessionId);
-  //   initializeOpenTelemetryMetrics(version, ENVIRONMENT);
-  // }
-
-  //   const logger = initLogger({
-  //     widget,
-  //     sessionId,
-  //     options,
-  //   });
-
-  //   // Some utils depend on others to execute since they use them
+  // Some utils depend on others to execute since they use them
   const appLoadTime = getAppLoadTimeUtils<WidgetAppLoadTimeUtils>(
     widget.widgetId,
   );
@@ -62,58 +55,36 @@ export const getPlatformUtils = (widget: WidgetConfig): PlatformUtils => {
 
   const eventBus = initEventBus(widget.widgetId);
 
-  //   const auth = initAuth(widget);
-
-  //   const network = initNetwork({
-  //     widgetId,
-  //     auth,
-  //     logger,
-  //   });
-
-  //   const user = initUserUtils(widget);
-
   const sessionStorage = initSessionStorage(widgetId);
 
   const localStorage = initLocalStorage(widgetId);
 
-  //   const experiments = initExperiments(ENVIRONMENT, widgetId, logger);
-
-  //   const i18n = initi18n(widgetId);
-
   const experience = initExperience(widgetId);
-
-  //   const analytics = initAnalytics(widgetId);
-
-  //   const UNSAFE_otel = initOTEL(widget, options);
 
   const shellUtilOverrides = readOneFEShellConfigs().utils;
 
   const processedUtilOverrides = shellUtilOverrides
     ? Object.values(shellUtilOverrides).reduce((acc, currUtil) => {
-        return {
-          ...acc,
-          ...currUtil(widgetId),
-        };
+        const customUtilities = currUtil(widgetId);
+        if (customUtilities) {
+          return {
+            ...acc,
+            ...customUtilities,
+          };
+        }
+        return acc;
       }, {})
     : {};
 
   const initializedPlatformUtils = merge(
     {},
     {
-      // network,
-      // logger,
       widgets,
       appLoadTime,
-      // auth,
-      // user,
       eventBus,
       sessionStorage,
       localStorage,
-      // experiments,
-      // i18n,
       experience,
-      // analytics,
-      // UNSAFE_otel,
     },
     processedUtilOverrides,
   );
