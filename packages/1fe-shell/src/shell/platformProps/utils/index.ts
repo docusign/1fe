@@ -69,7 +69,7 @@ export const getPlatformUtils = (
         if (customUtilities) {
           return {
             ...acc,
-            ...customUtilities
+            ...customUtilities,
           };
         }
         return acc;
