@@ -1,3 +1,4 @@
+import express from 'express';
 import request from 'supertest';
 
 import { oneFEServer } from '../..';
@@ -23,14 +24,14 @@ jest.mock('../../utils/one-fe-configs', () => ({
 }));
 
 describe('Given Health endpoint to test', () => {
-  let app: ReturnType<typeof oneFEServer>;
+  let app: ReturnType<typeof express>;
 
   afterAll(async () => {
     jest.resetAllMocks();
   });
 
   beforeAll(async () => {
-    app = oneFEServer(serverOptions);
+    app = await oneFEServer(serverOptions);
   });
 
   const widgetConfigTestCases: {
