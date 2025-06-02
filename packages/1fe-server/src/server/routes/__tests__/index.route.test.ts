@@ -1,3 +1,4 @@
+import express from 'express';
 import ky from 'ky';
 import request from 'supertest';
 
@@ -17,7 +18,7 @@ jest.mock('../../utils/one-fe-configs', () => ({
 }));
 
 describe('Testing Index', () => {
-  let app: ReturnType<typeof oneFEServer>;
+  let app: ReturnType<typeof express>;
 
   afterAll(async () => {
     jest.resetAllMocks();
@@ -30,7 +31,7 @@ describe('Testing Index', () => {
       status: 200,
     } as any);
 
-    app = oneFEServer(serverOptions);
+    app = await oneFEServer(serverOptions);
   });
 
   describe('[GET] /', () => {

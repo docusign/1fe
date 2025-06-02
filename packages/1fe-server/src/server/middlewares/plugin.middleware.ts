@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { isEmpty } from 'lodash';
 
-import { PLUGIN_DISABLED, PLUGIN_ID } from '../constants';
+import { BASE_KNOWN_ROUTES, PLUGIN_DISABLED, PLUGIN_ID } from '../constants';
 import {
   getPlugin,
   getPluginBaselineUrl,
@@ -15,6 +15,13 @@ TODO:
 - [1FE consumption] New middleware for updateOtelContextWithWidgetId
 - [1FE consumption] New middleware for getPluginFromAuthCallback
 */
+
+const getKnownPaths = (): Set<string> => {
+  const knownRoutes = readOneFEConfigs()?.server?.knownRoutes || [];
+  // return new Set(knownRoutes);
+  const baseKnownRoutes = Object.values(BASE_KNOWN_ROUTES);
+  return new Set([...knownRoutes, ...baseKnownRoutes]);
+};
 
 const pluginMiddleware = async (
   req: Request,
@@ -30,13 +37,7 @@ const pluginMiddleware = async (
     // For OSS, combined KNOWN_PATHS and IGNORED_PATHS
     // TODO: [1FE Consumption]. Going to comment this out for now. Could cause unwanted side effects
     // const topTwoLevelsPath = `/${path.split('/').slice(1, 3).join('/')}`;
-    const knownPaths = new Set(readOneFEConfigs()?.server?.knownRoutes);
-    const shouldIgnorePath =
-      knownPaths.has(topLevelPath) || knownPaths.has(topTwoLevelsPath);
-
-    if (shouldIgnorePath) {
-      return next();
-    }
+    const knownPaths = getKnownPaths();
 
     let plugin: PluginConfig | undefined;
     let should404 = false;

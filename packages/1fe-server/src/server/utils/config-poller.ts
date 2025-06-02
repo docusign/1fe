@@ -234,8 +234,10 @@ export const pollDynamicConfig = async (options: OneFEServerOptions) => {
   const initialConfig = await fetchConfig(options);
 
   if (initialConfig) {
-    processDynamicWidgetConfig(initialConfig.dynamicConfigs);
-    processDynamicLibraryConfig(initialConfig.dynamicConfigs);
+    await Promise.all([
+      processDynamicWidgetConfig(initialConfig.dynamicConfigs),
+      processDynamicLibraryConfig(initialConfig.dynamicConfigs),
+    ]);
   } else {
     throw new Error('Failed to fetch initial config. Exiting...');
   }
