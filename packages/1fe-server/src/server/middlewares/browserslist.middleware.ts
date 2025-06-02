@@ -5,12 +5,13 @@ import { readOneFEConfigs } from '../utils/one-fe-configs';
 import { matchesUA } from 'browserslist-useragent';
 import { isEmpty } from 'lodash';
 
+// TODO: [1FE consumption] Need to add option to ignore certain routes, or just reuse known routes
 const ignoredRoutes = [
   ROUTES.WATCHDOG,
   ROUTES.HEALTH,
   ROUTES.VERSION,
-  ROUTES.API,
-  ROUTES.LOAD_TEST,
+  // ROUTES.API,
+  // ROUTES.LOAD_TEST,
 ];
 
 // TODO: [1FE consumption] When consuming back, need to add middleware for isAutomationRun flag to be set
