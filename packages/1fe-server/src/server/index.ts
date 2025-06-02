@@ -28,9 +28,9 @@ const initializeRoutes = (app: express.Application) => {
   app.use('/', new IndexRoute().router);
 };
 
-export const oneFEServer = (
+export const oneFEServer = async (
   options: OneFEServerOptions,
-): ReturnType<typeof express> => {
+): Promise<ReturnType<typeof express>> => {
   const app = express();
   app.use(cookieParser());
   app.use(combinedMiddleware);
@@ -38,7 +38,7 @@ export const oneFEServer = (
   app.use(express.static(path.join(process.cwd(), 'dist', 'public')));
   initializeRoutes(app);
 
-  pollDynamicConfig(options);
+  await pollDynamicConfig(options);
 
   return app;
 };

@@ -13,7 +13,6 @@ export type OneFECSP = {
 };
 
 type InjectNonce = {
-  scriptSrc?: boolean;
   styleSrc?: boolean;
 };
 
