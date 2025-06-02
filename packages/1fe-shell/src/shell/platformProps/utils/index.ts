@@ -65,14 +65,14 @@ export const getPlatformUtils = (
 
   const processedUtilOverrides = shellUtilOverrides
     ? Object.values(shellUtilOverrides).reduce((acc, currUtil) => {
-      const customUtilities = currUtil(widgetId);
-      if (customUtilities) {
-        return {
-          ...acc,
-          ...customUtilities
-        };
-      }
-      return acc;
+        const customUtilities = currUtil(widgetId);
+        if (customUtilities) {
+          return {
+            ...acc,
+            ...customUtilities
+          };
+        }
+        return acc;
       }, {})
     : {};
 
