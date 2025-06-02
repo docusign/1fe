@@ -1,0 +1,38 @@
+name: Check a widget's existence in Azure Blob Storage
+description: |
+  This action checks if a specific widget file exists in configs blob storage.
+
+inputs:
+  widget-name:
+    description: Name of the widget to check.
+    required: true
+  sas-token:
+    description: The SAS token for accessing the Azure Blob Storage.
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Download widget json
+      id: widgetDownload
+      shell: bash
+      continue-on-error: true
+      run: |
+        az storage blob download --account-name 1festarter -c configs -n configs/widgets/${{ inputs.widget-name }}.json -f $GITHUB_WORKSPACE/${{ inputs.widget-name }}.json --sas-token "${{ inputs.sas-token }}"
+
+    - name: Create widget.json if it doesnt exist
+      shell: bash
+      if: steps.widgetDownload.outcome == 'failure'
+      run: |
+        echo '{ "name": "${{ inputs.widget-name }}", "version": 0 }' > $GITHUB_WORKSPACE/${{ inputs.widget-name }}.json
+
+    - name: Increment widget.json version
+      if: steps.widgetDownload.outcome != 'failure'
+      shell: bash
+      run: |
+        jq '.version += 1' $GITHUB_WORKSPACE/${{ inputs.widget-name }}.json > $GITHUB_WORKSPACE/${{ inputs.widget-name }}.tmp.json && mv $GITHUB_WORKSPACE/${{ inputs.widget-name }}.tmp.json $GITHUB_WORKSPACE/${{ inputs.widget-name }}.json
+
+    - name: Upload widget json
+      shell: bash
+      run: |
+        az storage blob upload --account-name 1festarter -c configs -n widgets/${{ inputs.widget-name }}.json -f $GITHUB_WORKSPACE/${{ inputs.widget-name }}.json --sas-token "${{ inputs.sas-token }}" --overwrite

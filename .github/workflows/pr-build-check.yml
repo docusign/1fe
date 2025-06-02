@@ -14,6 +14,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - uses: ./.github/workflows/steps/az-experiment
+        with:
+          widget-name: widget-name
+          sas-token: ${{ secrets.TJWIIFVMQXEC }}
+
       - uses: ./.github/workflows/steps/setup-node
 
       - uses: ./.github/workflows/steps/setup-submodules
