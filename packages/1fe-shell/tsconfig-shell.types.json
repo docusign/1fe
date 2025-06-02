@@ -6,7 +6,7 @@
       "declarationMap": true,
       "emitDeclarationOnly": true,
       "allowJs": false,
-      "outDir": "dist/types",
+      "outDir": "dist/types"
     },
     "include": ["src/index.ts"]
   }
