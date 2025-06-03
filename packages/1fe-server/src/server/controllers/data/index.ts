@@ -79,7 +79,7 @@ export const dataForRenderingTemplate = async (req: Request) => {
   // const activeAutomatedTestFramework =
   //   req.query.automated_test_framework || null;
 
-  const shellBundleUrl = readOneFEConfigs()?.shellBundleUrl;
+  const shellBundleUrl = readOneFEConfigs()?.criticalLibUrls.shellBundleUrl;
 
   return {
     isProduction: readOneFEConfigs()?.isProduction,
