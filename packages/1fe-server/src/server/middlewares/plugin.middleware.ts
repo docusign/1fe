@@ -10,6 +10,13 @@ import {
 import { PluginConfig } from '../types';
 import { readOneFEConfigs } from '../utils/one-fe-configs';
 
+async function ensureURLPattern() {
+  // @ts-ignore
+  if (!globalThis.URLPattern) {
+    await import('urlpattern-polyfill');
+  }
+}
+
 /*
 TODO:
 - [1FE consumption] New middleware for updateOtelContextWithWidgetId
@@ -23,17 +30,13 @@ const getKnownPaths = (): Set<string> => {
   return new Set([...knownRoutes, ...baseKnownRoutes]);
 };
 
-const matchRoute = (pattern: string, path: string): boolean => {
-  const regex = new RegExp(
-    '^' +
-      pattern
-        .replace(/\/\*\*/g, '/.*') // ** → match multiple segments
-        .replace(/\*/g, '[^/]+') // * → match one segment
-        .replace(/:([a-zA-Z0-9_]+)/g, '[^/]+') // :param → match one segment
-        .replace(/\//g, '\\/') +
-      '$', // escape slashes
-  );
-  return regex.test(path);
+const matchAnyRoute = async (knownPaths: Set<string>, fullUrl: string): Promise<boolean> => {
+  await ensureURLPattern();
+
+  return [...knownPaths].some((pattern) => {
+    const urlPattern = new URLPattern({ pathname: pattern });
+    return urlPattern.test(fullUrl);
+  }); 
 };
 
 const pluginMiddleware = async (
@@ -93,7 +96,8 @@ const pluginMiddleware = async (
       }
     } else {
       // Check if any known paths match the route
-      should404 = ![...knownPaths].some((pattern) => matchRoute(pattern, path));
+      const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+      should404 = !(await matchAnyRoute(knownPaths, fullUrl));
     }
 
     if (should404) {
