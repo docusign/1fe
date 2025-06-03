@@ -91,7 +91,7 @@ const pluginMiddleware = async (
       }
     } else {
       // Check if any known paths match the route
-      should404 = [...knownPaths].some(pattern => matchRoute(pattern, path));
+      should404 = ![...knownPaths].some(pattern => matchRoute(pattern, path));
     }
 
     if (should404) {
