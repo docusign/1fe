@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { isEmpty } from 'lodash';
 
-import { PLUGIN_DISABLED, PLUGIN_ID } from '../constants';
+import { BASE_KNOWN_ROUTES, PLUGIN_DISABLED, PLUGIN_ID } from '../constants';
 import {
   getPlugin,
   getPluginBaselineUrl,
@@ -10,11 +10,37 @@ import {
 import { PluginConfig } from '../types';
 import { readOneFEConfigs } from '../utils/one-fe-configs';
 
+async function ensureURLPattern() {
+  // @ts-expect-error URLPattern will not exist on globalThis in Node.js
+  if (!globalThis.URLPattern) {
+    await import('urlpattern-polyfill');
+  }
+}
+
 /*
 TODO:
 - [1FE consumption] New middleware for updateOtelContextWithWidgetId
 - [1FE consumption] New middleware for getPluginFromAuthCallback
 */
+
+const getKnownPaths = (): Set<string> => {
+  const knownRoutes = readOneFEConfigs()?.server?.knownRoutes || [];
+  // return new Set(knownRoutes);
+  const baseKnownRoutes = Object.values(BASE_KNOWN_ROUTES);
+  return new Set([...knownRoutes, ...baseKnownRoutes]);
+};
+
+const matchAnyRoute = async (
+  knownPaths: Set<string>,
+  fullUrl: string,
+): Promise<boolean> => {
+  await ensureURLPattern();
+
+  return [...knownPaths].some((pattern) => {
+    const urlPattern = new URLPattern({ pathname: pattern });
+    return urlPattern.test(fullUrl);
+  });
+};
 
 const pluginMiddleware = async (
   req: Request,
@@ -23,20 +49,14 @@ const pluginMiddleware = async (
 ): Promise<void> => {
   try {
     const path = req.path ?? '';
-    const topLevelPath = `/${path.split('/')[1]}`;
-    const topTwoLevelsPath = `/${path.split('/').slice(1, 3).join('/')}`;
+    // const topLevelPath = `/${path.split('/')[1]}`;
+    // const topTwoLevelsPath = `/${path.split('/').slice(1, 3).join('/')}`;
 
     // for /auth/logout, /test/load, etc.
     // For OSS, combined KNOWN_PATHS and IGNORED_PATHS
     // TODO: [1FE Consumption]. Going to comment this out for now. Could cause unwanted side effects
     // const topTwoLevelsPath = `/${path.split('/').slice(1, 3).join('/')}`;
-    const knownPaths = new Set(readOneFEConfigs()?.server?.knownRoutes);
-    const shouldIgnorePath =
-      knownPaths.has(topLevelPath) || knownPaths.has(topTwoLevelsPath);
-
-    if (shouldIgnorePath) {
-      return next();
-    }
+    const knownPaths = getKnownPaths();
 
     let plugin: PluginConfig | undefined;
     let should404 = false;
@@ -78,7 +98,9 @@ const pluginMiddleware = async (
         should404 = true;
       }
     } else {
-      should404 = !knownPaths.has(topLevelPath);
+      // Check if any known paths match the route
+      const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+      should404 = !(await matchAnyRoute(knownPaths, fullUrl));
     }
 
     if (should404) {

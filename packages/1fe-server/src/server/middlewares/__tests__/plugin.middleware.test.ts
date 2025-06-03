@@ -20,7 +20,7 @@ describe('plugin.middleware tests', () => {
   const testRoute = (path: string) => {
     test(`Known path ${path} should not 404`, async () => {
       const mockRes = httpMocks.createResponse();
-      mockRequest.path = path;
+      mockRequest.originalUrl = path;
       const mockHelpers = jest.spyOn(helpers, 'getPluginById');
 
       mockHelpers.mockResolvedValue(undefined);
@@ -33,7 +33,16 @@ describe('plugin.middleware tests', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    mockRequest = {};
+    mockRequest = {
+      protocol: 'http',
+      originalUrl: '/test/123?foo=bar',
+      get: jest.fn().mockImplementation((header) => {
+        if (header.toLowerCase() === 'host') {
+          return 'example.com:3000';
+        }
+        return undefined;
+      }),
+    };
     mockResponse = httpMocks.createResponse();
   });
 
@@ -68,7 +77,7 @@ describe('plugin.middleware tests', () => {
   });
 
   test('get plugin from path', async () => {
-    mockRequest.path = '/fake';
+    mockRequest.originalUrl = '/fake';
     const mock = jest.spyOn(helpers, 'getPlugin');
     mock.mockReturnValue(Promise.resolve({ widgetId: 'fakeWidgetId' } as any));
 
@@ -88,7 +97,7 @@ describe('plugin.middleware tests', () => {
   });
 
   test('no plugin found in demo/prod, 404', async () => {
-    mockRequest.path = '/fakePath';
+    mockRequest.originalUrl = '/fakePath';
 
     await PluginMiddleware(mockRequest, mockResponse, nextFunction);
 
