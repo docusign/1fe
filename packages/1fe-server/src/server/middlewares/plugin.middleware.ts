@@ -23,16 +23,18 @@ const getKnownPaths = (): Set<string> => {
   return new Set([...knownRoutes, ...baseKnownRoutes]);
 };
 
-const matchRoute = (pattern: string, path: string) => {
-  let regexPattern = pattern
-    .replace(/[-/\\^$+?.()|[\]{}]/g, '\\$&') // escape everything
-    .replace(/\\\*\\\*/g, '.*')              // "**" => match any depth
-    .replace(/\\\*/g, '[^/]+')               // "*" => match single segment
-    .replace(/:(\w+)/g, '([^/]+)');          // ":param" => capture param
-
-  const regex = new RegExp('^' + regexPattern + '$');
+const matchRoute = (pattern: string, path: string): boolean => {
+  const regex = new RegExp(
+    '^' +
+      pattern
+        .replace(/\/\*\*/g, '/.*') // ** → match multiple segments
+        .replace(/\*/g, '[^/]+') // * → match one segment
+        .replace(/:([a-zA-Z0-9_]+)/g, '[^/]+') // :param → match one segment
+        .replace(/\//g, '\\/') +
+      '$', // escape slashes
+  );
   return regex.test(path);
-}
+};
 
 const pluginMiddleware = async (
   req: Request,
@@ -91,7 +93,7 @@ const pluginMiddleware = async (
       }
     } else {
       // Check if any known paths match the route
-      should404 = ![...knownPaths].some(pattern => matchRoute(pattern, path));
+      should404 = ![...knownPaths].some((pattern) => matchRoute(pattern, path));
     }
 
     if (should404) {
