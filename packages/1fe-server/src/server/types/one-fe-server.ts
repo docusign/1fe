@@ -30,7 +30,7 @@ export type OneFeCriticalLibUrls = {
   systemJS: string;
   systemJSAmd: string;
   shellBundleUrl: string;
-}
+};
 
 export type OneFEServerOptions = {
   environment: string;
