@@ -18,7 +18,7 @@ export const ROUTES = {
 export const BASE_KNOWN_ROUTES = {
   HEALTH: '/health',
   VERSION: '/version',
-  WIDGET_VERSION: '/version/*',
+  WIDGET_VERSION: '/version/**',
   FAVICON: '/favicon.ico',
   ROOT: '/',
   SW: '/sw.js',
