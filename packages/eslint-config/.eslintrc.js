@@ -27,9 +27,14 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off', // Optional: Disables enforcing explicit return types on function signatures
     '@typescript-eslint/no-explicit-any': 'off', // Optional: Disables restrictions on `any` type (useful for some use cases)
     '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/no-empty-object-type': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-require-imports': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/no-unused-expressions': 'off',
+    '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/no-non-null-asserted-optional-chain': 'off',
     'no-control-regex': 'off',
     'no-global-assign': 'off',

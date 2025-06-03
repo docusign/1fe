@@ -42,7 +42,6 @@ export type WidgetNavigation = {
   // Widgets shouldn't know about the existence of this function.
 };
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export type PlatformUtils<CustomUtils = {}> = CustomUtils & {
   /**
    * Utilities for loading other widgets
@@ -142,7 +141,6 @@ export type PlatformContextType = {
 //   unregisterProvider: (providerType: ProviderType) => void;
 // };
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export type PlatformPropsType<CustomUtils = {}> = DeepReadonly<{
   /**
    * The environment the 1FE SHELL is running in.
