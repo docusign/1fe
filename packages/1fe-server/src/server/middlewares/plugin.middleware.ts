@@ -10,6 +10,13 @@ import {
 import { PluginConfig } from '../types';
 import { readOneFEConfigs } from '../utils/one-fe-configs';
 
+async function ensureURLPattern() {
+  // @ts-expect-error URLPattern will not exist on globalThis in Node.js
+  if (!globalThis.URLPattern) {
+    await import('urlpattern-polyfill');
+  }
+}
+
 /*
 TODO:
 - [1FE consumption] New middleware for updateOtelContextWithWidgetId
@@ -23,6 +30,18 @@ const getKnownPaths = (): Set<string> => {
   return new Set([...knownRoutes, ...baseKnownRoutes]);
 };
 
+const matchAnyRoute = async (
+  knownPaths: Set<string>,
+  fullUrl: string,
+): Promise<boolean> => {
+  await ensureURLPattern();
+
+  return [...knownPaths].some((pattern) => {
+    const urlPattern = new URLPattern({ pathname: pattern });
+    return urlPattern.test(fullUrl);
+  });
+};
+
 const pluginMiddleware = async (
   req: Request,
   res: Response,
@@ -30,8 +49,8 @@ const pluginMiddleware = async (
 ): Promise<void> => {
   try {
     const path = req.path ?? '';
-    const topLevelPath = `/${path.split('/')[1]}`;
-    const topTwoLevelsPath = `/${path.split('/').slice(1, 3).join('/')}`;
+    // const topLevelPath = `/${path.split('/')[1]}`;
+    // const topTwoLevelsPath = `/${path.split('/').slice(1, 3).join('/')}`;
 
     // for /auth/logout, /test/load, etc.
     // For OSS, combined KNOWN_PATHS and IGNORED_PATHS
@@ -79,7 +98,9 @@ const pluginMiddleware = async (
         should404 = true;
       }
     } else {
-      should404 = !knownPaths.has(topLevelPath);
+      // Check if any known paths match the route
+      const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+      should404 = !(await matchAnyRoute(knownPaths, fullUrl));
     }
 
     if (should404) {
