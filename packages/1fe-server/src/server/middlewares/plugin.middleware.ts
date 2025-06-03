@@ -11,7 +11,7 @@ import { PluginConfig } from '../types';
 import { readOneFEConfigs } from '../utils/one-fe-configs';
 
 async function ensureURLPattern() {
-  // @ts-expect-error
+  // @ts-expect-error URLPattern will not exist on globalThis in Node.js
   if (!globalThis.URLPattern) {
     await import('urlpattern-polyfill');
   }
