@@ -11,7 +11,7 @@ import { PluginConfig } from '../types';
 import { readOneFEConfigs } from '../utils/one-fe-configs';
 
 async function ensureURLPattern() {
-  // @ts-ignore
+  // @ts-expect-error
   if (!globalThis.URLPattern) {
     await import('urlpattern-polyfill');
   }
@@ -30,13 +30,16 @@ const getKnownPaths = (): Set<string> => {
   return new Set([...knownRoutes, ...baseKnownRoutes]);
 };
 
-const matchAnyRoute = async (knownPaths: Set<string>, fullUrl: string): Promise<boolean> => {
+const matchAnyRoute = async (
+  knownPaths: Set<string>,
+  fullUrl: string,
+): Promise<boolean> => {
   await ensureURLPattern();
 
   return [...knownPaths].some((pattern) => {
     const urlPattern = new URLPattern({ pathname: pattern });
     return urlPattern.test(fullUrl);
-  }); 
+  });
 };
 
 const pluginMiddleware = async (
