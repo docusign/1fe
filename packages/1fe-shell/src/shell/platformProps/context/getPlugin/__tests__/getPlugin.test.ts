@@ -28,7 +28,7 @@ describe('getPlugin', () => {
   });
 
   it('should return null if there is no plugin mounted', () => {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     jest.spyOn(require('../../getTree'), 'getTree').mockReturnValueOnce([
       {
         id: '1FE_SHELL',

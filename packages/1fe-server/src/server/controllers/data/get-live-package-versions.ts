@@ -50,7 +50,7 @@ export const getInstalledLibVersions = (): Lib[] => {
     }
 
     // We will roll out any change by environment, so still need to fallback to package.json
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const libPackageJson = require(`${lib.id}/package.json`);
     return { id: lib.id, version: libPackageJson.version };
   });
