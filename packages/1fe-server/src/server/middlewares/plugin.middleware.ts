@@ -23,6 +23,17 @@ const getKnownPaths = (): Set<string> => {
   return new Set([...knownRoutes, ...baseKnownRoutes]);
 };
 
+const matchRoute = (pattern: string, path: string) => {
+  let regexPattern = pattern
+    .replace(/[-/\\^$+?.()|[\]{}]/g, '\\$&') // escape everything
+    .replace(/\\\*\\\*/g, '.*')              // "**" => match any depth
+    .replace(/\\\*/g, '[^/]+')               // "*" => match single segment
+    .replace(/:(\w+)/g, '([^/]+)');          // ":param" => capture param
+
+  const regex = new RegExp('^' + regexPattern + '$');
+  return regex.test(path);
+}
+
 const pluginMiddleware = async (
   req: Request,
   res: Response,
@@ -30,8 +41,8 @@ const pluginMiddleware = async (
 ): Promise<void> => {
   try {
     const path = req.path ?? '';
-    const topLevelPath = `/${path.split('/')[1]}`;
-    const topTwoLevelsPath = `/${path.split('/').slice(1, 3).join('/')}`;
+    // const topLevelPath = `/${path.split('/')[1]}`;
+    // const topTwoLevelsPath = `/${path.split('/').slice(1, 3).join('/')}`;
 
     // for /auth/logout, /test/load, etc.
     // For OSS, combined KNOWN_PATHS and IGNORED_PATHS
@@ -79,7 +90,8 @@ const pluginMiddleware = async (
         should404 = true;
       }
     } else {
-      should404 = !knownPaths.has(topLevelPath);
+      // Check if any known paths match the route
+      should404 = [...knownPaths].some(pattern => matchRoute(pattern, path));
     }
 
     if (should404) {
