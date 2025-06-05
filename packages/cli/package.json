@@ -88,7 +88,7 @@
   "dependencies": {
     "@babel/core": "^7.26.10",
     "@babel/preset-env": "^7.23.3",
-    "@commander-js/extra-typings": "13.1.0",
+    "@commander-js/extra-typings": "^14.0.0",
     "@microsoft/api-extractor": "^7.42.3",
     "@optimizely/optimizely-sdk": "^4.0.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
