@@ -3,7 +3,7 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "declaration": true,
-    "target": "es2020",
+    "target": "es2022",
     "resolveJsonModule": true,
     "outDir": "dist",
     "types": ["node"]

@@ -1,8 +1,8 @@
 import { simpleGit } from 'simple-git';
 import { join } from 'path';
 
-import { getLogger } from '../lib/getLogger';
-import { getGitCloneUrl } from '../lib/git-utils';
+import { getLogger } from '../../lib/getLogger';
+import { getGitCloneUrl } from '../../lib/git-utils';
 import { RootCommandArgs, RootCommandOptions } from './root-command';
 import { existsSync, rmSync } from 'fs';
 
@@ -14,7 +14,6 @@ export async function rootAction(
   logger.log('⚒️ Welcome to the 1fe app creator! ⚒️');
 
   const cloneUrl = getGitCloneUrl(gitProtocol);
-  const git = simpleGit();
   const clonePath = join(process.cwd(), appName);
 
   try {
