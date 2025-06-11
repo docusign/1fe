@@ -5,8 +5,17 @@
     "declaration": true,
     "target": "es2022",
     "resolveJsonModule": true,
+    "esModuleInterop": true,
     "outDir": "dist",
     "types": ["node"]
   },
-  "include": ["src"]
+  "include": [],
+  "references": [
+    {
+      "path": "./tsconfig.src.json"
+    },
+    {
+      "path": "./tsconfig.test.json"
+    }
+  ]
 }

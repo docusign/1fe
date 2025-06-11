@@ -1,16 +1,16 @@
-import { simpleGit } from 'simple-git';
 import { join } from 'path';
 
 import { getLogger } from '../../lib/getLogger';
 import { getGitCloneUrl } from '../../lib/git-utils';
-import { RootCommandArgs, RootCommandOptions } from './createCommand';
+import { CreateCommandArgs, CreateCommandOptions } from './create-command';
 import { existsSync, rmSync } from 'fs';
+import { gitCloneAsync } from './gitCloneAsync';
 
-export async function rootAction(
-  appName: RootCommandArgs[0],
-  { gitProtocol }: RootCommandOptions,
+export async function createAction(
+  appName: CreateCommandArgs[0],
+  { gitProtocol, debug, trace }: CreateCommandOptions,
 ) {
-  const logger = getLogger('[create-1fe]');
+  const logger = getLogger('[create-1fe]', debug, trace);
   logger.log('⚒️ Welcome to the 1fe app creator! ⚒️');
 
   const cloneUrl = getGitCloneUrl(gitProtocol);
@@ -50,23 +50,4 @@ export async function rootAction(
     'Then navigate to http://localhost:3001 in your browser to see your new 1fe app in action!\n\n',
     'Happy coding! 🚀\n',
   );
-}
-
-function gitCloneAsync(cloneUrl: string, clonePath: string) {
-  return new Promise<void>((resolve, reject) => {
-    const git = simpleGit();
-
-    git.clone(
-      cloneUrl,
-      clonePath,
-      ['--depth', '1', '--single-branch'],
-      (err) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve();
-        }
-      },
-    );
-  });
 }

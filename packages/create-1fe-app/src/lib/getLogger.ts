@@ -1,15 +1,11 @@
-import chalk, { ChalkInstance } from 'chalk';
-import { rootCommand } from '../root-command/root-command';
+import chalk, { type ChalkInstance } from 'chalk';
 
 /**
  * NOTE: Do not use it outside of the context of commander program.
  * example: we must not import it and call it at the top level execution context of any file.
  * However, calling this inside an action for a command is ok because commander would have parsed the cli params by then
  */
-export function getLogger(prefix: `[${string}]`) {
-  const debug = rootCommand.getOptionValue('debug');
-  const trace = rootCommand.getOptionValue('trace');
-
+export function getLogger(prefix: `[${string}]`, debug = false, trace = false) {
   const coloredPrefix = chalk.gray(prefix);
 
   const logger = {
