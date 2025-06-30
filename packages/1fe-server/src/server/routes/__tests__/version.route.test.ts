@@ -3,7 +3,7 @@ import ky from 'ky';
 import request from 'supertest';
 
 import { Request, Response } from 'express';
-import { ROUTES } from '../../constants';
+import { ONEFE_ROUTES } from '../../constants';
 
 import * as dataModule from '../../controllers/data';
 import VersionController, {
@@ -67,17 +67,17 @@ describe('Given Version Endpoint to test', () => {
 
   it('responds with status code 200', () => {
     return request(app)
-      .get(ROUTES.VERSION)
+      .get(ONEFE_ROUTES.VERSION)
       .then((response) => expect(response.statusCode).toBe(200));
   });
 
   it('returns a right node version', async () => {
-    const response = await request(app).get(ROUTES.VERSION);
+    const response = await request(app).get(ONEFE_ROUTES.VERSION);
     expect(response.body.nodeVersion).toBe(process.version);
   });
 
   it('response returned matches expected value', async () => {
-    const response = await request(app).get(ROUTES.VERSION);
+    const response = await request(app).get(ONEFE_ROUTES.VERSION);
     expect(response.body).toEqual(
       expect.objectContaining({
         version: expect.any(String),
@@ -169,13 +169,13 @@ describe('Given Version Endpoint to test', () => {
     jest
       .spyOn(dataModule, 'dataForRenderingTemplate')
       .mockResolvedValueOnce(undefined as any);
-    const response = await request(app).get(`${ROUTES.VERSION}`);
+    const response = await request(app).get(`${ONEFE_ROUTES.VERSION}`);
     expect(response.status).toBe(500);
   });
 
   it('returns widget version', async () => {
     const response = await request(app).get(
-      `${ROUTES.VERSION}/@1fe/widget-starter-kit/current`,
+      `${ONEFE_ROUTES.VERSION}/@1fe/widget-starter-kit/current`,
     );
 
     expect(response.body.version).toBe('1.4059.5');
@@ -184,7 +184,7 @@ describe('Given Version Endpoint to test', () => {
 
   it('returns widget bundle', async () => {
     const response = await request(app).get(
-      `${ROUTES.VERSION}/@1fe/widget-starter-kit/current/bundle`,
+      `${ONEFE_ROUTES.VERSION}/@1fe/widget-starter-kit/current/bundle`,
     );
 
     expect(
@@ -197,7 +197,7 @@ describe('Given Version Endpoint to test', () => {
 
   it('returns widget contact', async () => {
     const response = await request(app).get(
-      `${ROUTES.VERSION}/@1fe/widget-starter-kit/current`,
+      `${ONEFE_ROUTES.VERSION}/@1fe/widget-starter-kit/current`,
     );
 
     expect(response.body.contract).toBe(

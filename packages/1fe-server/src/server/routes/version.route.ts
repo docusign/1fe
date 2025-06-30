@@ -1,11 +1,11 @@
 import { Router } from 'express';
 
-import { ROUTES } from '../constants';
+import { ONEFE_ROUTES } from '../constants';
 import VersionController from '../controllers/version.controller';
 import { RoutesInterface } from '../types';
 
 class VersionRoute implements RoutesInterface {
-  public path = ROUTES.VERSION;
+  public path = ONEFE_ROUTES.VERSION;
 
   public router: ReturnType<typeof Router> = Router();
 

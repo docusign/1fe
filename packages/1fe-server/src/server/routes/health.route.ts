@@ -1,11 +1,11 @@
 import { Router } from 'express';
 
 import HealthController from '../controllers/health.controller';
-import { ROUTES } from '../constants';
+import { ONEFE_ROUTES } from '../constants';
 import { RoutesInterface } from '../types';
 
 class HealthRoute implements RoutesInterface {
-  public path = ROUTES.HEALTH;
+  public path = ONEFE_ROUTES.HEALTH;
 
   public router: ReturnType<typeof Router> = Router();
 

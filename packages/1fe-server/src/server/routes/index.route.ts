@@ -1,11 +1,11 @@
 import { Router } from 'express';
 
 import IndexController from '../controllers/index.controller';
-import { ROUTES } from '../constants';
+import { ONEFE_ROUTES } from '../constants';
 import { RoutesInterface } from '../types';
 
 class IndexRoute implements RoutesInterface {
-  public path = ROUTES.INDEX;
+  public path = ONEFE_ROUTES.INDEX;
 
   public router: ReturnType<typeof Router> = Router();
 
