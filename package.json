@@ -12,12 +12,12 @@
     "typecheck": "turbo run typecheck"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.11",
+    "@changesets/cli": "^2.29.4",
     "prettier": "^3.5.3",
-    "syncpack": "^13.0.3",
-    "tsup": "^8.0.2",
-    "turbo": "^2.3.3",
-    "typescript": "5.8.2"
+    "syncpack": "^13.0.4",
+    "tsup": "^8.5.0",
+    "turbo": "^2.5.4",
+    "typescript": "5.8.3"
   },
   "engines": {
     "node": ">=22"

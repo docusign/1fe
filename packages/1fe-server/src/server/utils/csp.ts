@@ -73,9 +73,7 @@ export const injectNonceIntoCSP = (cspString: string, nonce: string) => {
   };
 
   // Default to adding nonce to script-src. This is needed for 1FE critical libraries.
-  if (readOneFEConfigs()?.csp?.injectNonce?.scriptSrc !== false) {
-    addValue('script-src');
-  }
+  addValue('script-src');
 
   if (readOneFEConfigs()?.csp?.injectNonce?.styleSrc) {
     addValue('style-src');
