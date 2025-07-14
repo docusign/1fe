@@ -9,6 +9,11 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "private": false,
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "build": "tsc --noEmit && tsup",
     "prepack": "yarn build",
@@ -18,7 +23,7 @@
     "lint": "eslint src/ --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint src/ --ext ts,tsx --report-unused-disable-directives --fix",
     "test": "jest",
-    "publish:packages": "yarn publish --access public"
+    "publish:packages": "yarn publish --access restricted"
   },
   "devDependencies": {
     "@1fe/eslint-config": "workspace:*",
