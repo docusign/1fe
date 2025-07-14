@@ -8,16 +8,12 @@
   ],
   "main": "dist/index.mjs",
   "module": "dist/index.mjs",
-<<<<<<< HEAD
   "types": "dist/index.d.mts",
   "private": false,
   "publishConfig": {
     "access": "restricted",
     "registry": "https://registry.npmjs.org/"
   },
-=======
-  "types": "dist/index.d.ts",
->>>>>>> 6877e975006992664614a33381e7fca6725a6241
   "scripts": {
     "build": "tsc --noEmit && npx tsup",
     "prepack": "yarn build",
