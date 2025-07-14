@@ -9,7 +9,6 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "private": false,
   "publishConfig": {
     "access": "restricted",
     "registry": "https://registry.npmjs.org/"

@@ -166,7 +166,6 @@
     "zod": "^3.25.51",
     "zod-validation-error": "^3.4.1"
   },
-  "private": false,
   "publishConfig": {
     "access": "restricted",
     "registry": "https://registry.npmjs.org/"
