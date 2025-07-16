@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { mergeWith, mapKeys, isArray, uniq } from 'lodash';
 
 import helmet from 'helmet';
-import { ROUTES } from '../constants';
+import { ONEFE_ROUTES } from '../constants';
 import { getRuntimeCSPConfigs } from '../utils';
 import { readOneFEConfigs } from '../utils/one-fe-configs';
 
@@ -42,8 +42,8 @@ export const getMergedDirectives = (cspOptions: MergeCSPOptions) => {
   const { reportOnly = false, pluginId, req } = cspOptions;
 
   const reportEndpoint = reportOnly
-    ? ROUTES.CSP_REPORT_ONLY
-    : ROUTES.CSP_REPORT_VIOLATION;
+    ? ONEFE_ROUTES.CSP_REPORT_ONLY
+    : ONEFE_ROUTES.CSP_REPORT_VIOLATION;
 
   const mappedDefaultCSPDirectives = reportOnly
     ? readOneFEConfigs()?.csp?.defaultCSP?.reportOnly
