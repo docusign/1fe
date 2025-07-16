@@ -22,7 +22,6 @@ export type ExternalLibIds =
 
 export const installedLibIds = {
   cli: '@1ds/cli',
-  playwright: '@playwright/test',
   browserslistConfig: '@1ds/browserslist-config',
   tsconfig: '@1ds/tsconfig',
   utils: '@1ds/utils',

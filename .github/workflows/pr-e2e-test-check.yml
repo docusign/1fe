@@ -36,10 +36,10 @@ jobs:
             ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
 
-      - run: yarn playwright install chromium --with-deps --only-shell
+      - run: yarn dlx @playwright/test@${{ env.PLAYWRIGHT_VERSION }} install chromium --with-deps --only-shell
         if: steps.playwright-cache.outputs.cache-hit != 'true'
 
-      - run: yarn playwright install-deps chromium
+      - run: yarn dlx @playwright/test@${{ env.PLAYWRIGHT_VERSION }} install-deps chromium
         if: steps.playwright-cache.outputs.cache-hit != 'true'
 
       - name: Run E2E tests
