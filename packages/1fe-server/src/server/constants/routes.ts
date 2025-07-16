@@ -1,4 +1,4 @@
-export const ROUTES = {
+export const ONEFE_ROUTES = {
   WATCHDOG: '/watchdog',
   CSP_REPORT_ONLY: '/csp-report-only',
   CSP_REPORT_VIOLATION: '/csp-report-violation',
