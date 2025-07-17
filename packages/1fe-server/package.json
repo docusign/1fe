@@ -21,8 +21,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint src/ --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint src/ --ext ts,tsx --report-unused-disable-directives --fix",
-    "test": "jest",
-    "publish:packages": "yarn publish --access restricted"
+    "test": "jest"
   },
   "devDependencies": {
     "@1fe/eslint-config": "workspace:*",

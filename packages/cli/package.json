@@ -44,8 +44,7 @@
     "test:unit": "yarn test:jest --testPathIgnorePatterns='src/__tests__/e2e/*'",
     "test": "yarn test:unit",
     "type:check": "tsc --noEmit --skipLibcheck",
-    "runCliAgainstWsk": "cd ../../widget-starter-kit && node ../packages/cli/dist/index.js",
-    "publish:packages": "yarn publish --access restricted"
+    "runCliAgainstWsk": "cd ../../widget-starter-kit && node ../packages/cli/dist/index.js"
   },
   "files": [
     "/dist"
