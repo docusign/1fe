@@ -128,6 +128,31 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@1fe/create-1fe-app@workspace:packages/create-1fe-app":
+  version: 0.0.0-use.local
+  resolution: "@1fe/create-1fe-app@workspace:packages/create-1fe-app"
+  dependencies:
+    "@babel/core": "npm:^7.27.4"
+    "@babel/preset-env": "npm:^7.27.2"
+    "@babel/preset-typescript": "npm:^7.27.1"
+    "@commander-js/extra-typings": "npm:^14.0.0"
+    "@jest/globals": "npm:^29.x"
+    "@types/babel__core": "npm:^7.20.5"
+    "@types/babel__preset-env": "npm:^7.10.0"
+    "@types/jest": "npm:^29.5.14"
+    babel-jest: "npm:^30.0.0"
+    chalk: "npm:^5.4.1"
+    es-main: "npm:^1.3.0"
+    esbuild-raw-plugin: "npm:^0.2.0"
+    jest: "npm:^29.x"
+    simple-git: "npm:^3.28.0"
+    tsup: "npm:^8.5.0"
+    typescript: "npm:^5.8.3"
+  bin:
+    create-1fe-app: dist/index.js
+  languageName: unknown
+  linkType: soft
+
 "@1fe/eslint-config@workspace:*, @1fe/eslint-config@workspace:packages/eslint-config":
   version: 0.0.0-use.local
   resolution: "@1fe/eslint-config@workspace:packages/eslint-config"
@@ -8062,31 +8087,6 @@ __metadata:
   checksum: 10c0/58f68e01cf8ad49e1fbbf622dcfdecb34b327a116f2e913aab12a3aad25cb41a6398eadc153c90ca3d92cf11d475eb10c5c2bb3c673b0172c4fb67dec75d0575
   languageName: node
   linkType: hard
-
-"create-1fe-app@workspace:packages/create-1fe-app":
-  version: 0.0.0-use.local
-  resolution: "create-1fe-app@workspace:packages/create-1fe-app"
-  dependencies:
-    "@babel/core": "npm:^7.27.4"
-    "@babel/preset-env": "npm:^7.27.2"
-    "@babel/preset-typescript": "npm:^7.27.1"
-    "@commander-js/extra-typings": "npm:^14.0.0"
-    "@jest/globals": "npm:^29.x"
-    "@types/babel__core": "npm:^7.20.5"
-    "@types/babel__preset-env": "npm:^7.10.0"
-    "@types/jest": "npm:^29.5.14"
-    babel-jest: "npm:^30.0.0"
-    chalk: "npm:^5.4.1"
-    es-main: "npm:^1.3.0"
-    esbuild-raw-plugin: "npm:^0.2.0"
-    jest: "npm:^29.x"
-    simple-git: "npm:^3.28.0"
-    tsup: "npm:^8.5.0"
-    typescript: "npm:^5.8.3"
-  bin:
-    create-1fe-app: dist/index.js
-  languageName: unknown
-  linkType: soft
 
 "create-jest@npm:^29.7.0":
   version: 29.7.0
