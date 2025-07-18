@@ -8,7 +8,7 @@
     "dev": "yarn build --watch",
     "test": "jest",
     "build": "tsup",
-    "prepack": "build"
+    "prepack": "yarn build"
   },
   "devDependencies": {
     "@babel/core": "^7.27.4",
