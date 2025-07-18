@@ -43,4 +43,4 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit != 'true'
 
       - name: Run E2E tests
-        run: yarn playwright install && yarn test:playwright
+        run: npx playwright install && yarn test:playwright
