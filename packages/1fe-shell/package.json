@@ -24,10 +24,8 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@1fe/eslint-config": "workspace:*",
     "@babel/preset-env": "^7.27.2",
     "@jest/globals": "^29.7.0",
-    "@repo/typescript-config": "0.0.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^14.3.1",
     "@testing-library/react-hooks": "^7.0.2",

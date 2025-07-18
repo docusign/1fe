@@ -12,6 +12,8 @@
     "typecheck": "turbo run typecheck"
   },
   "devDependencies": {
+    "@1fe/eslint-config": "workspace:*",
+    "@1fe/typescript-config": "workspace:*",
     "@changesets/cli": "^2.29.4",
     "prettier": "^3.5.3",
     "syncpack": "^13.0.4",
