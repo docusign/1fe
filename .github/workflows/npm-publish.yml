@@ -32,14 +32,14 @@ jobs:
 
       - name: Authenticate to npm
         run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ${{ env.NPM_CONFIG_USERCONFIG }}
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Build packages for publishing
         run: yarn turbo build --filter=./packages/* --filter=!./packages/eslint-config --filter=!./packages/typescript-config
 
-      - name: Create Release Pull Request or Publish to npm
+      - name: Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
