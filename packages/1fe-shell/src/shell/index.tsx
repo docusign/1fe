@@ -5,7 +5,7 @@ import 'systemjs/dist/extras/named-register.min.js';
 import 'systemjs/dist/extras/use-default.min.js';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOMClient from 'react-dom/client';
 
 import App from './App';
 import './globals.css';
@@ -86,12 +86,21 @@ const renderOneFEShell = (options: OneFEShellOptions) => {
   initShellPlatformUtils();
 
   init().then(() => {
-    // eslint-disable-next-line react/no-deprecated
-    ReactDOM.render(
+    options.hooks?.onBeforeRenderShell?.();
+
+    const container = document.querySelector('#root');
+    if (!container) {
+      throw new Error(
+        'Root container not found. Are you sure the HTML has a <div id="root">?',
+      );
+    }
+
+    const root = ReactDOMClient.createRoot(container);
+
+    root.render(
       <React.StrictMode>
         <App />
       </React.StrictMode>,
-      document.querySelector('#root'),
     );
   });
 };

@@ -1,15 +1,15 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { ROUTES, STATIC_ASSETS } from '../constants';
+import { ONEFE_ROUTES, STATIC_ASSETS } from '../constants';
 import { readOneFEConfigs } from '../utils/one-fe-configs';
 import { matchesUA } from 'browserslist-useragent';
 import { isEmpty } from 'lodash';
 
 // TODO: [1FE consumption] Need to add option to ignore certain routes, or just reuse known routes
 const ignoredRoutes = [
-  ROUTES.WATCHDOG,
-  ROUTES.HEALTH,
-  ROUTES.VERSION,
+  ONEFE_ROUTES.WATCHDOG,
+  ONEFE_ROUTES.HEALTH,
+  ONEFE_ROUTES.VERSION,
   // ROUTES.API,
   // ROUTES.LOAD_TEST,
 ];

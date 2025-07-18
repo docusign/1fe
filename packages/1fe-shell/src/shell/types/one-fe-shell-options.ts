@@ -42,4 +42,16 @@ export type OneFEShellOptions = {
   shellLogger?: OneFEShellLogger;
   routes?: OneFERoutes;
   components?: OneFEComponents;
+  /**
+   * These hooks are used by 1fe shell to execute any configured custom operations
+   * during various internal processes in 1fe shell.
+   */
+  hooks?: {
+    /**
+     * Callback to be executed before react's render method is called on the document root.
+     * Use this to perform any necessary setup before the shell is rendered, for example: registering a service worker,
+     * initializing global state, or setting up global event listeners.
+     */
+    onBeforeRenderShell?: () => void;
+  };
 };
