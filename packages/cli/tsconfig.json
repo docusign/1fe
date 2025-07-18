@@ -1,5 +1,5 @@
 {
-  "extends": "@repo/typescript-config/react-library.json",
+  "extends": "@1fe/typescript-config/react-library.json",
   "compilerOptions": {
     "target": "ES2022", // supported by Node 22+ https://node.green/#ES2022
     "lib": ["ES2022"],
