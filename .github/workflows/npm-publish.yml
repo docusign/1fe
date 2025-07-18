@@ -19,6 +19,9 @@ jobs:
 
       - uses: ./.github/workflows/steps/setup-node
 
+      - name: Build packages
+        run: yarn turbo build --filter=./packages/* --filter=!./packages/eslint-config --filter=!./packages/typescript-config
+
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
@@ -33,14 +36,15 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - run: yarn turbo build --filter=@abetest/ui
+      - name: Build packages for publishing
+        run: yarn turbo build --filter=./packages/* --filter=!./packages/eslint-config --filter=!./packages/typescript-config
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
-          # This expects you to have a script called release which does a build for your packages and calls changeset publish
-          publish: yarn turbo run publish:packages --filter=@abetest/ui && changeset publish
+          # Changesets handles publishing with the publishConfig from each package.json
+          publish: yarn changeset publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
