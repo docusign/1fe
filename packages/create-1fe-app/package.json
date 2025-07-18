@@ -1,8 +1,10 @@
 {
-  "name": "create-1fe-app",
+  "name": "@1fe/create-1fe-app",
   "version": "0.0.1",
   "main": "dist/index.js",
-  "bin": "dist/index.js",
+  "bin": {
+    "create-1fe-app": "dist/index.js"
+  },
   "scripts": {
     "run:cli": "node dist/index.js",
     "dev": "yarn build --watch",
