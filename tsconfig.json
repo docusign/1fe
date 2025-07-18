@@ -1,0 +1,22 @@
+{
+  "extends": "@1fe/typescript-config/base.json",
+  "compilerOptions": {
+    "target": "es2018"
+  },
+  "include": [],
+  "exclude": [],
+  "references": [
+    {
+      "path": "./packages/1fe-server"
+    },
+    {
+      "path": "./packages/1fe-shell"
+    },
+    {
+      "path": "./packages/cli"
+    },
+    {
+      "path": "./packages/create-1fe-app"
+    }
+  ]
+}

@@ -9,6 +9,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "1fe@workspace:."
   dependencies:
+    "@1fe/eslint-config": "workspace:*"
+    "@1fe/typescript-config": "workspace:*"
     "@changesets/cli": "npm:^2.29.4"
     prettier: "npm:^3.5.3"
     syncpack: "npm:^13.0.4"
@@ -29,7 +31,6 @@ __metadata:
     "@optimizely/optimizely-sdk": "npm:^4.10.1"
     "@pmmmwh/react-refresh-webpack-plugin": "npm:^0.5.16"
     "@pretty-ts-errors/formatter": "npm:^0.1.7"
-    "@repo/typescript-config": "npm:0.0.0"
     "@rollup/plugin-commonjs": "npm:^26.0.3"
     "@rollup/plugin-json": "npm:^6.1.0"
     "@rollup/plugin-node-resolve": "npm:^15.3.1"
@@ -144,9 +145,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@1fe/server@workspace:packages/1fe-server"
   dependencies:
-    "@1fe/eslint-config": "workspace:*"
     "@jest/globals": "npm:^29.7.0"
-    "@repo/typescript-config": "npm:0.0.0"
     "@types/cookie-parser": "npm:^1.4.8"
     "@types/ejs": "npm:^3.1.5"
     "@types/express": "npm:^4.17.22"
@@ -189,13 +188,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@1fe/shell@workspace:packages/1fe-shell"
   dependencies:
-    "@1fe/eslint-config": "workspace:*"
     "@babel/core": "npm:^7.27.4"
     "@babel/preset-env": "npm:^7.27.2"
     "@emotion/react": "npm:^11.14.0"
     "@emotion/styled": "npm:11.14.0"
     "@jest/globals": "npm:^29.7.0"
-    "@repo/typescript-config": "npm:0.0.0"
     "@testing-library/jest-dom": "npm:^6.6.3"
     "@testing-library/react": "npm:^14.3.1"
     "@testing-library/react-hooks": "npm:^7.0.2"
@@ -296,6 +293,12 @@ __metadata:
     webpack-dev-server: "npm:^5.2.0"
     webpack-merge: "npm:^6.0.1"
     zod: "npm:^3.25.36"
+  languageName: unknown
+  linkType: soft
+
+"@1fe/typescript-config@workspace:*, @1fe/typescript-config@workspace:packages/typescript-config":
+  version: 0.0.0-use.local
+  resolution: "@1fe/typescript-config@workspace:packages/typescript-config"
   languageName: unknown
   linkType: soft
 
@@ -4032,12 +4035,6 @@ __metadata:
   checksum: 10c0/eaef5cb46a1e413f7d1019a75990808307e08e53a39d4cf69c339432ddc03143d725decef3d6b9b5071b898da07f72a4a57c4e73f787005fcf10162973d8d7d7
   languageName: node
   linkType: hard
-
-"@repo/typescript-config@npm:0.0.0, @repo/typescript-config@workspace:packages/typescript-config":
-  version: 0.0.0-use.local
-  resolution: "@repo/typescript-config@workspace:packages/typescript-config"
-  languageName: unknown
-  linkType: soft
 
 "@rollup/plugin-commonjs@npm:^26.0.3":
   version: 26.0.3

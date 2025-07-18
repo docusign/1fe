@@ -56,7 +56,6 @@
   },
   "commentDevDependencies": "These automatically packaged into the dist/index.js bundle.",
   "devDependencies": {
-    "@repo/typescript-config": "0.0.0",
     "@rollup/rollup-darwin-arm64": "^4.41.1",
     "@swc/core": "^1.11.31",
     "@types/babel__core": "^7.20.5",
