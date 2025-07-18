@@ -1,5 +1,0 @@
----
-'@abetest/ui': patch
----
-
-asdf
