@@ -13,6 +13,13 @@ runs:
     - name: Cache for Turbo
       uses: rharkor/caching-for-turbo@v1.8
 
+    - name: Authenticate to npm
+      shell: bash
+      run: |
+        echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ${{ env.NPM_CONFIG_USERCONFIG }}
+      env:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
     - name: Install dependencies
       shell: bash
       run: yarn install --no-immutable # not using --immutable because some submodule lockfiles may change and its ok
