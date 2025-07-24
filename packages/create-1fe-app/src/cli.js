@@ -6,7 +6,7 @@
  */
 
 // Get minimum Node version injected at build time
-const MIN_NODE_VERSION = process.env.MIN_NODE_VERSION || '24';
+const MIN_NODE_VERSION = process.env.MIN_NODE_VERSION || '22';
 
 /**
  * Check if current Node version meets minimum requirement
