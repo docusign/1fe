@@ -25,13 +25,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Authenticate to npm
-        shell: bash
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ${{ env.NPM_CONFIG_USERCONFIG }}
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - uses: ./.github/workflows/steps/setup-node
 
       - uses: ./.github/workflows/steps/setup-submodules
@@ -55,6 +48,7 @@ jobs:
   lint:
     name: 🧹 Lint
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -73,6 +67,7 @@ jobs:
   unit-tests:
     name: 🧪 Unit Tests
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
