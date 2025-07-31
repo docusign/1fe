@@ -1,6 +1,6 @@
 # 1FE (One Frontend) 🚀
 
-A modern frontend framework and toolchain that provides a unified development experience for building performant web applications with server-side rendering capabilities.
+MonoRepo containing the main packages owned and supported by the 1fe team.
 
 ## 📋 Prerequisites
 
@@ -30,10 +30,10 @@ This is a monorepo containing the following packages:
 
 ### Core Packages
 
-- **`@1fe/shell`** - Frontend shell/runtime for 1FE applications
-- **`@1fe/server`** - Server-side rendering and backend utilities  
-- **`@1fe/cli`** - Command-line tools for development and build processes
-- **`@1fe/create-1fe-app`** - Scaffolding tool for new 1FE applications
+- **`@1fe/shell`** - Shell bundle that provides common utilities to the widgets
+- **`@1fe/server`** - Express server that is consumed by the 1fe instance for an organization.  
+- **`@1fe/cli`** - Command-line tools for building and maintaining widgets
+- **`@1fe/create-1fe-app`** - Scaffolding tool for new 1FE instances
 
 ### Configuration Packages
 
