@@ -5,12 +5,6 @@ inputs:
   submodule-ssh-private-key:
     description: SSH private key for accessing submodules
     required: true
-  self-ssh-private-key:
-    description: SSH private key for accessing the repository itself
-    required: true
-  npm-readonly-token:
-    description: NPM token for read-only access to packages
-    required: true
 
 runs:
   using: 'composite'
@@ -25,22 +19,6 @@ runs:
       with:
         ssh-private-key: |
           ${{ inputs.submodule-ssh-private-key }}
-          ${{ inputs.self-ssh-private-key }}
-
-    # TODO #61 - this action goes away when our repos become public.
-    - name: Add ssh host keys to the agent
-      shell: bash
-      run: |
-        # Add GitHub's SSH host keys to the known hosts to avoid prompts during submodule updates.
-        mkdir -p ~/.ssh
-        ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-        ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
-        ssh-keyscan -t ecdsa github.com >> ~/.ssh/known_hosts
-
-    # TODO #61 - this action goes away when our repos become public.
-    - name: Configure git to use SSH always
-      shell: bash
-      run: git config --global url."git@github.com:".insteadOf "https://github.com/" # Force SSH for all GitHub URLs after submodule init
 
     - name: Initialize submodules
       shell: bash

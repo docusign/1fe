@@ -19,8 +19,6 @@ jobs:
       - uses: ./.github/workflows/steps/setup-submodules
         with:
           submodule-ssh-private-key: ${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}
-          self-ssh-private-key: ${{ secrets.SELF_SSH_PRIVATE_KEY }}
-          npm-readonly-token: ${{ secrets.NPM_TOKEN_READONLY_1FE }}
 
       - name: Lint the project
         run: yarn lint
