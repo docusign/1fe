@@ -30,7 +30,7 @@ const RedirectComponent = ({ to }: { to: string }) => {
 const determineBaseRoute = (): RouteObject[] => {
   const isProd = ENVIRONMENT_CONFIG.isProduction;
   const defaultRoute =
-    readOneFEShellConfigs()?.routes?.defaultRoute || '/bathtub';
+    readOneFEShellConfigs()?.routes?.defaultRoute || '/playground';
   if (isProd) {
     return [
       {
@@ -40,14 +40,12 @@ const determineBaseRoute = (): RouteObject[] => {
     ];
   }
 
-  // When in integration, we want to allow the user to navigate to the bathtub
-  // Also the base route should be the bathtub
-  // When in higher environments, we want to redirect the user to the send page
-  // and all routes to bathtub should be redirected to send
+  // When in integration, we want to allow the user to navigate to the playground
+  // Also the base route should be the playground
   return [
     {
       path: '/',
-      element: <RedirectComponent to='/bathtub' />,
+      element: <RedirectComponent to='/playground' />,
     },
   ];
 };
