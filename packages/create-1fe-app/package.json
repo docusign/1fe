@@ -1,10 +1,10 @@
 {
   "name": "@1fe/create-1fe-app",
   "version": "0.0.1",
-  "main": "dist/index.js",
-  "bin": "dist/index.js",
+  "main": "dist/cli.js",
+  "bin": "dist/cli.js",
   "scripts": {
-    "run:cli": "node dist/index.js",
+    "run:cli": "node dist/cli.js",
     "dev": "yarn build --watch",
     "test": "jest",
     "build": "tsup",
@@ -13,6 +13,9 @@
   "publishConfig": {
     "access": "restricted",
     "registry": "https://registry.npmjs.org/"
+  },
+  "engines": {
+    "node": ">=22"
   },
   "devDependencies": {
     "@babel/core": "^7.27.4",
