@@ -50,20 +50,20 @@ export async function devCommandAction(devCommandOptions: DevCommandOptions) {
 
     server.compiler.hooks.done.tap('done', async () => {
       const {
-        baseConfig: { bathtubUrl },
+        baseConfig: { playgroundUrl },
       } = await getConfig();
 
-      if (bathtubUrl) {
+      if (playgroundUrl) {
         if (!headless) {
-          const bathtubUrlObject = new URL(bathtubUrl);
-          bathtubUrlObject.searchParams.set(
+          const playgroundUrlObject = new URL(playgroundUrl);
+          playgroundUrlObject.searchParams.set(
             'widgetUrl',
             `http://${DEV_HOST}:${port}/js/1fe-bundle.js`,
           );
           logger.log(
-            `Opening the widget in the bathtub with the URL: \n\t${chalk.blue(bathtubUrlObject.href)}\n`,
+            `Opening the widget in the playground with the URL: \n\t${chalk.blue(playgroundUrlObject.href)}\n`,
           );
-          open(bathtubUrlObject.href);
+          open(playgroundUrlObject.href);
         } else {
           logger.log('💀 The browser has been beheaded as instructed.');
         }

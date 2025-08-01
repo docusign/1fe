@@ -45,7 +45,7 @@ export type WidgetNavigation = {
 export type PlatformUtils<CustomUtils = {}> = CustomUtils & {
   /**
    * Utilities for loading other widgets
-   * Use the bathtub widget browser to find the widgetId you want to load
+   * Use the playground widget browser to find the widgetId you want to load
    *
    * Ensure they're available and deployed on the highest environment (Production) before consuming
    * @link https://github.docusignhq.com/pages/Core/1fe-docs/widgets/utils/widgets/

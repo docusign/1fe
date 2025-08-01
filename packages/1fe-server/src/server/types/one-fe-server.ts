@@ -3,7 +3,7 @@ import { ProcessedOneFEDynamicConfigs } from './processed-dynamic-configs';
 import { OneFEDynamicConfigs, WidgetVersion } from './raw-cdn-configs';
 
 export type OneFEServer = {
-  bathtub?: boolean;
+  playground?: boolean;
   knownRoutes?: string[];
 };
 
