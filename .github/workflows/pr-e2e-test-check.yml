@@ -19,7 +19,6 @@ jobs:
       - uses: ./.github/workflows/steps/setup-submodules
         with:
           submodule-ssh-private-key: ${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}
-          self-ssh-private-key: ${{ secrets.SELF_SSH_PRIVATE_KEY }}
 
       - name: Build dependencies
         run: yarn turbo build --filter=@1fe/shell... --filter=@1fe/server... --filter=@1fe/starter-app...
