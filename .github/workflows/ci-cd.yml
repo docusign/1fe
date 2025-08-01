@@ -15,6 +15,10 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
+  issues: write
+  repository-projects: write
+  id-token: write
 
 jobs:
   # Job 1: Build the project
@@ -38,7 +42,6 @@ jobs:
       - uses: ./.github/workflows/steps/setup-submodules
         with:
           submodule-ssh-private-key: ${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}
-          self-ssh-private-key: ${{ secrets.SELF_SSH_PRIVATE_KEY }}
 
       - name: Build the project
         run: yarn build
@@ -148,6 +151,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
 
       - name: Authenticate to npm
         shell: bash
