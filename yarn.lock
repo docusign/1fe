@@ -149,7 +149,7 @@ __metadata:
     tsup: "npm:^8.5.0"
     typescript: "npm:^5.8.3"
   bin:
-    create-1fe-app: dist/index.js
+    create-1fe-app: dist/cli.js
   languageName: unknown
   linkType: soft
 

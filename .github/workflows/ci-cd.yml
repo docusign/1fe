@@ -1,0 +1,187 @@
+# Consolidated CI/CD workflow for 1FE
+# Runs build, lint, unit tests, and E2E tests on all PRs and main branch pushes
+# Additionally publishes packages to npm on main branch pushes
+
+name: 🚀 CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  # Job 1: Build the project
+  build:
+    name: 🚧 Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate to npm
+        shell: bash
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ${{ env.NPM_CONFIG_USERCONFIG }}
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_USERCONFIG: ${{ github.workspace }}/.npmrc
+
+      - uses: ./.github/workflows/steps/setup-node
+
+      - uses: ./.github/workflows/steps/setup-submodules
+        with:
+          submodule-ssh-private-key: ${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}
+          self-ssh-private-key: ${{ secrets.SELF_SSH_PRIVATE_KEY }}
+
+      - name: Build the project
+        run: yarn build
+
+      - name: Cache build artifacts
+        uses: actions/cache@v4
+        with:
+          path: |
+            packages/*/dist
+            apps/*/dist
+            apps/*/build
+          key: build-${{ github.sha }}
+
+  # Job 2: Lint check (runs in parallel with build)
+  lint:
+    name: 🧹 Lint
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - uses: ./.github/workflows/steps/setup-node
+
+      - uses: ./.github/workflows/steps/setup-submodules
+        with:
+          submodule-ssh-private-key: ${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}
+          self-ssh-private-key: ${{ secrets.SELF_SSH_PRIVATE_KEY }}
+
+      - name: Lint the project
+        run: yarn lint
+
+  # Job 3: Unit tests (runs in parallel with build and lint)
+  unit-tests:
+    name: 🧪 Unit Tests
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - uses: ./.github/workflows/steps/setup-node
+
+      - uses: ./.github/workflows/steps/setup-submodules
+        with:
+          submodule-ssh-private-key: ${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}
+          self-ssh-private-key: ${{ secrets.SELF_SSH_PRIVATE_KEY }}
+
+      - name: Run unit tests
+        run: yarn test
+
+  # Job 4: E2E tests (depends on build completing successfully)
+  e2e-tests:
+    name: 🎭 E2E Tests
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - uses: ./.github/workflows/steps/setup-node
+
+      - uses: ./.github/workflows/steps/setup-submodules
+        with:
+          submodule-ssh-private-key: ${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}
+          self-ssh-private-key: ${{ secrets.SELF_SSH_PRIVATE_KEY }}
+
+      - name: Restore build artifacts
+        uses: actions/cache@v4
+        with:
+          path: |
+            packages/*/dist
+            apps/*/dist
+            apps/*/build
+          key: build-${{ github.sha }}
+
+      - name: Build dependencies for E2E
+        run: yarn turbo build --filter=@1fe/shell... --filter=@1fe/server... --filter=@1fe/starter-app...
+
+      - name: Get installed Playwright version
+        id: playwright-version
+        run: echo "PLAYWRIGHT_VERSION=$(yarn why @playwright/test --json | jq -r '.children | keys[0] | split("@npm:")[1]' | head -n 1)" >> $GITHUB_ENV
+
+      - name: Cache playwright binaries
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+
+      - run: yarn dlx @playwright/test@${{ env.PLAYWRIGHT_VERSION }} install chromium --with-deps --only-shell
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+
+      - run: yarn dlx @playwright/test@${{ env.PLAYWRIGHT_VERSION }} install-deps chromium
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+
+      - name: Run E2E tests
+        run: npx playwright install && yarn test:playwright
+
+  # Job 5: Publish packages (only runs on main branch pushes, after all tests pass)
+  publish:
+    name: 📦 Publish Packages
+    runs-on: ubuntu-latest
+    needs: [build, lint, unit-tests, e2e-tests]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate to npm
+        shell: bash
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ${{ env.NPM_CONFIG_USERCONFIG }}
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_USERCONFIG: ${{ github.workspace }}/.npmrc
+
+      - uses: ./.github/workflows/steps/setup-node
+
+      - uses: ./.github/workflows/steps/setup-submodules
+        with:
+          submodule-ssh-private-key: ${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}
+          self-ssh-private-key: ${{ secrets.SELF_SSH_PRIVATE_KEY }}
+
+      - name: Restore build artifacts
+        uses: actions/cache@v4
+        with:
+          path: |
+            packages/*/dist
+            apps/*/dist
+            apps/*/build
+          key: build-${{ github.sha }}
+
+      - name: Build packages for publishing
+        run: yarn turbo build --filter=./packages/* --filter=!./packages/eslint-config --filter=!./packages/typescript-config
+
+      - name: Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          # Changesets handles publishing with the publishConfig from each package.json
+          publish: yarn changeset publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
