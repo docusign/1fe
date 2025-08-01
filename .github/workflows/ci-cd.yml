@@ -15,6 +15,10 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
+  issues: write
+  repository-projects: write
+  id-token: write
 
 jobs:
   # Job 1: Build the project
@@ -148,6 +152,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
 
       - name: Authenticate to npm
         shell: bash
