@@ -1,8 +1,8 @@
 # @1fe/create-1fe-app
 
-> 🚀 CLI tool to quickly scaffold a new 1fe application
+> 🚀 CLI tool to quickly scaffold a new 1fe instance
 
-A command-line interface for creating new 1fe (One Frontend) applications with all the necessary boilerplate, configuration, and best practices built in.
+A command-line interface for creating new 1fe (One Frontend) instance
 
 ## 📋 Table of Contents
 
@@ -16,8 +16,7 @@ A command-line interface for creating new 1fe (One Frontend) applications with a
 ## 🔧 Requirements
 
 - **Node.js 22 or higher** (enforced at runtime)
-- **npm** or **yarn** package manager
-- **Git** (for cloning the starter template)
+- **yarn** package manager
 
 ## 📦 Installation
 
