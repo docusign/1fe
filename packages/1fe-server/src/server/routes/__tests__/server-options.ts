@@ -24,7 +24,7 @@ export const serverOptions: any = {
   },
   server: {
     // for Integration-env only
-    bathtub: true,
+    playground: true,
     importMapOverrides: {
       cdnURL: '',
     },

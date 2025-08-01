@@ -44,7 +44,7 @@ export const environmentSchema = z.object({
 
 export const baseConfigObjectSchema = z.object({
   environments: z.record(environmentNameSchema, environmentSchema),
-  bathtubUrl: z.string().url().optional(),
+  playgroundUrl: z.string().url().optional(),
 });
 
 export const baseConfigSchema = z.union([

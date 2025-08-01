@@ -15,7 +15,7 @@ const INTERNAL_CONTEXT_REF = Symbol('1feContext');
 
 /**
  * For cases when we use System.import to load a widget directly from a url
- * such as Bathtub's widget.get or when we are loading a pinned widget
+ * such as Playground's widget.get or when we are loading a pinned widget
  * we need to determine if we know this widget and if so then reuse the existing widget config.
  * We will override the version with the version from the url.
  *
