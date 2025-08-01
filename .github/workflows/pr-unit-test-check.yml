@@ -20,6 +20,7 @@ jobs:
         with:
           submodule-ssh-private-key: ${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}
           self-ssh-private-key: ${{ secrets.SELF_SSH_PRIVATE_KEY }}
+          npm-readonly-token: ${{ secrets.NPM_TOKEN_READONLY_1FE }}
 
       - name: Run unit tests
         run: yarn test
