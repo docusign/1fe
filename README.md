@@ -1,6 +1,8 @@
-# 1FE (One Frontend) 🚀
+# 1fe (One Frontend) 🚀
 
-MonoRepo containing the main packages owned and supported by the 1fe team.
+A micro-frontend platform that allows teams to focus on creating experiences for the front end utilizing shared utilities and governance controls provided by a single platform team. 1fe achieves this by standardizing the development, deployment and execution of frontend experiences.
+
+Visit our [documentation site](https://1fe.com/getting-started/installation/) for comprehensive guides and API references.
 
 ## 📋 Prerequisites
 
@@ -14,7 +16,7 @@ MonoRepo containing the main packages owned and supported by the 1fe team.
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/docusign/1fe.git
 cd 1fe
 
 # Install dependencies
@@ -26,19 +28,19 @@ yarn build
 
 ## 📦 Project Structure
 
-This is a monorepo containing the following packages:
+This monorepo contains the core packages that power the 1fe ecosystem:
 
 ### Core Packages
 
-- **`@1fe/shell`** - Shell bundle that provides common utilities to the widgets
-- **`@1fe/server`** - Express server that is consumed by the 1fe instance for an organization.  
-- **`@1fe/cli`** - Command-line tools for building and maintaining widgets
-- **`@1fe/create-1fe-app`** - Scaffolding tool for new 1FE instances
+- **`@1fe/server`** - Express server that serves as the backbone of a 1fe instance, handling dynamic configuration and widget loading
+- **`@1fe/shell`** - Application shell providing common UI components, layout, and platform utilities (the "sandbox") to widgets
+- **`@1fe/cli`** - Command-line tools for building, developing, and validating widgets with standardized configurations
+- **`@1fe/create-1fe-app`** - Scaffolding tool for quickly creating new 1fe instances
 
 ### Configuration Packages
 
-- **`@1fe/eslint-config`** - Shared ESLint configuration
-- **`@1fe/typescript-config`** - Shared TypeScript configurations
+- **`@1fe/eslint-config`** - Shared ESLint configuration enforced across all widgets
+- **`@1fe/typescript-config`** - Shared TypeScript configurations for consistent builds
 
 ## 🛠️ Development Commands
 
@@ -78,13 +80,25 @@ This project uses Git submodules. Make sure they're initialized:
 git submodule update --init --recursive
 ```
 
-## 📚 Useful Resources
+### Package Development
 
-- **Turbo Documentation** - This project uses Turbo for monorepo management
-- **TypeScript** - All packages are written in TypeScript
-- **Playwright** - Used for E2E testing
+Each package in this monorepo can be developed independently:
+
+```bash
+# Work on a specific package
+cd packages/1fe-server
+yarn dev
+
+# Test a specific package
+cd packages/1fe-cli
+yarn test
+```
 
 ## 🤝 Contributing
+
+We welcome contributions!
+
+### Pull Request Process
 
 1. **Fork the repository**
 2. **Create a feature branch** (`git checkout -b feature/amazing-feature`)
@@ -92,13 +106,23 @@ git submodule update --init --recursive
 4. **Push to the branch** (`git push origin feature/amazing-feature`)
 5. **Open a Pull Request**
 
-### Pull Request Process
+### Quality Requirements
 
 - All PRs trigger automated CI/CD pipeline
 - Tests must pass: Build ✅ Lint ✅ Unit Tests ✅ E2E Tests ✅
 - Code review required before merging
 - Publishing happens automatically on merge to `main`
 
+## 💬 Community & Support
+
+- **[Documentation](https://1fe.com/getting-started/installation/)** - Comprehensive guides and references
+- **[GitHub Issues](https://github.com/docusign/1fe/discussions)** - Bug reports and feature requests
+- **[GitHub Discussions](https://github.com/docusign/1fe/discussions)** - Community questions and ideas
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+**Ready to get started?** Check out our [Installation Guide](https://1fe.com/getting-started/installation) or explore the [demo site](https://demo.1fe.com) to see 1fe in action!
