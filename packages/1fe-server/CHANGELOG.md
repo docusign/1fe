@@ -1,5 +1,11 @@
 # @1fe/server
 
+## 0.1.1
+
+### Patch Changes
+
+- 03eada2: Update documentation links from https://1fe.com/getting-started/installation/ to https://1fe.com/start-here/ in README files
+
 ## 0.1.0
 
 ### Minor Changes
