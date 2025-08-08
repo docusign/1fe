@@ -2,7 +2,7 @@
 
 Express server that serves as the backbone of a 1fe instance, handling dynamic configuration, widget loading, and platform services.
 
-Follow our documentation [here](https://1fe.com/getting-started/installation/) to get started with your own 1fe instance.
+Follow our documentation [here](https://1fe.com/start-here/) to get started with your own 1fe instance.
 
 ## Installation
 

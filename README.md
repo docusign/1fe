@@ -2,7 +2,7 @@
 
 A micro-frontend platform that allows teams to focus on creating experiences for the front end utilizing shared utilities and governance controls provided by a single platform team. 1fe achieves this by standardizing the development, deployment and execution of frontend experiences.
 
-Visit our [documentation site](https://1fe.com/getting-started/installation/) for comprehensive guides and API references.
+Visit our [documentation site](https://1fe.com/start-here/) for comprehensive guides and API references.
 
 ## 📋 Prerequisites
 
@@ -115,7 +115,7 @@ We welcome contributions!
 
 ## 💬 Community & Support
 
-- **[Documentation](https://1fe.com/getting-started/installation/)** - Comprehensive guides and references
+- **[Documentation](https://1fe.com/start-here/)** - Comprehensive guides and references
 - **[GitHub Issues](https://github.com/docusign/1fe/discussions)** - Bug reports and feature requests
 - **[GitHub Discussions](https://github.com/docusign/1fe/discussions)** - Community questions and ideas
 
