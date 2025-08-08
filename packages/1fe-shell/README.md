@@ -2,7 +2,7 @@
 
 Application shell providing common UI components, layout, and platform utilities for 1fe widgets.
 
-Follow our documentation [here](https://1fe.com/getting-started/installation/) to learn more about 1fe and how the shell works.
+Follow our documentation [here](https://1fe.com/start-here/) to learn more about 1fe and how the shell works.
 
 ## Installation
 
