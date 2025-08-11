@@ -60,6 +60,10 @@ To learn more, follow the reference guide [here](https://1fe.com/api-reference/1
 - **[@1fe/shell](https://www.npmjs.com/package/@1fe/shell)** - Application shell and platform utilities
 - **[@1fe/cli](https://www.npmjs.com/package/@1fe/cli)** - CLI tools for widget development
 
+## Community
+
+If you have questions or want to discuss this project, please visit the [Issues](https://github.com/docusign/1fe/issues) or [Discussions](https://github.com/docusign/1fe/discussions) pages in our monorepo.
+
 ## License
 
 MIT © Docusign Inc.

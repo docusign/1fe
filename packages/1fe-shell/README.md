@@ -60,6 +60,10 @@ export default function MyWidget() {
 - **[@1fe/server](https://www.npmjs.com/package/@1fe/server)** - Express server for 1fe instances
 - **[@1fe/cli](https://www.npmjs.com/package/@1fe/cli)** - CLI tools for widget development
 
+## Community
+
+If you have questions or want to discuss this project, please visit the [Issues](https://github.com/docusign/1fe/issues) or [Discussions](https://github.com/docusign/1fe/discussions) pages in our monorepo.
+
 ## License
 
 MIT © Docusign Inc.
