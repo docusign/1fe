@@ -126,3 +126,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Ready to get started?** Check out our [Installation Guide](https://1fe.com/getting-started/installation) or explore the [demo site](https://demo.1fe.com) to see 1fe in action!
+
+### Issues and Discussions
+
+If you have questions or want to discuss this project, please visit the [Issues](https://github.com/docusign/1fe/issues) or [Discussions](https://github.com/docusign/1fe/discussions) pages in our monorepo.
+
