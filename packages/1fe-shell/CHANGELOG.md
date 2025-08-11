@@ -1,5 +1,11 @@
 # @1fe/shell
 
+## 0.1.2
+
+### Patch Changes
+
+- 464a88d: Patch bump all packages for release
+
 ## 0.1.1
 
 ### Patch Changes
