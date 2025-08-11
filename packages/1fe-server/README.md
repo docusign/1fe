@@ -53,7 +53,7 @@ app.listen(3000, () => {
 });
 ```
 
-To learn more, follow the reference guide [here](https://1fe.com/api-reference/1fe-server-reference/)
+To learn more, follow the reference guide [here](https://1fe.com/reference/1fe-server-reference/)
 
 ## Related Packages
 
