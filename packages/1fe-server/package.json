@@ -1,6 +1,18 @@
 {
   "name": "@1fe/server",
   "version": "0.1.2",
+  "description": "Server-side runtime and utilities for 1FE applications",
+  "keywords": [
+    "1fe",
+    "frontend",
+    "server",
+    "express",
+    "middleware",
+    "micro-frontend",
+    "runtime",
+    "csp",
+    "security"
+  ],
   "license": "MIT",
   "sideEffects": false,
   "files": [

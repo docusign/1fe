@@ -1,6 +1,19 @@
 {
   "name": "@1fe/create-1fe-app",
   "version": "0.0.3",
+  "description": "Create new 1FE applications with pre-configured setup and best practices",
+  "keywords": [
+    "1fe",
+    "create-app",
+    "scaffold",
+    "generator",
+    "micro-frontend",
+    "cli",
+    "boilerplate",
+    "starter",
+    "template",
+    "frontend"
+  ],
   "main": "dist/cli.js",
   "bin": "dist/cli.js",
   "scripts": {

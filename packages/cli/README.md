@@ -1,8 +1,12 @@
+![1FE Logo](./assets/1fe-logo.svg)
+
 # @1fe/cli
+
+[![npm version](https://badge.fury.io/js/@1fe%2Fcli.svg)](https://www.npmjs.com/package/@1fe/cli) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Join the community](https://img.shields.io/badge/Join%20the%20community-1fe.com-blue)](https://1fe.com)
 
 Command-line tools for building, developing, and validating widgets within the 1fe ecosystem.
 
-To learn more about what cli has to offer, read through the reference [here](https://1fe.com/api-reference/1fe-cli-reference/)
+To learn more about what cli has to offer, read through the reference [here](https://1fe.com/reference/1fe-config-reference/)
 
 ## Installation
 
@@ -41,6 +45,10 @@ The `@1fe/cli` package provides essential development tools for 1fe widgets:
 
 - **[@1fe/shell](https://www.npmjs.com/package/@1fe/shell)** - Application shell and platform utilities
 - **[@1fe/server](https://www.npmjs.com/package/@1fe/server)** - Express server for 1fe instances
+
+## Community
+
+If you have questions or want to discuss this project, please visit the [Issues](https://github.com/docusign/1fe/issues) or [Discussions](https://github.com/docusign/1fe/discussions) pages in our monorepo.
 
 ## License
 

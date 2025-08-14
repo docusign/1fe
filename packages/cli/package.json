@@ -1,6 +1,18 @@
 {
   "name": "@1fe/cli",
   "description": "CLI tools for 1FE development and build infrastructure.",
+  "keywords": [
+    "1fe",
+    "cli",
+    "frontend",
+    "build",
+    "development",
+    "micro-frontend",
+    "tools",
+    "webpack",
+    "typescript",
+    "contracts"
+  ],
   "version": "0.1.1",
   "bin": {
     "1fe-cli": "./dist/index.js"
