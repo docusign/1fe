@@ -1,6 +1,6 @@
 {
   "name": "@1fe/create-1fe-app",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Create new 1FE applications with pre-configured setup and best practices",
   "keywords": [
     "1fe",
