@@ -1,4 +1,4 @@
 [submodule "apps/starter-app"]
 	path = apps/starter-app
-	url = git@github.com:docusign/1fe-starter-app.git
+	url = https://github.com/docusign/1fe-starter-app.git
 	ignore = dirty
