@@ -2,7 +2,7 @@
 
 # @1fe/shell
 
-[![npm version](https://badge.fury.io/js/@1fe%2Fshell.svg)](https://www.npmjs.com/package/@1fe/shell) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Join the community](https://img.shields.io/badge/Join%20the%20community-1fe.com-blue)](https://1fe.com)
+[![npm version](https://badge.fury.io/js/@1fe%2Fshell.svg)](https://www.npmjs.com/package/@1fe/shell) [![npm downloads](https://img.shields.io/npm/dm/@1fe/shell.svg)](https://www.npmjs.com/package/@1fe/shell) [![CI Status](https://github.com/docusign/1fe/workflows/%F0%9F%9A%80%20CI%2FCD/badge.svg)](https://github.com/docusign/1fe/actions) [![Coverage Status](https://img.shields.io/badge/coverage-70%25-brightgreen.svg)](https://github.com/docusign/1fe) [![Bundle Size](https://img.shields.io/bundlephobia/minzip/@1fe/shell)](https://bundlephobia.com/result?p=@1fe/shell) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/) [![Join the community](https://img.shields.io/badge/Join%20the%20community-1fe.com-blue)](https://1fe.com)
 
 Application shell providing common UI components, layout, and platform utilities for 1fe widgets.
 

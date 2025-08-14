@@ -14,15 +14,23 @@
     "security"
   ],
   "license": "MIT",
+  "author": "DocuSign",
+  "homepage": "https://1fe.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/docusign/1fe.git",
+    "directory": "packages/1fe-server"
+  },
   "sideEffects": false,
   "files": [
-    "dist/**"
+    "dist/**",
+    "assets/1fe-logo.svg"
   ],
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "publishConfig": {
-    "access": "restricted",
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
