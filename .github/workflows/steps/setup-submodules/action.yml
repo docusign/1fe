@@ -1,24 +1,12 @@
 name: Setup Submodules
 description: Set up Git submodules for the project
 
-inputs:
-  submodule-ssh-private-key:
-    description: SSH private key for accessing submodules
-    required: true
-
 runs:
   using: 'composite'
   steps:
     - name: Mark workspace as safe
       shell: bash
       run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-
-    # TODO #61 - this action goes away when our repos become public.
-    - name: Set up SSH for submodules and yarn
-      uses: webfactory/ssh-agent@v0.9.1
-      with:
-        ssh-private-key: |
-          ${{ inputs.submodule-ssh-private-key }}
 
     - name: Initialize submodules
       shell: bash
