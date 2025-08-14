@@ -1,5 +1,11 @@
 # @1fe/cli
 
+## 0.1.2
+
+### Patch Changes
+
+- 3f760a5: Manual patch version bump for all packages
+
 ## 0.1.1
 
 ### Patch Changes

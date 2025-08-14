@@ -1,5 +1,11 @@
 # @1fe/create-1fe-app
 
+## 0.0.4
+
+### Patch Changes
+
+- 3f760a5: Manual patch version bump for all packages
+
 ## 0.0.3
 
 ### Patch Changes

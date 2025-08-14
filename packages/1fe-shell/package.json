@@ -1,6 +1,6 @@
 {
   "name": "@1fe/shell",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Frontend shell and runtime for 1FE micro-frontend applications",
   "keywords": [
     "1fe",
