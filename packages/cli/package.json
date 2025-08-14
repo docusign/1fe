@@ -1,7 +1,11 @@
 {
   "name": "@1fe/cli",
   "description": "CLI tools for 1FE development and build infrastructure.",
+<<<<<<< HEAD
   "version": "0.1.0",
+=======
+  "version": "0.1.1",
+>>>>>>> afc05324d81379ca198ed78cb025e3fa9557229e
   "bin": {
     "1fe-cli": "./dist/index.js"
   },

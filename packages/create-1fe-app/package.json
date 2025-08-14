@@ -1,6 +1,10 @@
 {
   "name": "@1fe/create-1fe-app",
+<<<<<<< HEAD
   "version": "0.0.2",
+=======
+  "version": "0.0.3",
+>>>>>>> afc05324d81379ca198ed78cb025e3fa9557229e
   "main": "dist/cli.js",
   "bin": "dist/cli.js",
   "scripts": {

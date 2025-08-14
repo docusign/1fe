@@ -53,17 +53,24 @@ app.listen(3000, () => {
 });
 ```
 
+<<<<<<< HEAD
 To learn more, follow the reference guide [here](https://1fe.com/reference/1fe-server-reference/)
+=======
+To learn more, follow the reference guide [here](https://1fe.com/api-reference/1fe-server-reference/)
+>>>>>>> afc05324d81379ca198ed78cb025e3fa9557229e
 
 ## Related Packages
 
 - **[@1fe/shell](https://www.npmjs.com/package/@1fe/shell)** - Application shell and platform utilities
 - **[@1fe/cli](https://www.npmjs.com/package/@1fe/cli)** - CLI tools for widget development
 
+<<<<<<< HEAD
 ## Community
 
 If you have questions or want to discuss this project, please visit the [Issues](https://github.com/docusign/1fe/issues) or [Discussions](https://github.com/docusign/1fe/discussions) pages in our monorepo.
 
+=======
+>>>>>>> afc05324d81379ca198ed78cb025e3fa9557229e
 ## License
 
 MIT © Docusign Inc.

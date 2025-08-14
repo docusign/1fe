@@ -124,10 +124,13 @@ nvm use 22
 - **[1fe Documentation](https://1fe.com)** - Complete 1fe framework docs
 - **[Starter Template](https://github.com/docusign/1fe-starter-app)** - The template this tool clones
 
+<<<<<<< HEAD
 ## 🤝 Community
 
 If you have questions or want to discuss this project, please visit the [Issues](https://github.com/docusign/1fe/issues) or [Discussions](https://github.com/docusign/1fe/discussions) pages in our monorepo.
 
+=======
+>>>>>>> afc05324d81379ca198ed78cb025e3fa9557229e
 ---
 
 Made with ❤️ by the 1fe team

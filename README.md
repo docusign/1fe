@@ -43,6 +43,7 @@ This monorepo contains the core packages that power the 1fe ecosystem:
 - **`@1fe/typescript-config`** - Shared TypeScript configurations for consistent builds
 
 ## 🛠️ Development Commands
+<<<<<<< HEAD
 
 ### Building
 
@@ -126,3 +127,93 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Ready to get started?** Check out our [Installation Guide](https://1fe.com/getting-started/installation) or explore the [demo site](https://demo.1fe.com) to see 1fe in action!
+=======
+
+### Building
+
+```bash
+# Build all packages
+yarn build
+
+# Build packages in watch mode
+yarn dev
+
+# Clean all build artifacts
+yarn clean
+```
+
+### Testing
+
+```bash
+# Run unit tests across all packages
+yarn test
+
+# Run E2E tests (Playwright)
+yarn test:playwright
+
+# Type checking
+yarn typecheck
+```
+
+## 📖 Development Workflow
+
+### Working with Submodules
+
+This project uses Git submodules. Make sure they're initialized:
+
+```bash
+git submodule update --init --recursive
+```
+
+### Package Development
+
+Each package in this monorepo can be developed independently:
+
+```bash
+# Work on a specific package
+cd packages/1fe-server
+yarn dev
+
+# Test a specific package
+cd packages/1fe-cli
+yarn test
+```
+
+## 🤝 Contributing
+
+We welcome contributions!
+
+### Pull Request Process
+
+1. **Fork the repository**
+2. **Create a feature branch** (`git checkout -b feature/amazing-feature`)
+3. **Commit your changes** (`git commit -m 'Add amazing feature'`)
+4. **Push to the branch** (`git push origin feature/amazing-feature`)
+5. **Open a Pull Request**
+
+### Quality Requirements
+
+- All PRs trigger automated CI/CD pipeline
+- Tests must pass: Build ✅ Lint ✅ Unit Tests ✅ E2E Tests ✅
+- Code review required before merging
+- Publishing happens automatically on merge to `main`
+
+## 💬 Community & Support
+
+- **[Documentation](https://1fe.com/start-here/)** - Comprehensive guides and references
+- **[GitHub Issues](https://github.com/docusign/1fe/discussions)** - Bug reports and feature requests
+- **[GitHub Discussions](https://github.com/docusign/1fe/discussions)** - Community questions and ideas
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+**Ready to get started?** Check out our [Installation Guide](https://1fe.com/getting-started/installation) or explore the [demo site](https://demo.1fe.com) to see 1fe in action!
+
+### Issues and Discussions
+
+If you have questions or want to discuss this project, please visit the [Issues](https://github.com/docusign/1fe/issues) or [Discussions](https://github.com/docusign/1fe/discussions) pages in our monorepo.
+
+>>>>>>> afc05324d81379ca198ed78cb025e3fa9557229e

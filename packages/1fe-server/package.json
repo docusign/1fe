@@ -1,6 +1,10 @@
 {
   "name": "@1fe/server",
+<<<<<<< HEAD
   "version": "0.1.1",
+=======
+  "version": "0.1.2",
+>>>>>>> afc05324d81379ca198ed78cb025e3fa9557229e
   "license": "MIT",
   "sideEffects": false,
   "files": [
