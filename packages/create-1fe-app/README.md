@@ -1,4 +1,8 @@
+![1FE Logo](./assets/1fe-logo.svg)
+
 # @1fe/create-1fe-app
+
+[![npm version](https://badge.fury.io/js/@1fe%2Fcreate-1fe-app.svg)](https://www.npmjs.com/package/@1fe/create-1fe-app) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Join the community](https://img.shields.io/badge/Join%20the%20community-1fe.com-blue)](https://1fe.com)
 
 > 🚀 CLI tool to quickly scaffold a new 1fe instance
 
@@ -123,6 +127,10 @@ nvm use 22
 
 - **[1fe Documentation](https://1fe.com)** - Complete 1fe framework docs
 - **[Starter Template](https://github.com/docusign/1fe-starter-app)** - The template this tool clones
+
+## 🤝 Community
+
+If you have questions or want to discuss this project, please visit the [Issues](https://github.com/docusign/1fe/issues) or [Discussions](https://github.com/docusign/1fe/discussions) pages in our monorepo.
 
 ---
 
