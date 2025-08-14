@@ -1,6 +1,19 @@
 {
   "name": "@1fe/shell",
   "version": "0.1.2",
+  "description": "Frontend shell and runtime for 1FE micro-frontend applications",
+  "keywords": [
+    "1fe",
+    "frontend",
+    "shell",
+    "micro-frontend",
+    "react",
+    "runtime",
+    "platform",
+    "widgets",
+    "routing",
+    "event-bus"
+  ],
   "license": "MIT",
   "sideEffects": false,
   "files": [
