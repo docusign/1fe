@@ -14,6 +14,14 @@
     "template",
     "frontend"
   ],
+  "license": "MIT",
+  "author": "DocuSign",
+  "homepage": "https://1fe.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/docusign/1fe.git",
+    "directory": "packages/create-1fe-app"
+  },
   "main": "dist/cli.js",
   "bin": "dist/cli.js",
   "scripts": {
@@ -23,8 +31,12 @@
     "build": "tsup",
     "prepack": "yarn build"
   },
+  "files": [
+    "dist/**",
+    "assets/1fe-logo.svg"
+  ],
   "publishConfig": {
-    "access": "restricted",
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "engines": {

@@ -2,7 +2,7 @@
 
 # @1fe/create-1fe-app
 
-[![npm version](https://badge.fury.io/js/@1fe%2Fcreate-1fe-app.svg)](https://www.npmjs.com/package/@1fe/create-1fe-app) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Join the community](https://img.shields.io/badge/Join%20the%20community-1fe.com-blue)](https://1fe.com)
+[![npm version](https://badge.fury.io/js/@1fe%2Fcreate-1fe-app.svg)](https://www.npmjs.com/package/@1fe/create-1fe-app) [![npm downloads](https://img.shields.io/npm/dm/@1fe/create-1fe-app.svg)](https://www.npmjs.com/package/@1fe/create-1fe-app) [![CI Status](https://github.com/docusign/1fe/workflows/%F0%9F%9A%80%20CI%2FCD/badge.svg)](https://github.com/docusign/1fe/actions) [![Bundle Size](https://img.shields.io/bundlephobia/minzip/@1fe/create-1fe-app)](https://bundlephobia.com/result?p=@1fe/create-1fe-app) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Node.js](https://img.shields.io/badge/Node.js-22%2B-green.svg)](https://nodejs.org/) [![Join the community](https://img.shields.io/badge/Join%20the%20community-1fe.com-blue)](https://1fe.com)
 
 > 🚀 CLI tool to quickly scaffold a new 1fe instance
 
