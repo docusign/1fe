@@ -1,6 +1,6 @@
 {
   "name": "@1fe/server",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Server-side runtime and utilities for 1FE applications",
   "keywords": [
     "1fe",
