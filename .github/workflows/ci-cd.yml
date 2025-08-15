@@ -65,7 +65,6 @@ jobs:
       - uses: ./.github/workflows/steps/setup-node
 
       - uses: ./.github/workflows/steps/setup-submodules
-          self-ssh-private-key: ${{ secrets.SELF_SSH_PRIVATE_KEY }}
 
       - name: Lint the project
         run: yarn lint
@@ -82,7 +81,6 @@ jobs:
       - uses: ./.github/workflows/steps/setup-node
 
       - uses: ./.github/workflows/steps/setup-submodules
-          self-ssh-private-key: ${{ secrets.SELF_SSH_PRIVATE_KEY }}
 
       - name: Run unit tests
         run: yarn test
@@ -101,7 +99,6 @@ jobs:
       - uses: ./.github/workflows/steps/setup-node
 
       - uses: ./.github/workflows/steps/setup-submodules
-          self-ssh-private-key: ${{ secrets.SELF_SSH_PRIVATE_KEY }}
 
       - name: Restore build artifacts
         uses: actions/cache@v4
@@ -161,7 +158,6 @@ jobs:
       - uses: ./.github/workflows/steps/setup-node
 
       - uses: ./.github/workflows/steps/setup-submodules
-          self-ssh-private-key: ${{ secrets.SELF_SSH_PRIVATE_KEY }}
 
       - name: Restore build artifacts
         uses: actions/cache@v4
