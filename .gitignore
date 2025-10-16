@@ -11,6 +11,7 @@ dist-ssr
 server/dist
 public/dist
 .env
+.npmrc
 
 # Yarn
 .pnp.*
