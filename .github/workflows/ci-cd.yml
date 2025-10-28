@@ -131,6 +131,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
       id-token: write
     # needs: [build, lint, unit-tests, e2e-tests]
     needs: [build, lint, unit-tests]
