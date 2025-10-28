@@ -1,5 +1,11 @@
 # @1fe/create-1fe-app
 
+## 0.0.7
+
+### Patch Changes
+
+- 96a1d11: Patch all packages
+
 ## 0.0.6
 
 ### Patch Changes
