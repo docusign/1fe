@@ -1,5 +1,11 @@
 # @1fe/shell
 
+## 0.1.6
+
+### Patch Changes
+
+- 96a1d11: Patch all packages
+
 ## 0.1.5
 
 ### Patch Changes
