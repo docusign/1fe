@@ -130,7 +130,7 @@ jobs:
     name: 📦 Publish Packages
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       id-token: write
     # needs: [build, lint, unit-tests, e2e-tests]
     needs: [build, lint, unit-tests]
