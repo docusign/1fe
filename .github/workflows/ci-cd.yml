@@ -29,14 +29,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Authenticate to npm
-        shell: bash
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ${{ env.NPM_CONFIG_USERCONFIG }}
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_USERCONFIG: ${{ github.workspace }}/.npmrc
-
       - uses: ./.github/workflows/steps/setup-node
 
       - uses: ./.github/workflows/steps/setup-submodules
@@ -137,6 +129,9 @@ jobs:
   publish:
     name: 📦 Publish Packages
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     # needs: [build, lint, unit-tests, e2e-tests]
     needs: [build, lint, unit-tests]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -147,15 +142,12 @@ jobs:
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
 
-      - name: Authenticate to npm
-        shell: bash
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ${{ env.NPM_CONFIG_USERCONFIG }}
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_USERCONFIG: ${{ github.workspace }}/.npmrc
-
       - uses: ./.github/workflows/steps/setup-node
+
+      - name: Ensure OIDC trusted publishing has latest npm
+        run: |
+          # install a recent npm (11.5.1+) which supports OIDC trusted publishing
+          npm install -g npm@^11.5.1
 
       - uses: ./.github/workflows/steps/setup-submodules
 
@@ -179,4 +171,3 @@ jobs:
           publish: yarn changeset publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
