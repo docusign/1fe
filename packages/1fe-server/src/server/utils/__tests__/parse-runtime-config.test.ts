@@ -1,5 +1,8 @@
 import { RuntimeConfig, WidgetConfig } from '../../types';
-import { parseRuntimeConfig } from '../runtime-configs';
+import {
+  DISALLOWED_TEMPLATE_SYNTAX_ERROR,
+  parseRuntimeConfig,
+} from '../runtime-configs';
 
 jest.mock('ky', () => ({
   get: jest.fn().mockReturnValue({}),
@@ -61,5 +64,63 @@ describe('parseRuntimeConfig', () => {
     });
 
     expect(parsedPreload).toMatchObject({});
+  });
+
+  describe('security: template injection prevention', () => {
+    it('throws on disallowed token (process.exit)', () => {
+      expect(() =>
+        parseRuntimeConfig({
+          runtimeConfig: {
+            preload: [{ apiGet: '<%= process.exit(1) %>' }],
+          },
+          widgetConfig: widgetConfig as WidgetConfig,
+        }),
+      ).toThrow(DISALLOWED_TEMPLATE_SYNTAX_ERROR);
+    });
+
+    it('throws on constructor-based RCE payload', () => {
+      expect(() =>
+        parseRuntimeConfig({
+          runtimeConfig: {
+            preload: [
+              {
+                apiGet:
+                  '<%= constructor.constructor("return process.exit(1)")() %>',
+              },
+            ],
+          },
+          widgetConfig: widgetConfig as WidgetConfig,
+        }),
+      ).toThrow(DISALLOWED_TEMPLATE_SYNTAX_ERROR);
+    });
+
+    it('throws on execute block (<% %>)', () => {
+      expect(() =>
+        parseRuntimeConfig({
+          runtimeConfig: {
+            preload: [{ apiGet: '<% process.exit(1) %>' }],
+          },
+          widgetConfig: widgetConfig as WidgetConfig,
+        }),
+      ).toThrow(DISALLOWED_TEMPLATE_SYNTAX_ERROR);
+    });
+
+    it('allows valid tokens', () => {
+      const result = parseRuntimeConfig({
+        runtimeConfig: {
+          preload: [
+            {
+              apiGet:
+                'https://cdn.example.com/<%= ENVIRONMENT %>/<%= WIDGET_ID %>/<%= WIDGET_VERSION %>',
+            },
+          ],
+        },
+        widgetConfig: widgetConfig as WidgetConfig,
+      });
+
+      expect(result.preload?.[0].apiGet).toEqual(
+        `https://cdn.example.com/${environment}/${widgetConfig.widgetId}/${widgetConfig.version}`,
+      );
+    });
   });
 });
