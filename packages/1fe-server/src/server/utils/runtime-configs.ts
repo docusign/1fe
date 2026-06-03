@@ -86,7 +86,7 @@ export const parseRuntimeConfig = ({
               WIDGET_ID: widgetConfig.widgetId,
               ENVIRONMENT: readOneFEConfigs()?.environment,
             }),
-          };
+          };  
         }
 
         return preloadObj;
