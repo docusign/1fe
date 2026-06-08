@@ -12,6 +12,11 @@ runs:
       shell: bash
       run: git submodule update --init --recursive --remote # always make sure to work on latest submodule commits
 
+    - name: Fix unresolved module types in starter-app
+      shell: bash
+      run: |
+        echo 'declare module "@azure/app-configuration-provider";' > ./apps/starter-app/src/azure-app-config.d.ts
+
     - name: Prepare submodule for yarn install
       shell: bash
       run: |

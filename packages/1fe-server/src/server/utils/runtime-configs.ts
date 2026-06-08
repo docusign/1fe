@@ -1,4 +1,3 @@
-import { template } from 'lodash';
 import ky from 'ky';
 
 import { widgetRuntimeConfigUrlFilename } from '../constants';
@@ -15,6 +14,35 @@ import {
 } from './widget-config-helpers';
 import { getCachedWidgetConfigs } from './widget-config';
 import { readOneFEConfigs } from './one-fe-configs';
+
+const ALLOWED_TOKENS = ['WIDGET_VERSION', 'WIDGET_ID', 'ENVIRONMENT'] as const;
+
+export const DISALLOWED_TEMPLATE_SYNTAX_ERROR =
+  'Disallowed template syntax in apiGet URL';
+
+const safeTemplateReplace = (
+  input: string,
+  values: Record<string, string | undefined>,
+): string => {
+  // Reject any <% %> or <%- %> (execute/escape blocks) - only <%= %> allowed
+  if (/<%[^=]/.test(input) || /<%$/m.test(input)) {
+    throw new Error(DISALLOWED_TEMPLATE_SYNTAX_ERROR);
+  }
+
+  const result = input.replace(/<%=\s*(\w+)\s*%>/g, (match, token) => {
+    if (ALLOWED_TOKENS.includes(token as (typeof ALLOWED_TOKENS)[number])) {
+      return values[token] ?? '';
+    }
+    throw new Error(DISALLOWED_TEMPLATE_SYNTAX_ERROR);
+  });
+
+  // Reject any remaining <%= ... %> blocks that weren't matched by the simple \w+ pattern
+  if (/<%=/.test(result)) {
+    throw new Error(DISALLOWED_TEMPLATE_SYNTAX_ERROR);
+  }
+
+  return result;
+};
 
 type ParseRuntimeConfigArgs = {
   runtimeConfig: RuntimeConfig;
@@ -50,10 +78,10 @@ export const parseRuntimeConfig = ({
     const parsedPreloads = parsedRuntimeConfig.preload.map(
       (preloadObj: PreloadType) => {
         if ('apiGet' in preloadObj) {
-          const templatizedApiGetUrl = template(preloadObj.apiGet as string);
+          const apiGetStr = preloadObj.apiGet as string;
 
           return {
-            apiGet: templatizedApiGetUrl({
+            apiGet: safeTemplateReplace(apiGetStr, {
               WIDGET_VERSION: widgetConfig.version,
               WIDGET_ID: widgetConfig.widgetId,
 
